@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Extracting data from websites without API and calculating your needed calories - MyFitnessPal and Ruby + Mechanize]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api"/>
+    <updated>2015-01-15T16:40:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api</id>
+    <content type="html"><![CDATA[<p>As a programmer I like to automate stuff, I love being able to extract the data I’m tracking and visualise and analyze it in many different ways.</p>
+
+<p>I’ve been using MyFitnessPal for years, and I’ve collected a big amount of nutrition / weight data, as such I wanted to be able to play with that data in my own environment, unfortunately MyFitnessPal did not give me API access, even though I’ve asked twice.</p>
+
+<p>As such I’ve decided to get that data in other means, Web crawling with Ruby and Mechanize is one option.</p>
+
+<p>Let’s see how we can extract nutrition summary and weight data, meaning calories/macros and weight measurements.</p>
+
+<!-- more -->
+
+
+<h1>Finding good entry-point</h1>
+
+<p>After logging in into MyFitnessPal we can go into Reports Tab, it shows you graphs of your data. Since we want raw data instead of graphics, We can use View Page Source and look for something that looks interesting. It was easy to find this:</p>
+
+<p><img src="/uploads/2015/01/report1.png" alt="" /></p>
+
+<p>I can now use this endpoint to see my weight data:
+<a href="http://www.myfitnesspal.com/reports/results/progress/1/30.json">http://www.myfitnesspal.com/reports/results/progress/1/30.json</a></p>
+
+<p>Further analysis found this to be the case:
+- /progress/1 is weight data
+- /30 means number of days to return
+- Nutrition/Calories Nutrition/Protein Nutrition/Carbs Nutrition/Fat are some of the other available reports</p>
+
+<blockquote><p>When I was doing initial work on my fitness app I’ve not used .json but regular report, back then I’ve used mechanize  with xpath / css selectors to crawl data.</p></blockquote>
+
+<h1>Accessing data from code</h1>
+
+<p>Our data is protected, so before we are able to extract it we need to login into MyFitnessPal website to have valid login cookie.</p>
+
+<h3>Ruby</h3>
+
+<p>Ruby is a great and easy to grasp language, in our case the usage will only require few explanations:</p>
+
+<ul>
+<li>Ruby files end with .rb</li>
+<li>You can run ruby file from command line by calling <code>ruby file.rb</code></li>
+<li>gem’s are v. similar to CocoaPods, that’s actually what inspired Pods in first place.</li>
+</ul>
+
+
+<p>If you want to learn more about it, I recommend <a href="http://tryruby.org">http://tryruby.org</a>.</p>
+
+<h2>Getting valid login credential cookie</h2>
+
+<p>First let’s look at Login website in a browser
+<a href="https://www.myfitnesspal.com/account/login">https://www.myfitnesspal.com/account/login</a></p>
+
+<p><img src="/uploads/2015/01/login.png" alt="" /></p>
+
+<p>Again looking at the Page Source we know that:
+- There is only 1 form on the page
+- The input fields id are <code>username</code> and <code>password</code></p>
+
+<p>Filling this form with Ruby and Mechanize is very straightforward.</p>
+
+<p>First we need to install mechanize gem:</p>
+
+<p><code>gem install mechanize</code></p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;mechanize&#39;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;1&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">mechanize</span> <span class="o">=</span> <span class="no">Mechanize</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">login_page</span> <span class="o">=</span> <span class="n">mechanize</span><span class="o">.</span><span class="n">get</span> <span class="s1">&#39;https://www.myfitnesspal.com/account/login&#39;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;2&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">form</span> <span class="o">=</span> <span class="n">login_page</span><span class="o">.</span><span class="n">forms</span><span class="o">.</span><span class="n">first</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;noinspection RubyResolve&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">form</span><span class="o">.</span><span class="n">field_with</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;username&quot;</span>
+</span><span class='line'><span class="n">form</span><span class="o">.</span><span class="n">field_with</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;password&quot;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;3&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">form</span><span class="o">.</span><span class="n">submit</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ol>
+<li>We create a Mechanize agent and load the login page.</li>
+<li>There is only one form on the login page, we grab it and fill the user data.</li>
+<li>After submitting our form, mechanize will store the login cookie in the agent, which means all further requests on this agent will be properly authorised.</li>
+</ol>
+
+
+<h2>Retrieving reports</h2>
+
+<p>Now that we have a valid credentials we can access our report data, let’s grab 30 days worth of our weight and calories data:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">weight_report</span> <span class="o">=</span> <span class="n">mechanize</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.myfitnesspal.com/reports/results/progress/1/</span><span class="si">#{</span><span class="n">days_to_query</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">calories_report</span> <span class="o">=</span> <span class="n">mechanize</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.myfitnesspal.com/reports/results/nutrition/Calories/</span><span class="si">#{</span><span class="n">days_to_query</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;weights = JSON.parse(weight_report.body)[&quot;data&quot;]</span>
+</span><span class='line'><span class="sr">calories = JSON.parse(calories_report.body)[&quot;data&quot;]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We use mechanize to request our reports and then parse the json into hash, we are only intersted in raw data so we extract that.
+Also the data array is sorted by dates already so we can avoid manual sort here.</p>
+
+<h1>Calculating our caloric needs</h1>
+
+<p>Now that we have both weight and intake calories, we can start calculating our needs to maintain our current weight.</p>
+
+<blockquote><p>The more data you have is usually the better, especially for calculating your weight.</p></blockquote>
+
+<p>Then we just extract the values and calculate average calories intake.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avg_calories</span> <span class="o">=</span> <span class="n">calories</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">instance_eval</span> <span class="p">{</span> <span class="n">reduce</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="o">.</span><span class="n">to_f</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>I got 1045 calories, seems a bit low, doesn’t it?
+Just calculating average would work great if we were perfect at tracking, but sometimes we just aren’t,<strong>although I would highly recommend you at least estimate and track that when you eat out</strong>.</p>
+
+<p>We’ll end up averaging data that has some missing entries thus lowering the average, how can we deal with that?
+For simplicity we can simply reject entries that are missing data, before calculating the average, this will work if your diet is steady.</p>
+
+<p>Let’s modify our previous line to do just that</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avg_calories</span> <span class="o">=</span> <span class="n">calories</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">reject</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">}</span><span class="o">.</span><span class="n">instance_eval</span> <span class="p">{</span> <span class="n">reduce</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="o">.</span><span class="n">to_f</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now I got 1796.5 calories, this seems to look correct since I’m in cutting phase.</p>
+
+<h2>Weight change</h2>
+
+<p>It’s crucial that we smooth our weight data, weight can fluctuate quite a lot and we want to see the trend we are having, not just the values.</p>
+
+<p>I like to use smoothed moving average for my data, there is a ruby gem <code>moving_average</code> that simplifies that so let’s use it:</p>
+
+<p><code>gem install moving_average</code></p>
+
+<p>And on top of our script add requirement for it:</p>
+
+<p><code>require moving_average</code></p>
+
+<p>Take a look at graph visualising my weight changes, the diamonds are the raw measurements, if I didn’t apply smoothing function it would be really hard to see the trends of my weight changes.</p>
+
+<p><img src="/uploads/2015/01/weight.png" alt="" /></p>
+
+<p>With weights we want to calculate smoothed average for each entry, not just one average</p>
+
+<blockquote><p>The best way would be to have a long period of data, so that the beginning weight we are analysing is already smoothed and not influenced by fluctuations.</p></blockquote>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">weight_values</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="n">smoothed_weights</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="n">weight_values</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">idx</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">smoothed_weights</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;  if idx &amp;gt; 1</span>
+</span><span class='line'><span class="sr">    weight_values[0, idx + 1].smma.round(1)</span>
+</span><span class='line'><span class="sr">  else</span>
+</span><span class='line'><span class="sr">    weight_values[idx]</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  )</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>That way each smoothed weight entry will depend on the previous values (it’s tail).</p>
+
+<p>Now we can grab first and last entry and see how our average changed:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">weight_change</span> <span class="o">=</span> <span class="n">smoothed_weights</span><span class="o">.</span><span class="n">first</span> <span class="o">-</span> <span class="n">smoothed_weights</span><span class="o">.</span><span class="n">last</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Each kg of weight is approximately 7700 kcal, so we can calculate how much calories are we under / over our intake by just multiplying by 7700.</p>
+
+<h2>How much do we need to eat to maintain our weight?</h2>
+
+<p>Now that we know our average intake and weight change, we can calculate our TDEE, which means calories we should be eating to keep our weight stable.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Observed TDEE is </span><span class="si">#{</span><span class="n">avg_calories</span> <span class="o">+</span> <span class="n">weight_in_calories</span> <span class="o">/</span> <span class="n">weights</span><span class="o">.</span><span class="n">count</span> <span class="si">}</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>For me it’s <strong>2257 kcal</strong></p>
+
+<p>Usually evaluate that once every 10-14 days, to make sure you are on track.</p>
+
+<h1>Diet composition</h1>
+
+<p>How should you divide your calories into macros, like Protein/Fat/Carbs?</p>
+
+<p>Doesn’t matter if you bulk or cut, this is the order of importance of macros I recommend:
+1. Protein - crucial for your body, 4 kcal / 1g
+2. Fat - get your essential fat intake for healthy hormones, 9 kcal / 1g
+3. Carbs - remaining calories, 4 kcal / 1g</p>
+
+<p>A good starting point for composition would be:
+- Protein: 2g / kg
+- Fat: 0.8g / kg
+- Carbs: Remaining intake</p>
+
+<p>e.g. For me it looks as follows:</p>
+
+<pre><code>kcal 2256
+protein = 76 kg * 2 = 152 protein
+fat = 76 kg * 0.8 = 60.8 fat
+carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
+</code></pre>
+
+<h1>Goals</h1>
+
+<h2>Bulking - Gaining Muscle</h2>
+
+<p>If you are looking to gain muscle (because gaining weight shouldn’t be the goal), you should be looking at maximum 0.2 kg per week.</p>
+
+<p><code>0.2 kg * 7700 kcal =&gt; 1 540 kcal per week / 7 =&gt; 220 kcal</code></p>
+
+<p>Eat around 200 kcal over your TDEE and you should be gaining mostly lean muscle, gaining a little bit of fat is almost inevitable but if adjust your intake correctly it will be minimal, don’t stress it.</p>
+
+<h2>Cutting - Loosing weight</h2>
+
+<p>Loosing weight is actually simpler than gaining lean muscle, you need to eat less than your TDEE, how much less will depend on your goal and bodyfat level.</p>
+
+<p>The leaner you are the slower you should be loosing weight, to spare muscles and to not feel like you are dying, general recommendation would be something like this:</p>
+
+<ul>
+<li>12+% bodyfat: eat 750 kcal below TDEE - refeed every 14 days</li>
+<li>8-12% bodyfat: eat 500-700 kcal below TDEE – reefed every 7-10 days</li>
+<li>&lt;8% bodyfat: eat 300-500 kcal below TDEE – reefed every 3-7 days</li>
+</ul>
+
+
+<h2>Refeed day</h2>
+
+<p>A refeed day is a day that you want to eat around your TDEE, usually increasing your carb intake, you could treat this as cheat meal (not cheat day, all-out pig feast).
+It’s beneficial for your body and mind, if you were on spot with your diet, you deserve to have a little treat.</p>
+
+<h1>Conclusion and Next Actions</h1>
+
+<p>So now that you know how to calculate your real TDEE, you should  calculate it and then apply either surplus or deficit as I just described, evaluate for next 2 weeks and adjust if needed.</p>
+
+<p><a href="https://gist.github.com/krzysztofzablocki/f5f597f04b2efcb711c7">Whole script is available here</a></p>
+
+<p>For more info either go read my previous blog posts:</p>
+
+<p><a href="http://www.merowing.info/2014/02/fit-geek/">Fit Geek</a></p>
+
+<p><a href="http://www.merowing.info/2014/09/a-swift-introduction-into-fitness/#.VLfecsaJn8s">Swift introduction to Fitness</a></p>
+
+<p>or visit my <a href="https://www.youtube.com/channel/UCv58ZNeKPIsn7BDJYdGud_w" title="YouTube channel">YouTube Chanel</a></p>
+
+<p>You can also <a href="http://twitter.com/merowing_">Follow me on Twitter</a></p>
+]]></content>
+  </entry>
+  
+</feed>

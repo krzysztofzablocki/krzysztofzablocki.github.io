@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Swift | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/swift/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Swift introduction into Fitness]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness"/>
+    <updated>2014-09-30T12:17:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness</id>
+    <content type="html"><![CDATA[<p><a href="http://merowing.info/uploads/2014/09/IntroToFitness.playground.zip">Download this article as Playground</a> for XCode 6 to be able to experiment with calculations.</p>
+
+<p>Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.</p>
+
+<p>Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:</p>
+
+<p><em>If you burn more calories than you eat you will lose weight</em></p>
+
+<p>Same goes for bulking, eat more and you gain weight.</p>
+
+<p>Two questions arise:</p>
+
+<ol>
+<li>how to estimate our caloric needs?</li>
+<li>how fast should we lose or gain weight?</li>
+</ol>
+
+
+<p>It’s easy enough to explain both, but since I’m a programmer and I really like Swift playgrounds, let’s use some swift to do express math for us.</p>
+
+<!-- more -->
+
+
+<h1>Defining user</h1>
+
+<p>Before we start calculating our caloric needs we will need to have access to our user stats.</p>
+
+<p>We could define a struct for our user or we can simplify it and use tuple:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum Gender {
+</span><span class='line'>  case Male
+</span><span class='line'>  case Female
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>typealias User = (gender: Gender, age: Int, weightInKg: Double, heightInCm: Int, bodyfat: Int?)</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Don’t worry if you use Imperial system for measurements, let’s introduce conversion functions:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func toKg(#lbs: Double) -> Double {
+</span><span class='line'>  return lbs / 2.2
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>func toCm(#feet: Double, #inches: Double) -> Double {
+</span><span class='line'>  return feet * 30.48 + inches * 2.54
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now we can setup our user by simply assigning it to variable:
+<div><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var user = User(gender: .Male, age: 26, weightInKg: 73, heightInCm: 184, bodyfat: 10)</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>How to estimate calories we should eat?</h1>
+
+<p>The only real way to know how much calories you should eat would be to track your food intake and weight changes over couple of weeks, then we can calculate your personal calories accurately.</p>
+
+<p>But there are few math approximations we can use as a starting point, we’ll take a look at 2 most accurate ones but first some theory.</p>
+
+<p>There are few components we need to consider when calculating our caloric needs:</p>
+
+<h2>BMR - Basal Metabolic Rate</h2>
+
+<p>BMR defines bulk of our caloric needs, it can be thought of as calories you would need if you stayed in bed all day and didn’t do anything eg. Comatose. Resting Metabolic Rate can be considered same as BMR .</p>
+
+<p>It will decrease with age or with loss of LBM - lean body mass, if you have more muscles then you’ll have higher BMR, but the effect of having more muscle mass doesn’t have (as previously thought) high enough effect on BMR to be used for fat loss purpose (<strong>dreamers bulking</strong> to have more muscle and thinking that will make your fat loss phase easier is just stupid).</p>
+
+<p>Since we will be using one of two functions to calculate BMR, let’s create a typealias for our calculator:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>typealias BMRCalculator = () -> Double</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>NEAT and Activity Factor- Non-Exercise Associated Thermogenesis</h2>
+
+<p>NEAT is calories we burn doing stuff that’s not exercise, eg. washing/talking/working.</p>
+
+<p>NEAT is calculated by selecting an activity factor multiplier dependent on your lifestyle, let’s define some common values:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum ActivityFactor: Double {
+</span><span class='line'>  case Sedentary = 1.2 // Little or no exercise and desk job
+</span><span class='line'>  case LightlyActive = 1.375 // Light exercise or sports 1-3 days a week
+</span><span class='line'>  case ModeratelyActive = 1.55 // Moderate exercise or sports 3-5 days a week
+</span><span class='line'>  case VeryActive = 1.725 // Hard exercise or sports 6-7 days a week4
+</span><span class='line'>  case ExtremelyActive = 1.9 // Hard daily exercise or sports and physical job
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>TEF - Thermic Effect of Feeding</h2>
+
+<p>TEF is used to calculate amount of calories you burn while eating, it will mostly depend on the amount of Protein and Fiber content in your diet as they influence how much energy is needed for converting food into energy.</p>
+
+<p>It does <strong>NOT</strong> depend on the amount of meals you have, doesn’t matter if you eat 2k calories in 1 or 6 meals, TEF is percentage based on total intake.</p>
+
+<p>Values would vary depending on protein intake mostly:
+0.05 to 0.15 from low to high protein intake (1-3g of protein / kg), but for most people starting out this difference will fall into calculation error margin so let’s not worry about it for now.</p>
+
+<h2>MET - Metabolic Effect of Training</h2>
+
+<p>MET is amount of calories you burn during exercise, as such it only applies for training days.</p>
+
+<h2>TDEE - Total Daily Energy Expenditure</h2>
+
+<p>TDEE is total amount of calories you need to maintain your current weight, it’s affected by all of the above, but we’ll be calculating TDEE without taking TEF (because for beginners it will be negligible) and MET (only applies to training days).</p>
+
+<p>We can define TDEE as follows:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func TDEE(bmrCalculator: BMRCalculator, activityFactor: ActivityFactor) -> Int {
+</span><span class='line'>  return Int(bmrCalculator() * activityFactor.rawValue)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>BMR Equations</h2>
+
+<p>Two most accurate equations for calculating BMR are:</p>
+
+<ol>
+<li>Cunningham Equation - if we know user lean body mass (simply weight * (100-bodyfat%))</li>
+<li>Mifflin St Jeor - if body fat is unknown</li>
+</ol>
+
+
+<p>Let’s write a function generator that will return a proper calculator for a specific user:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func lbm(user: User) -> Double {
+</span><span class='line'>  return user.weightInKg * (100.0-Double(user.bodyfat!))/100.0
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>func BMRCalculatorForUser(user: User) -> BMRCalculator {
+</span><span class='line'>  func cunninghamCalculator(user: User) -> BMRCalculator {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>return { 500 + 22 * lbm(user) }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  func mifflinCalculator(user: User) -> BMRCalculator {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>let genderAdjustment = user.gender == .Male ? 161.0 : -5.0
+</span><span class='line'>return { 10.0 * user.weightInKg + 6.25 * Double(user.heightInCm) + genderAdjustment }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  if let bodyfat = user.bodyfat {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>return cunninghamCalculator(user)
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }
+</span><span class='line'>  return mifflinCalculator(user)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Calculating maintenance</h1>
+
+<p>Now we have enough code to calculate our TDEE needs:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user = User(gender: .Male, age: 26, weightInKg: 73, heightInCm: 184, bodyfat: 10)
+</span><span class='line'>let tdee = TDEE(BMRCalculatorForUser(user), ActivityFactor.Sedentary)
+</span><span class='line'>println("You can maintain your weight by eating (tdee) kcal daily")</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Personal Goals</h1>
+
+<p>Now that we have calories to maintain our weight, let’s look at possible goals for a user:</p>
+
+<ol>
+<li>Fat Loss - we want to cut some fat</li>
+<li>Muscle gain - when we want to gain muscle</li>
+</ol>
+
+
+<p>I didn’t use word weight here for a reason, when you bulk you want to gain muscle, you don’t want to get fat.
+Same goes for fat loss, we don’t want to lose hard earned muscle tissue, only fat and as such aiming at highest possible weight loss is usually mistake.</p>
+
+<p>How fast can we change our weight?</p>
+
+<p>1 KG of weight is considered to amount to ~7700 calories:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func caloriesForWeight(kgs: Double) -> Double {
+</span><span class='line'>  return kgs * 7700
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>Fat loss</h2>
+
+<p>It could be fast if you were willing to really restrict calories, but one have to be careful to avoid muscle loss. Starvation mode is a myth but you might be miserable when you do very strict diet. I’d suggest going slower but steady, having around 0.5 kg fat loss per week wouldn’t be bad, in 10 weeks you’d have 5 kg of FAT less.</p>
+
+<p>If you feel like it’s a bit too fast or to slow, adjust the value and see how much less you’d need to eat daily to hit your desired speed:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>println("daily deficit: (caloriesForWeight(0.5) / 7.0)")</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>Muscle gain</h2>
+
+<p>Muscle gain is hard, we can’t just overeat and expect to gain more muscle, doing so will end up with getting fat and having to go into Fat Loss phase, it will make you miserable in long run.</p>
+
+<p>Avoid dreamers bulk, better to go slow and steady, what should be your weekly aim? It will heavily depend on your current conditioning:</p>
+
+<p>On average, a guy doing everything right (Perfect diet etc.) will be doing very well to gain 0.2kg of muscle per week. A female might gain half that or about 0.2kg of muscle every 2 weeks.</p>
+
+<p>The more advanced you are, the slower you should be gaining weight to avoid getting too much fat.</p>
+
+<p>So we have 2 weight goals, bulking and cutting:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>typealias Goal = () -> Double
+</span><span class='line'>func bulking(#kgPerWeek: Double) -> Goal {
+</span><span class='line'>  return {+kgPerWeek/7}
+</span><span class='line'>}
+</span><span class='line'>func cutting(#kgPerWeek: Double) -> Goal {
+</span><span class='line'>  return {-kgPerWeek/7}
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Final calculation</h1>
+
+<p>Now we can finally calculate daily calories needed to reach our goals:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func dailyCalories(tdee: Int, #goal: Goal) -> Int {
+</span><span class='line'>  return Int(Double(tdee) + (caloriesForWeight(goal())))
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>let target = dailyCalories(tdee, goal: bulking(kgPerWeek: 0.2))
+</span><span class='line'>println("You should be eating (target) kcal everyday")</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Conclusion</h1>
+
+<p>This should make starting your fitness journey easier, it also shows how cool playgrounds are. If you are interested in more fitness tips especially about loosing fat I recommend you take a look at my <a href="http://www.merowing.info/2014/02/fit-geek/">previous article</a></p>
+
+<p><a href="http://twitter.com/merowing_">Follow me on twitter</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Implementing Observable in Swift]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/07/implementing-observable-in-swift"/>
+    <updated>2014-07-17T14:56:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/07/implementing-observable-in-swift</id>
+    <content type="html"><![CDATA[<p>Use it or not, KVO has been integral part of Cocoa programming, yet if you decide to use only native Swift code you are loosing ability to observe other object properties.</p>
+
+<p>There is a way to add Observable properties back to your own codebase with generics in a way they won’t have ripple effect on remaining code, it’s actually pretty cool.</p>
+
+<!-- more -->
+
+
+<h2>API Design</h2>
+
+<p>When I thought of how I want to implement Observable properties, I’ve had few things in mind:</p>
+
+<ol>
+<li>Distinct closures for Will/Did set.</li>
+<li>Ability to access current value and old/new one.</li>
+<li>Observable property should work as non-observable one, if function takes int as argument it should work with both cases.</li>
+</ol>
+
+
+<p>1 and 2 can be satisfied with just API design, sample code for usage of Observable looks like this:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">object</span><span class="p">.</span><span class="n">property</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(.</span><span class="n">WillSet</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">println</span><span class="p">(</span><span class="s">&quot;Will set value to ($0) curValue ($1)”)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>What I meant by point 3 is best explained with some sample code. Let’s say we have a class Foo in our Library/Module:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">struct</span> <span class="n">Foo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">var</span> <span class="n">rawInt</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class='line'>  <span class="n">var</span> <span class="n">observableInt</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Let’s say user of our library has a function that processes ints:
+<div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">func</span> <span class="n">processInt</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now I want the users of my module to be able to just use my code, regardless of it beining observable or not:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">let</span> <span class="n">object</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+</span><span class='line'><span class="n">processInt</span><span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">rawInt</span><span class="p">)</span>
+</span><span class='line'><span class="n">processInt</span><span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">observableInt</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Having a code like this would mean that you as an user of my code doesn’t need to care if it’s observable or not, yet you could leverage that power if you needed/wanted.</p>
+
+<h2>Swift Types and Implict conversions</h2>
+
+<p>Implementing compliance with above requirement (3rd) wouldn’t be  possible in Swift because of Type difference if not for a little known function called <strong>__conversion()</strong>, conversion as the name clearly states gives you implicit conversion between types, this is how we can use it for our Observable properties:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">struct</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">var</span> <span class="n">raw</span> <span class="o">:</span> <span class="n">T</span>
+</span><span class='line'><span class="c1">// other code...</span>
+</span><span class='line'>  <span class="n">func</span> <span class="n">__conversion</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">T</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">raw</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now each time a parameter of T is required, we can use Observable<T> instead.</p>
+
+<h2>Swift issues and Wish-list</h2>
+
+<p>When I was playing with the idea of Observables I’ve found few things that either crashed the compiler (<em>Ouch</em>) or just didn’t work in language (yet?).</p>
+
+<p>Issues:</p>
+
+<ul>
+<li>Putting enum declaration in a generic Struct will kill your Xcode -> that’s why ObservingType is separate enum.</li>
+<li>Working with compound collections (Hash of Arrays) has some really weird behaviours:
+
+<ul>
+<li>don’t try using mapping with observingInfo or compiler crashes -> thus let instead of simple map</li>
+<li>Can’t do inline manipulation of Arrays in hash -> needed  to overwrite whole array object in a hash</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Wish list:</p>
+
+<ol>
+<li>Would be nice to have a way to define behaviour/mutability for compound collections</li>
+<li>Ability to create extensions from a generic scope or overload assigment = operator, right now to be able to modify Observable<T> we need to use rawValue accessor which is far from perfect.</li>
+</ol>
+
+
+<p>Hopefully Apple is working on at least some of those points.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/Swift-Observable">Full playground is available here</a></p>
+
+<p>If you’d like to chat <a href="http://twitter.com/merowing_">send me a tweet</a> or even better send me some PR’s :-)</p>
+]]></content>
+  </entry>
+  
+</feed>

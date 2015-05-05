@@ -1,0 +1,1748 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Architecture | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/architecture/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Project Bootstrap]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/ios-project-bootstrap"/>
+    <updated>2014-10-15T14:52:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/ios-project-bootstrap</id>
+    <content type="html"><![CDATA[<p>As we are approaching 2015 I'm working on refreshing my project bootstrap. It's still work in progress but I think you'll like it already:
+<a href="https://github.com/krzysztofzablocki/KZBootstrap">Check it out on github.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Behaviours and Xcode 6]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/06/behaviours-and-xcode-6"/>
+    <updated>2014-06-22T16:46:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/06/behaviours-and-xcode-6</id>
+    <content type="html"><![CDATA[<p><a href="http://www.objc.io/issue-13/behaviors.html">I wrote about Behaviours in newest issue of objc.io Architecture series</a>.</p>
+
+<p>Xcode 6 brought some great improvements to interface builder, one of the coolest one is ability to design custom views, even cooler is the fact that few people realised - IBInspectable works on ANY object, this makes my Behaviours even better!</p>
+
+<!-- more -->
+
+
+<h1>Behaviours</h1>
+
+<p>My behaviours are built on top of 3 principles:</p>
+
+<ol>
+<li>Use of runtime attributes for setting properties</li>
+<li>Reversing lifetime notation</li>
+<li>Generating events</li>
+</ol>
+
+
+<p>Both 2. and 3. were easy to use since they were powered by visual binding, it was only a matter of connecting proper outlets/actions.</p>
+
+<p>Using runtime attributes was far from ideal:
+1. Error prone - since you need to enter keyPath correctly, spelling mistakes will lead to crash when deserialising Xib/Storyboard which gets annoying.
+2. Need to read documentation / header to know what keyPaths are supported.</p>
+
+<h1>Enter Xcode 6</h1>
+
+<p>With introduction of Xcode 6 we’ve received live rendering of custom views (finally!?), to support custom views rendering you need to:
+1. Put your view classes inside a separate framework
+2. Specify IBDesignable attribute for your class interface
+3. For each configurable custom property you should specify IBInspectable attribute</p>
+
+<p>If we add few IBInspectables like so:</p>
+
+<p><img src="http://merowing.info/uploads/2014/06/inspectable_code.png"></p>
+
+<p>Interface builder will now generate WYSIWYG editors for them:</p>
+
+<p><img src="http://merowing.info/uploads/2014/06/inspectable_ib.png"></p>
+
+<p>This is great improvement to workflow, especially if you look at how many different types of properties receive their own editors:
+- boolean
+- number
+- string
+- rectangle
+- point
+- size
+- color
+- range
+- image</p>
+
+<p>This is great improvement to workflow, especially when I work with designers, I no longer need them to read docs for each custom view we have in app, they can just use visual editor 100% of time!</p>
+
+<h1>How does that help with Behaviours?</h1>
+
+<p>Very few people realised that IBInspectable can work without IBDesignable, and it get’s better:</p>
+
+<blockquote><p>IBInspectable works without needing frameworks, on any class.</p></blockquote>
+
+<p>That means that each Behaviour property can be made IBInspectable and you get all the benefits of WYSIWYG editor for no cost, how great is that?</p>
+
+<p>Finally my Parallax behaviour get a nice visual editor:</p>
+
+<p><img src="http://merowing.info/uploads/2014/06/Inspectables.png"></p>
+
+<h1>Supporting older Xcode?</h1>
+
+<p>Xcode 6 is still beta and so are inspectables, fortunately for us Apple did great job of joining Runtime attributes and inspectables together:</p>
+
+<blockquote><p>If you have runtime attribute set for a specific keyPath that’s also IBInspectable property, it will show up as the value of that Inspectable</p></blockquote>
+
+<p>To be able to compile your IBInspectable enabled Behaviours on older Xcode 5 you just need to add empty macro for IBInspectable, like so:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">ifndef</span> <span class="n">IBInspectable</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="err">#</span><span class="n">define</span> <span class="n">IBInspectable</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">endif</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>All behaviours will now work as expected, you can use runtime attributes in Xcode 5 or Inspectable’s in Xcode 6.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/BehavioursExample">Grab example code from GitHub.</a></p>
+
+<p>If you’d like to chat about Behaviours or anything else, <a href="http://twitter.com/merowing_">send me a tweet</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Subjective guide to writing iOS Apps - Part 2 Data Parsing]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing"/>
+    <updated>2014-04-03T19:36:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing</id>
+    <content type="html"><![CDATA[<p>When it comes to architecture choices, the model layer is very important, flexible data parsing will allow us to add new types of objects easily, so making a mistake in this part of our app might lead to serious problems in the future.</p>
+
+<p>Let's look at how we could create a simple yet flexible architecture for our model layer.</p>
+
+<!-- more -->
+
+
+<h2>Design</h2>
+
+<p>What I like to do is create a modular architecture, one in which I can add new types of objects without modifying the core of the app, that way I can expand the application without much fuss.</p>
+
+<p>Since UI will come later in this series, I'll write this part using tests.</p>
+
+<h3>Choices</h3>
+
+<p>Let's start with a few choices before we design the architecture:</p>
+
+<ul>
+<li><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">KZPropertyMapper</a> for data mapping - because it's simple.</li>
+<li>CoreData for data persistence - because it's a very common need/choice in commercial apps.</li>
+<li><a href="https://github.com/rentzsch/mogenerator">mogenerator</a> - as it's useful for creating human / machine files</li>
+<li><a href="https://github.com/magicalpanda/MagicalRecord">Magical Record</a> - since we already know CoreData let's use a popular wrapper to help us out.</li>
+<li><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> - a very popular library that I'll use for fetching data.</li>
+<li><a href="https://github.com/AliSoftware/OHHTTPStubs">OHHTTPStubs</a> - this is not backend tutorial, so we'll stub server responses.</li>
+<li><a href="https://github.com/allending/Kiwi">Kiwi</a> for tests -my favorite.</li>
+</ul>
+
+
+<p>I'm not a huge fan of CoreData, but It gives me a nice way to have separation of concern.
+When I use a Fetched Results Controller my UI can be automatically updated and I end up having something like this:</p>
+
+<p><img src="http://merowing.info/uploads/2014/04/Flow.png" width="400" height="57"></p>
+
+<p>In this article I'll talk about the data path.
+<a href="https://github.com/krzysztofzablocki/KZBootstrap">Grab source code from GitHub</a></p>
+
+<h2>Implementation</h2>
+
+<p>First I start by setting up a project with <a href="https://github.com/krzysztofzablocki/crafter">crafter</a>
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1. KZBootstrap
+</span><span class='line'>2. KZBootstrapTests
+</span><span class='line'>Which target should I use for default?
+</span><span class='line'>1
+</span><span class='line'>1. KZBootstrap
+</span><span class='line'>2. KZBootstrapTests
+</span><span class='line'>Which target should I use for tests?
+</span><span class='line'>2
+</span><span class='line'>do you want to add networking? [y/n]
+</span><span class='line'>y
+</span><span class='line'>do you want to add coredata? [y/n]
+</span><span class='line'>y
+</span><span class='line'>do you want to add kiwi? [y/n]
+</span><span class='line'>y
+</span><span class='line'>duplicating configurations
+</span><span class='line'>setting up variety of options
+</span><span class='line'>preparing git ignore
+</span><span class='line'>preparing pod file
+</span><span class='line'>adding scripts
+</span><span class='line'>Finished.</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Using <a href="https://github.com/krzysztofzablocki/crafter">crafter</a> I now have all of my preferred libraries and custom warning levels without wasting time doing manual configuration.</p>
+
+<h3>Fetching</h3>
+
+<p>We won't be using a real backend server, instead we'll use the OHHTTPStubs library to stub network requests and return canned JSON responses. The library also provides us with simulated network speed (How cool is that?).</p>
+
+<p>For this part we can get away with an extra simple DataProvider concept, it just needs to satisfy a few simple requirements:</p>
+
+<ul>
+<li>it should allow stubbing fake data for an arbitrary URL (because we don't have backend)</li>
+<li>it should return operations that can be cancelled</li>
+</ul>
+
+
+<p>We can write tests for these 2 conditions like this:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">it</span><span class="p">(</span><span class="s">@&quot;should fetch data from an arbitrary URL&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">__block</span> <span class="kt">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">sut</span> <span class="nl">dataForURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://fake.url&quot;</span><span class="p">]</span> <span class="nl">withSuccessBlock:</span><span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">responseData</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">success</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span> <span class="nl">andFailureBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">}];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="n">success</span><span class="p">))</span> <span class="n">shouldEventually</span><span class="p">]</span> <span class="n">beTrue</span><span class="p">];</span>
+</span><span class='line'><span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">it</span><span class="p">(</span><span class="s">@&quot;should return operations that can be canceled&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">__block</span> <span class="kt">BOOL</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">id</span><span class="o">&lt;</span><span class="n">KZBCancelableOperation</span><span class="o">&gt;</span> <span class="n">operation</span> <span class="o">=</span> <span class="p">[</span><span class="n">sut</span> <span class="nl">dataForURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://fake.url&quot;</span><span class="p">]</span> <span class="nl">withSuccessBlock:</span><span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="n">responseData</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">executed</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span> <span class="nl">andFailureBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">executed</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">operation</span> <span class="n">cancel</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="n">executed</span><span class="p">))</span> <span class="n">shouldNotEventually</span><span class="p">]</span> <span class="n">beTrue</span><span class="p">];</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>In the first test we only care that it succeeds, in the second test I'm making sure that the operation can be cancelled.</p>
+
+<p>Now to make the first test pass, we want to stub our network requests by using OHHTTPStubs:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setupStubs</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">OHHTTPStubs</span> <span class="n">removeAllStubs</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">mapping</span> <span class="nl">enumerateKeysAndObjectsUsingBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">urlPath</span><span class="p">,</span> <span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">fileName</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">OHHTTPStubs</span> <span class="nl">stubRequestsPassingTest:</span><span class="o">^</span><span class="kt">BOOL</span><span class="p">(</span><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">BOOL</span> <span class="n">equal</span> <span class="o">=</span> <span class="p">[</span><span class="n">request</span><span class="p">.</span><span class="n">URL</span><span class="p">.</span><span class="n">absoluteString</span> <span class="nl">isEqualToString:</span><span class="n">urlPath</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">equal</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="nl">withStubResponse:</span><span class="o">^</span><span class="n">OHHTTPStubsResponse</span> <span class="o">*</span><span class="p">(</span><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">OHHTTPStubsResponse</span> <span class="o">*</span><span class="k">const</span> <span class="n">response</span> <span class="o">=</span> <span class="p">[</span><span class="n">OHHTTPStubsResponse</span> <span class="nl">responseWithFileAtPath:</span><span class="n">OHPathForFileInBundle</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="nb">nil</span><span class="p">)</span> <span class="nl">statusCode:</span><span class="mi">200</span> <span class="nl">headers:</span><span class="err">@</span><span class="p">{</span><span class="s">@&quot;Content-Type&quot;</span> <span class="o">:</span> <span class="s">@&quot;text/json&quot;</span><span class="p">}];</span>
+</span><span class='line'>  <span class="n">response</span><span class="p">.</span><span class="n">responseTime</span> <span class="o">=</span> <span class="n">OHHTTPStubsDownloadSpeed3G</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">response</span><span class="p">;</span>
+</span><span class='line'><span class="p">}];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here I setup all the stubbed network responses by using a mapping dictionary in form URLPath : FileName.</p>
+
+<p>I also setup the stub to simulate the speed of a 3G connection since I want real async tests as we don't currently have a real UI</p>
+
+<p>(In most cases you want to make tests run as fast as possible so that whole test-suite takes the minimum amount of time, since you'll be running them very often).</p>
+
+<p>Implementing dataForURL is easy enough:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span> <span class="o">&lt;</span><span class="n">KZBCancelableOperation</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">dataForURL:</span><span class="p">(</span><span class="n">NSURL</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">url</span> <span class="nf">withSuccessBlock:</span><span class="p">(</span><span class="n">KZBSuccessBlock</span><span class="p">)</span><span class="nv">successBlock</span> <span class="nf">andFailureBlock:</span><span class="p">(</span><span class="n">KZBFailureBlock</span><span class="p">)</span><span class="nv">failureBlock</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">id</span> <span class="n">requestOperation</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPRequestOperationManager</span> <span class="n">manager</span><span class="p">]</span> <span class="nl">GET:</span><span class="n">url</span><span class="p">.</span><span class="n">absoluteString</span> <span class="nl">parameters:</span><span class="nb">nil</span> <span class="nl">success:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">successBlock</span><span class="p">(</span><span class="n">responseObject</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span> <span class="nl">failure:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span><span class="p">(</span><span class="n">operation</span><span class="p">.</span><span class="n">isCancelled</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">failureBlock</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span>
+</span><span class='line'>  <span class="n">NSAssert</span><span class="p">([</span><span class="n">requestOperation</span> <span class="nl">respondsToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">cancel</span><span class="p">)],</span> <span class="s">@&quot;Returned operation doesn&#39;t support KZBCancelableOperation protocol&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">requestOperation</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here I am using AFNetworking to do a simple fetch.</p>
+
+<ul>
+<li>I don't want a cancelled action to callback my completion blocks so I ignore cancelled operations with a guard clause.</li>
+<li>I want to make sure requestOperation supports canceling.</li>
+<li>Since I don't have any value in exposing AFNetworking internal classes to my code I'll be using my cancelable protocol.</li>
+</ul>
+
+
+<h3>Parsing data</h3>
+
+<p>When it comes to parsing data, I'd like to make sure this implementation handles a few requirements:</p>
+
+<ol>
+<li>Easy to modify source format, if I need to change from JSON to something else, then that shouldn't be a massive endeavor.</li>
+<li>I'd like to be able to add new types of objects without modifying the parsing core. Ideally I would just add a class and have it working.</li>
+<li>Parsing should be very simple, preferably with little-to-no code.</li>
+</ol>
+
+
+<p>Let's look how we can create a design that will take care of all of these requirements:</p>
+
+<h4>Source format</h4>
+
+<p>This requirement is very simple to satisfy since we'll be using KZPropertyMapper for mapping.</p>
+
+<p>It doesn't rely on JSON/XML or any other format. It uses native data structures, so the only thing we need to make sure of is that our parser converts the source format into native types before passing the data to KZPropertyMapper.</p>
+
+<h4>Supporting new classes</h4>
+
+<p>This is the requirement that affects the design of this architecture the most.</p>
+
+<p>I want to drop-in a new class to the project, and <em>'somehow'</em> have it picked up by the parser and handled.</p>
+
+<h5>Protocol</h5>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@protocol</span> <span class="nc">KZBParsableObjectProtocol</span> <span class="o">&lt;</span><span class="n">NSObject</span><span class="o">&gt;</span>
+</span><span class='line'><span class="err">@</span><span class="n">required</span>
+</span><span class='line'><span class="o">+</span> <span class="p">(</span><span class="n">NSString</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">serverType</span><span class="p">;</span>
+</span><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">NSString</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">serverIDPropertyName</span><span class="p">;</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">updateFromDictionary:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">dictionary</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we decide on 3 main features:</p>
+
+<ol>
+<li>We can define our own mapping for serverTypes, doing ORM with 1:1 naming is usually ugly, especially if you have to support multiple platforms.</li>
+<li>We select which property will be used for mapping serverTypes.</li>
+<li>Each object knows how to update itself from an NSDictionary*. In proper projects this might be a good place to return an error at the core parsing level, especially since KZPropertyMapper can generate validation errors for you.</li>
+</ol>
+
+
+<p>It's a nice simple protocol, but it doesn't help us automatically support any new classes.</p>
+
+<h5>Finding parsable classes</h5>
+
+<p>It's actually quite simple to use the Obj-C runtime to get a list of all classes that conform to our protocol.</p>
+
+<p>Let's start with being able to find classes conforming to an arbitrary protocol:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">it</span><span class="p">(</span><span class="s">@&quot;should be able to find classes conforming to specific protocol&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[[[</span><span class="n">KZBParsingHelper</span> <span class="nl">findClassesConformingToProtocol:</span><span class="err">@</span><span class="n">protocol</span><span class="p">(</span><span class="n">KZBParsableObjectProtocol</span><span class="p">)]</span> <span class="n">should</span><span class="p">]</span> <span class="nl">equal:</span><span class="err">@</span><span class="p">[</span><span class="n">KZBTestParsableClass</span><span class="p">.</span><span class="n">class</span><span class="p">]];</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>In order to make this simple test pass, we need to get our hands a little bit dirty and use the straight C API of the Obj-C runtime.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">NSArray</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">findClassesConformingToProtocol:</span><span class="p">(</span><span class="n">Protocol</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">protocol</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">//! 1</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">numberOfClasses</span> <span class="o">=</span> <span class="n">objc_getClassList</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Class</span> <span class="o">*</span><span class="n">classes</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 2</span>
+</span><span class='line'>  <span class="n">classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">Class</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Class</span><span class="p">)</span> <span class="o">*</span> <span class="n">numberOfClasses</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">objc_getClassList</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">numberOfClasses</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">conformingClasses</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">NSInteger</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">numberOfClasses</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">Class</span> <span class="n">lClass</span> <span class="o">=</span> <span class="n">classes</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 3&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="n">class_conformsToProtocol</span><span class="p">(</span><span class="n">lClass</span><span class="p">,</span> <span class="n">protocol</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">conformingClasses</span> <span class="nl">addObject:</span><span class="n">classes</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">free</span><span class="p">(</span><span class="n">classes</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">[</span><span class="n">conformingClasses</span> <span class="n">copy</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>What happens here?</p>
+
+<ol>
+<li>First we need to establish the total number of classes in our application, so that we can allocate enough memory to hold them all.</li>
+<li>We allocate memory for our classes array and then ask the runtime to fill this allocated memory with the classes.</li>
+<li>While we are enumerating over all classes we need to use
+<div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">class_conformsToProtocol</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div>
+Instead of NSObject:
+<div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">class</span> <span class="nl">conformsToProtocol:</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div>
+This is because <strong>not all</strong> classes have to inherit from NSObject or implement the NSObject Protocol and that method will fail.</li>
+</ol>
+
+
+<p>Next we'd like to be able to grab a class corresponding to a specific serverType value:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">it</span><span class="p">(</span><span class="s">@&quot;should be able to query class for a serverType&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[[[</span><span class="n">KZBParsingHelper</span> <span class="nl">findClassesConformingToProtocol:</span><span class="err">@</span><span class="n">protocol</span><span class="p">(</span><span class="n">KZBParsableObjectProtocol</span><span class="p">)]</span> <span class="n">should</span><span class="p">]</span> <span class="nl">contain:</span><span class="n">KZBTestParsableClass</span><span class="p">.</span><span class="n">class</span><span class="p">];</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now querying all the classes every time someone asks for a serverType would be <em>very wasteful and not very smart</em>.</p>
+
+<p>Let's generate a serverType - class mapping only once when the KZBParsingHelper is first used:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 1.</span>
+</span><span class='line'><span class="o">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">initialize</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">setupServerTypeToClassMapping</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">setupServerTypeToClassMapping</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">//! 2.</span>
+</span><span class='line'><span class="n">NSMutableDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">classMapping</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">Class</span> <span class="n">lClass</span> <span class="k">in</span> <span class="p">[</span><span class="n">self</span> <span class="nl">findClassesConformingToProtocol:</span><span class="err">@</span><span class="n">protocol</span><span class="p">(</span><span class="n">KZBParsableObjectProtocol</span><span class="p">)])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">classMapping</span><span class="p">[[(</span><span class="kt">id</span><span class="p">)</span><span class="n">lClass</span> <span class="n">serverType</span><span class="p">]]</span> <span class="o">=</span> <span class="n">lClass</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">//! 3.</span>
+</span><span class='line'><span class="n">NSArray</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="k">const</span> <span class="n">serverTypes</span> <span class="o">=</span> <span class="n">classMapping</span><span class="p">.</span><span class="n">allValues</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSAssert</span><span class="p">([</span><span class="n">serverTypes</span> <span class="n">count</span><span class="p">]</span> <span class="o">==</span> <span class="p">[[</span><span class="n">serverTypes</span> <span class="nl">valueForKeyPath:</span><span class="s">@&quot;@distinctUnionOfObjects.self&quot;</span><span class="p">]</span> <span class="n">count</span><span class="p">],</span> <span class="s">@&quot;serverType collision, there shouldn&#39;t be 2 classes using same serverType %@&quot;</span><span class="p">,</span> <span class="n">classMapping</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 4.</span>
+</span><span class='line'>  <span class="n">objc_setAssociatedObject</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">serverTypeToClassMappingKey</span><span class="p">,</span> <span class="n">classMapping</span><span class="p">,</span> <span class="n">OBJC_ASSOCIATION_RETAIN_NONATOMIC</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Class</span><span class="p">)</span><span class="nl">classForServerType:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">serverType</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">//! 5.</span>
+</span><span class='line'><span class="k">return</span> <span class="p">[</span><span class="n">objc_getAssociatedObject</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">serverTypeToClassMappingKey</span><span class="p">)</span> <span class="nl">objectForKey:</span><span class="n">serverType</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></li>
+</ul>
+
+
+<p>Let's elaborate:</p>
+
+<ol>
+<li>initialize is called when the class is first referenced, so when you first try to use any of the methods available in KZBParsingHelper it will execute.</li>
+<li>Create a simple mapping between a serverType and the class that can map it.</li>
+<li>Make sure that there aren't any duplicate serverTypes, since that would be programmer mistake.</li>
+<li>Use associated objects to store the mappings against the class.</li>
+<li>Use associated objects to retrieve a mapping from the class.</li>
+</ol>
+
+
+<h5>Parser</h5>
+
+<p>Let's define a simple DataParser protocol:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@protocol</span> <span class="nc">KZBParserProtocol</span> <span class="o">&lt;</span><span class="n">NSObject</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">parseData:</span><span class="p">(</span><span class="n">NSData</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">data</span> <span class="nl">withCompletion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">parsingInfo</span><span class="p">))</span><span class="n">completionBlock</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ol>
+<li>I don't see a need to define data types at this level, I'd rather accept raw data and have the specific parser know how to handle it.</li>
+<li>Even if you wanted to do the parsing synchronously (really?) I believe this should still be designed as an async interface.</li>
+<li>Completion is called with error and parsingInfo, parsingInfo might be useful for specific parsers.</li>
+</ol>
+
+
+<h5>JSON Parser &amp; CoreData</h5>
+
+<p>Let's implement a base JSON parser that can work with CoreData, this will be a base class for implementing format specific JSON parsers later on.
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">KZBJSONParser</span> : <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">KZBParserProtocol</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">processBody:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">jsonBody</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">localContext</span> <span class="nl">completion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="p">))</span><span class="n">completionBlock</span> <span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we are adding one new method, subclasses can use it to define format specific parsing logic.</p>
+
+<p>The implementation looks like this:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@implementation</span> <span class="nc">KZBJSONParser</span>
+</span><span class='line'><span class="c1">//! 1.</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">parseData:</span><span class="p">(</span><span class="n">NSData</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">jsonData</span> <span class="nf">withCompletion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="p">))</span><span class="nv">completionBlock</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">//! 2.</span>
+</span><span class='line'>  <span class="n">NSParameterAssert</span><span class="p">(</span><span class="n">completionBlock</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">__block</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">deserializeJSONData:</span><span class="n">jsonData</span> <span class="nl">error:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">error</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">__block</span> <span class="n">NSDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">parserInfo</span><span class="p">;</span>
+</span><span class='line'><span class="c1">//! 3.</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">MagicalRecord</span> <span class="nl">saveWithBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">localContext</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span> <span class="nl">processBody:</span><span class="n">obj</span>
+</span><span class='line'>      <span class="nl">withCompletion:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">aError</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">aParserInfo</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">error</span> <span class="o">=</span> <span class="n">aError</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">parserInfo</span> <span class="o">=</span> <span class="n">aParserInfo</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span> <span class="nl">inContext:</span><span class="n">localContext</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span> <span class="nl">completion:</span><span class="o">^</span><span class="p">(</span><span class="kt">BOOL</span> <span class="n">success</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">aError</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">aError</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">error</span> <span class="o">=</span> <span class="n">pixle_NSErrorMake</span><span class="p">([</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;Saving to CoreData failed with error %@&quot;</span><span class="p">,</span> <span class="n">aError</span><span class="p">],</span> <span class="n">kErrorCodeInternal</span><span class="p">,</span> <span class="n">aError</span> <span class="o">?</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;parseError&quot;</span> <span class="o">:</span> <span class="n">aError</span><span class="p">}</span> <span class="o">:</span> <span class="nb">nil</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">parserInfo</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 4.</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">processBody:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">jsonBody</span> <span class="nl">withCompletion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">))</span><span class="n">completionBlock</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="p">)</span><span class="n">localContext</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">pragma</span> <span class="n">mark</span> <span class="o">-</span> <span class="n">Helpers</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 5.</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">deserializeJSONData:</span><span class="p">(</span><span class="n">NSData</span> <span class="o">*</span><span class="p">)</span><span class="n">data</span> <span class="nl">error:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">**</span><span class="p">)</span><span class="n">error</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSError</span> <span class="o">*</span><span class="n">ourError</span> <span class="o">=</span> <span class="n">pixle_NSErrorMake</span><span class="p">(</span><span class="s">@&quot;JSON data is nil&quot;</span><span class="p">,</span> <span class="n">kErrorCodeInternal</span><span class="p">,</span> <span class="nb">nil</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'>  <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="n">ourError</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="kt">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSJSONSerialization</span> <span class="nl">JSONObjectWithData:</span><span class="n">data</span> <span class="nl">options:</span><span class="p">(</span><span class="n">NSJSONReadingOptions</span><span class="p">)</span><span class="mi">0</span> <span class="nl">error:</span><span class="n">error</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ol>
+<li>Concrete implementation of the base method from the Parser protocol.</li>
+<li><strong>Parsing is an expensive operation</strong> and I'd like to enforce no-one calls it without caring about the results.</li>
+<li>Our JSON processing will happen on the CoreData context thread, and we'll pass in the localContext as I prefer to be explicit when working with context objects.</li>
+<li>Stub method for subclasses.</li>
+<li>Helper method for deserialising JSON using NSJSONSerialization.</li>
+</ol>
+
+
+<p>Now to be able to progress from here:</p>
+
+<p>We need to know the JSON format coming from our servers.</p>
+
+<p>As nice as REST is, not every client you have to work with have proper REST services, sometimes you might need to handle custom endpoints.</p>
+
+<h3>Server API?</h3>
+
+<p>While I was lead dev at <a href="http://theappbusiness.com">TAB</a> one of our apps had a diff-like API:</p>
+
+<p>We would query an endpoint and we'd get a response with list of actions to execute on our iOS app.</p>
+
+<p>Let's define something similar for our tests:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;pre&gt;&lt;code&gt;</span><span class="nt">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;payload&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nt">&quot;serverId&quot;</span> <span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;serverType&quot;</span> <span class="p">:</span> <span class="s2">&quot;TextWidget&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;My test title&quot;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;payload&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nt">&quot;serverId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;serverType&quot;</span><span class="p">:</span> <span class="s2">&quot;ImageWidget&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://goo.gl/IFSk4C&quot;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}],</span>
+</span><span class='line'><span class="nt">&quot;nextUrl&quot;</span> <span class="p">:</span> <span class="kc">null</span>
+</span><span class='line'><span class="err">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We have 2 sections in our response:</p>
+
+<ol>
+<li>actions - this is an array of actions to execute in a specific order. Each action has a type and a payload.</li>
+<li>nextUrl - the next fetch request should use this url. This way we can drive the whole API flow and only hardcode the 'start' endpoint in our app.</li>
+</ol>
+
+
+<p>Let's implement a JSON Diff parser to handle our custom format, with some space for extensibility later on.</p>
+
+<h4>JSON Diff parser</h4>
+
+<p>The nice thing about our base JSON parser is the fact that we only need to override one method to implement our diff format:
+<div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">processBody:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">jsonBody</span> <span class="nf">withCompletion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">))</span><span class="nv">completionBlock</span> <span class="nf">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="p">)</span><span class="nv">localContext</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Let's define some simple requirements for our diff parser:</p>
+
+<ul>
+<li>should raise an exception for JSON format</li>
+<li>should succeed for proper JSON format</li>
+<li>should ignore non implemented actions</li>
+<li>should create a new object for the add action</li>
+</ul>
+
+
+<p>To satisfy the first 2 requirements we can write tests like this:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//! 1.</span>
+</span><span class='line'>  <span class="n">it</span><span class="p">(</span><span class="s">@&quot;should raise exception for corrupted JSON format&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[[</span><span class="n">theBlock</span><span class="p">(</span><span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">sut</span> <span class="nl">processBody:</span><span class="p">[</span><span class="n">sut</span> <span class="nl">deserializeJSONData:</span><span class="n">DataForDiffFile</span><span class="p">(</span><span class="n">invalid</span><span class="p">)</span> <span class="nl">error:</span><span class="nb">nil</span><span class="p">]</span> <span class="nl">withCompletion:</span><span class="o">^</span>
+</span><span class='line'>  <span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">aError</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">}</span> <span class="nl">inContext:</span><span class="p">[</span><span class="n">NSManagedObjectContext</span> <span class="n">MR_context</span><span class="p">]];</span>
+</span><span class='line'><span class="p">})</span> <span class="n">should</span><span class="p">]</span> <span class="n">raise</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 2.</span>
+</span><span class='line'>  <span class="n">it</span><span class="p">(</span><span class="s">@&quot;should succeed for proper JSON format&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">__block</span> <span class="n">NSNumber</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">sut</span> <span class="nl">parseData:</span><span class="n">DataForDiffFile</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span> <span class="nl">withCompletion:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">result</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">}];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="n">shouldEventually</span><span class="p">]</span> <span class="n">beYes</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ol>
+<li>This test is not perfect as I had to manually deserialise JSON and use processBody instead of the standard method, this is due to having to raise an exception asynchronously, if you know how to write a test that can work with the default method, <a href="http://twitter.com/merowing_">send me a tweet</a>.</li>
+<li>We want to get a completion callback and make sure there weren't any errors.</li>
+</ol>
+
+
+<p>We can make these 2 tests pass with a simple implementation like:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">processBody:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">jsonBody</span> <span class="nf">withCompletion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">))</span><span class="nv">completionBlock</span> <span class="nf">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="p">)</span><span class="nv">localContext</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">processBody:</span><span class="n">jsonBody</span> <span class="nl">withCompletion:</span><span class="n">completionBlock</span> <span class="nl">inContext:</span><span class="n">localContext</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">jsonBody</span> <span class="nl">isKindOfClass:</span><span class="n">NSDictionary</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">nextURL</span> <span class="o">=</span> <span class="n">jsonBody</span><span class="p">[</span><span class="s">@&quot;nextUrl&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnBlock</span><span class="p">((</span><span class="kt">id</span><span class="p">)</span><span class="n">nextURL</span> <span class="o">==</span> <span class="p">[</span><span class="n">NSNull</span> <span class="n">null</span><span class="p">]</span> <span class="o">||</span> <span class="p">[</span><span class="n">nextURL</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">NSArray</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">actions</span> <span class="o">=</span> <span class="n">jsonBody</span><span class="p">[</span><span class="s">@&quot;actions&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">actions</span> <span class="nl">isKindOfClass:</span><span class="n">NSArray</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">actions</span> <span class="nl">enumerateObjectsUsingBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">action</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">action</span> <span class="nl">isKindOfClass:</span><span class="n">NSDictionary</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">*</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">action</span><span class="p">[</span><span class="s">@&quot;type&quot;</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="o">*</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we assert on expected types using <a href="http://www.merowing.info/2013/07/expanded-use-of-asserts/#.Uz2g1K2Sx1M">my advanced asserts</a>, that way it won't crash when compiled for release.</p>
+
+<p><strong>But</strong> this code already looks a little bit crowded, and not that flexible, so let's refactor it to prepare for the next steps:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">processBody:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">jsonBody</span> <span class="nl">withCompletion:</span><span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">))</span><span class="n">completionBlock</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="p">)</span><span class="n">localContext</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">[</span><span class="n">super</span> <span class="nl">processBody:</span><span class="n">jsonBody</span> <span class="nl">withCompletion:</span><span class="n">completionBlock</span> <span class="nl">inContext:</span><span class="n">localContext</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">jsonBody</span> <span class="nl">isKindOfClass:</span><span class="n">NSDictionary</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="c1">//! 1.</span>
+</span><span class='line'><span class="n">NSMutableDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">parsingInfo</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableDictionary</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">processSections:</span><span class="n">jsonBody</span> <span class="nl">parsingInfo:</span><span class="n">parsingInfo</span> <span class="nl">inContext:</span><span class="n">localContext</span><span class="p">];</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">completionBlock</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">parsingInfo</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">completionBlock</span><span class="p">(</span><span class="nb">nil</span><span class="p">,</span> <span class="n">parsingInfo</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">processSections:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">sections</span> <span class="nl">parsingInfo:</span><span class="p">(</span><span class="n">NSMutableDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">parsingInfo</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">context</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">__block</span> <span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">oError</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">sections</span> <span class="nl">enumerateKeysAndObjectsUsingBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">section</span><span class="p">,</span> <span class="kt">id</span> <span class="n">sectionData</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">section</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">oError</span> <span class="o">=</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="c1">//! 2.</span>
+</span><span class='line'>  <span class="kt">SEL</span> <span class="n">selector</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">selectorForHandlingSection:</span><span class="n">section</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">self</span> <span class="nl">respondsToSelector:</span><span class="n">selector</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">DDLogWarn</span><span class="p">(</span><span class="s">@&quot;Ignoring json diff section %@&quot;</span><span class="p">,</span> <span class="n">section</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">//! 3.</span>
+</span><span class='line'>  <span class="kt">id</span> <span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">objc_msgSendTyped</span><span class="p">)(</span><span class="kt">id</span><span class="p">,</span> <span class="kt">SEL</span><span class="p">,</span> <span class="kt">id</span><span class="p">,</span> <span class="n">NSMutableDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSManagedObjectContext</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">context</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">objc_msgSend</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span> <span class="o">=</span> <span class="n">objc_msgSendTyped</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">sectionData</span><span class="p">,</span> <span class="n">parsingInfo</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">*</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">oError</span> <span class="o">=</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">oError</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! 4.&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">pragma</span> <span class="n">mark</span> <span class="o">-</span> <span class="n">Parsing</span> <span class="n">sections</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">processActions:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">actionsArray</span> <span class="nl">parsingInfo:</span><span class="p">(</span><span class="n">NSMutableDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">parsingInfo</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">context</span>  <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">used</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">block</span> <span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">oError</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">AssertTrueOrReturnError</span><span class="p">([</span><span class="n">actionsArray</span> <span class="nl">isKindOfClass:</span><span class="n">NSArray</span><span class="p">.</span><span class="n">class</span><span class="p">]);</span>
+</span><span class='line'><span class="p">[</span><span class="n">actionsArray</span> <span class="nl">enumerateObjectsUsingBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">actionData</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">BOOL</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">actionData</span> <span class="nl">isKindOfClass:</span><span class="n">NSDictionary</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">oError</span> <span class="o">=</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">AssertTrueOrReturnBlock</span><span class="p">([</span><span class="n">actionData</span><span class="p">[</span><span class="s">@&quot;type&quot;</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">oError</span> <span class="o">=</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">});</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="kt">SEL</span> <span class="n">selector</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">selectorForHandlingAction:</span><span class="n">actionData</span><span class="p">[</span><span class="s">@&quot;type&quot;</span><span class="p">]];</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">self</span> <span class="nl">respondsToSelector:</span><span class="n">selector</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">DDLogWarn</span><span class="p">(</span><span class="s">@&quot;Ignoring json diff action %@&quot;</span><span class="p">,</span> <span class="n">actionData</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="kt">id</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">objc_msgSendTyped</span><span class="p">)(</span><span class="kt">id</span><span class="p">,</span> <span class="kt">SEL</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">NSManagedObjectContext</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">context</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">objc_msgSend</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span> <span class="o">=</span> <span class="n">objc_msgSendTyped</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">actionData</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">oError</span> <span class="o">=</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">oError</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">processNextUrl:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">nextURL</span> <span class="nl">parsingInfo:</span><span class="p">(</span><span class="n">NSMutableDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">parsingInfo</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">context</span> <span class="n">__used</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">AssertTrueOrReturnError</span><span class="p">((</span><span class="kt">id</span><span class="p">)</span><span class="n">nextURL</span> <span class="o">==</span> <span class="p">[</span><span class="n">NSNull</span> <span class="n">null</span><span class="p">]</span> <span class="o">||</span> <span class="p">[</span><span class="n">nextURL</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">]);</span>
+</span><span class='line'><span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">pragma</span> <span class="n">mark</span> <span class="o">-</span> <span class="n">Helpers</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nl">selectorForHandlingSection:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">section</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">return</span> <span class="n">NSSelectorFromString</span><span class="p">([</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;process%@:parsingInfo:inContext:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">section</span> <span class="n">MR_capitalizedFirstCharacterString</span><span class="p">]]);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></li>
+</ul>
+
+
+<p>Even though there is more code with extra methods this is easier to read and future-proofed:</p>
+
+<ol>
+<li>Parsing all sections is now done in a separate method.</li>
+<li>We now have dynamic resolution of section handling, which means we don't hardcode supported sections, this can be very useful in the future of the project, when you need to add support for new sections, I'll show an example later on.</li>
+<li>We use a typed objc_msgSend to call the selector, this is due to the fact that we need to be careful about types when working with ARC and arm64.</li>
+<li>The previous code has been refactored into separate methods that are called dynamically, don't forget to use <strong>__used</strong> keyword to prevent compiler from thinking this code is dead.</li>
+</ol>
+
+
+<p>We have 2 remaining requirements:</p>
+
+<ol>
+<li>should ignore non implemented actions</li>
+<li>should create a new object for the add action</li>
+</ol>
+
+
+<p>The <em>1st</em> requirement is tested with same code as the success requirement, only using different JSON file.</p>
+
+<p>The <em>2nd</em> one is more complicated:</p>
+
+<ul>
+<li>we need some test classes that use our CoreData model.</li>
+<li>we need to make sure our CoreData is set-up correctly for testing.</li>
+<li>we need to finish our processActions section handling.</li>
+</ul>
+
+
+<p>Let's start with a very basic data model:</p>
+
+<p><img src="http://merowing.info/uploads/2014/04/Model.png" width="344" height="219"></p>
+
+<p>To be able to write tests with CoreData I'd recommend using beforeEach/afterEach blocks in Kiwi, this is how they look after adding CD memory store:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="n">__block</span> <span class="n">KZBJSONDiffParser</span> <span class="o">*</span><span class="n">sut</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">beforeEach</span><span class="p">(</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">MagicalRecord</span> <span class="n">setupCoreDataStackWithInMemoryStore</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">sut</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBJSONDiffParser</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">afterEach</span><span class="p">(</span><span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">MagicalRecord</span> <span class="n">cleanUp</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span><span class="p">(</span><span class="s">@&quot;should ignore non implemented actions&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">__block</span> <span class="n">NSNumber</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">sut</span> <span class="nl">parseData:</span><span class="n">DataForDiffFile</span><span class="p">(</span><span class="n">newactions</span><span class="p">)</span> <span class="nl">withCompletion:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="nb">nil</span> <span class="o">?</span> <span class="err">@</span><span class="n">YES</span> <span class="o">:</span> <span class="err">@</span><span class="n">NO</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="n">shouldEventually</span><span class="p">]</span> <span class="n">beYes</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span><span class="p">(</span><span class="s">@&quot;should create a new object for the add action&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">__block</span> <span class="kt">id</span> <span class="n">object</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">sut</span> <span class="nl">parseData:</span><span class="n">DataForDiffFile</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span> <span class="nl">withCompletion:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">object</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBTextWidget</span> <span class="n">MR_findFirst</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="n">shouldEventually</span><span class="p">]</span> <span class="n">beNonNil</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now we need to expand our processActions method to actually do something constructive.</p>
+
+<p>Since we added a nice flexible way for dealing with section sections, let's replicate that for actions as well:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">SEL</span> <span class="n">selector</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">selectorForHandlingAction:</span><span class="n">actionData</span><span class="p">[</span><span class="s">@&quot;type&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">self</span> <span class="nl">respondsToSelector:</span><span class="n">selector</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">DDLogWarn</span><span class="p">(</span><span class="s">@&quot;Ignoring json diff action %@&quot;</span><span class="p">,</span> <span class="n">actionData</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">id</span> <span class="p">(</span><span class="o">*</span><span class="n">objc_msgSendTyped</span><span class="p">)(</span><span class="kt">id</span><span class="p">,</span> <span class="kt">SEL</span><span class="p">,</span> <span class="kt">id</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">objc_msgSend</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSError</span> <span class="o">*</span><span class="n">error</span> <span class="o">=</span> <span class="n">objc_msgSendTyped</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">actionData</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">*</span><span class="n">stop</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">oError</span> <span class="o">=</span> <span class="n">error</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>For the actionAdd itself, you can implement it like this:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">actionAdd:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">action</span> <span class="nf">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">*</span><span class="p">)</span><span class="nv">context</span> <span class="n">__used</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">action</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">@&quot;payload&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnNil</span><span class="p">([</span><span class="n">action</span> <span class="nl">isKindOfClass:</span><span class="n">NSDictionary</span><span class="p">.</span><span class="n">class</span><span class="p">]);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">NSString</span> <span class="o">*</span><span class="n">serverType</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">@&quot;serverType&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnNil</span><span class="p">([</span><span class="n">serverType</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">]);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">NSString</span> <span class="o">*</span><span class="n">serverID</span> <span class="o">=</span> <span class="n">action</span><span class="p">[</span><span class="s">@&quot;serverId&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">AssertTrueOrReturnNil</span><span class="p">([</span><span class="n">serverID</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">]);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">NSManagedObject</span> <span class="o">&lt;</span><span class="n">KZBParsableObjectProtocol</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBParsingHelper</span> <span class="nl">findOrCreateWithServerType:</span><span class="n">serverType</span> <span class="nl">serverID:</span><span class="n">serverID</span> <span class="nl">inContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">obj</span> <span class="nl">updateFromDictionary:</span><span class="n">action</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ul>
+<li>We are only interested in payload at this point.</li>
+<li>Asserts to make sure our format is matching expectations</li>
+<li>Only soft-errors, if we return an Error from here it will stop the whole parsing, instead I'd like to ignore incorrect data in this particular case, so I am using Asserts but not returning errors (my asserts already generate and log error info).</li>
+<li>findOrCreate object and ask it to update itself from the action dictionary.</li>
+</ul>
+
+
+<p>Keep in mind that in normal projects:</p>
+
+<ul>
+<li>I'd recommend having a separate helper for CoreData stuff.</li>
+<li>findOrCreate should be optimised, doing it per action is too slow when you have lots of them. It's quite simple to optimise it but beyond scope of this article.</li>
+</ul>
+
+
+<p>This is how findOrCreate is implemented in ParsingHelper:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">NSManagedObject</span> <span class="o">&lt;</span><span class="n">KZBParsableObjectProtocol</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">findOrCreateWithServerType:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">serverType</span> <span class="nf">serverID:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">serverID</span> <span class="nf">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">context</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">Class</span> <span class="n">oClass</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">NSManagedObject</span> <span class="o">&lt;</span><span class="n">KZBParsableObjectProtocol</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">findWithServerType:</span><span class="n">serverType</span> <span class="nl">serverID:</span><span class="n">serverID</span> <span class="nl">inContext:</span><span class="n">context</span> <span class="nl">classForObject:</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">oClass</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">obj</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">oClass</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">oClass</span> <span class="nl">MR_createInContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">obj</span> <span class="nl">setValue:</span><span class="n">serverID</span> <span class="nl">forKey:</span><span class="p">[(</span><span class="kt">id</span><span class="p">)</span><span class="n">oClass</span> <span class="n">serverIDPropertyName</span><span class="p">]];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="n">NSManagedObject</span> <span class="o">&lt;</span><span class="n">KZBParsableObjectProtocol</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">findWithServerType:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">serverType</span> <span class="nl">serverID:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">serverID</span> <span class="nl">inContext:</span><span class="p">(</span><span class="n">NSManagedObjectContext</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">context</span> <span class="nl">classForObject:</span><span class="p">(</span><span class="n">out</span> <span class="n">Class</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">oClass</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">Class</span> <span class="n">classForObject</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBParsingHelper</span> <span class="nl">classForServerType:</span><span class="n">serverType</span><span class="p">];</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">oClass</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">oClass</span> <span class="o">=</span> <span class="n">classForObject</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">classForObject</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">DDLogInfo</span><span class="p">(</span><span class="s">@&quot;Ignoring object with serverType %@ as there is no matching class&quot;</span><span class="p">,</span> <span class="n">serverType</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">AssertTrueOrReturnNilBlock</span><span class="p">([</span><span class="n">self</span> <span class="nl">checkIfClass:</span><span class="n">classForObject</span> <span class="nl">isKindOfClass:</span><span class="n">NSManagedObject</span><span class="p">.</span><span class="n">class</span><span class="p">],</span> <span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">oClass</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">oClass</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="k">const</span> <span class="n">serverIDProperty</span> <span class="o">=</span> <span class="p">[(</span><span class="kt">id</span><span class="p">)</span><span class="n">classForObject</span> <span class="n">serverIDPropertyName</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSManagedObject</span> <span class="o">&lt;</span><span class="n">KZBParsableObjectProtocol</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="n">classForObject</span> <span class="nl">MR_findFirstByAttribute:</span><span class="n">serverIDProperty</span> <span class="nl">withValue:</span><span class="n">serverID</span> <span class="nl">inContext:</span><span class="n">context</span><span class="p">];</span>
+</span><span class='line'><span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p></li>
+<li><p>We ignore serverTypes that don't have a matching class</p></li>
+<li>We assert this parsable object is a managed object since this is a CoreData method.</li>
+<li>We try finding an existing object. If one doesn't exist but we have found a proper class we use this class to create a new instance.</li>
+</ul>
+
+
+<p>Now all tests pass. Our architecture is finally ready to parse some data.</p>
+
+<h4>Parsing object data</h4>
+
+<p>Let's add parsing to our ImageWidget, since we spennt some time creating a nice architecture, it's going to be very straightforward.</p>
+
+<p>First let's see if we can get our URL parsed correctly and transformed into an NSURL.
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">it</span><span class="p">(</span><span class="s">@&quot;should create ImageWidget with properly parsed data&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">__block</span> <span class="n">KZBImageWidget</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">imageWidget</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">sut</span> <span class="nl">parseData:</span><span class="n">DataForDiffFile</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span> <span class="nl">withCompletion:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">imageWidget</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBImageWidget</span> <span class="n">MR_findFirst</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="n">imageWidget</span><span class="p">.</span><span class="n">url</span><span class="p">)</span> <span class="n">shouldEventually</span><span class="p">]</span> <span class="nl">equal:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://goo.gl/IFSk4C&quot;</span><span class="p">]];</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>So how hard is it to add support for parsing image widgets with this architecture?
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">//! in .h</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">KZBImageWidget</span> : <span class="nc">_KZBImageWidget</span> <span class="o">&lt;</span><span class="n">KZBParsableObjectProtocol</span><span class="o">&gt;</span><span class="p">{}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! in .m</span>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">KZBImageWidget</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">serverType</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">return</span> <span class="s">@&quot;ImageWidget&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">updateFromDictionary:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="n">dictionary</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">[</span><span class="n">KZPropertyMapper</span> <span class="nl">mapValuesFrom:</span><span class="n">dictionary</span> <span class="nl">toInstance:</span><span class="n">self</span> <span class="nl">usingMapping:</span><span class="err">@</span><span class="p">{</span>
+</span><span class='line'>  <span class="s">@&quot;url&quot;</span> <span class="o">:</span> <span class="n">KZBox</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">url</span><span class="p">),</span>
+</span><span class='line'>  <span class="s">@&quot;caption&quot;</span> <span class="o">:</span> <span class="n">KZProperty</span><span class="p">(</span><span class="n">caption</span><span class="p">)</span>
+</span><span class='line'><span class="p">}];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p></li>
+</ul>
+
+
+<p>And that's it. Pretty simple isn't it? You just conform to the protocol, specify the class and describe the mapping.</p>
+
+<h4>Yeah right</h4>
+
+<p>That was really simple data, what if I'd like to have a CoreData relationship? It's probably going to be <em>dreadful and hard</em>?</p>
+
+<p><strong>Not really</strong>.</p>
+
+<p>Let's say our server architecture changes and we need to add a relationship between ImageWidget and TextWidget:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'> <span class="p">{</span><span class="err">&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;pre&gt;&lt;code&gt;</span>        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;payload&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nt">&quot;serverId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;serverType&quot;</span><span class="p">:</span> <span class="s2">&quot;ImageWidget&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://goo.gl/IFSk4C&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;caption&quot;</span> <span class="p">:</span> <span class="s2">&quot;it works!&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nt">&quot;textWidgetId&quot;</span> <span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="err">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>How can we change our parsing to handle this? 2 Options:</p>
+
+<ol>
+<li>Add boxing in a category to be able to create objects like that, preferable if you need to repeat this kind of mapping in multiple places.</li>
+<li>Just use KZCall to create sub-object:</li>
+</ol>
+
+
+<p>First let's add test for our new requirement:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">it</span><span class="p">(</span><span class="s">@&quot;should create ImageWidget with properly parsed relationship&quot;</span><span class="p">,</span> <span class="o">^</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">__block</span> <span class="kt">BOOL</span> <span class="n">isEqual</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">sut</span> <span class="nl">parseData:</span><span class="n">DataForDiffFile</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span> <span class="nl">withCompletion:</span><span class="o">^</span><span class="p">(</span><span class="n">NSError</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">error</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">KZBImageWidget</span> <span class="o">*</span><span class="n">imageWidget</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBImageWidget</span> <span class="n">MR_findFirst</span><span class="p">];</span>
+</span><span class='line'><span class="n">KZBTextWidget</span> <span class="o">*</span><span class="n">textWidget</span> <span class="o">=</span> <span class="p">[</span><span class="n">KZBTextWidget</span> <span class="n">MR_findFirst</span><span class="p">];</span>
+</span><span class='line'><span class="n">isEqual</span> <span class="o">=</span> <span class="n">imageWidget</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">imageWidget</span><span class="p">.</span><span class="n">textWidget</span> <span class="o">==</span> <span class="n">textWidget</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[[</span><span class="n">expectFutureValue</span><span class="p">(</span><span class="err">@</span><span class="p">(</span><span class="n">isEqual</span><span class="p">))</span> <span class="n">shouldEventually</span><span class="p">]</span> <span class="n">beTrue</span><span class="p">];</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now we need to update our KZBImageWidget parsing like this:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">updateFromDictionary:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">dictionary</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">KZPropertyMapper</span> <span class="nl">mapValuesFrom:</span><span class="n">dictionary</span> <span class="nl">toInstance:</span><span class="n">self</span> <span class="nl">usingMapping:</span><span class="err">@</span><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="s">@&quot;url&quot;</span> <span class="o">:</span> <span class="n">KZBox</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">url</span><span class="p">),</span>
+</span><span class='line'><span class="s">@&quot;caption&quot;</span> <span class="o">:</span> <span class="n">KZProperty</span><span class="p">(</span><span class="n">caption</span><span class="p">),</span>
+</span><span class='line'><span class="s">@&quot;textWidgetId&quot;</span> <span class="o">:</span> <span class="n">KZCall</span><span class="p">(</span><span class="nl">objectForId:</span><span class="p">,</span> <span class="n">textWidget</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">objectForId:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">serverID</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">AssertTrueOrReturnNil</span><span class="p">([</span><span class="n">serverID</span> <span class="nl">isKindOfClass:</span><span class="n">NSString</span><span class="p">.</span><span class="n">class</span><span class="p">]);</span>
+</span><span class='line'><span class="k">return</span> <span class="p">[</span><span class="n">KZBParsingHelper</span> <span class="nl">findWithServerType:</span><span class="p">[</span><span class="n">KZBWidget</span> <span class="n">serverType</span><span class="p">]</span> <span class="nl">serverID:</span><span class="n">serverID</span> <span class="nl">inContext:</span><span class="n">self</span><span class="p">.</span><span class="n">managedObjectContext</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></li>
+</ul>
+
+
+<p>Looks simple enough?</p>
+
+<ol>
+<li>Use KZCall to specify the selector to be called with textWidgetId value, the resulting value should be assigned to the textWidget property.</li>
+<li>objectForId method that will query ANY subclass of KZBWidget that has specific serverID.</li>
+</ol>
+
+
+<p>I've implemented objectForId without textWidgetType because you could move this code to KZPropertyMapper as a new boxing and have it used in ALL your relationships if needed.</p>
+
+<p>KZPM offers more than we used here:</p>
+
+<ul>
+<li>It does compile time checking for your property / method names</li>
+<li>Allows extra simple expansion by using categories</li>
+<li>Offers simple validation logic with a custom DSL syntax</li>
+</ul>
+
+
+<p><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Read more at it's github page.</a></p>
+
+<h1>Conclusion and what's next?</h1>
+
+<p>So now we have fetching capabilities and parsing, how do we connect the two ?</p>
+
+<p>In the next part of this series I'll introduce a DataService class(for lack of better name) that coordinates Provider and Parser using composition, it has some simple features like auto-updating, following URL redirections(nextURL) etc.</p>
+
+<p>I'll also start connecting our data to UI, so you'll be able to see how we can use CoreData to drive our responsive UI with little fuss.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/KZBootstrap">Grab source code from GitHub</a></p>
+
+<p>This was a long article and I really hope you found it at least mildly interesting, <a href="http://twitter.com/merowing_">send me a tweet</a></p>
+
+<h4>Foot notes</h4>
+
+<ul>
+<li>In normal projects you should definitely have more tests and they could be refactored a little bit.</li>
+<li>This is the general idea, but it's a good start, I'd adapt it to project specific needs.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

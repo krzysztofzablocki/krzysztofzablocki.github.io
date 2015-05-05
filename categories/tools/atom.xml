@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tools | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/tools/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Playgrounds for Objective-C]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/playgrounds-for-objective-c"/>
+    <updated>2014-10-23T12:03:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/playgrounds-for-objective-c</id>
+    <content type="html"><![CDATA[<p>Everyone loves Swift playgrounds, they are awesome, Apple has made amazing job with Xcode 6 and Playgrounds were the icying on the cake.</p>
+
+<p>But since most of us still need to write Objective-C I've created Playgrounds for Objective-C:</p>
+
+<p><div class="embed-video-container"><iframe src="http://player.vimeo.com/video/109757619 "></iframe></div></p>
+
+<h3>Features</h3>
+
+<ul>
+<li>Faster than Swift playgrounds (a lot)</li>
+<li>Extra controls for tweaking:</li>
+<li>Adjustable values</li>
+<li>Autoanimated values</li>
+<li>Buttons</li>
+<li>IDE agnostic, once you run it, you can modify the code even from vim.</li>
+<li>Full iOS simulator and access to all iOS features, so you can prototype production ready code.</li>
+<li>Nice DSL for rapid prototyping</li>
+<li>CocoaPods support, so you can add it to existing projects to experiment</li>
+<li>Open source, anyone can contribute to make them better!</li>
+</ul>
+
+
+<p>And it’s just a start.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/KZPlayground">Source code on GitHub</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Project Bootstrap]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/ios-project-bootstrap"/>
+    <updated>2014-10-15T14:52:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/ios-project-bootstrap</id>
+    <content type="html"><![CDATA[<p>As we are approaching 2015 I'm working on refreshing my project bootstrap. It's still work in progress but I think you'll like it already:
+<a href="https://github.com/krzysztofzablocki/KZBootstrap">Check it out on github.</a></p>
+]]></content>
+  </entry>
+  
+</feed>

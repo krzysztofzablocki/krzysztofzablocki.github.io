@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tip | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/tip/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quick Tip: Xib referencing]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2012/12/quick-tip-for-interface-builder"/>
+    <updated>2012-12-26T21:03:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2012/12/quick-tip-for-interface-builder</id>
+    <content type="html"><![CDATA[<p>Do you use Interface Builder ? Even if you don’t like IB, read this short tip and referenced articles. If you have used IB before, you probably needed to reference one Xib view from another Xib / Storyboard. You probably wrote some code to create that view from code ? You don’t need to do that.</p>
+
+<!-- more -->
+
+
+<h2>Intro</h2>
+
+<p>People often argue if you should use IB/Storyboards or not, I’ve heard that you can’t create advanced UI in IB and you need to write code. What’s interesting is that I’ve always heard that argument from people that are opposed to using IB, I guess there are tons of people creating such amazing and custom UI ?</p>
+
+<p>Some people obviously have valid reasons not to use IB as it’s not magic solution and some stuff is better and easier done with code. The thing is, to be able to be pragmatic about it and understand when to use which, you actually need to give IB a try and use it for quite some time.</p>
+
+<p>I’ve been doing only code layout for 2 years, because I believed it’s better than IB and my UI’s are too complicated to use IB. After 2 years I’ve made decision to really give IB a try, I’ve been using it for over a year now, guess what? Most of the layout code I’ve written in 2 years could be replaced with Xib’s and it would be less buggy, faster to develop and cheaper to maintain.</p>
+
+<p>My current approach is pretty much aligned with this <a href="http://berzniz.com/post/32597579083/8-reasons-why-real-men-do-use-interface-builder">blog post</a>, you should also <a href="http://twoshotsofcocoa.com/?p=70">read this</a> as it shows how to pass custom attributes to views.</p>
+
+<p>One thing that I didn’t agree with was the line “<strong>reusing a UI control from a different Xib is not yet possible</strong>“. Well that’s not exactly true, it’s not perfect but it is very much possible.</p>
+
+<h2>Referencing Xib’s from other Xib’s</h2>
+
+<p>There are many hidden gems in iOS frameworks that many people miss, one of such gems is method:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">awakeAfterUsingCoder:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="nv">aDecoder</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Documentation states:<br/>
+<em>Overridden by subclasses to substitute another object in place of the object that was decoded and subsequently received this message.</em></p>
+
+<p>And it so happens that Xib/Storyboards are decoded from NSCoder, let’s use that to our advantage.<br/>
+We need to distinguish when awakeAfterUsingCoder is called from our referencing Xib and when it’s called from the real, simplest way to do that will be setting some arbitrary Tag on the placeholder view in IB/Storyboard.</p>
+
+<p>Simple category method might look like this:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">awakeAfterUsingCoder:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="nv">aDecoder</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="c1">//! loading from placeholder</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">kNibReferencingTag</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIView</span> <span class="o">*</span><span class="n">realView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">class</span><span class="p">]</span> <span class="n">loadInstanceFromNib</span><span class="p">];</span>
+</span><span class='line'><span class="n">realView</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">;</span>
+</span><span class='line'><span class="n">realView</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="p">;</span>
+</span><span class='line'><span class="n">realView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">backgroundColor</span><span class="p">;</span>
+</span><span class='line'><span class="n">realView</span><span class="p">.</span><span class="n">autoresizingMask</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">autoresizingMask</span><span class="p">;</span>
+</span><span class='line'><span class="n">realView</span><span class="p">.</span><span class="n">autoresizesSubviews</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">autoresizesSubviews</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">UIView</span> <span class="o">*</span><span class="n">view</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">subviews</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">realView</span> <span class="nl">addSubview:</span><span class="n">view</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="n">realView</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">[</span><span class="n">super</span> <span class="nl">awakeAfterUsingCoder:</span><span class="n">aDecoder</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>If we are loading from placeholder view, we create a real view and then we transfer some common properties from it and all it’s subviews, then we just return that instance in place of placeholder, otherwise we just return normal view (This method is implemented on NSObject so we can call super, but this still should be done with method swizzling instead of category smashing).</p>
+
+<h2>Conclusion and Sample</h2>
+
+<p>Create some simple Xib view, set your custom class on it. Create storyboard / other xib and create new UIView on it, set it’s class to your custom class and it’s tag to 616 ( as that’s my special tag in sample ). Run your project.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/XibReferencing">Sample on GitHub.</a></p>
+
+<p>Required improvements:</p>
+
+<p>That’s all for my quick post (thanks to <a href="http://twitter.com/mugunthkumar">@mugunthkumar</a> for tweeting about first article and thus inspring me to write this quick post), I’m back to <a href="http://www.itunes.com/app/Foldify">foldify</a> 1.1 development. I’ll be back with more and better quality posts after it goes live.</p>
+
+<p>I'm <a href="http://twitter.com/merowing_">merowing_ on twitter</a> if you feel like talking about it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to check if user touched anything in your iOS App]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app"/>
+    <updated>2012-03-05T21:55:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app</id>
+    <content type="html"><![CDATA[<p>So you want to know when user is interacting with your app and you don’t really care which screen is he using or what is he doing. You only want to know when he touches your app, for example: you make a game and you would like to automatically go into pause mode if user didn’t use your app for N minutes…</p>
+
+<p>The solution that I will describe also can be used to find if or where UIWebView was touched without interfering with the web clickable content, for example showing an overlay where the user touched your UIWebView content…</p>
+
+<!-- more -->
+
+
+<h2>Implement a simple solution</h2>
+
+<p>Doing that at each top view level would be waste of time and not something that you really need.</p>
+
+<p>You could add some custom subview to your window, intercept touches there and try to somehow pass it along to real views that needs it ( after all you can have many interactive views ). <strong>But this is not simple</strong>, it requires subclassing, adding custom views to windows…</p>
+
+<p>Actually UIWindow is subclass of UIView, that means you can add a gesture recognizer to it. But how to make sure this will not have influence on real content of your app ?</p>
+
+<p>Make AppDelegate the delegate of UIGestureRecognizer that you just added, and override shouldReceiveTouch as follows:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">gestureRecognizer:</span><span class="p">(</span><span class="n">UIGestureRecognizer</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">gestureRecognizer</span> <span class="nf">shouldReceiveTouch:</span><span class="p">(</span><span class="n">UITouch</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">touch</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;touch at %@&quot;</span><span class="p">,</span> <span class="n">NSStringFromCGPoint</span><span class="p">([</span><span class="n">touch</span> <span class="nl">locationInView:</span><span class="n">touch</span><span class="p">.</span><span class="n">view</span><span class="p">]));</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>This allows you to intercept any screen touches but ignores it and prevents your code from influencing your app normal behavior ( UIControls or other UIGestureRecognizers <strong>works as always</strong> ) .</p>
+
+<h2>Summary</h2>
+
+<p>Adding UIGestureRecognizer to arbitrary view, be it UIWindow or UIWebView and setting it’s delegate to return NO on shouldReceiveTouch allows you to execute arbitrary code when user puts down its finger on screen without interfering with UIControls or UIGestureRecognizers behaviors.</p>
+
+<p>I'm <a href="http://twitter.com/merowing_">merowing_ on twitter</a> if you feel like talking about it.</p>
+]]></content>
+  </entry>
+  
+</feed>

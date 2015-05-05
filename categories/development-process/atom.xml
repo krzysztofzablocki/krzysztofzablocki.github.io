@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Development process | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/development-process/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Tips]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/ios-tips"/>
+    <updated>2014-02-20T13:55:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/ios-tips</id>
+    <content type="html"><![CDATA[<p>Easy to apply tips that can improve your development workflow.</p>
+
+<!-- more -->
+
+
+<h2>Know available tools and how to use them.</h2>
+
+<p>I believe you should use best tool for the job, and there are lots of tools that are perfect for specific tasks.
+<a href="http://www.merowing.info/2014/02/ios-developer-tools/">This is blog post about tools I use</a></p>
+
+<h2>Write and use code snippets.</h2>
+
+<p>We often write similar code, stuff like dispatch to main thread, dispatch after, KVO etc. Use code snippets for that, this can save you lots of keystrokes and time.</p>
+
+<p>Some of my most used ones would be:</p>
+
+<ul>
+<li>properties declarations</li>
+<li>dispatch_after usage</li>
+<li>init</li>
+<li>KVO</li>
+<li>weakSelf</li>
+<li>Singleton</li>
+</ul>
+
+
+<p>I've asked others on twitter:</p>
+
+<div>
+<blockquote class="twitter-tweet" lang="en"><p>iOS devs: What are your most used code snippets?</p>&mdash; Krzysztof Zabłocki (@merowing_) <a href="https://twitter.com/merowing_/statuses/435710935886729216">February 18, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+
+<p>Some of the coolest ones I've seen are created by
+<a href="https://github.com/kylef/dotfiles/tree/master/Library/Developer/Xcode">Kyle Fuller</a> and
+<a href="https://github.com/mattt/Xcode-Snippets">Mattt</a></p>
+
+<p>Just be careful not to break <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY principle</a>.</p>
+
+<h2><a href="http://clang.llvm.org/docs/LanguageExtensions.html">Read clang/gcc documentation</a> to explore some interesting possibilities</h2>
+
+<h3>Examples:</h3>
+
+<ul>
+<li><strong>Vector extensions and component swizzle</strong>, useful when doing lots of math.</li>
+</ul>
+
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="k">typedef</span> <span class="kt">float</span> <span class="n">float4</span> <span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">attribute</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">((</span><span class="n">ext_vector_type</span><span class="p">(</span><span class="mi">4</span><span class="p">)));</span>
+</span><span class='line'> <span class="n">float4</span> <span class="n">test</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">44</span><span class="p">};</span>
+</span><span class='line'> <span class="n">test</span><span class="p">.</span><span class="n">xz</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'> <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;test %f %f %f %f&quot;</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">z</span><span class="p">,</span> <span class="n">test</span><span class="p">.</span><span class="n">w</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div>
+* <strong>C Function overloading</strong> to simplify code, instead of calling fabsf, fabsf you could have (<strong>Obviously</strong> that's more interesting for your functions)
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">attribute</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">((</span><span class="n">overloadable</span><span class="p">))</span> <span class="kt">float</span> <span class="n">smart_abs</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;floats&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nf">fabsf</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">attribute</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">((</span><span class="n">overloadable</span><span class="p">))</span> <span class="kt">double</span> <span class="n">smart_abs</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;doubles&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nf">fabs</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ul>
+<li><strong>require_super</strong>, useful whenever you are creating base classes and want to make sure your subclasses actually remember to call super.
+<div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">__attribute</span><span class="p">((</span><span class="n">objc_requires_super</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></li>
+<li><p><strong>using braces to have implicit return</strong> (last references value is returned, same as in ruby). <a href="https://github.com/krzysztofzablocki/KZPropertyMapper/blob/master/KZPropertyMapper/KZPropertyMapper.h#L20">I'm using this in KZPropertyMapper for a neat trick that allows me to execute some arbitrary code and still control returned value</a></p></li>
+<li><p><strong><strong>attribute</strong>((constructor))</strong> can be used on C functions for <a href="http://stackoverflow.com/questions/2053029/how-exactly-does-attribute-constructor-work">similar</a> behaviour to +(void)<strong>load</strong>;
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;</span><span class="n">strong</span><span class="o">&gt;</span><span class="n">attribute</span><span class="o">&lt;/</span><span class="n">strong</span><span class="o">&gt;</span><span class="p">((</span><span class="n">constructor</span><span class="p">))</span>
+</span><span class='line'><span class="k">static</span> <span class="kt">void</span> <span class="n">someFunction</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">@</span><span class="n">autoreleasepool</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">//! some code</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p></li>
+</ul>
+
+
+<h2>Use build phases, scripting and automation for your projects</h2>
+
+<h4>Warnings</h4>
+
+<p>Add this build-phase script AFTER compilation and you will turn all TODO/HACKS etc into warnings (but still be able to use treat warnings as errors)
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">KEYWORDS</span><span class="o">=</span><span class="s2">&quot;TODO:|VERIFY:|FIXME:|\?\?\?:|!!!:&quot;</span>
+</span><span class='line'>find <span class="s2">&quot;${SRCROOT}&quot;</span> -name <span class="s2">&quot;&lt;em&gt;.h&quot;</span> -or -name <span class="s2">&quot;&lt;/em&gt;.m&quot;</span> -print0 | xargs -0 egrep --with-filename --line-number --only-matching <span class="s2">&quot;($KEYWORDS).*\$&quot;</span> | perl -p -e <span class="s2">&quot;s/($KEYWORDS)/ warning: \$1/&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h4><a href="http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Icon versioning</a></h4>
+
+<p><img class="left" src="http://www.merowing.info/uploads/2013/03/Icon.png" width="114" height="114"></p>
+
+<p>Never again have someone test wrong version of your application.</p>
+
+<h4>Build number</h4>
+
+<p>You can use either very simple script like this one:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">buildNumber</span><span class="o">=</span><span class="k">$(</span>/usr/libexec/PlistBuddy -c <span class="s2">&quot;Print CFBundleVersion&quot;</span> <span class="k">${</span><span class="nv">INFOPLIST_FILE</span><span class="k">})</span>
+</span><span class='line'><span class="nv">buildNumber</span><span class="o">=</span><span class="k">$((</span><span class="nv">$buildNumber</span> <span class="o">+</span> <span class="m">1</span><span class="k">))</span>
+</span><span class='line'>/usr/libexec/PlistBuddy -c <span class="s2">&quot;Set :CFBundleVersion $buildNumber&quot;</span> <span class="k">${</span><span class="nv">INFOPLIST_FILE</span><span class="k">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div>
+or <a href="http://useyourloaf.com/blog/2010/08/18/setting-iphone-application-build-versions.html">do it properly by using agvtool</a></p>
+
+<h4><a href="https://github.com/nst/objc_dep/">Script for graphing dependencies in Cocoa project</a></h4>
+
+<p>Great tool for seeing how tangled is your (or vendor's) code, useful for refactoring or checking if agency that just send you some code knows anything about quality coding.</p>
+
+<h2>Use smarter breakpoints</h2>
+
+<h4><a href="https://gist.github.com/krzysztofzablocki/4396302">Log all methods that are executed in your app</a></h4>
+
+<h4>Avoid temporarly modifying code</h4>
+
+<p>Instead you can call NSLog from breakpoints and continue execution.</p>
+
+<p><img src="http://merowing.info/uploads/2014/02/log_breakpoint.png" width="320"></p>
+
+<h4>User space breakpoints</h4>
+
+<p>By promoting breakpoints to <strong>user space</strong> you can have breakpoints that exist only on your machine.</p>
+
+<p><img src="http://merowing.info/uploads/2014/02/user_breakpoint.png" width="320"></p>
+
+<h4>Fast jump to feature you are working on</h4>
+
+<p>By combining above 2 ideas you can execute arbitrary code eg. to enable some feature without modifying code, and you can promote it to user space so <strong>only you</strong> get that behaviour.</p>
+
+<p><img src="http://merowing.info/uploads/2014/02/action_breakpoint.png" width="320"></p>
+
+<h2>More to come</h2>
+
+<p>There is way more tips we could mention, but let's leave something for future blog posts.
+If you have any questions or suggestions <a href="http://twitter.com/merowing_">send me a tweet</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Developer Tools]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/ios-developer-tools"/>
+    <updated>2014-02-07T15:33:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/ios-developer-tools</id>
+    <content type="html"><![CDATA[<p>I always try to improve my productivity, being more productive means I can spend more time doing stuff I love instead of fighting with bad tools. That's probably why I spend lots of money on apps, I enjoy supporting great ideas other people have.</p>
+
+<p>I recently gave talk about tools I use and why, read more to see the video and description of each tool.</p>
+
+<!-- more -->
+
+
+<p><a href="http://vimeo.com/83794146">Video is available here</a></p>
+
+<p><div class="embed-video-container"><iframe src="http://player.vimeo.com/video/83794146 "></iframe></div></p>
+
+<h2>Initial setup</h2>
+
+<h3><a href="https://github.com/krzysztofzablocki/crafter">Crafter</a></h3>
+
+<p>How do you setup your Cocoa projects? Do you always set same warnings, clone configurations and do bunch of other stuff? Or maybe you work in a big company and you are missing some standardised setup?</p>
+
+<p>Programmers tend to automatise boring and repetitive tasks, yet I often see people spending time and time again configuring their Xcode Projects, even thought they always set it up same way.</p>
+
+<p>We all know that Xcode templating system is far from perfect, beside we often use different templates, but same level of warnings, scripts etc.</p>
+
+<p>What if you could define your project setup once (even with optional stuff) then just apply that to all your projects?</p>
+
+<p>That's why I've created <strong>Crafter</strong></p>
+
+<h3><a href="http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Icon versioning</a></h3>
+
+<p>Ever had someone testing wrong version of the app?
+This little build-phase script will let you know if someone is running old version of your application.</p>
+
+<h2>Day to day use</h2>
+
+<h3><a href="http://www.jetbrains.com/objc/">AppCode</a></h3>
+
+<p>If you don't know what AppCode is, you are about to have your world shaken up.</p>
+
+<p>AppCode is probably best IDE I've had pleasure to work with, it has extensive amount of small features that will improve your workflow by a ton. Let's just name a few:</p>
+
+<ul>
+<li>Reliable and efficient refactoring, Xcode can't even compare.</li>
+<li>Code quality tracking beyond just LLVM.</li>
+<li>Code navigation that let's you find contextual uses and much much more.</li>
+<li>Diff and merging integrated so well that even Kaleidoscope can't compare.</li>
+<li>Plugins. Official supported plugins that is.</li>
+<li>Powerful code formatting setup, define once, apply everywhere, every time.</li>
+<li>Contextual snippets.</li>
+</ul>
+
+
+<p>Java might put you away from this, but you really deserve to force yourself and use it for a week, I hate Java and I love AppCode.</p>
+
+<h3><a href="http://krillapps.com/coderunner/">CodeRunner</a></h3>
+
+<p>Great tool for testing snippets of code in many languages, no need to create a project to play with some small algorithm. Great little time saver.</p>
+
+<h3><a href="http://kapeli.com/dash">Dash</a></h3>
+
+<p>Fastest documentation browser available, really impressive UIX and ease of use. Integrates well with AppCode.</p>
+
+<h3><a href="http://xscopeapp.com/">xScope</a></h3>
+
+<p>Great set of tools that can help you save lots of time when working with designs, it can even simulate user vision problems like colour blindness.</p>
+
+<h3><a href="http://twelvetwenty.nl/apps/uberlayer">UberLayer</a></h3>
+
+<p>Simplest way to check if your designs are pixel perfect.</p>
+
+<h3><a href="http://wafflesoftware.net/hexpicker/">Hex Color Picker</a></h3>
+
+<p>Add hex support in all OSX colour pickers, how many times did you get colours in hex and had to use some website to translate that to RGB to use it in Interface Builder? Enough of that.</p>
+
+<h3><a href="http://www.myfonts.com/WhatTheFont/">What The Font</a></h3>
+
+<p>Ever saw a font you loved but could't find the name? Here's the tool you need.</p>
+
+<h3><a href="http://injectionforxcode.com/">Code injection</a></h3>
+
+<p>Great plugin that let's your recompile single file you are working on. If you do small changes and need to see them running in your app, eg. graphics or physics adjustments this will save you <strong>hours</strong>.</p>
+
+<h3><a href="http://hockeyapp.net/releases/hockeycoach/">HockeyCoach</a></h3>
+
+<p>Great way to view crash reports. Connects to your repository and hockey account and gives you great aggregation of crashes, stack traces and many other features. Finding what made the app crash is a lot less painful.</p>
+
+<h3><a href="https://github.com/onevcat/VVDocumenter-Xcode">VVDocumenter</a></h3>
+
+<p>This great plugin allows you to add documentation comments in Xcode with ease, it's like code snippet but on steroids. It grabs names from the code you want documented and enters template for you to fill in.</p>
+
+<h3><a href="https://github.com/fpillet/NSLogger">NSLogger</a></h3>
+
+<p>Best iOS/OSX logger I've seen to date, filtering, tagging, logging images and binary data and much much more. All wirelessly over bonjour.</p>
+
+<h3><a href="https://itunes.apple.com/us/app/patterns-the-regex-app/id429449079?mt=12">Patterns</a></h3>
+
+<p>Simple but powerful tool for creating regular expressions. I never remember syntax, do you? This makes my life easier.</p>
+
+<h3><a href="https://itunes.apple.com/pl/app/watchdog-for-xcode/id734258109?mt=12">WatchDog</a></h3>
+
+<p>Ever had problem with wrong symbols? Had to remove derived data as a solution? This little tool will monitor your actions and do proper clean when you clean in Xcode. It can also release lots of space from your Macbook as Derived data tends to grow quite large.</p>
+
+<h2>Debugging</h2>
+
+<h3><a href="http://www.charlesproxy.com/">Charles</a></h3>
+
+<p>Best way to verify network connectivity in your apps or doing some hacking on someone else's app. Works as a proxy between your app and network and lets you see all data connections.</p>
+
+<h3><a href="http://revealapp.com/">Reveal</a></h3>
+
+<p>Great tool for inspecting UI problems, it can even modify your UI in real-time, thus allowing you to find issues quicker.</p>
+
+<h2>Other tools</h2>
+
+<h3><a href="http://wasted.werk01.de/">Wasted</a></h3>
+
+<p>Nice tool that helps to check how much space are your images wasting and optimise it.</p>
+
+<p>We tend to use PNG's everywhere but that's not always optimal, this tool will show you why.</p>
+
+<h3><a href="https://itunes.apple.com/us/app/slender/id493656257?mt=12">Slender</a></h3>
+
+<p>Find unused assets or mismatched dimensions in your apps.</p>
+
+<h3><a href="http://usetokens.com/">Tokens</a></h3>
+
+<p>This is my favourite tool for redeem codes, great UIX and effective tracking of who and when used your code, if they didn't you can reuse your code.</p>
+
+<h3><a href="https://gist.github.com/skeeet/2367298">RamDisk</a></h3>
+
+<p>This script will let you create ramdisk for iOS sim, derived data a few other important folders. This can make your development wayyy faster.</p>
+
+<p>Make sure you check out those tools, I'd love to hear your opinions and other tools you find useful.</p>
+
+<p><a href="http://twitter.com/merowing_">Send me a tweet</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Crafter - setup your Cocoa projects with ease]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2013/05/crafter-setup-your-cocoa-projects-with-ease"/>
+    <updated>2013-05-02T09:31:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2013/05/crafter-setup-your-cocoa-projects-with-ease</id>
+    <content type="html"><![CDATA[<p>How do you setup your Cocoa projects? Do you always set same warnings, clone configurations and do bunch of other stuff? Or maybe you work in a big company and you are missing some standardised setup?</p>
+
+<p>Programmers tend to automatise boring and repetitive tasks, yet I often see people spending time and time again configuring their Xcode Projects, even thought they always set it up same way.</p>
+
+<!-- more -->
+
+
+<p>We all know that Xcode templating system is far from perfect, beside we often use different templates, but same level of warnings, scripts etc.</p>
+
+<p>What if you could define your project setup once (even with optional stuff) then just apply that to all your projects?</p>
+
+<h2>Enter crafter</h2>
+
+<p>That's why I've created <strong>crafter</strong>, a ruby gem that you can install, setup your configuration once and enjoy hours of time saved.</p>
+
+<h3>So how does it work?</h3>
+
+<p>Install it by calling:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install crafter
+</span><span class='line'>crafter reset
+</span></code></pre></td></tr></table></div></figure></notextile></div></div>
+this will create your personal configuration file at <strong>~/.crafter.rb</strong></p>
+
+<p>now open that file with your favourite editor and you will see default configuration, along with description of different parts:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">load</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="ss">Crafter</span><span class="p">:</span><span class="ss">:ROOT</span><span class="si">}</span><span class="s2">/config/default_scripts.rb&quot;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;All your configuration should happen inside configure block&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">Crafter</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # This are projects wide instructions</span>
+</span><span class='line'><span class="sr">  add_platform({:platform =&gt; :ios, :deployment =&gt; 6.0})</span>
+</span><span class='line'><span class="sr">  add_git_ignore</span>
+</span><span class='line'><span class="sr">  duplicate_configurations({:adhoc =&gt; :debug, :profiling =&gt; :debug})&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="c1"># set of options, warnings, static analyser and anything else normal xcode treats as build options</span>
+</span><span class='line'>  <span class="n">set_options</span> <span class="sx">%w(&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;pre&gt;&lt;code&gt;GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED</span>
+</span><span class='line'><span class="sx">GCC_WARN_MISSING_PARENTHESES</span>
+</span><span class='line'><span class="sx">GCC_WARN_ABOUT_RETURN_TYPE</span>
+</span><span class='line'><span class="sx">GCC_WARN_SIGN_COMPARE</span>
+</span><span class='line'><span class="sx">GCC_WARN_CHECK_SWITCH_STATEMENTS</span>
+</span><span class='line'><span class="sx">GCC_WARN_UNUSED_FUNCTION</span>
+</span><span class='line'><span class="sx">GCC_WARN_UNUSED_LABEL</span>
+</span><span class='line'><span class="sx">GCC_WARN_UNUSED_VALUE</span>
+</span><span class='line'><span class="sx">GCC_WARN_UNUSED_VARIABLE</span>
+</span><span class='line'><span class="sx">GCC_WARN_SHADOW</span>
+</span><span class='line'><span class="sx">GCC_WARN_64_TO_32_BIT_CONVERSION</span>
+</span><span class='line'><span class="sx">GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS</span>
+</span><span class='line'><span class="sx">GCC_WARN_UNDECLARED_SELECTOR</span>
+</span><span class='line'><span class="sx">GCC_WARN_TYPECHECK_CALLS_TO_PRINTF</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">RUN_CLANG_STATIC_ANALYZER</span>
+</span><span class='line'><span class="sx">GCC_TREAT_WARNINGS_AS_ERRORS</span>
+</span><span class='line'><span class="sx">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;p&gt;  )</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # target specific options, :default is just a name for you, feel free to call it whatever you like</span>
+</span><span class='line'><span class="sr">  with :default do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1"># each target have set of pods</span>
+</span><span class='line'><span class="n">pods</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="sx">%w(NSLogger-CocoaLumberjack-connector TestFlightSDK)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># each target can have optional blocks, eg. crafter will ask you if you want to include networking with a project</span>
+</span><span class='line'><span class="n">add_option</span> <span class="ss">:networking</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">pods</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="s1">&#39;AFNetworking&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">add_option</span> <span class="ss">:coredata</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">pods</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="s1">&#39;MagicalRecord&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># each target can have shell scripts added, in this example we are adding my icon versioning script as in http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</span>
+</span><span class='line'><span class="n">scripts</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="p">{</span><span class="ss">:name</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s1">&#39;icon versioning&#39;</span><span class="p">,</span> <span class="ss">:script</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="no">Crafter</span><span class="o">.</span><span class="n">icon_versioning_script</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># we can also execute arbitrary ruby code when configuring our projects, here we rename all our standard icon* to icon_base for versioning script</span>
+</span><span class='line'><span class="n">icon_rename</span> <span class="o">=</span> <span class="nb">proc</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">extension</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">extname</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">file_name</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
+</span><span class='line'>  <span class="no">File</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">_base</span><span class="si">#{</span><span class="n">extension</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;**/Icon.png&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">icon_rename</span><span class="p">)</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;**/Icon@2x.png&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">icon_rename</span><span class="p">)</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;**/Icon-72.png&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">icon_rename</span><span class="p">)</span>
+</span><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="s1">&#39;**/Icon-72@2x.png&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">icon_rename</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # more targets setup</span>
+</span><span class='line'><span class="sr">  with :tests do&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">add_option</span> <span class="ss">:kiwi</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">pods</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="s1">&#39;Kiwi&#39;</span>
+</span><span class='line'>  <span class="n">scripts</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="p">{</span><span class="ss">:name</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="s1">&#39;command line unit tests&#39;</span><span class="p">,</span> <span class="ss">:script</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="no">Crafter</span><span class="o">.</span><span class="n">command_line_test_script</span><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>As you can see the configuration files is quite easy, yet is pretty flexible.
+Once you set it up as you see fit, go to your project folder (the one with xcodeproj, workspace etc.) and call:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>crafter
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>it will guide you through project setup, with default configuration it would look like this:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>1. sample
+</span><span class='line'>2. sampleTests
+</span><span class='line'>Which target should I use <span class="k">for </span>default?
+</span><span class='line'>1
+</span><span class='line'>1. sample
+</span><span class='line'>2. sampleTests
+</span><span class='line'>Which target should I use <span class="k">for </span>tests?
+</span><span class='line'>2
+</span><span class='line'><span class="k">do </span>you want to add networking? <span class="o">[</span>Yn<span class="o">]</span>
+</span><span class='line'>n
+</span><span class='line'><span class="k">do </span>you want to add coredata? <span class="o">[</span>Yn<span class="o">]</span>
+</span><span class='line'>y
+</span><span class='line'><span class="k">do </span>you want to add testing? <span class="o">[</span>Yn<span class="o">]</span>
+</span><span class='line'>n
+</span><span class='line'>duplicating configurations
+</span><span class='line'>setting up variety of options
+</span><span class='line'>preparing git ignore
+</span><span class='line'>preparing pod file
+</span><span class='line'>adding scripts
+</span><span class='line'>Finished.
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now your project should have all options applied, generated Podfile (call pod install or set it up in your configuration).</p>
+
+<p>I'm learning Ruby, so I'm looking forward to pull requests on <a href="https://github.com/krzysztofzablocki/crafter">GitHub</a></p>
+
+<p>Send me your thoughts, I'm <a href="http://twitter.com/merowing_">merowing_ on twitter</a></p>
+
+<h4>Acknowledgements:</h4>
+
+<p><a href="http://theappbusiness.com">The App Business</a> (the company I work for) for supporting my idea and caring about work quality.</p>
+
+<p>to <a href="http://twitter.com/alloy">@alloy</a>, <a href="http://twitter.com/orta">@orta</a>, <a href="http://twitter.com/romainbriche">@romainbriche</a> - for taking some of their valuable time and sharing their thoughts about beta version.</p>
+
+<p>Inspired by <a href="https://github.com/thoughtbot/liftoff">liftoff</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[StatusBoard and Jenkins]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2013/04/statusboard-and-jenkins"/>
+    <updated>2013-04-11T15:00:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2013/04/statusboard-and-jenkins</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://www.merowing.info/uploads/2013/04/statusboard-small.jpg" width="170" height="127"></p>
+
+<p>You probably saw <a href="http://panic.com/statusboard/">StatusBoard by Panic</a>. I've immediately thought it needs simple Jenkins widget.</p>
+
+<p>If you still don't have your Jenkins CI, you should spend some time and <a href="http://www.sailmaker.co.uk/blog/2013/04/02/advanced-jenkins-for-ios-and-mac/">set</a> <a href="http://blog.octo.com/en/jenkins-quality-dashboard-ios-development/">it</a> <a href="http://9elements.com/io/index.php/continuous-integration-of-ios-projects-using-jenkins-cocoapods-and-kiwi/">up</a> before reading further.</p>
+
+<!-- more -->
+
+
+<h1>Jenkins jobs on Panic StatusBoard</h1>
+
+<p><a href="https://github.com/krzysztofzablocki/jenkins_jobs_to_statusboard">This simple script</a> will grab jenkins jobs and put them in HTML table, one that you can use as data source for your StatusBoard.</p>
+
+<p>By generating static html you will be able to use it even if your jenkins CI is only accesible from LAN network.
+Just use Dropbox or any other service(Apache) to expose output html file.</p>
+
+<p>It uses images from my server(http://merowing.info) for all status types, they will be skinned today to match StatusBoard graphics style.</p>
+
+<h1>Installation</h1>
+
+<p>Install jenkins_api_client gem on your jenkins machine:</p>
+
+<pre><code>gem install jenkins_api_client
+</code></pre>
+
+<p>make sure your script is executable by setting proper permission:</p>
+
+<pre><code>chmod +x /path/to/script
+</code></pre>
+
+<p>Add a cron/launchd scheduled job on your machine to run this script periodically (here it will run every minute):</p>
+
+<pre><code>* * * * * /path/to/script jenkins_ip_adress username password path_to_html
+</code></pre>
+
+<p>Make sure your <strong>path_to_html</strong> is pointing to space which will be accessible from your iPad Storyboard. After that just reference that file from your iPad StatusBoard and enjoy seeing your projects status.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/jenkins_jobs_to_statusboard">Script on GitHub</a></p>
+
+<p>I'm <a href="http://twitter.com/merowing_">merowing_ on twitter</a> if you feel like talking about it.</p>
+
+<p>References:</p>
+
+<p>https://wiki.jenkins-ci.org/display/JENKINS/Standard+Security+Setup</p>
+
+<p>http://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Overlaying application version on top of your icon]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2013/03/overlaying-application-version-on-top-of-your-icon"/>
+    <updated>2013-03-07T12:10:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2013/03/overlaying-application-version-on-top-of-your-icon</id>
+    <content type="html"><![CDATA[<p><img class="left" src="http://www.merowing.info/uploads/2013/03/Icon.png" width="114" height="114"></p>
+
+<p>I've just returned from NSConference #5 (which was awesome), there were many good talks there, but my favourite one was the one about Flipboard development tools/setup by Evan Doll.</p>
+
+<p>One of the things that Evan showed was adding version and commit on top of your icon. Read more to learn how I've implemented it.</p>
+
+<!-- more -->
+
+
+<p></p>
+
+<h1>What we will be overlaying ?</h1>
+
+<p>I've decided that 3 parts of information should be enough:</p>
+
+<ul>
+<li>version number</li>
+<li>branch name</li>
+<li>short commit hash</li>
+</ul>
+
+
+<h2>Version number</h2>
+
+<p>We can extract version number straight from our application .plist file by using PlistBuddy tool:
+<div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">version</span><span class="o">=</span>&lt;code&gt;/usr/libexec/PlistBuddy -c <span class="s2">&quot;Print CFBundleVersion&quot;</span> <span class="s2">&quot;${INFOPLIST_FILE}&quot;</span>&lt;/code&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>PS. <em>You could extract any plist entry with this tool, just change CFBundleVersion to different key (show raw keys in Xcode)</em></p>
+
+<h2>Branch and short commit hash</h2>
+
+<p>git command line tool offers rev-parse command which let's you both of those variables:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">commit</span><span class="o">=</span>&lt;code&gt;git rev-parse --short HEAD&lt;/code&gt;
+</span><span class='line'><span class="nv">branch</span><span class="o">=</span>&lt;code&gt;git rev-parse --abbrev-ref HEAD&lt;/code&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>How to overlay it ?</h1>
+
+<p>ImageMagic is my go-to tool for playing with images from command line, it offers crazy amount of functions.</p>
+
+<p>Make sure to install ImageMagick and ghostscript (fonts) first, you can use brew to simplify process:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install imagemagick
+</span><span class='line'>brew install ghostscript
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We can use convert function, by specifing caption parameter imagemagick will layout our text on top of image, we also setup alignment to bottom and default height.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>convert -background <span class="s1">&#39;#0008&#39;</span> -fill white -gravity center -size <span class="k">${</span><span class="nv">width</span><span class="k">}</span>x40 <span class="se">\&lt;</span>/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;caption:<span class="s2">&quot;${version} ${branch} ${commit}&quot;</span> <span class="se">\</span>
+</span><span class='line'><span class="k">${</span><span class="nv">base_file</span><span class="k">}</span> +swap -gravity south -composite  <span class="s2">&quot;${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${target_file}&quot;</span>
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Setting it up in Xcode project</h1>
+
+<p>There are few steps we need to take in order to set this up as part of Xcode build:</p>
+
+<ol>
+<li>Rename your Icon<em> files (where * is @2x, -568h etc.) to Icon_base</em>, e.g. Icon@2x_base.png</li>
+<li>Add run script for your target under Build Phases</li>
+<li>Paste this code:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">commit</span><span class="o">=</span>&lt;code&gt;git rev-parse --short HEAD&lt;/code&gt;
+</span><span class='line'><span class="nv">branch</span><span class="o">=</span>&lt;code&gt;git rev-parse --abbrev-ref HEAD&lt;/code&gt;
+</span><span class='line'><span class="nv">version</span><span class="o">=</span>&lt;code&gt;/usr/libexec/PlistBuddy -c <span class="s2">&quot;Print CFBundleVersion&quot;</span> <span class="s2">&quot;${INFOPLIST_FILE}&quot;</span>&lt;/code&gt;&lt;/li&gt;
+</span><span class='line'>&lt;/ol&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;function processIcon<span class="o">()</span> <span class="o">{</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;pre&gt;&lt;code&gt;export <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/bin
+</span><span class='line'><span class="nv">base_file</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">base_path</span><span class="o">=</span><span class="sb">`</span>find <span class="k">${</span><span class="nv">SRCROOT</span><span class="k">}</span> -name <span class="nv">$base_file</span><span class="sb">`</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[[</span> ! -f <span class="k">${</span><span class="nv">base_path</span><span class="k">}</span> <span class="o">||</span> -z <span class="k">${</span><span class="nv">base_path</span><span class="k">}</span> <span class="o">]]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">    return</span>;
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">target_file</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$base_file</span> | sed <span class="s2">&quot;s/_base//&quot;</span><span class="sb">`</span>
+</span><span class='line'><span class="nv">target_path</span><span class="o">=</span><span class="s2">&quot;${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${target_file}&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$CONFIGURATION</span> <span class="o">=</span> <span class="s2">&quot;Release&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>cp <span class="k">${</span><span class="nv">base_file</span><span class="k">}</span> <span class="nv">$target_path</span>
+</span><span class='line'><span class="k">return</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">width</span><span class="o">=</span><span class="sb">`</span>identify -format %w <span class="k">${</span><span class="nv">base_path</span><span class="k">}</span><span class="sb">`</span>
+</span><span class='line'>
+</span><span class='line'>convert -background <span class="s1">&#39;#0008&#39;</span> -fill white -gravity center -size <span class="k">${</span><span class="nv">width</span><span class="k">}</span>x40<span class="se">\</span>
+</span><span class='line'>caption:<span class="s2">&quot;${version} ${branch} ${commit}&quot;</span><span class="se">\</span>
+</span><span class='line'><span class="k">${</span><span class="nv">base_path</span><span class="k">}</span> +swap -gravity south -composite <span class="k">${</span><span class="nv">target_path</span><span class="k">}</span>
+</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="o">}</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;processIcon <span class="s2">&quot;Icon_base.png&quot;</span>
+</span><span class='line'>processIcon <span class="s2">&quot;Icon@2x_base.png&quot;</span>
+</span><span class='line'>processIcon <span class="s2">&quot;Icon-72_base.png&quot;</span>
+</span><span class='line'>processIcon <span class="s2">&quot;Icon-72@2x_base.png&quot;</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Few things about final script:</p>
+
+<ul>
+<li>I've added support for skipping icons that don't exist, no need to change script contents.</li>
+<li>I'm using sed to strip _base string from file name.</li>
+<li>For release build we don't want to overlay our development info.</li>
+<li>Xcode likes messes up path resolution, so I've added usr/local/bin to it for this terminal lifetime.</li>
+</ul>
+
+
+<p>Now run your project and you should see this:
+<img src="http://www.merowing.info/uploads/2013/03/Icon.png" width="114" height="114"></p>
+
+<p><a href="https://github.com/krzysztofzablocki/IconOverlaying">Sample project on GitHub</a></p>
+
+<p>I'm <a href="http://twitter.com/merowing_">merowing_ on twitter</a> if you feel like talking about it.</p>
+
+<p>PS. If you are Senior iOS Developer and you are looking for work in in <a href="http://theappbusiness.com">awesome team</a> (located in London), drop me a tweet and I'll send you more info.</p>
+]]></content>
+  </entry>
+  
+</feed>

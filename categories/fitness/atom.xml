@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Fitness | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/fitness/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Extracting data from websites without API and calculating your needed calories - MyFitnessPal and Ruby + Mechanize]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api"/>
+    <updated>2015-01-15T16:40:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api</id>
+    <content type="html"><![CDATA[<p>As a programmer I like to automate stuff, I love being able to extract the data I’m tracking and visualise and analyze it in many different ways.</p>
+
+<p>I’ve been using MyFitnessPal for years, and I’ve collected a big amount of nutrition / weight data, as such I wanted to be able to play with that data in my own environment, unfortunately MyFitnessPal did not give me API access, even though I’ve asked twice.</p>
+
+<p>As such I’ve decided to get that data in other means, Web crawling with Ruby and Mechanize is one option.</p>
+
+<p>Let’s see how we can extract nutrition summary and weight data, meaning calories/macros and weight measurements.</p>
+
+<!-- more -->
+
+
+<h1>Finding good entry-point</h1>
+
+<p>After logging in into MyFitnessPal we can go into Reports Tab, it shows you graphs of your data. Since we want raw data instead of graphics, We can use View Page Source and look for something that looks interesting. It was easy to find this:</p>
+
+<p><img src="/uploads/2015/01/report1.png" alt="" /></p>
+
+<p>I can now use this endpoint to see my weight data:
+<a href="http://www.myfitnesspal.com/reports/results/progress/1/30.json">http://www.myfitnesspal.com/reports/results/progress/1/30.json</a></p>
+
+<p>Further analysis found this to be the case:
+- /progress/1 is weight data
+- /30 means number of days to return
+- Nutrition/Calories Nutrition/Protein Nutrition/Carbs Nutrition/Fat are some of the other available reports</p>
+
+<blockquote><p>When I was doing initial work on my fitness app I’ve not used .json but regular report, back then I’ve used mechanize  with xpath / css selectors to crawl data.</p></blockquote>
+
+<h1>Accessing data from code</h1>
+
+<p>Our data is protected, so before we are able to extract it we need to login into MyFitnessPal website to have valid login cookie.</p>
+
+<h3>Ruby</h3>
+
+<p>Ruby is a great and easy to grasp language, in our case the usage will only require few explanations:</p>
+
+<ul>
+<li>Ruby files end with .rb</li>
+<li>You can run ruby file from command line by calling <code>ruby file.rb</code></li>
+<li>gem’s are v. similar to CocoaPods, that’s actually what inspired Pods in first place.</li>
+</ul>
+
+
+<p>If you want to learn more about it, I recommend <a href="http://tryruby.org">http://tryruby.org</a>.</p>
+
+<h2>Getting valid login credential cookie</h2>
+
+<p>First let’s look at Login website in a browser
+<a href="https://www.myfitnesspal.com/account/login">https://www.myfitnesspal.com/account/login</a></p>
+
+<p><img src="/uploads/2015/01/login.png" alt="" /></p>
+
+<p>Again looking at the Page Source we know that:
+- There is only 1 form on the page
+- The input fields id are <code>username</code> and <code>password</code></p>
+
+<p>Filling this form with Ruby and Mechanize is very straightforward.</p>
+
+<p>First we need to install mechanize gem:</p>
+
+<p><code>gem install mechanize</code></p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;mechanize&#39;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;1&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">mechanize</span> <span class="o">=</span> <span class="no">Mechanize</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="n">login_page</span> <span class="o">=</span> <span class="n">mechanize</span><span class="o">.</span><span class="n">get</span> <span class="s1">&#39;https://www.myfitnesspal.com/account/login&#39;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;2&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">form</span> <span class="o">=</span> <span class="n">login_page</span><span class="o">.</span><span class="n">forms</span><span class="o">.</span><span class="n">first</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;noinspection RubyResolve&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">form</span><span class="o">.</span><span class="n">field_with</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;username&quot;</span>
+</span><span class='line'><span class="n">form</span><span class="o">.</span><span class="n">field_with</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;password&quot;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;3&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="n">form</span><span class="o">.</span><span class="n">submit</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<ol>
+<li>We create a Mechanize agent and load the login page.</li>
+<li>There is only one form on the login page, we grab it and fill the user data.</li>
+<li>After submitting our form, mechanize will store the login cookie in the agent, which means all further requests on this agent will be properly authorised.</li>
+</ol>
+
+
+<h2>Retrieving reports</h2>
+
+<p>Now that we have a valid credentials we can access our report data, let’s grab 30 days worth of our weight and calories data:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">weight_report</span> <span class="o">=</span> <span class="n">mechanize</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.myfitnesspal.com/reports/results/progress/1/</span><span class="si">#{</span><span class="n">days_to_query</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">calories_report</span> <span class="o">=</span> <span class="n">mechanize</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://www.myfitnesspal.com/reports/results/nutrition/Calories/</span><span class="si">#{</span><span class="n">days_to_query</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;weights = JSON.parse(weight_report.body)[&quot;data&quot;]</span>
+</span><span class='line'><span class="sr">calories = JSON.parse(calories_report.body)[&quot;data&quot;]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We use mechanize to request our reports and then parse the json into hash, we are only intersted in raw data so we extract that.
+Also the data array is sorted by dates already so we can avoid manual sort here.</p>
+
+<h1>Calculating our caloric needs</h1>
+
+<p>Now that we have both weight and intake calories, we can start calculating our needs to maintain our current weight.</p>
+
+<blockquote><p>The more data you have is usually the better, especially for calculating your weight.</p></blockquote>
+
+<p>Then we just extract the values and calculate average calories intake.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avg_calories</span> <span class="o">=</span> <span class="n">calories</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">instance_eval</span> <span class="p">{</span> <span class="n">reduce</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="o">.</span><span class="n">to_f</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>I got 1045 calories, seems a bit low, doesn’t it?
+Just calculating average would work great if we were perfect at tracking, but sometimes we just aren’t,<strong>although I would highly recommend you at least estimate and track that when you eat out</strong>.</p>
+
+<p>We’ll end up averaging data that has some missing entries thus lowering the average, how can we deal with that?
+For simplicity we can simply reject entries that are missing data, before calculating the average, this will work if your diet is steady.</p>
+
+<p>Let’s modify our previous line to do just that</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">avg_calories</span> <span class="o">=</span> <span class="n">calories</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">reject</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">}</span><span class="o">.</span><span class="n">instance_eval</span> <span class="p">{</span> <span class="n">reduce</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="o">.</span><span class="n">to_f</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now I got 1796.5 calories, this seems to look correct since I’m in cutting phase.</p>
+
+<h2>Weight change</h2>
+
+<p>It’s crucial that we smooth our weight data, weight can fluctuate quite a lot and we want to see the trend we are having, not just the values.</p>
+
+<p>I like to use smoothed moving average for my data, there is a ruby gem <code>moving_average</code> that simplifies that so let’s use it:</p>
+
+<p><code>gem install moving_average</code></p>
+
+<p>And on top of our script add requirement for it:</p>
+
+<p><code>require moving_average</code></p>
+
+<p>Take a look at graph visualising my weight changes, the diamonds are the raw measurements, if I didn’t apply smoothing function it would be really hard to see the trends of my weight changes.</p>
+
+<p><img src="/uploads/2015/01/weight.png" alt="" /></p>
+
+<p>With weights we want to calculate smoothed average for each entry, not just one average</p>
+
+<blockquote><p>The best way would be to have a long period of data, so that the beginning weight we are analysing is already smoothed and not influenced by fluctuations.</p></blockquote>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">weight_values</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="nb">hash</span><span class="o">|</span> <span class="nb">hash</span><span class="o">[</span><span class="s1">&#39;total&#39;</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'><span class="n">smoothed_weights</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="n">weight_values</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">idx</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">smoothed_weights</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;  if idx &amp;gt; 1</span>
+</span><span class='line'><span class="sr">    weight_values[0, idx + 1].smma.round(1)</span>
+</span><span class='line'><span class="sr">  else</span>
+</span><span class='line'><span class="sr">    weight_values[idx]</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  )</span>
+</span><span class='line'><span class="sr">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>That way each smoothed weight entry will depend on the previous values (it’s tail).</p>
+
+<p>Now we can grab first and last entry and see how our average changed:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">weight_change</span> <span class="o">=</span> <span class="n">smoothed_weights</span><span class="o">.</span><span class="n">first</span> <span class="o">-</span> <span class="n">smoothed_weights</span><span class="o">.</span><span class="n">last</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Each kg of weight is approximately 7700 kcal, so we can calculate how much calories are we under / over our intake by just multiplying by 7700.</p>
+
+<h2>How much do we need to eat to maintain our weight?</h2>
+
+<p>Now that we know our average intake and weight change, we can calculate our TDEE, which means calories we should be eating to keep our weight stable.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Observed TDEE is </span><span class="si">#{</span><span class="n">avg_calories</span> <span class="o">+</span> <span class="n">weight_in_calories</span> <span class="o">/</span> <span class="n">weights</span><span class="o">.</span><span class="n">count</span> <span class="si">}</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>For me it’s <strong>2257 kcal</strong></p>
+
+<p>Usually evaluate that once every 10-14 days, to make sure you are on track.</p>
+
+<h1>Diet composition</h1>
+
+<p>How should you divide your calories into macros, like Protein/Fat/Carbs?</p>
+
+<p>Doesn’t matter if you bulk or cut, this is the order of importance of macros I recommend:
+1. Protein - crucial for your body, 4 kcal / 1g
+2. Fat - get your essential fat intake for healthy hormones, 9 kcal / 1g
+3. Carbs - remaining calories, 4 kcal / 1g</p>
+
+<p>A good starting point for composition would be:
+- Protein: 2g / kg
+- Fat: 0.8g / kg
+- Carbs: Remaining intake</p>
+
+<p>e.g. For me it looks as follows:</p>
+
+<pre><code>kcal 2256
+protein = 76 kg * 2 = 152 protein
+fat = 76 kg * 0.8 = 60.8 fat
+carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
+</code></pre>
+
+<h1>Goals</h1>
+
+<h2>Bulking - Gaining Muscle</h2>
+
+<p>If you are looking to gain muscle (because gaining weight shouldn’t be the goal), you should be looking at maximum 0.2 kg per week.</p>
+
+<p><code>0.2 kg * 7700 kcal =&gt; 1 540 kcal per week / 7 =&gt; 220 kcal</code></p>
+
+<p>Eat around 200 kcal over your TDEE and you should be gaining mostly lean muscle, gaining a little bit of fat is almost inevitable but if adjust your intake correctly it will be minimal, don’t stress it.</p>
+
+<h2>Cutting - Loosing weight</h2>
+
+<p>Loosing weight is actually simpler than gaining lean muscle, you need to eat less than your TDEE, how much less will depend on your goal and bodyfat level.</p>
+
+<p>The leaner you are the slower you should be loosing weight, to spare muscles and to not feel like you are dying, general recommendation would be something like this:</p>
+
+<ul>
+<li>12+% bodyfat: eat 750 kcal below TDEE - refeed every 14 days</li>
+<li>8-12% bodyfat: eat 500-700 kcal below TDEE – reefed every 7-10 days</li>
+<li>&lt;8% bodyfat: eat 300-500 kcal below TDEE – reefed every 3-7 days</li>
+</ul>
+
+
+<h2>Refeed day</h2>
+
+<p>A refeed day is a day that you want to eat around your TDEE, usually increasing your carb intake, you could treat this as cheat meal (not cheat day, all-out pig feast).
+It’s beneficial for your body and mind, if you were on spot with your diet, you deserve to have a little treat.</p>
+
+<h1>Conclusion and Next Actions</h1>
+
+<p>So now that you know how to calculate your real TDEE, you should  calculate it and then apply either surplus or deficit as I just described, evaluate for next 2 weeks and adjust if needed.</p>
+
+<p><a href="https://gist.github.com/krzysztofzablocki/f5f597f04b2efcb711c7">Whole script is available here</a></p>
+
+<p>For more info either go read my previous blog posts:</p>
+
+<p><a href="http://www.merowing.info/2014/02/fit-geek/">Fit Geek</a></p>
+
+<p><a href="http://www.merowing.info/2014/09/a-swift-introduction-into-fitness/#.VLfecsaJn8s">Swift introduction to Fitness</a></p>
+
+<p>or visit my <a href="https://www.youtube.com/channel/UCv58ZNeKPIsn7BDJYdGud_w" title="YouTube channel">YouTube Chanel</a></p>
+
+<p>You can also <a href="http://twitter.com/merowing_">Follow me on Twitter</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Swift introduction into Fitness]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness"/>
+    <updated>2014-09-30T12:17:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness</id>
+    <content type="html"><![CDATA[<p><a href="http://merowing.info/uploads/2014/09/IntroToFitness.playground.zip">Download this article as Playground</a> for XCode 6 to be able to experiment with calculations.</p>
+
+<p>Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.</p>
+
+<p>Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:</p>
+
+<p><em>If you burn more calories than you eat you will lose weight</em></p>
+
+<p>Same goes for bulking, eat more and you gain weight.</p>
+
+<p>Two questions arise:</p>
+
+<ol>
+<li>how to estimate our caloric needs?</li>
+<li>how fast should we lose or gain weight?</li>
+</ol>
+
+
+<p>It’s easy enough to explain both, but since I’m a programmer and I really like Swift playgrounds, let’s use some swift to do express math for us.</p>
+
+<!-- more -->
+
+
+<h1>Defining user</h1>
+
+<p>Before we start calculating our caloric needs we will need to have access to our user stats.</p>
+
+<p>We could define a struct for our user or we can simplify it and use tuple:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum Gender {
+</span><span class='line'>  case Male
+</span><span class='line'>  case Female
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>typealias User = (gender: Gender, age: Int, weightInKg: Double, heightInCm: Int, bodyfat: Int?)</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Don’t worry if you use Imperial system for measurements, let’s introduce conversion functions:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func toKg(#lbs: Double) -> Double {
+</span><span class='line'>  return lbs / 2.2
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>func toCm(#feet: Double, #inches: Double) -> Double {
+</span><span class='line'>  return feet * 30.48 + inches * 2.54
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Now we can setup our user by simply assigning it to variable:
+<div><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var user = User(gender: .Male, age: 26, weightInKg: 73, heightInCm: 184, bodyfat: 10)</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>How to estimate calories we should eat?</h1>
+
+<p>The only real way to know how much calories you should eat would be to track your food intake and weight changes over couple of weeks, then we can calculate your personal calories accurately.</p>
+
+<p>But there are few math approximations we can use as a starting point, we’ll take a look at 2 most accurate ones but first some theory.</p>
+
+<p>There are few components we need to consider when calculating our caloric needs:</p>
+
+<h2>BMR - Basal Metabolic Rate</h2>
+
+<p>BMR defines bulk of our caloric needs, it can be thought of as calories you would need if you stayed in bed all day and didn’t do anything eg. Comatose. Resting Metabolic Rate can be considered same as BMR .</p>
+
+<p>It will decrease with age or with loss of LBM - lean body mass, if you have more muscles then you’ll have higher BMR, but the effect of having more muscle mass doesn’t have (as previously thought) high enough effect on BMR to be used for fat loss purpose (<strong>dreamers bulking</strong> to have more muscle and thinking that will make your fat loss phase easier is just stupid).</p>
+
+<p>Since we will be using one of two functions to calculate BMR, let’s create a typealias for our calculator:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>typealias BMRCalculator = () -> Double</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>NEAT and Activity Factor- Non-Exercise Associated Thermogenesis</h2>
+
+<p>NEAT is calories we burn doing stuff that’s not exercise, eg. washing/talking/working.</p>
+
+<p>NEAT is calculated by selecting an activity factor multiplier dependent on your lifestyle, let’s define some common values:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>enum ActivityFactor: Double {
+</span><span class='line'>  case Sedentary = 1.2 // Little or no exercise and desk job
+</span><span class='line'>  case LightlyActive = 1.375 // Light exercise or sports 1-3 days a week
+</span><span class='line'>  case ModeratelyActive = 1.55 // Moderate exercise or sports 3-5 days a week
+</span><span class='line'>  case VeryActive = 1.725 // Hard exercise or sports 6-7 days a week4
+</span><span class='line'>  case ExtremelyActive = 1.9 // Hard daily exercise or sports and physical job
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>TEF - Thermic Effect of Feeding</h2>
+
+<p>TEF is used to calculate amount of calories you burn while eating, it will mostly depend on the amount of Protein and Fiber content in your diet as they influence how much energy is needed for converting food into energy.</p>
+
+<p>It does <strong>NOT</strong> depend on the amount of meals you have, doesn’t matter if you eat 2k calories in 1 or 6 meals, TEF is percentage based on total intake.</p>
+
+<p>Values would vary depending on protein intake mostly:
+0.05 to 0.15 from low to high protein intake (1-3g of protein / kg), but for most people starting out this difference will fall into calculation error margin so let’s not worry about it for now.</p>
+
+<h2>MET - Metabolic Effect of Training</h2>
+
+<p>MET is amount of calories you burn during exercise, as such it only applies for training days.</p>
+
+<h2>TDEE - Total Daily Energy Expenditure</h2>
+
+<p>TDEE is total amount of calories you need to maintain your current weight, it’s affected by all of the above, but we’ll be calculating TDEE without taking TEF (because for beginners it will be negligible) and MET (only applies to training days).</p>
+
+<p>We can define TDEE as follows:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func TDEE(bmrCalculator: BMRCalculator, activityFactor: ActivityFactor) -> Int {
+</span><span class='line'>  return Int(bmrCalculator() * activityFactor.rawValue)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>BMR Equations</h2>
+
+<p>Two most accurate equations for calculating BMR are:</p>
+
+<ol>
+<li>Cunningham Equation - if we know user lean body mass (simply weight * (100-bodyfat%))</li>
+<li>Mifflin St Jeor - if body fat is unknown</li>
+</ol>
+
+
+<p>Let’s write a function generator that will return a proper calculator for a specific user:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func lbm(user: User) -> Double {
+</span><span class='line'>  return user.weightInKg * (100.0-Double(user.bodyfat!))/100.0
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>func BMRCalculatorForUser(user: User) -> BMRCalculator {
+</span><span class='line'>  func cunninghamCalculator(user: User) -> BMRCalculator {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>return { 500 + 22 * lbm(user) }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  func mifflinCalculator(user: User) -> BMRCalculator {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>let genderAdjustment = user.gender == .Male ? 161.0 : -5.0
+</span><span class='line'>return { 10.0 * user.weightInKg + 6.25 * Double(user.heightInCm) + genderAdjustment }
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  if let bodyfat = user.bodyfat {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>return cunninghamCalculator(user)
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>  }
+</span><span class='line'>  return mifflinCalculator(user)
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Calculating maintenance</h1>
+
+<p>Now we have enough code to calculate our TDEE needs:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user = User(gender: .Male, age: 26, weightInKg: 73, heightInCm: 184, bodyfat: 10)
+</span><span class='line'>let tdee = TDEE(BMRCalculatorForUser(user), ActivityFactor.Sedentary)
+</span><span class='line'>println("You can maintain your weight by eating (tdee) kcal daily")</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Personal Goals</h1>
+
+<p>Now that we have calories to maintain our weight, let’s look at possible goals for a user:</p>
+
+<ol>
+<li>Fat Loss - we want to cut some fat</li>
+<li>Muscle gain - when we want to gain muscle</li>
+</ol>
+
+
+<p>I didn’t use word weight here for a reason, when you bulk you want to gain muscle, you don’t want to get fat.
+Same goes for fat loss, we don’t want to lose hard earned muscle tissue, only fat and as such aiming at highest possible weight loss is usually mistake.</p>
+
+<p>How fast can we change our weight?</p>
+
+<p>1 KG of weight is considered to amount to ~7700 calories:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func caloriesForWeight(kgs: Double) -> Double {
+</span><span class='line'>  return kgs * 7700
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>Fat loss</h2>
+
+<p>It could be fast if you were willing to really restrict calories, but one have to be careful to avoid muscle loss. Starvation mode is a myth but you might be miserable when you do very strict diet. I’d suggest going slower but steady, having around 0.5 kg fat loss per week wouldn’t be bad, in 10 weeks you’d have 5 kg of FAT less.</p>
+
+<p>If you feel like it’s a bit too fast or to slow, adjust the value and see how much less you’d need to eat daily to hit your desired speed:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>println("daily deficit: (caloriesForWeight(0.5) / 7.0)")</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>Muscle gain</h2>
+
+<p>Muscle gain is hard, we can’t just overeat and expect to gain more muscle, doing so will end up with getting fat and having to go into Fat Loss phase, it will make you miserable in long run.</p>
+
+<p>Avoid dreamers bulk, better to go slow and steady, what should be your weekly aim? It will heavily depend on your current conditioning:</p>
+
+<p>On average, a guy doing everything right (Perfect diet etc.) will be doing very well to gain 0.2kg of muscle per week. A female might gain half that or about 0.2kg of muscle every 2 weeks.</p>
+
+<p>The more advanced you are, the slower you should be gaining weight to avoid getting too much fat.</p>
+
+<p>So we have 2 weight goals, bulking and cutting:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>typealias Goal = () -> Double
+</span><span class='line'>func bulking(#kgPerWeek: Double) -> Goal {
+</span><span class='line'>  return {+kgPerWeek/7}
+</span><span class='line'>}
+</span><span class='line'>func cutting(#kgPerWeek: Double) -> Goal {
+</span><span class='line'>  return {-kgPerWeek/7}
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Final calculation</h1>
+
+<p>Now we can finally calculate daily calories needed to reach our goals:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><figcaption><span>swift </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func dailyCalories(tdee: Int, #goal: Goal) -> Int {
+</span><span class='line'>  return Int(Double(tdee) + (caloriesForWeight(goal())))
+</span><span class='line'>}&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>let target = dailyCalories(tdee, goal: bulking(kgPerWeek: 0.2))
+</span><span class='line'>println("You should be eating (target) kcal everyday")</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h1>Conclusion</h1>
+
+<p>This should make starting your fitness journey easier, it also shows how cool playgrounds are. If you are interested in more fitness tips especially about loosing fat I recommend you take a look at my <a href="http://www.merowing.info/2014/02/fit-geek/">previous article</a></p>
+
+<p><a href="http://twitter.com/merowing_">Follow me on twitter</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fit Geek]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/fit-geek"/>
+    <updated>2014-02-10T11:56:00+01:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/fit-geek</id>
+    <content type="html"><![CDATA[<p>If you ever meet me you probably already know my second biggest passion after programming is Bodybuilding. I used to be a fat kid weighting 105 kg, now I'm ripped. I don't spend my days in gym, neither do I eat raw chicken and eggs. I approach fitness the same way I approach programming, KISS.</p>
+
+<p>Read more to learn how you too can become extra fit without much effort.</p>
+
+<p><strong>NSFW</strong> because I'll show my progress photos.</p>
+
+<!-- more -->
+
+
+<h2>Why you should avoid most blog's and fitness trainers</h2>
+
+<p>Let's look at some stuff you'd hear at gym or most blogs:</p>
+
+<ol>
+<li>You shouldn't skip breakfast</li>
+<li>Eat low GI carbs</li>
+<li>Eat 5-6 meals a day when cutting</li>
+<li>Don't eat after 6PM</li>
+<li>It's cheating when you eat ice-cream, you should feel bad.</li>
+<li>Train in higher reps to get 'definition'</li>
+<li>Lots of cardio.</li>
+</ol>
+
+
+<p>What I did:</p>
+
+<ol>
+<li>Didn't eat breakfast in 2 years</li>
+<li>Couldn't care less about GI, GI doesn't even apply if you eat mixed food, who the hells eat only carbs in a meal?</li>
+<li>I prefer 1-2 huge meals when cutting.</li>
+<li>I eat around 2000-2500 kcal before sleep.</li>
+<li>I had days when I eat 500ml of low fat ice-cream after training. Fat doesn't make you fat but after training I prefer to refill glycogen.</li>
+<li>Train for strength, you need to spare muscles not 'define' them.</li>
+<li>Cardio? Do you mean sex and walking? that's what I did. Cardio is not necessary unless you are already under 10% body fat.</li>
+</ol>
+
+
+<p>You can imagine how fat I got by following that right? WRONG.</p>
+
+<p><img src="http://www.merowing.info/uploads/2014/02/Progress.jpg" alt="progress" />
+<a href="http://www.merowing.info/uploads/2014/02/chinups.mov">Me doing chin-ups... with extra 20kg</a></p>
+
+<p>There are only few authors I'd recommend you follow if you are interested in dieting:</p>
+
+<ul>
+<li>Lyle McDonald - Great diet expert, research based.</li>
+<li>Martin Berkhan - Intermittent fasting advocate, my favourite way of cutting fat.</li>
+<li>Alan Aragorn - similar to lyle.</li>
+</ul>
+
+
+<h2>How to apply KISS to training?</h2>
+
+<p>I don't like wasting time, if you are trying to loose fat you don't need to do tons of cardio or spend hours on the gym 'toning'.</p>
+
+<p>I love simplicity:</p>
+
+<ul>
+<li>I prefer do to Intermittent fasting <a href="http://leangains.com">leangains style</a>, it's very easy to eat nothing than to eat little. You don't need to do it but it's easier to control your eating if you only eat 8h a day.</li>
+<li>Train hard but short, 3x45-50 min a week Reverse Pyramid Training as recommended by Martin.</li>
+<li>Start slow and be patient, you don't want to start dieting by eating 1500 kcal, unless you are little girl. Are you?</li>
+</ul>
+
+
+<h3>Supplements</h3>
+
+<ul>
+<li>Omega 3 - 2 g EPA, 1.5 g DHA per day</li>
+<li>Vitamins - most people have deficiencies, especially when you are in kcal deficit and training hard, <a href="http://www.youtube.com/watch?v=o0u8UdZeOhc">if you believed vitamins are bad</a></li>
+<li>Calcium - 800 mg in the morning, 1200 mg in night</li>
+<li>BCAA - useful if you train fasted, not necessary otherwise. I prefer Scivation Xtend.</li>
+<li>Fat burners - waste of money. Watch your diet.</li>
+</ul>
+
+
+<h3>Eating</h3>
+
+<p>Eat what you like as long as you can hit macros calculated from following diet setup. I like ice-cream and chilli con carne, Chinese chicken with mushrooms etc. Keep in mind that food choices doesn't really matter for weight loss but they do for general health, so don't just eat at McDonalds. I like to eat 80% least processed food and 20% whatever I like on the specific day.</p>
+
+<p>If you decide to follow IF, I'd recommend you set-up your eating window at evening, this will make easier to eat with friends when you go out and enjoy life.</p>
+
+<p>I recommend using <a href="http://myfitnesspal.com">MyFitnessPal</a> to track kcal and macros. <a href="http://www.reddit.com/r/leangains/comments/1rkevo/finally_a_way_to_get_custom_macros_on_mfp/">You can use this script to specify macro goals perfectly</a></p>
+
+<h2>Diet setup</h2>
+
+<p>I'm programmer and most of you are probably as well, so let's share a diet <em>algorithm</em> I'm using for my cutting.</p>
+
+<p>To avoid wasting time and doing manual calculations, I'd recommend you buy <a href="http://calca.io">calca.io</a> which is a text-based symbolic calculator I'm using.</p>
+
+<p>Paste following in to calca.io and adjust stats section, you can <a href="http://www.1percentedge.com/ifcalc/">get your TDEE estimate here</a></p>
+
+<p><a href="https://gist.github.com/krzysztofzablocki/8913213">Diet setup to paste in calca.io</a></p>
+
+<p>Key points for this setup:</p>
+
+<ul>
+<li>Start slow, no cardio, target for 0.5 kg of FAT loss in a week. You could loose weight way faster, but you don't want to loose <strong>weight</strong>, you want to loose <strong>FAT</strong>. Keep your muscles and be patient.</li>
+<li>Only increase deficit when you stall for 2 weeks and <strong>not less</strong>. Weight loss is not linear, you might wake up one day and weight 1kg less. If you do increase deficit by 400 kcal (-100 kcal on rest days)</li>
+<li>Don't go under 1400 kcal (Unless you are a girl, then you could probably go as low as 1100 kcal, but again start slowly.), add some walking instead.</li>
+</ul>
+
+
+<p>If you have any questions, <a href="http://twitter.com/merowing_">send me a tweet</a></p>
+]]></content>
+  </entry>
+  
+</feed>

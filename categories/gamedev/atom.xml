@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gamedev | Krzysztof Zabłocki]]></title>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/gamedev/atom.xml" rel="self"/>
+  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
+  <updated>2015-05-05T03:08:41+02:00</updated>
+  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <author>
+    <name><![CDATA[Krzysztof Zabłocki]]></name>
+    <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learn iOS Game Dev - Level 0]]></title>
+    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2013/04/learn-ios-game-dev-level-0"/>
+    <updated>2013-04-11T19:20:00+02:00</updated>
+    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2013/04/learn-ios-game-dev-level-0</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://www.merowing.info/uploads/2013/04/clone-small.png"></p>
+
+<p>This tutorial is part of a new series, my goal is to teach you new things but don't treat you like a complete newbie. First tutorial in the series will be the most detailed one, but don't expect your typical step by step guide from this series. Each next tutorial will assume more and more knowdlege from your part, get ready.</p>
+
+<p>By the end of this tutorial you will have a simple game with level editor. And you <strong>won't even need</strong> to write 250 lines of code to create it.</p>
+
+<!-- more -->
+
+
+<h2>Goal</h2>
+
+<p>Create a simple clone of game called teeter.</p>
+
+<h2>Technology</h2>
+
+<ul>
+<li><em>UIKit</em> for rendering - this game doesn't require any fancy effects.</li>
+<li><em>Interface Builder</em> for level editing - Keep it simple.</li>
+<li><em>Chipmunk</em> for Physics - Physics is heavy topic, let's not bother with it in this tutorial.</li>
+</ul>
+
+
+<h2>Analysing</h2>
+
+<p>As always you should first look at the problem ahead and think it through, let's do that even with our simple game.</p>
+
+<p>What kind of Actors (objects) do we need for our game and their physical properties?</p>
+
+<p><img class="right" src="http://www.merowing.info/uploads/2013/04/gamedev0-analyse.jpg" width="320" height="240"></p>
+
+<ol>
+<li>Player - dynamic, circular</li>
+<li>Hole - static, no collisions</li>
+<li>Obstacle - static, quad</li>
+<li>Finish - Static, no collisions</li>
+</ol>
+
+
+<p>We could express all of them with single set of properties:</p>
+
+<ul>
+<li>static/dynamic</li>
+<li>circle/quad</li>
+<li>sensor/collider - should it generate collisions or just inform about them</li>
+<li>mass - each dynamic object needs some mass</li>
+<li>momentum - each physical object needs also momentum, but we are better off calculating that from shape and mass of object</li>
+<li>type - needed for recognising between object types</li>
+</ul>
+
+
+<h2>Start coding</h2>
+
+<p>I recommend you <a href="https://github.com/krzysztofzablocki/Learn-iOS-GameDev-Level-0">grab the project from GitHub</a> and read it along with this tutorial, or start fresh by following all steps and filling in missing pieces.</p>
+
+<p>If you don't have an Xcode project yet, create a new one and make sure to enable Storyboards support.
+Let's create PhysicalView class that will implement those:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">PhysicalView</span> : <span class="nc">UIImageView</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">isStatic</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">isCircle</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">isSensor</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="n">CGFloat</span> <span class="n">mass</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">type</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">update</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We also added update method, as you will soon learn, most game objects needs to update their state with each display frame. For now just implement it as empty method.</p>
+
+<p>Let's make static body of mass 1 as default (mass doesn't really matter for static bodies, but it's good to setup default value anyway), implement initWithCoder:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="nv">aDecoder</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nl">initWithCoder:</span><span class="n">aDecoder</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">_isStatic</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="n">_mass</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<h2>Levels</h2>
+
+<p>Most games consist of multiple levels, let's create LevelViewController that will manage each level. Create new UIViewController subclass, call it LevelViewController then add it to storyboards as well.</p>
+
+<p>Next step is downloading and adding <a href="http://chipmunk-physics.net/release/Chipmunk-6.x/ChipmunkPro-Trial-6.1.2.tgz">Chipmunk Physics library</a> to our project. Be sure to import "ObjectiveChipmunk.h" on top of PhysicalView and LevelViewController.</p>
+
+<h3>Physics</h3>
+
+<p>All chipmunk physics is happening inside <em>space</em>, we need to make sure that our level has it's own <em>space</em>, let's limit the space to screen size. In LevelViewController create method called setupPhysics:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setupPhysics</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">space</span> <span class="o">=</span> <span class="p">[</span><span class="n">ChipmunkSpace</span> <span class="n">new</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">space</span> <span class="nl">addBounds:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span> <span class="nl">thickness:</span><span class="mf">10.0f</span> <span class="nl">elasticity:</span><span class="mf">1.0f</span> <span class="nl">friction:</span><span class="mf">1.0f</span> <span class="nl">layers:</span><span class="n">CP_ALL_LAYERS</span> <span class="nl">group:</span><span class="n">CP_NO_GROUP</span> <span class="nl">collisionType:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">_space</span><span class="p">.</span><span class="n">gravity</span> <span class="o">=</span> <span class="n">cpv</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">self</span> <span class="n">addPhysicalObjects</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We create new <em>space</em>, setup it's bounds to match the screen and specify that they should collide for all layers and groups. Then we setup gravity and call addPhysicalObjects method.</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addPhysicalObjects</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">UIView</span> <span class="o">&lt;</span><span class="n">ChipmunkObject</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">view</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">subviews</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">([</span><span class="n">view</span> <span class="nl">conformsToProtocol:</span><span class="err">@</span><span class="n">protocol</span><span class="p">(</span><span class="n">ChipmunkObject</span><span class="p">)])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">_space</span> <span class="nl">add:</span><span class="n">view</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we just go over all subviews and we add each subview that conforms to ChipmunkObject protocol to our space.</p>
+
+<p>We need to call our setupPhysics method from viewDidLoad:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">setupPhysics</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We need to make sure our space is updated with each frame, on iOS we can use CADisplayLink, it's an object that allows to bind update functions to screen refresh rate. Let's manage it in viewWillAppear / viewWillDisappear methods:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">animated</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">viewDidAppear:</span><span class="n">animated</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">displayLink</span> <span class="o">=</span> <span class="p">[</span><span class="n">CADisplayLink</span> <span class="nl">displayLinkWithTarget:</span><span class="n">self</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">tick:</span><span class="p">)];</span>
+</span><span class='line'>  <span class="p">[</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">displayLink</span> <span class="nl">addToRunLoop:</span><span class="p">[</span><span class="n">NSRunLoop</span> <span class="n">mainRunLoop</span><span class="p">]</span> <span class="nl">forMode:</span><span class="n">NSDefaultRunLoopMode</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">viewWillDisappear:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="n">animated</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">[</span><span class="n">super</span> <span class="nl">viewWillDisappear:</span><span class="n">animated</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">displayLink</span> <span class="n">invalidate</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">displayLink</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></li>
+</ul>
+
+
+<p>Here we basically create new display link when level becomes visible and clean it up when it disappears.</p>
+
+<p>We also need to implement actual <em>tick:</em> method:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">tick:</span><span class="p">(</span><span class="n">CADisplayLink</span> <span class="o">*</span><span class="p">)</span><span class="nv">link</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">CGFloat</span> <span class="n">deltaTime</span> <span class="o">=</span> <span class="n">link</span><span class="p">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">link</span><span class="p">.</span><span class="n">frameInterval</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">_space</span> <span class="nl">step:</span><span class="n">deltaTime</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">for</span> <span class="p">(</span><span class="kt">id</span> <span class="n">view</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">subviews</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">([</span><span class="n">view</span> <span class="nl">respondsToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">update</span><span class="p">)])</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">view</span> <span class="n">update</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we progress <em>space</em> calculations by stepping it by the difference between current and previous frames. Then we just iterate over all our subviews and update them if they have update method.</p>
+
+<h3>Would be nice to see something</h3>
+
+<p>We already wrote bunch of code, but we can't see anything yet. We still didn't implement proper methods on PhysicalView, let's fix that. We need to start with setup:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">awakeFromNib</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">awakeFromNib</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">setup</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">setup</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="kt">float</span> <span class="n">moment</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">width</span> <span class="o">=</span> <span class="n">CGRectGetWidth</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">);</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">height</span> <span class="o">=</span> <span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="o">!&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">isCircle</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">moment</span> <span class="o">=</span> <span class="n">cpMomentForBox</span><span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">mass</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">moment</span> <span class="o">=</span> <span class="n">cpMomentForCircle</span><span class="p">(</span><span class="n">_mass</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">cpvzero</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//! setup physics</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">isStatic</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">body</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ChipmunkBody</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initStaticBody</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">body</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ChipmunkBody</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithMass:</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">mass</span> <span class="nl">andMoment:</span><span class="n">moment</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">_body</span><span class="p">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="n">CGRectGetMidX</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">),</span> <span class="n">CGRectGetMidY</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="o">!&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">isCircle</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">ChipmunkPolyShape</span> <span class="nl">boxWithBody:</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">body</span> <span class="nl">width:</span><span class="n">width</span> <span class="nl">height:</span><span class="n">height</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">ChipmunkCircleShape</span> <span class="nl">circleWithBody:</span><span class="n">_body</span> <span class="nl">radius:</span><span class="n">width</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="nl">offset:</span><span class="n">cpvzero</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span><span class="p">.</span><span class="n">elasticity</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span><span class="p">.</span><span class="n">friction</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span><span class="p">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">isSensor</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Before creating bodies we need to calculate momentum, we will use Chipmunk helper methods for that. Then we create physical body and set their position it in level space (our superview). Then depending on shape we either create circle or box, setup some basic defaults for friction and elasticity and sensor property.</p>
+
+<p>We also need to implement proper ChipmunkObject protocol and update methods:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">update</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">center</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">pos</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformMakeRotation</span><span class="p">(</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">body</span><span class="p">.</span><span class="n">angle</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="n">chipmunkObjects</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">isStatic</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">[</span><span class="n">NSSet</span> <span class="nl">setWithObjects:</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">return</span> <span class="p">[</span><span class="n">NSSet</span> <span class="nl">setWithObjects:</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">shape</span><span class="p">,</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">body</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we just set center of our view to match physical body and it's angle. chipmunkObjects needs to return physical objects that are to be added to space, static bodies should not be added.</p>
+
+<p>Now go to storyboards, add new UIImageView:</p>
+
+<ol>
+<li>Set custom class to PhysicalView, make it a square rect</li>
+<li>Set user defined runtime attributes accordingly:
+
+<ul>
+<li>isCircle - YES</li>
+<li>isStatic - NO</li>
+<li>type - Player</li>
+</ul>
+</li>
+</ol>
+
+
+<p><img class="right" src="http://www.merowing.info/uploads/2013/04/gamedev0-attributes.png"></p>
+
+<p>Run project, you should now see player animating and being affected by gravity, not very impressive right?
+Copy player view multiple times in IB, put it in different places (set them up so they collide after applying gravity), run it again. That was easy change right? Try changing mass properties and see how it changes animation.</p>
+
+<p><strong>Let's go even further</strong>, create new Physical view, set it's size as you see fit, set graphics to our wall.png. No runtime attributes needed, we will use defaults. Run again!</p>
+
+<p><strong>You just added obstacles!</strong> It's nice to have flexible level editor, isn't it?</p>
+
+<h3>Accelerometer</h3>
+
+<p>Static gravity isn't that impressive, let's use our accelerometer to control player. Add this code at the end LevelViewController viewDidAppear method:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">UIAccelerometer</span> <span class="o">*</span><span class="n">accelerometer</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIAccelerometer</span> <span class="n">sharedAccelerometer</span><span class="p">];</span>
+</span><span class='line'><span class="n">accelerometer</span><span class="p">.</span><span class="n">updateInterval</span> <span class="o">=</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="mf">30.0f</span><span class="p">;</span>
+</span><span class='line'><span class="n">accelerometer</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>We just setup our level as delegate for accelerometer updates, we still need to implement that method:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">accelerometer:</span><span class="p">(</span><span class="n">UIAccelerometer</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">accelerometer</span> <span class="nf">didAccelerate:</span><span class="p">(</span><span class="n">UIAcceleration</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nv">acceleration</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">_space</span> <span class="nl">setGravity:</span><span class="n">cpvmult</span><span class="p">(</span><span class="n">cpv</span><span class="p">((</span><span class="n">cpFloat</span> <span class="k">const</span><span class="p">)</span><span class="n">acceleration</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">cpFloat</span> <span class="k">const</span><span class="p">)</span><span class="o">-</span><span class="n">acceleration</span><span class="p">.</span><span class="n">y</span><span class="p">),</span> <span class="mi">200</span><span class="p">)];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>What we do here is very simple, we grab current acceleration from device, multiple it by 200 in each axis and set that as space gravity, this will affect all dynamic objects on scene.</p>
+
+<p><strong>Be sure to run project on device to see acceleration changes.</strong></p>
+
+<h3>Game logic</h3>
+
+<p>So now we have nice WYSIWYG editor inside IB (more or less), we have good physics along with accelerometer control over it. What's missing is the gameplay of our game, in this game we only have 2 types of actions affecting gameplay:</p>
+
+<ol>
+<li>Collision with hole - Player loss and we restart game.</li>
+<li>Collision with finish - Player wins and we go to next level.</li>
+</ol>
+
+
+<p>Before proceeding be sure to create level and setup proper types in runtime attributes, you should only have single player object.</p>
+
+<p>We need to add collision handlers to recognise when player is interacting with those objects, at the end of setupPhysics add:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">_space</span> <span class="nl">addCollisionHandler:</span><span class="n">self</span> <span class="nl">typeA:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Hole&quot;</span><span class="p">]</span> <span class="nl">typeB:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Player&quot;</span><span class="p">]</span> <span class="nl">begin:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">gameLost:space:</span><span class="p">)</span> <span class="nl">preSolve:</span><span class="nb">nil</span> <span class="nl">postSolve:</span><span class="nb">nil</span> <span class="nl">separate:</span><span class="nb">nil</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">[</span><span class="n">_space</span> <span class="nl">addCollisionHandler:</span><span class="n">self</span> <span class="nl">typeA:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Player&quot;</span><span class="p">]</span> <span class="nl">typeB:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Finish&quot;</span><span class="p">]</span> <span class="nl">begin:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">gameWon:space:</span><span class="p">)</span> <span class="nl">preSolve:</span><span class="nb">nil</span> <span class="nl">postSolve:</span><span class="nb">nil</span> <span class="nl">separate:</span><span class="nb">nil</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Here we add 2 distinct collision handlers, Player vs Hole and Player vs Finish.</p>
+
+<p>Before we compile this change we need to add some code, because typeA and typeB can be any kind of objects they need to be unique (in sense of pointers, not equality), we need some way to map our type strings to unique objects:
+In PhysicalView implement this class method:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">NSMutableDictionary</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nf">handlers</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">static</span> <span class="n">NSMutableDictionary</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">handlers</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">handlers</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">handlers</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">handlers</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>at the end of setup method add this lines:
+<div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">_type</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="n">_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">_type</span><span class="p">;</span>
+</span><span class='line'><span class="n">_shape</span><span class="p">.</span><span class="n">collisionType</span> <span class="o">=</span> <span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="n">_type</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>This code guarantees uniqueness of strings as objects, we use keys (which check for equality of content) and use type as object. Which means we get exactly 1 object for each matching key.</p>
+
+<p>Going back to LevelViewController as we still need to implement gameLost/gameWon logic:</p>
+
+<p><div><div class='bogus-wrapper'><notextile><button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">gameOver:</span><span class="p">(</span><span class="n">cpArbiter</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">arbiter</span> <span class="nl">space:</span><span class="p">(</span><span class="n">ChipmunkSpace</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">space</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alertView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;You lost!&quot;</span> <span class="nl">message:</span><span class="s">@&quot;I&#39;ve told you already: You lost!&quot;</span> <span class="nl">delegate:</span><span class="n">self</span> <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Restart&quot;</span> <span class="nl">otherButtonTitles:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">alertView</span> <span class="n">show</span><span class="p">];</span>
+</span><span class='line'><span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nl">gameWon:</span><span class="p">(</span><span class="n">cpArbiter</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">arbiter</span> <span class="nl">space:</span><span class="p">(</span><span class="n">ChipmunkSpace</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">space</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alertView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;You won!&quot;</span> <span class="nl">message:</span><span class="s">@&quot;I&#39;ve told you already: You won!&quot;</span> <span class="nl">delegate:</span><span class="n">self</span> <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Next level&quot;</span> <span class="nl">otherButtonTitles:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">alertView</span><span class="p">.</span><span class="n">tag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">[</span><span class="n">alertView</span> <span class="n">show</span><span class="p">];</span>
+</span><span class='line'><span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">alertView:</span><span class="p">(</span><span class="n">UIAlertView</span> <span class="o">*</span><span class="p">)</span><span class="n">alertView</span> <span class="nl">clickedButtonAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="n">buttonIndex</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">alertView</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">nextLevel</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">return</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span> <span class="nl">loadLevel:</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">nextLevel</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">loadLevel:</span><span class="n">currentLevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">loadLevel:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="n">level</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">UIViewController</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">controller</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;Level%d&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">]];</span>
+</span><span class='line'><span class="c1">//! looping</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">controller</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">UIViewController</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">controller</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;Level%d&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">]];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">setViewControllers:</span><span class="err">@</span><span class="p">[</span><span class="n">controller</span><span class="p">]</span> <span class="nl">animated:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'><span class="n">currentLevel</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></div></p>
+
+<p>Logic here is very simple, depending on player result we show proper alert and then once user dismisses alert we either restart game or move to next level.</p>
+
+<p>We load levels from storyboards, to make this work you need to setup LevelViewController <em>Storyboard ID</em> to LevelX where X is the level number. Once user finishes all levels we will automatically loop to the first one.</p>
+
+<h2>Conclusion and next steps</h2>
+
+<p><img class="left" src="http://www.merowing.info/uploads/2013/04/clone.png"></p>
+
+<p>You should now have a simple game, simple level editor and loads of space to improve. What's interesting is that everything has <strong>less than 250 lines of code</strong>, that's pretty small isn't it ?</p>
+
+<p>What could you do next:</p>
+
+<ul>
+<li>add spring joint when player collides with any hole (that was actually in tutorial but I've removed that to keep it simpler)</li>
+<li>add nice transitions between levels, instead of going straight to next controller show summary screen with stats (time)</li>
+<li><strong><a href="http://twitter.com/merowing_">follow me on twitter</a></strong></li>
+</ul>
+
+
+<p><a href="http://twitter.com/faktory">Game graphics by my friend @faktory</a></p>
+]]></content>
+  </entry>
+  
+</feed>
