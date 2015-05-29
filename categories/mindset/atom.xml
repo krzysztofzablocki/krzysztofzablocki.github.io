@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Mindset | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/mindset/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/mindset/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How do I work?]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/how-do-i-work"/>
+    <link href="http://merowing.info/2014/10/how-do-i-work"/>
     <updated>2014-10-06T15:21:00+02:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/how-do-i-work</id>
+    <id>http://merowing.info/2014/10/how-do-i-work</id>
     <content type="html"><![CDATA[<p>I’ve been programming for 18 years now, doing commercial work for the last 6, over the years I’ve been exposed to different ideas and experiences that have constantly affect the way I write code, what matters and how I go about working for my clients. I’d like to share some insights in what is my current approach to few common topics.</p>
 
 <!-- more -->
@@ -186,9 +186,9 @@ I like to have peer code reviews, and it has few advantages over  only team lead
   
   <entry>
     <title type="html"><![CDATA[Programmers bad habits]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2012/05/programmers-bad-habits"/>
+    <link href="http://merowing.info/2012/05/programmers-bad-habits"/>
     <updated>2012-05-29T21:26:00+02:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2012/05/programmers-bad-habits</id>
+    <id>http://merowing.info/2012/05/programmers-bad-habits</id>
     <content type="html"><![CDATA[<p><a href="http://www.merowing.info/uploads/2012/05/reuse.jpg"><img src="http://www.merowing.info/uploads/2012/05/reuse.jpg" alt="" /></a></p>
 
 <p>We evolve and change our habits, probably many times every few years. Your code style changes, your approach to writing code in general.<br/>

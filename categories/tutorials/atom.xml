@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tutorials | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/tutorials/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/tutorials/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Simple Image Comparison View]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/05/implementing-image-comparison-view-in-20-minutes"/>
+    <link href="http://merowing.info/2014/05/implementing-image-comparison-view-in-20-minutes"/>
     <updated>2014-05-20T11:21:00+02:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/05/implementing-image-comparison-view-in-20-minutes</id>
+    <id>http://merowing.info/2014/05/implementing-image-comparison-view-in-20-minutes</id>
     <content type="html"><![CDATA[<p>Did you ever see image split available in Kaleidoscope? It's really easy to implement similar one in iOS with some CoreAnimation code.</p>
 
 <p><img src="http://www.merowing.info/uploads/2014/05/ImageSplit.gif" width="180" height="270"></p>

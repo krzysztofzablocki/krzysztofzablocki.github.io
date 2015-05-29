@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Fitness | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/fitness/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/fitness/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Extracting data from websites without API and calculating your needed calories - MyFitnessPal and Ruby + Mechanize]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api"/>
+    <link href="http://merowing.info/2015/01/extracting-data-from-websites-without-api"/>
     <updated>2015-01-15T16:40:00+01:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api</id>
+    <id>http://merowing.info/2015/01/extracting-data-from-websites-without-api</id>
     <content type="html"><![CDATA[<p>As a programmer I like to automate stuff, I love being able to extract the data I’m tracking and visualise and analyze it in many different ways.</p>
 
 <p>I’ve been using MyFitnessPal for years, and I’ve collected a big amount of nutrition / weight data, as such I wanted to be able to play with that data in my own environment, unfortunately MyFitnessPal did not give me API access, even though I’ve asked twice.</p>
@@ -312,9 +312,9 @@ It’s beneficial for your body and mind, if you were on spot with your diet, yo
   
   <entry>
     <title type="html"><![CDATA[A Swift introduction into Fitness]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness"/>
+    <link href="http://merowing.info/2014/09/a-swift-introduction-into-fitness"/>
     <updated>2014-09-30T12:17:00+02:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness</id>
+    <id>http://merowing.info/2014/09/a-swift-introduction-into-fitness</id>
     <content type="html"><![CDATA[<p><a href="http://merowing.info/uploads/2014/09/IntroToFitness.playground.zip">Download this article as Playground</a> for XCode 6 to be able to experiment with calculations.</p>
 
 <p>Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.</p>
@@ -621,9 +621,9 @@ Same goes for fat loss, we don’t want to lose hard earned muscle tissue, only 
   
   <entry>
     <title type="html"><![CDATA[Fit Geek]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/fit-geek"/>
+    <link href="http://merowing.info/2014/02/fit-geek"/>
     <updated>2014-02-10T11:56:00+01:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/fit-geek</id>
+    <id>http://merowing.info/2014/02/fit-geek</id>
     <content type="html"><![CDATA[<p>If you ever meet me you probably already know my second biggest passion after programming is Bodybuilding. I used to be a fat kid weighting 105 kg, now I'm ripped. I don't spend my days in gym, neither do I eat raw chicken and eggs. I approach fitness the same way I approach programming, KISS.</p>
 
 <p>Read more to learn how you too can become extra fit without much effort.</p>

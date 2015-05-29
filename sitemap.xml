@@ -1,199 +1,159 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://merowing.info/2012/03/using-gesturerecognizers-in-cocos2d</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/using-gesturerecognizers-in-cocos2d
+            http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app
         </loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
         <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app
+            http://merowing.info/2012/03/automatic-removal-of-nsnotificationcenter-or-kvo-observers
         </loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
         <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/automatic-removal-of-nsnotificationcenter-or-kvo-observers
+            http://merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper
         </loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2012/05/programmers-bad-habits</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
         <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper
+            http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones
         </loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2012/12/quick-tip-for-interface-builder</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2013/04/statusboard-and-jenkins</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2013/04/learn-ios-game-dev-level-0</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2013/05/crafter-setup-your-cocoa-projects-with-ease</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2013/07/expanded-use-of-asserts</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2014/02/ios-developer-tools</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2014/02/fit-geek</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2014/02/ios-tips</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
         <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/05/programmers-bad-habits
+            http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction
         </loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2014/03/7-most-common-code-issues</loc>
+        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://merowing.info/2014/03/refactoring-tricks</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
         <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones
+            http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing
         </loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2012/12/quick-tip-for-interface-builder
-        </loc>
+        <loc>http://merowing.info/2014/05/implementing-image-comparison-view-in-20-minutes</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2013/03/overlaying-application-version-on-top-of-your-icon
-        </loc>
+        <loc>http://merowing.info/2014/06/behaviours-and-xcode-6</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2013/04/statusboard-and-jenkins
-        </loc>
+        <loc>http://merowing.info/2014/07/implementing-observable-in-swift</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2013/04/learn-ios-game-dev-level-0
-        </loc>
+        <loc>http://merowing.info/2014/07/improving-development-speed</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2013/05/crafter-setup-your-cocoa-projects-with-ease
-        </loc>
+        <loc>http://merowing.info/2014/08/writing-less-code</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2013/07/expanded-use-of-asserts
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2013/07/stop-writing-data-parsing-code-in-your-apps
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/ios-developer-tools
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/fit-geek</loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/02/ios-tips</loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/03/7-most-common-code-issues
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/03/refactoring-tricks
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/05/implementing-image-comparison-view-in-20-minutes
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/06/behaviours-and-xcode-6
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/07/implementing-observable-in-swift
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/07/improving-development-speed
-        </loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/08/writing-less-code</loc>
-        <lastmod>2014-12-28T20:11:51+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness
-        </loc>
+        <loc>http://merowing.info/2014/09/a-swift-introduction-into-fitness</loc>
         <lastmod>2015-01-15T17:26:11+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/how-do-i-work</loc>
+        <loc>http://merowing.info/2014/10/how-do-i-work</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/ios-project-bootstrap
-        </loc>
+        <loc>http://merowing.info/2014/10/ios-project-bootstrap</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2014/10/playgrounds-for-objective-c
-        </loc>
+        <loc>http://merowing.info/2014/10/playgrounds-for-objective-c</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api
-        </loc>
+        <loc>http://merowing.info/2015/01/extracting-data-from-websites-without-api</loc>
         <lastmod>2015-01-15T18:14:52+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/about/</loc>
+        <loc>http://merowing.info/about/</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/blog/archives/</loc>
+        <loc>http://merowing.info/blog/archives/</loc>
         <lastmod>2015-01-15T18:14:52+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/blog/categories/</loc>
+        <loc>http://merowing.info/blog/categories/</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/</loc>
+        <loc>http://merowing.info/</loc>
         <lastmod>2015-01-15T18:14:52+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/robots.txt</loc>
+        <loc>http://merowing.info/robots.txt</loc>
         <lastmod>2014-12-28T20:11:51+01:00</lastmod>
     </url>
     <url>
-        <loc>http://krzysztofzablocki.github.com/krzysztofzablocki/speaking/</loc>
+        <loc>http://merowing.info/speaking/</loc>
         <lastmod>2015-03-26T12:21:40+01:00</lastmod>
     </url>
 </urlset>

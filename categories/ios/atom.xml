@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: iOS, | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/ios/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/ios/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Subjective guide to writing iOS Apps - Part 1 Introduction]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction"/>
+    <link href="http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction"/>
     <updated>2014-03-14T11:24:00+01:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction</id>
+    <id>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction</id>
     <content type="html"><![CDATA[<p>This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.</p>
 
 <!-- more -->

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tip | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/tip/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/tip/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Quick Tip: Xib referencing]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2012/12/quick-tip-for-interface-builder"/>
+    <link href="http://merowing.info/2012/12/quick-tip-for-interface-builder"/>
     <updated>2012-12-26T21:03:00+01:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2012/12/quick-tip-for-interface-builder</id>
+    <id>http://merowing.info/2012/12/quick-tip-for-interface-builder</id>
     <content type="html"><![CDATA[<p>Do you use Interface Builder ? Even if you don’t like IB, read this short tip and referenced articles. If you have used IB before, you probably needed to reference one Xib view from another Xib / Storyboard. You probably wrote some code to create that view from code ? You don’t need to do that.</p>
 
 <!-- more -->
@@ -113,9 +113,9 @@ We need to distinguish when awakeAfterUsingCoder is called from our referencing 
   
   <entry>
     <title type="html"><![CDATA[How to check if user touched anything in your iOS App]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app"/>
+    <link href="http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app"/>
     <updated>2012-03-05T21:55:00+01:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app</id>
+    <id>http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app</id>
     <content type="html"><![CDATA[<p>So you want to know when user is interacting with your app and you don’t really care which screen is he using or what is he doing. You only want to know when he touches your app, for example: you make a game and you would like to automatically go into pause mode if user didn’t use your app for N minutes…</p>
 
 <p>The solution that I will describe also can be used to find if or where UIWebView was touched without interfering with the web clickable content, for example showing an overlay where the user touched your UIWebView content…</p>

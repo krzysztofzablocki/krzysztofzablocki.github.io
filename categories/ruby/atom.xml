@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Ruby | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Extracting data from websites without API and calculating your needed calories - MyFitnessPal and Ruby + Mechanize]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api"/>
+    <link href="http://merowing.info/2015/01/extracting-data-from-websites-without-api"/>
     <updated>2015-01-15T16:40:00+01:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2015/01/extracting-data-from-websites-without-api</id>
+    <id>http://merowing.info/2015/01/extracting-data-from-websites-without-api</id>
     <content type="html"><![CDATA[<p>As a programmer I like to automate stuff, I love being able to extract the data I’m tracking and visualise and analyze it in many different ways.</p>
 
 <p>I’ve been using MyFitnessPal for years, and I’ve collected a big amount of nutrition / weight data, as such I wanted to be able to play with that data in my own environment, unfortunately MyFitnessPal did not give me API access, even though I’ve asked twice.</p>

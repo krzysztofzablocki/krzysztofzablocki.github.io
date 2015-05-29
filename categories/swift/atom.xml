@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Swift | Krzysztof Zabłocki]]></title>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/categories/swift/atom.xml" rel="self"/>
-  <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/"/>
-  <updated>2015-05-05T12:27:48+02:00</updated>
-  <id>http://krzysztofzablocki.github.com/krzysztofzablocki/</id>
+  <link href="http://merowing.info/categories/swift/atom.xml" rel="self"/>
+  <link href="http://merowing.info/"/>
+  <updated>2015-05-29T16:18:44+02:00</updated>
+  <id>http://merowing.info/</id>
   <author>
     <name><![CDATA[Krzysztof Zabłocki]]></name>
     <email><![CDATA[krzysztof.zablocki@pixle.pl]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A Swift introduction into Fitness]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness"/>
+    <link href="http://merowing.info/2014/09/a-swift-introduction-into-fitness"/>
     <updated>2014-09-30T12:17:00+02:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/09/a-swift-introduction-into-fitness</id>
+    <id>http://merowing.info/2014/09/a-swift-introduction-into-fitness</id>
     <content type="html"><![CDATA[<p><a href="http://merowing.info/uploads/2014/09/IntroToFitness.playground.zip">Download this article as Playground</a> for XCode 6 to be able to experiment with calculations.</p>
 
 <p>Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.</p>
@@ -324,9 +324,9 @@ Same goes for fat loss, we don’t want to lose hard earned muscle tissue, only 
   
   <entry>
     <title type="html"><![CDATA[Implementing Observable in Swift]]></title>
-    <link href="http://krzysztofzablocki.github.com/krzysztofzablocki/2014/07/implementing-observable-in-swift"/>
+    <link href="http://merowing.info/2014/07/implementing-observable-in-swift"/>
     <updated>2014-07-17T14:56:00+02:00</updated>
-    <id>http://krzysztofzablocki.github.com/krzysztofzablocki/2014/07/implementing-observable-in-swift</id>
+    <id>http://merowing.info/2014/07/implementing-observable-in-swift</id>
     <content type="html"><![CDATA[<p>Use it or not, KVO has been integral part of Cocoa programming, yet if you decide to use only native Swift code you are loosing ability to observe other object properties.</p>
 
 <p>There is a way to add Observable properties back to your own codebase with generics in a way they won’t have ripple effect on remaining code, it’s actually pretty cool.</p>
