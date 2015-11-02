@@ -1,160 +1,311 @@
-<!DOCTYPE HTML> <html> <head> <meta charset="utf-8"> <title>Stop writing data parsing code in your Apps. - Krzysztof Zabłocki</title> <meta name="author" content="Krzysztof Zabłocki"> <meta name=”twitter:site” content=”@merowing_> <meta name="description" content="Stop writing data parsing code in your Apps. Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do &hellip;"> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="/atom.xml" rel="alternate" title="Krzysztof Zabłocki" type="application/atom+xml"> <link rel="canonical" href="http://merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps"> <link href="/favicon.png" rel="shortcut icon"> <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"> <link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css"> <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--> <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <style type="text/css">
-  .fancybox-wrap { position: fixed !important; }
-  .fancybox-opened {
-    -webkit-border-radius: 4px !important;
-       -moz-border-radius: 4px !important;
-            border-radius: 4px !important;
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Stop writing data parsing code in your apps - Krzysztof Zabłocki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <link rel="canonical" href="http://replace-this-with-your-hugo-site.com/2013/07/stop-writing-data-parsing-code-in-your-apps/">
+  <link href="/css/prism.css" rel="stylesheet" />
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" type="text/css" href="http://replace-this-with-your-hugo-site.com//css/combined-min.css">
+</head>
+<body class="">
+
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://replace-this-with-your-hugo-site.com/" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/speaking/">Speaking</a>
+
+
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Stop writing data parsing code in your apps</h1>
+                <span class="post-meta">Jul 25, 2013</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+
+            <article class="post-content">
+                
+
+<p>Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do this parsing by hand, always repeating the same code for each class they need to map.</p>
+
+<p>I&rsquo;ll show show you how you could simplify your code and make it more readable at the same time.</p>
+
+<p>Usual parsing requires this steps:</p>
+
+<ul>
+<li>make sure you translate NSNull to nil and not crash</li>
+<li>gracefully handle optional params</li>
+<li>do type conversions</li>
+</ul>
+
+<h2 id="why-property-mapper:21e04c76d04b728a0263ca043248654e">Why Property Mapper?</h2>
+
+<p>There are libraries helping with that like Mantle, RESTKit and many more… But I wanted something that&rsquo;s self contained, easy to change / remove and requires minimal amount of code.</p>
+
+<p>I&rsquo;ve created <strong>Property Mapper</strong> as part of working on <a href="http://foldifyapp.com">Foldify</a>, a simple self contained class that allows you to specify mapping between data you receive and data representation you have in your application. With some additional features.</p>
+
+<p>I don&rsquo;t like passing around JSON so I write parsing on top of native objects like NSDictionary/NSArray.
+If you get data as JSON just write a simple category that transforms JSON to native objects using NSJSONSerialization.</p>
+
+<h2 id="example-usage:21e04c76d04b728a0263ca043248654e">Example usage</h2>
+
+<p>Let&rsquo;s assume you have object like this:</p>
+
+<pre><code class="language-objectivec">@interface KZPropertyTestObject : NSObject
+@property(nonatomic, strong) NSURL *contentURL;
+@property(nonatomic, strong) NSURL *videoURL;
+@property(nonatomic, strong) NSNumber *type;
+@property(nonatomic, strong) NSString *title;
+@property(nonatomic, strong) NSString *uniqueID;
+
+@end
+</code></pre>
+
+<p>and you receive data from server in this format:</p>
+
+<pre><code class="language-objectivec">@{
+  @&quot;videoURL&quot; : @&quot;http://test.com/video.mp4&quot;, 
+	@&quot;name&quot; : @&quot;Some Cool Video&quot;, 
+	@&quot;videoType&quot; : [NSNull null], 
+	@&quot;sub_object&quot; : @{
+			@&quot;title&quot; : @616,
+			@&quot;arbitraryData&quot; : @&quot;data&quot;
+	}
+}
+</code></pre>
+
+<p>this is the code you would write in your parsing code:</p>
+
+<pre><code class="language-objectivec">[KZPropertyMapper mapValuesFrom:dictionary toInstance:self usingMapping:@{
+   @&quot;videoURL&quot; : @&quot;@URL(contentURL)&quot;,
+     @&quot;name&quot; : @&quot;title&quot;,
+     @&quot;videoType&quot; : @&quot;type&quot;,
+     @&quot;sub_object&quot; : @{
+         @&quot;title&quot; : @&quot;uniqueID&quot;
+     }
+   }];
+</code></pre>
+
+<p>Quite obvious what it does but in case you are confused, it will translate videoURL string to contentURL NSURL object, it will also grab title from sub_object and assign it to uniqueID. It also handles NSNull.</p>
+
+<h2 id="advanced-usage:21e04c76d04b728a0263ca043248654e">Advanced usage</h2>
+
+<p>Let&rsquo;s now change our mind and decide that we want our type property to be typedef enumeration, it&rsquo;s quite easy with KZPropertyMapper, change type mapping to following and add following method:</p>
+
+<pre><code class="language-objectivec">@&quot;videoType&quot; : @&quot;@Selector(videoTypeFromString:, type)&quot;,
+
+//! implemented on instance you are parsing
+- (NSUInteger)videoTypeFromString:(NSString *)type
+{
+  if ([type isEqualToString:@&quot;shortVideo&quot;]) {
+    return VideoTypeShort;
   }
-  .fancybox-close, .fancybox-prev span, .fancybox-next span {
-    background-color: transparent !important;
-    border: 0 !important;
-  }
-</style> <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-29400340-1']);
-		_gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-
-		$('a').click(function() { 
-			var $a = $(this); var href = $a.attr('href');
-			// see if the link is external 
-			if ( (href.match(/^http/)) && (! href.match(document.domain)) ) {
-
-			// if so, register an event
-			var category = 'outgoing'; // set this to whatever you want
-			var event = 'click'; // set this to whatever you want
-			var label = href; // set this to whatever you want
-			pageTracker._trackEvent(category, event, href);
-			}});
-	</script> </head> <body> <div class="container"> <div class="left-col"> <div class="intrude-less"> <header id="header" class="inner"><div class="profilepic"> <script src="/javascripts/md5.js"></script> <script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<a href='http://twitter.com/merowing_'><img src='http://www.gravatar.com/avatar/" + MD5("krzysztof.zablocki@pixle.pl") + "?s=120' alt='Profile Picture' style='width: 120px; float: left; margin: 0px 15px 15px 0px;' /></a> <div class='header_bio'><a href='/about/''>Krzysztof Zabłocki - Software Engineer.</a></div>");
-		});
-	</script> </div> <nav id="main-nav"><ul class="main"> <br/> <br/> <div class="indie_apps" style="clear:both;"> <a href="http://appstore.com/foldify"><img class="app_poster" src="http://www.merowing.info/images/foldify.png" alt="Foldify"></a> <a href="http://appstore.com/foldifyzoo"><img class="app_poster" src="http://www.merowing.info/images/foldifyzoo.png" alt="Foldify Zoo"></a> <a href="http://appstore.com/foldifydino"><img class="app_poster" src="http://www.merowing.info/images/foldifydino.png" alt="Foldify Dino"></a> <a href="https://itunes.apple.com/us/app/storest-kids-love-playing/id926102013?mt=8"><img class="app_poster" src="http://www.merowing.info/images/storest.png" alt="Bord"></a> <a href="http://appstore.com/bord"><img class="app_poster" src="http://www.merowing.info/images/bord.png" alt="Storest"></a> <br/> <br/> </div> <li><a href="/about">About me</a></li> <li><a href="/speaking">Speaking</a></li> <li><a href="/">Blog</a></li> <li><a href="/blog/archives">Archives</a></li> </ul> </nav> <nav id="popular"> <section> <h4>Recommended</h4> <li class="related"><a href="/2014/10/how-do-i-work/">How do I Work?</a></li> <li class="related"><a href="/2014/03/refactoring-tricks">Refactoring tricks</a> and <a href="/2014/02/ios-developer-tools">Developer Tools</a></li> <li class="related"><a href="/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper">Drawing smooth lines</a></li> <li class="related"><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Data Parsing</a> and <a href="https://github.com/krzysztofzablocki/KZBootstrap">Project bootstrap</a></li> </section> </nav> <nav id="sub-nav"> <div class="social"> <a class="email" href="mailto:krzysztof.zablocki@pixle.pl" title="Email">Email</a> <a class="facebook" href="http://www.facebook.com/100000315956630" title="Facebook">Facebook</a> <a class="twitter" href="http://twitter.com/merowing_" title="Twitter">Twitter</a> <a class="github" href="https://github.com/krzysztofzablocki" title="GitHub">GitHub</a> <a class="linkedin" href="http://www.linkedin.com/profile/view?id=90077810" title="LinkedIn">LinkedIn</a> <a class="rss" href="/atom.xml" title="RSS">RSS</a> </div> </nav></header> </div> </div> <div class="mid-col"> <div class="mid-col-container"> <div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting"> <h1 class="title" itemprop="name">Stop writing data parsing code in your Apps.</h1> <div class="entry-content" itemprop="articleBody"><p>Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do this parsing by hand, always repeating the same code for each class they need to map.</p> <p>Usual parsing requires this steps:</p> <ul> <li>make sure you translate NSNull to nil and not crash</li> <li>gracefully handle optional params</li> <li>do type conversions</li> </ul> <p>I&#8217;ll show show you how you could simplify your code, with very lightweight pattern (0 Dependendencies). <a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Or just jump straight to github repo</a></p> <h2>Why Property Mapper?</h2> <p>There are libraries helping with that like Mantle, RESTKit and many more… But I wanted something that&#8217;s self contained, easy to change / remove and requires minimal amount of code.</p> <p>I&#8217;ve created <strong>Property Mapper</strong> as part of working on <a href="http://foldifyapp.com">Foldify</a>, a simple self contained class that allows you to specify mapping between data you receive and data representation you have in your application. With some additional features.</p> <p>I don&#8217;t like passing around JSON so I write parsing on top of native objects like NSDictionary/NSArray. If you get data as JSON just write a simple category that transforms JSON to native objects using NSJSONSerialization.</p> <h2>Example usage</h2> <p>Let&#8217;s assume you have object like this:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">KZPropertyTestObject</span> : <span class="nc">NSObject</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSURL</span> <span class="o">*</span><span class="n">contentURL</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSURL</span> <span class="o">*</span><span class="n">videoURL</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSNumber</span> <span class="o">*</span><span class="n">type</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">title</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">uniqueID</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>and you receive data from server in this format:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="err">@</span><span class="p">{</span>
-</span><span class='line'>  <span class="s">@&quot;videoURL&quot;</span> <span class="o">:</span> <span class="s">@&quot;http://test.com/video.mp4&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s">@&quot;name&quot;</span> <span class="o">:</span> <span class="s">@&quot;Some Cool Video&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s">@&quot;videoType&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="n">NSNull</span> <span class="n">null</span><span class="p">],</span>
-</span><span class='line'>  <span class="s">@&quot;sub_object&quot;</span> <span class="o">:</span> <span class="err">@</span><span class="p">{</span>
-</span><span class='line'>          <span class="s">@&quot;title&quot;</span> <span class="o">:</span> <span class="err">@</span><span class="mi">616</span><span class="p">,</span>
-</span><span class='line'>          <span class="s">@&quot;arbitraryData&quot;</span> <span class="o">:</span> <span class="s">@&quot;data&quot;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>this is the code you would write in your parsing code:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">KZPropertyMapper</span> <span class="nl">mapValuesFrom:</span><span class="n">dictionary</span> <span class="nl">toInstance:</span><span class="n">self</span> <span class="nl">usingMapping:</span><span class="err">@</span><span class="p">{</span>
-</span><span class='line'>   <span class="s">@&quot;videoURL&quot;</span> <span class="o">:</span> <span class="s">@&quot;@URL(contentURL)&quot;</span><span class="p">,</span>
-</span><span class='line'>     <span class="s">@&quot;name&quot;</span> <span class="o">:</span> <span class="s">@&quot;title&quot;</span><span class="p">,</span>
-</span><span class='line'>     <span class="s">@&quot;videoType&quot;</span> <span class="o">:</span> <span class="s">@&quot;type&quot;</span><span class="p">,</span>
-</span><span class='line'>     <span class="s">@&quot;sub_object&quot;</span> <span class="o">:</span> <span class="err">@</span><span class="p">{</span>
-</span><span class='line'>         <span class="s">@&quot;title&quot;</span> <span class="o">:</span> <span class="s">@&quot;uniqueID&quot;</span>
-</span><span class='line'>     <span class="p">}</span>
-</span><span class='line'>   <span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Quite obvious what it does but in case you are confused, it will translate videoURL string to contentURL NSURL object, it will also grab title from sub_object and assign it to uniqueID. It also handles NSNull.</p> <h2>Advanced usage</h2> <p>Let&#8217;s now change our mind and decide that we want our type property to be typedef enumeration, it&#8217;s quite easy with KZPropertyMapper, change type mapping to following and add following method:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="s">@&quot;videoType&quot;</span> <span class="o">:</span> <span class="s">@&quot;@Selector(videoTypeFromString:, type)&quot;</span><span class="p">,</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//! implemented on instance you are parsing</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nl">videoTypeFromString:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">type</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">([</span><span class="n">type</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;shortVideo&quot;</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">VideoTypeShort</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">VideoTypeLong</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Done. Same approach will work for sub-object instances or anything that you can assign to property.</p> <h3>Referencing arrays items</h3> <p>If your data comes to you in ordered array instead of dictionaries you can reference that as well:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">sourceData</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;sub_object_array&quot;</span> <span class="o">:</span> <span class="err">@</span><span class="p">[</span><span class="s">@&quot;test&quot;</span><span class="p">,</span> <span class="err">@</span><span class="mi">123</span><span class="p">]}</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">@</span><span class="p">{</span><span class="s">@&quot;sub_object_array&quot;</span> <span class="o">:</span> <span class="err">@</span><span class="p">{</span><span class="err">@</span><span class="mi">1</span> <span class="o">:</span> <span class="s">@&quot;uniqueID&quot;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>This will grab first item from sub_object_array and assign it to uniqueID. It also works recursively.</p> <h3>Expanding boxing capabilities</h3> <p>You can expand boxing capabilities across whole application easily, just add category on KZPropertyMapper that implements methods like this:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">boxValueAsType:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">value</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="c1">//! your boxing</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Now you can use @Type mapping everywhere in your code.</p> <h1>Final note</h1> <p>Unit tests should serve as documentation. Default boxing types include @URL and @Date. CocoaPods spec will follow shortly. For now you can just add KZPropertyMapper.h / m to your project, ARC only.</p> <p><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Github repo</a></p> <p><a href="http://twitter.com/merowing_">Follow me on twitter</a></p> </div> </article> <div class="share"> <div class="addthis_sharing_toolbox"></div> <script type="text/javascript">
-var addthis_share = addthis_share || {}
-addthis_share = {
-passthrough : {
-twitter: {
-via: "merowing_",
-text: "Great article"
+  return VideoTypeLong;
 }
+</code></pre>
+
+<p>Done. Same approach will work for sub-object instances or anything that you can assign to property.</p>
+
+<h3 id="referencing-arrays-items:21e04c76d04b728a0263ca043248654e">Referencing arrays items</h3>
+
+<p>If your data comes to you in ordered array instead of dictionaries you can reference that as well:</p>
+
+<pre><code class="language-objectivec">sourceData = @{@&quot;sub_object_array&quot; : @[@&quot;test&quot;, @123]}
+
+@{@&quot;sub_object_array&quot; : @{@1 : @&quot;uniqueID&quot;}
+
+</code></pre>
+
+<p>This will grab first item from sub_object_array and assign it to uniqueID. It also works recursively.</p>
+
+<h3 id="expanding-boxing-capabilities:21e04c76d04b728a0263ca043248654e">Expanding boxing capabilities</h3>
+
+<p>You can expand boxing capabilities across whole application easily, just add category on KZPropertyMapper that implements methods like this:</p>
+
+<pre><code class="language-objectivec">+ (id)boxValueAsType:(id)value
+{
+	//! your boxing
 }
-}
-</script> <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async></script> </div> </div> </div> <footer id="footer" class="inner">Copyright &copy; 2015 Krzysztof Zabłocki Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer> <script src="/javascripts/slash.js"></script> <script src="/javascripts/code-toggle.js"></script> <script src="/javascripts/jquery.fancybox.pack.js"></script> <script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-29400340-1']);
-		_gaq.push(['_trackPageview']);
+</code></pre>
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+<p>Now you can use @Type mapping everywhere in your code.</p>
 
-		$('a').click(function() { 
-			var $a = $(this); var href = $a.attr('href');
-			// see if the link is external 
-			if ( (href.match(/^http/)) && (! href.match(document.domain)) ) {
+<h1 id="conclusion:21e04c76d04b728a0263ca043248654e">Conclusion</h1>
 
-			// if so, register an event
-			var category = 'outgoing'; // set this to whatever you want
-			var event = 'click'; // set this to whatever you want
-			var label = href; // set this to whatever you want
-			pageTracker._trackEvent(category, event, href);
-			}});
-	</script> </div> </div> </body> </html>
+<p>Unit tests should serve as documentation.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Github repo</a></p>
+
+            </article>
+
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+
+            <br/>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://replace-this-with-your-hugo-site.com//tags/iOS">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/Library">Library</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/open%20source">open source</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="/js/readingtime.js"></script>
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script>
+    
+    window.jQuery || document.write('<script src=" src="//code.jquery.com/jquery-1.8.3.min.js""><\/script>');
+</script>
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
+

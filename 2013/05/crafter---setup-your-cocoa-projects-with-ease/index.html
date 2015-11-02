@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Crafter - setup your cocoa projects with ease - Krzysztof Zabłocki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <link rel="canonical" href="http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/">
+  <link href="/css/prism.css" rel="stylesheet" />
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" type="text/css" href="http://replace-this-with-your-hugo-site.com//css/combined-min.css">
+</head>
+<body class="">
+
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://replace-this-with-your-hugo-site.com/" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/speaking/">Speaking</a>
+
+
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Crafter - setup your cocoa projects with ease</h1>
+                <span class="post-meta">May 2, 2013</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+
+            <article class="post-content">
+                
+
+<p>How do you setup your Cocoa projects?
+Do you always set same warnings, clone configurations and do bunch of other stuff?</p>
+
+<p>I made a tool that might help.</p>
+
+<p>We all know that Xcode templating system is far from perfect, beside we often use different templates, but same level of warnings, scripts etc.</p>
+
+<p>What if you could define your project setup once (even with optional stuff) then just apply that to all your projects?</p>
+
+<h2 id="enter-crafter:146821d3fc0029def50082175264725e">Enter crafter</h2>
+
+<p>That&rsquo;s why I&rsquo;ve created <strong>crafter</strong>, a ruby gem that you can install, setup your configuration once and enjoy hours of time saved.</p>
+
+<h3 id="so-how-does-it-work:146821d3fc0029def50082175264725e">So how does it work?</h3>
+
+<p>Install it by calling:</p>
+
+<pre><code class="language-bash">gem install crafter
+crafter reset
+</code></pre>
+
+<p>this will create your personal configuration file at <strong>~/.crafter.rb</strong></p>
+
+<p>now open that file with your favourite editor and you will see default configuration, along with description of different parts:</p>
+
+<pre><code class="language-ruby">load &quot;#{Crafter::ROOT}/config/default_scripts.rb&quot;
+
+# All your configuration should happen inside configure block
+Crafter.configure do
+
+  # This are projects wide instructions
+  add_platform({:platform =&gt; :ios, :deployment =&gt; 6.0})
+  add_git_ignore
+  duplicate_configurations({:adhoc =&gt; :debug, :profiling =&gt; :debug})
+
+  # set of options, warnings, static analyser and anything else normal xcode treats as build options
+  set_options %w(
+    GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED
+    GCC_WARN_MISSING_PARENTHESES
+    GCC_WARN_ABOUT_RETURN_TYPE
+    GCC_WARN_SIGN_COMPARE
+    GCC_WARN_CHECK_SWITCH_STATEMENTS
+    GCC_WARN_UNUSED_FUNCTION
+    GCC_WARN_UNUSED_LABEL
+    GCC_WARN_UNUSED_VALUE
+    GCC_WARN_UNUSED_VARIABLE
+    GCC_WARN_SHADOW
+    GCC_WARN_64_TO_32_BIT_CONVERSION
+    GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS
+    GCC_WARN_UNDECLARED_SELECTOR
+    GCC_WARN_TYPECHECK_CALLS_TO_PRINTF
+
+    RUN_CLANG_STATIC_ANALYZER
+    GCC_TREAT_WARNINGS_AS_ERRORS
+  )
+
+  # target specific options, :default is just a name for you, feel free to call it whatever you like
+  with :default do
+
+    # each target have set of pods
+    pods &lt;&lt; %w(NSLogger-CocoaLumberjack-connector TestFlightSDK)
+
+    # each target can have optional blocks, eg. crafter will ask you if you want to include networking with a project
+    add_option :networking do
+      pods &lt;&lt; 'AFNetworking'
+    end
+
+    add_option :coredata do
+      pods &lt;&lt; 'MagicalRecord'
+    end
+
+    # each target can have shell scripts added, in this example we are adding my icon versioning script as in http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/
+    scripts &lt;&lt; {:name =&gt; 'icon versioning', :script =&gt; Crafter.icon_versioning_script}
+
+    # we can also execute arbitrary ruby code when configuring our projects, here we rename all our standard icon* to icon_base for versioning script
+    icon_rename = proc do |file|
+      extension = File.extname(file)
+      file_name = File.basename(file, extension)
+      File.rename(file, &quot;#{File.dirname(file)}/#{file_name}_base#{extension}&quot;)
+    end
+
+    Dir['**/Icon.png'].each(&amp;icon_rename)
+    Dir['**/Icon@2x.png'].each(&amp;icon_rename)
+    Dir['**/Icon-72.png'].each(&amp;icon_rename)
+    Dir['**/Icon-72@2x.png'].each(&amp;icon_rename)
+  end
+
+  # more targets setup
+  with :tests do
+    add_option :kiwi do
+      pods &lt;&lt; 'Kiwi'
+      scripts &lt;&lt; {:name =&gt; 'command line unit tests', :script =&gt; Crafter.command_line_test_script}
+    end
+  end
+end
+</code></pre>
+
+<p>As you can see the configuration files is quite easy, yet is pretty flexible.
+Once you set it up as you see fit, go to your project folder (the one with xcodeproj, workspace etc.) and call:</p>
+
+<pre><code class="language-bash">crafter
+</code></pre>
+
+<p>it will guide you through project setup, with default configuration it would look like this:</p>
+
+<pre><code class="language-bash">1. sample
+2. sampleTests
+Which target should I use for default?
+1
+1. sample
+2. sampleTests
+Which target should I use for tests?
+2
+do you want to add networking? [Yn]
+n
+do you want to add coredata? [Yn]
+y
+do you want to add testing? [Yn]
+n
+duplicating configurations
+setting up variety of options
+preparing git ignore
+preparing pod file
+adding scripts
+Finished.
+</code></pre>
+
+<p>Now your project should have all options applied, generated Podfile (call pod install or set it up in your configuration).</p>
+
+<p>I&rsquo;m learning Ruby, so I&rsquo;m looking forward to pull requests on <a href="https://github.com/krzysztofzablocki/crafter">GitHub</a></p>
+
+<p>Send me your thoughts, I&rsquo;m <a href="http://twitter.com/merowing_">merowing_ on twitter</a></p>
+
+<h2 id="conclusion:146821d3fc0029def50082175264725e">Conclusion:</h2>
+
+<p>The library was inspired by <a href="https://github.com/thoughtbot/liftoff">liftoff</a></p>
+
+<p>I&rsquo;d like to thank <a href="http://twitter.com/alloy">@alloy</a>, <a href="http://twitter.com/orta">@orta</a>, <a href="http://twitter.com/romainbriche">@romainbriche</a> for taking some of their valuable time and sharing their thoughts about beta version.</p>
+
+            </article>
+
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+
+            <br/>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://replace-this-with-your-hugo-site.com//tags/iOS">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/Script">Script</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/Development%20process%20">Development process </a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="/js/readingtime.js"></script>
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script>
+    
+    window.jQuery || document.write('<script src=" src="//code.jquery.com/jquery-1.8.3.min.js""><\/script>');
+</script>
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
+

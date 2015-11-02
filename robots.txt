@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://merowing.info/sitemap.xml 

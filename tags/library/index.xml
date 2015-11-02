@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Library on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://replace-this-with-your-hugo-site.com/tags/library/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Thu, 25 Jul 2013 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Stop writing data parsing code in your apps</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/07/stop-writing-data-parsing-code-in-your-apps/</link>
+      <pubDate>Thu, 25 Jul 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/07/stop-writing-data-parsing-code-in-your-apps/</guid>
+      <description>&lt;p&gt;Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do this parsing by hand, always repeating the same code for each class they need to map.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll show show you how you could simplify your code and make it more readable at the same time.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Expanded use of asserts</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/07/expanded-use-of-asserts/</link>
+      <pubDate>Wed, 03 Jul 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/07/expanded-use-of-asserts/</guid>
+      <description>&lt;p&gt;Do you use assertions in your code? What for? How do you handle release builds ?&lt;/p&gt;
+
+&lt;p&gt;There is a better way than NSAssert&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pinch to reveal animation, like in Boeing Milestones</title>
+      <link>http://replace-this-with-your-hugo-site.com/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://itunes.apple.com/us/app/boeing-milestones/id510294916?mt=8&#34;&gt;Boeing made a nice app for iPad&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I was shown this app and asked if it’s hard to do this pinch to reveal animation.
+It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
+
+&lt;video width=&#34;100%&#34; controls&gt;
+  &lt;source src=&#34;http://replace-this-with-your-hugo-site.com/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Drawing smooth lines with cocos2d ios inspired by Paper</title>
+      <link>http://replace-this-with-your-hugo-site.com/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</link>
+      <pubDate>Mon, 23 Apr 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</guid>
+      <description>&lt;p&gt;You’ve probably seen &lt;a href=&#34;http://www.fiftythree.com/&#34;&gt;Paper&lt;/a&gt;, the app is pretty cool and the drawings look really nice and smooth.&lt;/p&gt;
+
+&lt;p&gt;I’m working on my personal app that needs something similar, and after doing some research I’ve not seen a proper solution.&lt;/p&gt;
+
+&lt;p&gt;So I wrote one.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automatic removal of NSNotificationCenter or KVO observers</title>
+      <link>http://replace-this-with-your-hugo-site.com/2012/03/automatic-removal-of-nsnotificationcenter-or-kvo-observers/</link>
+      <pubDate>Wed, 28 Mar 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2012/03/automatic-removal-of-nsnotificationcenter-or-kvo-observers/</guid>
+      <description>&lt;p&gt;Observer pattern is common on iOS platform, you use observers in NSNotificationCenter and in Key Value Observing.&lt;/p&gt;
+
+&lt;p&gt;You need to remember to unregister before you release your observer object, if you don’t you are going to have crashes.&lt;/p&gt;
+
+&lt;p&gt;What if you could automate it ?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using UIGestureRecognizers in cocos2d</title>
+      <link>http://replace-this-with-your-hugo-site.com/2012/03/using-uigesturerecognizers-in-cocos2d/</link>
+      <pubDate>Mon, 05 Mar 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2012/03/using-uigesturerecognizers-in-cocos2d/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.cocos2d-iphone.org/&#34;&gt;cocos2d&lt;/a&gt; is one of the best gaming framework I’ve seen, but it doesn’t use UIKit.&lt;/p&gt;
+
+&lt;p&gt;When Apple introduced UIGestureRecognizers they unified how touch interaction should work.&lt;/p&gt;
+
+&lt;p&gt;Is there a way we can add UIGestureRecognizers to cocos2d architecture, without modyfing cocos2d source?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+

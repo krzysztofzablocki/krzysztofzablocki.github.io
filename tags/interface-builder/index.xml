@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Interface Builder on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://replace-this-with-your-hugo-site.com/tags/interface-builder/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Thu, 11 Apr 2013 00:00:00 UTC</updated>
+    
+    <item>
+      <title>iOS Game with Interface Builder</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/04/learn-ios-game-dev-level-0/</link>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/04/learn-ios-game-dev-level-0/</guid>
+      <description>&lt;p&gt;
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://replace-this-with-your-hugo-site.com/2013/04/clone-small.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;By the end of this tutorial you will have a simple game with level editor under 250 lines of code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Quick tip for Interface Builder</title>
+      <link>http://replace-this-with-your-hugo-site.com/2012/12/quick-tip-for-interface-builder/</link>
+      <pubDate>Wed, 26 Dec 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2012/12/quick-tip-for-interface-builder/</guid>
+      <description>&lt;p&gt;Do you use Interface Builder ? Even if you don’t like IB, read this short tip and referenced articles.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+

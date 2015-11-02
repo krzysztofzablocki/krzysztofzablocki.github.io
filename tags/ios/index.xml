@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Ios on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://replace-this-with-your-hugo-site.com/tags/ios/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Thu, 23 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Playgrounds for Objective C</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</link>
+      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</guid>
+      <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
+
+&lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
+
+&lt;p&gt;&lt;div 
+class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
+	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
+		allowfullscreen
+		frameborder=&#34;0&#34;
+		width=&#34;100%&#34;
+		height=&#34;385&#34;
+	&gt;&lt;/iframe&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
+&lt;li&gt;Extra controls for tweaking:&lt;/li&gt;
+&lt;li&gt;Adjustable values&lt;/li&gt;
+&lt;li&gt;Autoanimated values&lt;/li&gt;
+&lt;li&gt;Buttons&lt;/li&gt;
+&lt;li&gt;IDE agnostic, once you run it, you can modify the code even from vim.&lt;/li&gt;
+&lt;li&gt;Full iOS simulator and access to all iOS features, so you can prototype production ready code.&lt;/li&gt;
+&lt;li&gt;Nice DSL for rapid prototyping&lt;/li&gt;
+&lt;li&gt;CocoaPods support, so you can add it to existing projects to experiment&lt;/li&gt;
+&lt;li&gt;Open source, anyone can contribute to make them better!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Project Bootstrap</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</link>
+      <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</guid>
+      <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How do I work?</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/10/how-do-i-work/</link>
+      <pubDate>Mon, 06 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/10/how-do-i-work/</guid>
+      <description>&lt;p&gt;I’ve been programming for 18 years now, doing commercial work for the last 6.&lt;/p&gt;
+
+&lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affect the way I work.&lt;/p&gt;
+
+&lt;p&gt;What matters and how I go about working for my clients?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Swift introduction into fitness</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</link>
+      <pubDate>Tue, 30 Sep 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</guid>
+      <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
+
+&lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you burn more calories than you eat you will lose weight&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Two questions arise:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;how to estimate our caloric needs?&lt;/li&gt;
+&lt;li&gt;how fast should we lose or gain weight?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We&amp;rsquo;ll use Swift Playgrounds to explain it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Improving development speed</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/07/improving-development-speed/</link>
+      <pubDate>Fri, 18 Jul 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/07/improving-development-speed/</guid>
+      <description>&lt;p&gt;I wrote a blogpost about improving iteration speed and why code injection is awesome when you work on small changes.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.lextech.com/2014/07/3-big-ways-to-speed-up-your-development-cycle/&#34;&gt;Read it on Lextech blog&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implementing observable in Swift</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/07/implementing-observable-in-swift/</link>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/07/implementing-observable-in-swift/</guid>
+      <description>&lt;p&gt;KVO has been integral part of Cocoa programming, yet it&amp;rsquo;s not available for pure Swift classes.&lt;/p&gt;
+
+&lt;p&gt;Is there a way to implement your own implementation of native KVO?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Behaviours and Xcode 6</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/</link>
+      <pubDate>Sun, 22 Jun 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/</guid>
+      <description>&lt;p&gt;Last time I&amp;rsquo;ve written about Behaviours in &lt;a href=&#34;http://www.objc.io/issue-13/behaviors.html&#34;&gt;objc.io&lt;/a&gt; Architecture Series.&lt;/p&gt;
+
+&lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS App Architecture, Part 2: Data parsing</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
+      <pubDate>Thu, 03 Apr 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS App Architecture, Part 1: Setting up</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
+      <pubDate>Fri, 14 Mar 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
+      <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS tips</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/02/ios-tips/</link>
+      <pubDate>Thu, 20 Feb 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/02/ios-tips/</guid>
+      <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Developer Tools</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/02/ios-developer-tools/</link>
+      <pubDate>Fri, 07 Feb 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/02/ios-developer-tools/</guid>
+      <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
+
+&lt;p&gt;I recently gave talk about tools I use and why.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Stop writing data parsing code in your apps</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/07/stop-writing-data-parsing-code-in-your-apps/</link>
+      <pubDate>Thu, 25 Jul 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/07/stop-writing-data-parsing-code-in-your-apps/</guid>
+      <description>&lt;p&gt;Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do this parsing by hand, always repeating the same code for each class they need to map.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll show show you how you could simplify your code and make it more readable at the same time.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Expanded use of asserts</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/07/expanded-use-of-asserts/</link>
+      <pubDate>Wed, 03 Jul 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/07/expanded-use-of-asserts/</guid>
+      <description>&lt;p&gt;Do you use assertions in your code? What for? How do you handle release builds ?&lt;/p&gt;
+
+&lt;p&gt;There is a better way than NSAssert&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Crafter - setup your cocoa projects with ease</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
+      <pubDate>Thu, 02 May 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
+      <description>&lt;p&gt;How do you setup your Cocoa projects?
+Do you always set same warnings, clone configurations and do bunch of other stuff?&lt;/p&gt;
+
+&lt;p&gt;I made a tool that might help.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Game with Interface Builder</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/04/learn-ios-game-dev-level-0/</link>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/04/learn-ios-game-dev-level-0/</guid>
+      <description>&lt;p&gt;
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://replace-this-with-your-hugo-site.com/2013/04/clone-small.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;By the end of this tutorial you will have a simple game with level editor under 250 lines of code.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+

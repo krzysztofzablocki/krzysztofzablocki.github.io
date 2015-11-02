@@ -1,434 +1,616 @@
-<!DOCTYPE HTML> <html> <head> <meta charset="utf-8"> <title>Learn iOS Game Dev - Level 0 - Krzysztof Zabłocki</title> <meta name="author" content="Krzysztof Zabłocki"> <meta name=”twitter:site” content=”@merowing_> <meta name="description" content="Learn iOS Game Dev - Level 0 This tutorial is part of a new series, my goal is to teach you new things but don&#8217;t treat you like a complete &hellip;"> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="/atom.xml" rel="alternate" title="Krzysztof Zabłocki" type="application/atom+xml"> <link rel="canonical" href="http://merowing.info/2013/04/learn-ios-game-dev-level-0"> <link href="/favicon.png" rel="shortcut icon"> <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"> <link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css"> <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--> <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <style type="text/css">
-  .fancybox-wrap { position: fixed !important; }
-  .fancybox-opened {
-    -webkit-border-radius: 4px !important;
-       -moz-border-radius: 4px !important;
-            border-radius: 4px !important;
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>iOS Game with Interface Builder - Krzysztof Zabłocki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <link rel="canonical" href="http://replace-this-with-your-hugo-site.com/2013/04/learn-ios-game-dev-level-0/">
+  <link href="/css/prism.css" rel="stylesheet" />
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" type="text/css" href="http://replace-this-with-your-hugo-site.com//css/combined-min.css">
+</head>
+<body class="">
+
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://replace-this-with-your-hugo-site.com/" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/speaking/">Speaking</a>
+
+
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">iOS Game with Interface Builder</h1>
+                <span class="post-meta">Apr 11, 2013</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>9 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+
+            <article class="post-content">
+                
+
+<p>
+<figure >
+    
+        <img src="/2013/04/clone-small.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>By the end of this tutorial you will have a simple game with level editor under 250 lines of code.</p>
+
+<h2 id="goal:82066e9a45e3952153175057cafdd8c0">Goal</h2>
+
+<p>Create a simple clone of game called teeter.</p>
+
+<h2 id="technology:82066e9a45e3952153175057cafdd8c0">Technology</h2>
+
+<ul>
+<li><em>UIKit</em> for rendering - this game doesn&rsquo;t require any fancy effects.</li>
+<li><em>Interface Builder</em> for level editing - Keep it simple.</li>
+<li><em>Chipmunk</em> for Physics - Physics is heavy topic, let&rsquo;s not bother with it in this tutorial.</li>
+</ul>
+
+<h2 id="analysing:82066e9a45e3952153175057cafdd8c0">Analysing</h2>
+
+<p>As always you should first look at the problem ahead and think it through, let&rsquo;s do that even with our simple game.</p>
+
+<p>What kind of Actors (objects) do we need for our game and their physical properties?</p>
+
+<p>
+<figure >
+    
+        <img src="/2013/04/gamedev0-analyse.jpg"  />
+    
+    
+</figure>
+
+</p>
+
+<ol>
+<li>Player - dynamic, circular</li>
+<li>Hole - static, no collisions</li>
+<li>Obstacle - static, quad</li>
+<li>Finish - Static, no collisions</li>
+</ol>
+
+<p>We could express all of them with single set of properties:</p>
+
+<ul>
+<li>static/dynamic</li>
+<li>circle/quad</li>
+<li>sensor/collider - should it generate collisions or just inform about them</li>
+<li>mass - each dynamic object needs some mass</li>
+<li>momentum - each physical object needs also momentum, but we are better off calculating that from shape and mass of object</li>
+<li>type - needed for recognising between object types</li>
+</ul>
+
+<h2 id="start-coding:82066e9a45e3952153175057cafdd8c0">Start coding</h2>
+
+<p>I recommend you <a href="https://github.com/krzysztofzablocki/Learn-iOS-GameDev-Level-0">grab the project from GitHub</a> and read it along with this tutorial, or start fresh by following all steps and filling in missing pieces.</p>
+
+<p>If you don&rsquo;t have an Xcode project yet, create a new one and make sure to enable Storyboards support.
+Let&rsquo;s create PhysicalView class that will implement those:</p>
+
+<pre><code class="language-objectivec">@interface PhysicalView : UIImageView
+@property(nonatomic, assign) BOOL isStatic;
+@property(nonatomic, assign) BOOL isCircle;
+@property(nonatomic, assign) BOOL isSensor;
+@property(nonatomic, assign) CGFloat mass;
+@property(nonatomic, copy) NSString *type;
+
+- (void)update;
+
+@end
+</code></pre>
+
+<p>We also added update method, as you will soon learn, most game objects needs to update their state with each display frame. For now just implement it as empty method.</p>
+
+<p>Let&rsquo;s make static body of mass 1 as default (mass doesn&rsquo;t really matter for static bodies, but it&rsquo;s good to setup default value anyway), implement initWithCoder:</p>
+
+<pre><code class="language-objectivec">- (id)initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    _isStatic = YES;
+    _mass = 1;
   }
-  .fancybox-close, .fancybox-prev span, .fancybox-next span {
-    background-color: transparent !important;
-    border: 0 !important;
+
+  return self;
+} 
+</code></pre>
+
+<h2 id="levels:82066e9a45e3952153175057cafdd8c0">Levels</h2>
+
+<p>Most games consist of multiple levels, let&rsquo;s create LevelViewController that will manage each level. Create new UIViewController subclass, call it LevelViewController then add it to storyboards as well.</p>
+
+<p>Next step is downloading and adding <a href="http://chipmunk-physics.net/release/Chipmunk-6.x/ChipmunkPro-Trial-6.1.2.tgz">Chipmunk Physics library</a> to our project. Be sure to import &ldquo;ObjectiveChipmunk.h&rdquo; on top of PhysicalView and LevelViewController.</p>
+
+<h3 id="physics:82066e9a45e3952153175057cafdd8c0">Physics</h3>
+
+<p>All chipmunk physics is happening inside <em>space</em>, we need to make sure that our level has it&rsquo;s own <em>space</em>, let&rsquo;s limit the space to screen size. In LevelViewController create method called setupPhysics:</p>
+
+<pre><code class="language-objectivec">- (void)setupPhysics
+{
+  _space = [ChipmunkSpace new];
+  [_space addBounds:self.view.bounds thickness:10.0f elasticity:1.0f friction:1.0f layers:CP_ALL_LAYERS group:CP_NO_GROUP collisionType:nil];
+  _space.gravity = cpv(0, 100);
+
+  [self addPhysicalObjects];
+}
+</code></pre>
+
+<p>We create new <em>space</em>, setup it&rsquo;s bounds to match the screen and specify that they should collide for all layers and groups. Then we setup gravity and call addPhysicalObjects method.</p>
+
+<pre><code class="language-objectivec">- (void)addPhysicalObjects
+{
+  for (UIView &lt;ChipmunkObject&gt; *view in self.view.subviews) { 
+    if ([view conformsToProtocol:@protocol(ChipmunkObject)]) {
+      [_space add:view];
+      }
   }
-</style> <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-29400340-1']);
-		_gaq.push(['_trackPageview']);
-
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-
-		$('a').click(function() { 
-			var $a = $(this); var href = $a.attr('href');
-			// see if the link is external 
-			if ( (href.match(/^http/)) && (! href.match(document.domain)) ) {
-
-			// if so, register an event
-			var category = 'outgoing'; // set this to whatever you want
-			var event = 'click'; // set this to whatever you want
-			var label = href; // set this to whatever you want
-			pageTracker._trackEvent(category, event, href);
-			}});
-	</script> </head> <body> <div class="container"> <div class="left-col"> <div class="intrude-less"> <header id="header" class="inner"><div class="profilepic"> <script src="/javascripts/md5.js"></script> <script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<a href='http://twitter.com/merowing_'><img src='http://www.gravatar.com/avatar/" + MD5("krzysztof.zablocki@pixle.pl") + "?s=120' alt='Profile Picture' style='width: 120px; float: left; margin: 0px 15px 15px 0px;' /></a> <div class='header_bio'><a href='/about/''>Krzysztof Zabłocki - Software Engineer.</a></div>");
-		});
-	</script> </div> <nav id="main-nav"><ul class="main"> <br/> <br/> <div class="indie_apps" style="clear:both;"> <a href="http://appstore.com/foldify"><img class="app_poster" src="http://www.merowing.info/images/foldify.png" alt="Foldify"></a> <a href="http://appstore.com/foldifyzoo"><img class="app_poster" src="http://www.merowing.info/images/foldifyzoo.png" alt="Foldify Zoo"></a> <a href="http://appstore.com/foldifydino"><img class="app_poster" src="http://www.merowing.info/images/foldifydino.png" alt="Foldify Dino"></a> <a href="https://itunes.apple.com/us/app/storest-kids-love-playing/id926102013?mt=8"><img class="app_poster" src="http://www.merowing.info/images/storest.png" alt="Bord"></a> <a href="http://appstore.com/bord"><img class="app_poster" src="http://www.merowing.info/images/bord.png" alt="Storest"></a> <br/> <br/> </div> <li><a href="/about">About me</a></li> <li><a href="/speaking">Speaking</a></li> <li><a href="/">Blog</a></li> <li><a href="/blog/archives">Archives</a></li> </ul> </nav> <nav id="popular"> <section> <h4>Recommended</h4> <li class="related"><a href="/2014/10/how-do-i-work/">How do I Work?</a></li> <li class="related"><a href="/2014/03/refactoring-tricks">Refactoring tricks</a> and <a href="/2014/02/ios-developer-tools">Developer Tools</a></li> <li class="related"><a href="/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper">Drawing smooth lines</a></li> <li class="related"><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Data Parsing</a> and <a href="https://github.com/krzysztofzablocki/KZBootstrap">Project bootstrap</a></li> </section> </nav> <nav id="sub-nav"> <div class="social"> <a class="email" href="mailto:krzysztof.zablocki@pixle.pl" title="Email">Email</a> <a class="facebook" href="http://www.facebook.com/100000315956630" title="Facebook">Facebook</a> <a class="twitter" href="http://twitter.com/merowing_" title="Twitter">Twitter</a> <a class="github" href="https://github.com/krzysztofzablocki" title="GitHub">GitHub</a> <a class="linkedin" href="http://www.linkedin.com/profile/view?id=90077810" title="LinkedIn">LinkedIn</a> <a class="rss" href="/atom.xml" title="RSS">RSS</a> </div> </nav></header> </div> </div> <div class="mid-col"> <div class="mid-col-container"> <div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting"> <h1 class="title" itemprop="name">Learn iOS Game Dev - Level 0</h1> <div class="entry-content" itemprop="articleBody"><p><img class="right" src="http://www.merowing.info/uploads/2013/04/clone-small.png"></p> <p>This tutorial is part of a new series, my goal is to teach you new things but don&#8217;t treat you like a complete newbie. First tutorial in the series will be the most detailed one, but don&#8217;t expect your typical step by step guide from this series. Each next tutorial will assume more and more knowdlege from your part, get ready.</p> <p>By the end of this tutorial you will have a simple game with level editor. And you <strong>won&#8217;t even need</strong> to write 250 lines of code to create it.</p> <h2>Goal</h2> <p>Create a simple clone of game called teeter.</p> <h2>Technology</h2> <ul> <li><em>UIKit</em> for rendering - this game doesn&#8217;t require any fancy effects.</li> <li><em>Interface Builder</em> for level editing - Keep it simple.</li> <li><em>Chipmunk</em> for Physics - Physics is heavy topic, let&#8217;s not bother with it in this tutorial.</li> </ul> <h2>Analysing</h2> <p>As always you should first look at the problem ahead and think it through, let&#8217;s do that even with our simple game.</p> <p>What kind of Actors (objects) do we need for our game and their physical properties?</p> <p><img class="right" src="http://www.merowing.info/uploads/2013/04/gamedev0-analyse.jpg" width="320" height="240"></p> <ol> <li>Player - dynamic, circular</li> <li>Hole - static, no collisions</li> <li>Obstacle - static, quad</li> <li>Finish - Static, no collisions</li> </ol> <p>We could express all of them with single set of properties:</p> <ul> <li>static/dynamic</li> <li>circle/quad</li> <li>sensor/collider - should it generate collisions or just inform about them</li> <li>mass - each dynamic object needs some mass</li> <li>momentum - each physical object needs also momentum, but we are better off calculating that from shape and mass of object</li> <li>type - needed for recognising between object types</li> </ul> <h2>Start coding</h2> <p>I recommend you <a href="https://github.com/krzysztofzablocki/Learn-iOS-GameDev-Level-0">grab the project from GitHub</a> and read it along with this tutorial, or start fresh by following all steps and filling in missing pieces.</p> <p>If you don&#8217;t have an Xcode project yet, create a new one and make sure to enable Storyboards support. Let&#8217;s create PhysicalView class that will implement those:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">PhysicalView</span> : <span class="nc">UIImageView</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">isStatic</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">isCircle</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">isSensor</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="n">CGFloat</span> <span class="n">mass</span><span class="p">;</span>
-</span><span class='line'><span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">type</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">update</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>We also added update method, as you will soon learn, most game objects needs to update their state with each display frame. For now just implement it as empty method.</p> <p>Let&#8217;s make static body of mass 1 as default (mass doesn&#8217;t really matter for static bodies, but it&#8217;s good to setup default value anyway), implement initWithCoder:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithCoder:</span><span class="p">(</span><span class="n">NSCoder</span> <span class="o">*</span><span class="p">)</span><span class="nv">aDecoder</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nl">initWithCoder:</span><span class="n">aDecoder</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">_isStatic</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">_mass</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <h2>Levels</h2> <p>Most games consist of multiple levels, let&#8217;s create LevelViewController that will manage each level. Create new UIViewController subclass, call it LevelViewController then add it to storyboards as well.</p> <p>Next step is downloading and adding <a href="http://chipmunk-physics.net/release/Chipmunk-6.x/ChipmunkPro-Trial-6.1.2.tgz">Chipmunk Physics library</a> to our project. Be sure to import &#8220;ObjectiveChipmunk.h&#8221; on top of PhysicalView and LevelViewController.</p> <h3>Physics</h3> <p>All chipmunk physics is happening inside <em>space</em>, we need to make sure that our level has it&#8217;s own <em>space</em>, let&#8217;s limit the space to screen size. In LevelViewController create method called setupPhysics:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setupPhysics</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">_space</span> <span class="o">=</span> <span class="p">[</span><span class="n">ChipmunkSpace</span> <span class="n">new</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">_space</span> <span class="nl">addBounds:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span> <span class="nl">thickness:</span><span class="mf">10.0f</span> <span class="nl">elasticity:</span><span class="mf">1.0f</span> <span class="nl">friction:</span><span class="mf">1.0f</span> <span class="nl">layers:</span><span class="n">CP_ALL_LAYERS</span> <span class="nl">group:</span><span class="n">CP_NO_GROUP</span> <span class="nl">collisionType:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">_space</span><span class="p">.</span><span class="n">gravity</span> <span class="o">=</span> <span class="n">cpv</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">addPhysicalObjects</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>We create new <em>space</em>, setup it&#8217;s bounds to match the screen and specify that they should collide for all layers and groups. Then we setup gravity and call addPhysicalObjects method.</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">addPhysicalObjects</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">UIView</span> <span class="o">&lt;</span><span class="n">ChipmunkObject</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">view</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">subviews</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([</span><span class="n">view</span> <span class="nl">conformsToProtocol:</span><span class="err">@</span><span class="n">protocol</span><span class="p">(</span><span class="n">ChipmunkObject</span><span class="p">)])</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="n">_space</span> <span class="nl">add:</span><span class="n">view</span><span class="p">];</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Here we just go over all subviews and we add each subview that conforms to ChipmunkObject protocol to our space.</p> <p>We need to call our setupPhysics method from viewDidLoad:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidLoad</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">viewDidLoad</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">setupPhysics</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>We need to make sure our space is updated with each frame, on iOS we can use CADisplayLink, it&#8217;s an object that allows to bind update functions to screen refresh rate. Let&#8217;s manage it in viewWillAppear / viewWillDisappear methods:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewDidAppear:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">animated</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">viewDidAppear:</span><span class="n">animated</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">_displayLink</span> <span class="o">=</span> <span class="p">[</span><span class="n">CADisplayLink</span> <span class="nl">displayLinkWithTarget:</span><span class="n">self</span> <span class="nl">selector:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">tick:</span><span class="p">)];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">_displayLink</span> <span class="nl">addToRunLoop:</span><span class="p">[</span><span class="n">NSRunLoop</span> <span class="n">mainRunLoop</span><span class="p">]</span> <span class="nl">forMode:</span><span class="n">NSDefaultRunLoopMode</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillDisappear:</span><span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nv">animated</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">viewWillDisappear:</span><span class="n">animated</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">_displayLink</span> <span class="n">invalidate</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">_displayLink</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Here we basically create new display link when level becomes visible and clean it up when it disappears.</p> <p>We also need to implement actual <em>tick:</em> method:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">tick:</span><span class="p">(</span><span class="n">CADisplayLink</span> <span class="o">*</span><span class="p">)</span><span class="nv">link</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">CGFloat</span> <span class="n">deltaTime</span> <span class="o">=</span> <span class="n">link</span><span class="p">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">link</span><span class="p">.</span><span class="n">frameInterval</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">_space</span> <span class="nl">step:</span><span class="n">deltaTime</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">id</span> <span class="n">view</span> <span class="k">in</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">subviews</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">([</span><span class="n">view</span> <span class="nl">respondsToSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">update</span><span class="p">)])</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="n">view</span> <span class="n">update</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Here we progress <em>space</em> calculations by stepping it by the difference between current and previous frames. Then we just iterate over all our subviews and update them if they have update method.</p> <h3>Would be nice to see something</h3> <p>We already wrote bunch of code, but we can&#8217;t see anything yet. We still didn&#8217;t implement proper methods on PhysicalView, let&#8217;s fix that. We need to start with setup:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">awakeFromNib</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">awakeFromNib</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="n">setup</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setup</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="kt">float</span> <span class="n">moment</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">CGFloat</span> <span class="n">width</span> <span class="o">=</span> <span class="n">CGRectGetWidth</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">);</span>
-</span><span class='line'>  <span class="n">CGFloat</span> <span class="n">height</span> <span class="o">=</span> <span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_isCircle</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">moment</span> <span class="o">=</span> <span class="n">cpMomentForBox</span><span class="p">(</span><span class="n">_mass</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">moment</span> <span class="o">=</span> <span class="n">cpMomentForCircle</span><span class="p">(</span><span class="n">_mass</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">cpvzero</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">//! setup physics</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">_isStatic</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">_body</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ChipmunkBody</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initStaticBody</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">_body</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ChipmunkBody</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithMass:</span><span class="n">_mass</span> <span class="nl">andMoment:</span><span class="n">moment</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="n">_body</span><span class="p">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="n">CGRectGetMidX</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">),</span> <span class="n">CGRectGetMidY</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_isCircle</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">_shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">ChipmunkPolyShape</span> <span class="nl">boxWithBody:</span><span class="n">_body</span> <span class="nl">width:</span><span class="n">width</span> <span class="nl">height:</span><span class="n">height</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">_shape</span> <span class="o">=</span> <span class="p">[</span><span class="n">ChipmunkCircleShape</span> <span class="nl">circleWithBody:</span><span class="n">_body</span> <span class="nl">radius:</span><span class="n">width</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="nl">offset:</span><span class="n">cpvzero</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">_shape</span><span class="p">.</span><span class="n">elasticity</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">_shape</span><span class="p">.</span><span class="n">friction</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">_shape</span><span class="p">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">_isSensor</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Before creating bodies we need to calculate momentum, we will use Chipmunk helper methods for that. Then we create physical body and set their position it in level space (our superview). Then depending on shape we either create circle or box, setup some basic defaults for friction and elasticity and sensor property.</p> <p>We also need to implement proper ChipmunkObject protocol and update methods:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">update</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">_body</span><span class="p">.</span><span class="n">pos</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">CGAffineTransformMakeRotation</span><span class="p">(</span><span class="n">_body</span><span class="p">.</span><span class="n">angle</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="nf">chipmunkObjects</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">_isStatic</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">[</span><span class="n">NSSet</span> <span class="nl">setWithObjects:</span><span class="n">_shape</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="p">[</span><span class="n">NSSet</span> <span class="nl">setWithObjects:</span><span class="n">_shape</span><span class="p">,</span> <span class="n">_body</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Here we just set center of our view to match physical body and it&#8217;s angle. chipmunkObjects needs to return physical objects that are to be added to space, static bodies should not be added.</p> <p>Now go to storyboards, add new UIImageView:</p> <ol> <li>Set custom class to PhysicalView, make it a square rect</li> <li>Set user defined runtime attributes accordingly: <ul> <li>isCircle - YES</li> <li>isStatic - NO</li> <li>type - Player</li> </ul> </li> </ol> <p><img class="right" src="http://www.merowing.info/uploads/2013/04/gamedev0-attributes.png"></p> <p>Run project, you should now see player animating and being affected by gravity, not very impressive right? Copy player view multiple times in IB, put it in different places (set them up so they collide after applying gravity), run it again. That was easy change right? Try changing mass properties and see how it changes animation.</p> <p><strong>Let&#8217;s go even further</strong>, create new Physical view, set it&#8217;s size as you see fit, set graphics to our wall.png. No runtime attributes needed, we will use defaults. Run again!</p> <p><strong>You just added obstacles!</strong> It&#8217;s nice to have flexible level editor, isn&#8217;t it?</p> <h3>Accelerometer</h3> <p>Static gravity isn&#8217;t that impressive, let&#8217;s use our accelerometer to control player. Add this code at the end LevelViewController viewDidAppear method:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UIAccelerometer</span> <span class="o">*</span><span class="n">accelerometer</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIAccelerometer</span> <span class="n">sharedAccelerometer</span><span class="p">];</span>
-</span><span class='line'><span class="n">accelerometer</span><span class="p">.</span><span class="n">updateInterval</span> <span class="o">=</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="mf">30.0f</span><span class="p">;</span>
-</span><span class='line'><span class="n">accelerometer</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>We just setup our level as delegate for accelerometer updates, we still need to implement that method:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">accelerometer:</span><span class="p">(</span><span class="n">UIAccelerometer</span> <span class="o">*</span><span class="p">)</span><span class="nv">accelerometer</span> <span class="nf">didAccelerate:</span><span class="p">(</span><span class="n">UIAcceleration</span> <span class="o">*</span><span class="p">)</span><span class="nv">acceleration</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">_space</span> <span class="nl">setGravity:</span><span class="n">cpvmult</span><span class="p">(</span><span class="n">cpv</span><span class="p">((</span><span class="n">cpFloat</span> <span class="k">const</span><span class="p">)</span><span class="n">acceleration</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">cpFloat</span> <span class="k">const</span><span class="p">)</span><span class="o">-</span><span class="n">acceleration</span><span class="p">.</span><span class="n">y</span><span class="p">),</span> <span class="mi">200</span><span class="p">)];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>What we do here is very simple, we grab current acceleration from device, multiple it by 200 in each axis and set that as space gravity, this will affect all dynamic objects on scene.</p> <p><strong>Be sure to run project on device to see acceleration changes.</strong></p> <h3>Game logic</h3> <p>So now we have nice WYSIWYG editor inside IB (more or less), we have good physics along with accelerometer control over it. What&#8217;s missing is the gameplay of our game, in this game we only have 2 types of actions affecting gameplay:</p> <ol> <li>Collision with hole - Player loss and we restart game.</li> <li>Collision with finish - Player wins and we go to next level.</li> </ol> <p>Before proceeding be sure to create level and setup proper types in runtime attributes, you should only have single player object.</p> <p>We need to add collision handlers to recognise when player is interacting with those objects, at the end of setupPhysics add:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">_space</span> <span class="nl">addCollisionHandler:</span><span class="n">self</span> <span class="nl">typeA:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Hole&quot;</span><span class="p">]</span> <span class="nl">typeB:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Player&quot;</span><span class="p">]</span> <span class="nl">begin:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">gameLost:space:</span><span class="p">)</span> <span class="nl">preSolve:</span><span class="nb">nil</span> <span class="nl">postSolve:</span><span class="nb">nil</span> <span class="nl">separate:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">[</span><span class="n">_space</span> <span class="nl">addCollisionHandler:</span><span class="n">self</span> <span class="nl">typeA:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Player&quot;</span><span class="p">]</span> <span class="nl">typeB:</span><span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="s">@&quot;Finish&quot;</span><span class="p">]</span> <span class="nl">begin:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">gameWon:space:</span><span class="p">)</span> <span class="nl">preSolve:</span><span class="nb">nil</span> <span class="nl">postSolve:</span><span class="nb">nil</span> <span class="nl">separate:</span><span class="nb">nil</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Here we add 2 distinct collision handlers, Player vs Hole and Player vs Finish.</p> <p>Before we compile this change we need to add some code, because typeA and typeB can be any kind of objects they need to be unique (in sense of pointers, not equality), we need some way to map our type strings to unique objects: In PhysicalView implement this class method:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="n">NSMutableDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nf">handlers</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">static</span> <span class="n">NSMutableDictionary</span> <span class="o">*</span><span class="n">handlers</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">handlers</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">handlers</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSMutableDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">handlers</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>at the end of setup method add this lines:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">_type</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="n">_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">_type</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">_shape</span><span class="p">.</span><span class="n">collisionType</span> <span class="o">=</span> <span class="p">[</span><span class="n">PhysicalView</span> <span class="n">handlers</span><span class="p">][</span><span class="n">_type</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>This code guarantees uniqueness of strings as objects, we use keys (which check for equality of content) and use type as object. Which means we get exactly 1 object for each matching key.</p> <p>Going back to LevelViewController as we still need to implement gameLost/gameWon logic:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">gameOver:</span><span class="p">(</span><span class="n">cpArbiter</span> <span class="o">*</span><span class="p">)</span><span class="nv">arbiter</span> <span class="nf">space:</span><span class="p">(</span><span class="n">ChipmunkSpace</span> <span class="o">*</span><span class="p">)</span><span class="nv">space</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alertView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;You lost!&quot;</span> <span class="nl">message:</span><span class="s">@&quot;I&#39;ve told you already: You lost!&quot;</span> <span class="nl">delegate:</span><span class="n">self</span> <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Restart&quot;</span> <span class="nl">otherButtonTitles:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">alertView</span> <span class="n">show</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">gameWon:</span><span class="p">(</span><span class="n">cpArbiter</span> <span class="o">*</span><span class="p">)</span><span class="nv">arbiter</span> <span class="nf">space:</span><span class="p">(</span><span class="n">ChipmunkSpace</span> <span class="o">*</span><span class="p">)</span><span class="nv">space</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">UIAlertView</span> <span class="o">*</span><span class="n">alertView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIAlertView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTitle:</span><span class="s">@&quot;You won!&quot;</span> <span class="nl">message:</span><span class="s">@&quot;I&#39;ve told you already: You won!&quot;</span> <span class="nl">delegate:</span><span class="n">self</span> <span class="nl">cancelButtonTitle:</span><span class="s">@&quot;Next level&quot;</span> <span class="nl">otherButtonTitles:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">alertView</span><span class="p">.</span><span class="n">tag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">alertView</span> <span class="n">show</span><span class="p">];</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">alertView:</span><span class="p">(</span><span class="n">UIAlertView</span> <span class="o">*</span><span class="p">)</span><span class="nv">alertView</span> <span class="nf">clickedButtonAtIndex:</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">)</span><span class="nv">buttonIndex</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">alertView</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">nextLevel</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">return</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">loadLevel:</span><span class="mi">1</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">nextLevel</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span> <span class="nl">loadLevel:</span><span class="n">currentLevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">loadLevel:</span><span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="nv">level</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">UIViewController</span> <span class="o">*</span><span class="n">controller</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;Level%d&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">]];</span>
-</span><span class='line'>  <span class="c1">//! looping</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">controller</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">level</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">UIViewController</span> <span class="o">*</span><span class="n">controller</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;Level%d&quot;</span><span class="p">,</span> <span class="n">level</span><span class="p">]];</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="nl">setViewControllers:</span><span class="err">@</span><span class="p">[</span><span class="n">controller</span><span class="p">]</span> <span class="nl">animated:</span><span class="n">YES</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">currentLevel</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>Logic here is very simple, depending on player result we show proper alert and then once user dismisses alert we either restart game or move to next level.</p> <p>We load levels from storyboards, to make this work you need to setup LevelViewController <em>Storyboard ID</em> to LevelX where X is the level number. Once user finishes all levels we will automatically loop to the first one.</p> <h2>Conclusion and next steps</h2> <p><img class="left" src="http://www.merowing.info/uploads/2013/04/clone.png"></p> <p>You should now have a simple game, simple level editor and loads of space to improve. What&#8217;s interesting is that everything has <strong>less than 250 lines of code</strong>, that&#8217;s pretty small isn&#8217;t it ?</p> <p>What could you do next:</p> <ul> <li>add spring joint when player collides with any hole (that was actually in tutorial but I&#8217;ve removed that to keep it simpler)</li> <li>add nice transitions between levels, instead of going straight to next controller show summary screen with stats (time)</li> <li><strong><a href="http://twitter.com/merowing_">follow me on twitter</a></strong></li> </ul> <p><a href="http://twitter.com/faktory">Game graphics by my friend @faktory</a></p> </div> </article> <div class="share"> <div class="addthis_sharing_toolbox"></div> <script type="text/javascript">
-var addthis_share = addthis_share || {}
-addthis_share = {
-passthrough : {
-twitter: {
-via: "merowing_",
-text: "Great article"
 }
+</code></pre>
+
+<p>Here we just go over all subviews and we add each subview that conforms to ChipmunkObject protocol to our space.</p>
+
+<p>We need to call our setupPhysics method from viewDidLoad:</p>
+
+<pre><code class="language-objectivec">- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  [self setupPhysics];
 }
+</code></pre>
+
+<p>We need to make sure our space is updated with each frame, on iOS we can use CADisplayLink, it&rsquo;s an object that allows to bind update functions to screen refresh rate. Let&rsquo;s manage it in viewWillAppear / viewWillDisappear methods:</p>
+
+<pre><code class="language-objectivec">- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+
+  _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
+  [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
-</script> <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async></script> </div> </div> </div> <footer id="footer" class="inner">Copyright &copy; 2015 Krzysztof Zabłocki Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer> <script src="/javascripts/slash.js"></script> <script src="/javascripts/code-toggle.js"></script> <script src="/javascripts/jquery.fancybox.pack.js"></script> <script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-29400340-1']);
-		_gaq.push(['_trackPageview']);
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  [_displayLink invalidate];
+  _displayLink = nil;
+}
+</code></pre>
 
-		$('a').click(function() { 
-			var $a = $(this); var href = $a.attr('href');
-			// see if the link is external 
-			if ( (href.match(/^http/)) && (! href.match(document.domain)) ) {
+<p>Here we basically create new display link when level becomes visible and clean it up when it disappears.</p>
 
-			// if so, register an event
-			var category = 'outgoing'; // set this to whatever you want
-			var event = 'click'; // set this to whatever you want
-			var label = href; // set this to whatever you want
-			pageTracker._trackEvent(category, event, href);
-			}});
-	</script> </div> </div> </body> </html>
+<p>We also need to implement actual <em>tick:</em> method:</p>
+
+<pre><code class="language-objectivec">- (void)tick:(CADisplayLink *)link
+{
+ 	CGFloat deltaTime = link.duration * link.frameInterval
+  [_space step:deltaTime];
+
+  for (id view in self.view.subviews) {
+    if ([view respondsToSelector:@selector(update)]) {
+      [view update];
+    }
+  }
+} 
+</code></pre>
+
+<p>Here we progress <em>space</em> calculations by stepping it by the difference between current and previous frames. Then we just iterate over all our subviews and update them if they have update method.</p>
+
+<h3 id="would-be-nice-to-see-something:82066e9a45e3952153175057cafdd8c0">Would be nice to see something</h3>
+
+<p>We already wrote bunch of code, but we can&rsquo;t see anything yet. We still didn&rsquo;t implement proper methods on PhysicalView, let&rsquo;s fix that. We need to start with setup:</p>
+
+<pre><code class="language-objectivec">- (void)awakeFromNib
+{
+  [super awakeFromNib];
+  [self setup];
+}
+
+- (void)setup
+{
+  float moment;
+  CGFloat width = CGRectGetWidth(self.bounds);
+  CGFloat height = CGRectGetHeight(self.bounds);
+  
+  if (!_isCircle) {
+    moment = cpMomentForBox(_mass, width, height);
+  } else {
+    moment = cpMomentForCircle(_mass, 0, width * 0.5, cpvzero);
+  }
+
+  //! setup physics
+  if (_isStatic) {
+    _body = [[ChipmunkBody alloc] initStaticBody];
+  } else {
+    _body = [[ChipmunkBody alloc] initWithMass:_mass andMoment:moment];
+  }
+  _body.pos = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+
+  if (!_isCircle) {
+    _shape = [ChipmunkPolyShape boxWithBody:_body width:width height:height];
+  } else {
+    _shape = [ChipmunkCircleShape circleWithBody:_body radius:width * 0.5 offset:cpvzero];
+  }
+
+  _shape.elasticity = 0.3;
+  _shape.friction = 0.5;
+  
+  _shape.sensor = _isSensor;
+}
+</code></pre>
+
+<p>Before creating bodies we need to calculate momentum, we will use Chipmunk helper methods for that.</p>
+
+<p>Then we create physical body and set their position it in level space (our superview). Depending on shape we either create circle or box.</p>
+
+<p>We also need to implement proper ChipmunkObject protocol and update methods:</p>
+
+<pre><code class="language-objectivec">- (void)update
+{
+  self.center = _body.pos;
+  self.transform = CGAffineTransformMakeRotation(_body.angle);
+}
+
+- (NSSet *)chipmunkObjects
+{
+  if (_isStatic) {
+    return [NSSet setWithObjects:_shape, nil];
+  }
+
+  return [NSSet setWithObjects:_shape, _body, nil];
+}
+
+</code></pre>
+
+<p>Here we just set center of our view to match physical body and it&rsquo;s angle. chipmunkObjects needs to return physical objects that are to be added to space, static bodies should not be added.</p>
+
+<p>Now go to storyboards, add new UIImageView:</p>
+
+<ol>
+<li>Set custom class to PhysicalView, make it a square rect</li>
+<li>Set user defined runtime attributes accordingly:
+
+<ul>
+<li>isCircle - YES</li>
+<li>isStatic - NO</li>
+<li>type - Player</li>
+</ul></li>
+</ol>
+
+<p>
+<figure >
+    
+        <img src="/2013/04/gamedev0-attributes.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Run project, you should now see player animating and being affected by gravity, not very impressive right?
+Copy player view multiple times in IB, put it in different places (set them up so they collide after applying gravity), run it again. That was easy change right? Try changing mass properties and see how it changes animation.</p>
+
+<p><strong>Let&rsquo;s go even further</strong>, create new Physical view, set it&rsquo;s size as you see fit, set graphics to our wall.png. No runtime attributes needed, we will use defaults. Run again!</p>
+
+<p><strong>You just added obstacles!</strong> It&rsquo;s nice to have flexible level editor, isn&rsquo;t it?</p>
+
+<h3 id="accelerometer:82066e9a45e3952153175057cafdd8c0">Accelerometer</h3>
+
+<p>Static gravity isn&rsquo;t that impressive, let&rsquo;s use our accelerometer to control player. Add this code at the end LevelViewController viewDidAppear method:</p>
+
+<pre><code class="language-objectivec">
+UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
+accelerometer.updateInterval = 1.0f / 30.0f;
+accelerometer.delegate = self; 
+
+</code></pre>
+
+<p>We just setup our level as delegate for accelerometer updates, we still need to implement that method:</p>
+
+<pre><code class="language-objectivec">- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
+{
+  [_space setGravity:cpvmult(cpv((cpFloat const)acceleration.x, (cpFloat const)-acceleration.y), 200)];
+}
+
+</code></pre>
+
+<p>What we do here is very simple, we grab current acceleration from device, multiple it by 200 in each axis and set that as space gravity, this will affect all dynamic objects on scene.</p>
+
+<p><strong>Be sure to run project on device to see acceleration changes.</strong></p>
+
+<h3 id="game-logic:82066e9a45e3952153175057cafdd8c0">Game logic</h3>
+
+<p>So now we have nice WYSIWYG editor inside IB (more or less), we have good physics along with accelerometer control over it. What&rsquo;s missing is the gameplay of our game, in this game we only have 2 types of actions affecting gameplay:</p>
+
+<ol>
+<li>Collision with hole - Player loss and we restart game.</li>
+<li>Collision with finish - Player wins and we go to next level.</li>
+</ol>
+
+<p>Before proceeding be sure to create level and setup proper types in runtime attributes, you should only have single player object.</p>
+
+<p>We need to add collision handlers to recognise when player is interacting with those objects, at the end of setupPhysics add:</p>
+
+<pre><code class="language-objectivec">[_space addCollisionHandler:self typeA:[PhysicalView handlers][@&quot;Hole&quot;] typeB:[PhysicalView handlers][@&quot;Player&quot;] begin:@selector(gameLost:space:) preSolve:nil postSolve:nil separate:nil];
+
+[_space addCollisionHandler:self typeA:[PhysicalView handlers][@&quot;Player&quot;] typeB:[PhysicalView handlers][@&quot;Finish&quot;] begin:@selector(gameWon:space:) preSolve:nil postSolve:nil separate:nil];
+
+</code></pre>
+
+<p>Here we add 2 distinct collision handlers, Player vs Hole and Player vs Finish.</p>
+
+<p>Before we compile this change we need to add some code, because typeA and typeB can be any kind of objects they need to be unique (in sense of pointers, not equality), we need some way to map our type strings to unique objects:
+In PhysicalView implement this class method:</p>
+
+<pre><code class="language-objectivec">+ (NSMutableDictionary *)handlers
+{
+  static NSMutableDictionary *handlers;
+  if (!handlers) {
+    handlers = [[NSMutableDictionary alloc] init];
+  }
+  return handlers;
+}
+</code></pre>
+
+<p>at the end of setup method add this lines:</p>
+
+<pre><code class="language-objectivec">  if (_type) {
+    [PhysicalView handlers][_type] = _type;
+    _shape.collisionType = [PhysicalView handlers][_type];
+  }
+</code></pre>
+
+<p>This code guarantees uniqueness of strings as objects, we use keys (which check for equality of content) and use type as object. Which means we get exactly 1 object for each matching key.</p>
+
+<p>Going back to LevelViewController as we still need to implement gameLost/gameWon logic:</p>
+
+<pre><code class="language-objectivec">
+- (BOOL)gameOver:(cpArbiter *)arbiter space:(ChipmunkSpace *)space
+{
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@&quot;You lost!&quot; message:@&quot;I've told you already: You lost!&quot; delegate:self cancelButtonTitle:@&quot;Restart&quot; otherButtonTitles:nil];
+  [alertView show];
+  return YES;
+}
+
+- (BOOL)gameWon:(cpArbiter *)arbiter space:(ChipmunkSpace *)space
+{
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@&quot;You won!&quot; message:@&quot;I've told you already: You won!&quot; delegate:self cancelButtonTitle:@&quot;Next level&quot; otherButtonTitles:nil];
+  alertView.tag = 1;
+  [alertView show];
+  return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if (alertView.tag == 1) {
+    [self nextLevel];
+    return;
+  }
+  
+  [self loadLevel:1];
+}
+
+- (void)nextLevel
+{
+  [self loadLevel:currentLevel + 1];
+}
+
+- (void)loadLevel:(NSUInteger)level
+{
+  UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:[NSString stringWithFormat:@&quot;Level%d&quot;, level]];
+  //! looping
+  if (!controller) {
+    level = 1;
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:[NSString stringWithFormat:@&quot;Level%d&quot;, level]];
+  }
+  [self.navigationController setViewControllers:@[controller] animated:YES];
+  currentLevel = level;
+}
+
+</code></pre>
+
+<p>Logic here is very simple, depending on player result we show proper alert and then once user dismisses alert we either restart game or move to next level.</p>
+
+<p>We load levels from storyboards, to make this work you need to setup LevelViewController <em>Storyboard ID</em> to LevelX where X is the level number. Once user finishes all levels we will automatically loop to the first one.</p>
+
+<h2 id="conclusion:82066e9a45e3952153175057cafdd8c0">Conclusion</h2>
+
+<p>
+<figure >
+    
+        <img src="/2013/04/clone.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>You should now have a simple game, simple level editor and loads of space to improve. What&rsquo;s interesting is that everything has <strong>less than 250 lines of code</strong>, that&rsquo;s pretty small isn&rsquo;t it ?</p>
+
+<p>What could you do next:</p>
+
+<ul>
+<li>add spring joint when player collides with any hole (that was actually in tutorial but I&rsquo;ve removed that to keep it simpler)</li>
+<li>add nice transitions between levels, instead of going straight to next controller show summary screen with stats (time)</li>
+</ul>
+
+<p>Game graphics by my friend <a href="http://twitter.com/faktory">@faktory</a></p>
+
+            </article>
+
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+
+            <br/>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://replace-this-with-your-hugo-site.com//tags/iOS">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/tutorial">tutorial</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/gamedev">gamedev</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/interface%20builder">interface builder</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="/js/readingtime.js"></script>
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script>
+    
+    window.jQuery || document.write('<script src=" src="//code.jquery.com/jquery-1.8.3.min.js""><\/script>');
+</script>
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Development Process on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://replace-this-with-your-hugo-site.com/tags/development-process/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Thu, 20 Feb 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>iOS tips</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/02/ios-tips/</link>
+      <pubDate>Thu, 20 Feb 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/02/ios-tips/</guid>
+      <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS Developer Tools</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/02/ios-developer-tools/</link>
+      <pubDate>Fri, 07 Feb 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/02/ios-developer-tools/</guid>
+      <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
+
+&lt;p&gt;I recently gave talk about tools I use and why.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Crafter - setup your cocoa projects with ease</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
+      <pubDate>Thu, 02 May 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
+      <description>&lt;p&gt;How do you setup your Cocoa projects?
+Do you always set same warnings, clone configurations and do bunch of other stuff?&lt;/p&gt;
+
+&lt;p&gt;I made a tool that might help.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Statusboard and Jenkins</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/04/statusboard-and-jenkins/</link>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/04/statusboard-and-jenkins/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://replace-this-with-your-hugo-site.com/2013/04/statusboard-small.jpg&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;You probably saw &lt;a href=&#34;http://panic.com/statusboard/&#34;&gt;StatusBoard by Panic&lt;/a&gt;. I&amp;rsquo;ve immediately thought it needs simple Jenkins widget.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overlaying application version on top of your icon</title>
+      <link>http://replace-this-with-your-hugo-site.com/2013/03/overlaying-application-version-on-top-of-your-icon/</link>
+      <pubDate>Thu, 07 Mar 2013 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://replace-this-with-your-hugo-site.com/2013/03/Icon.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve just returned from NSConference #5, there were many good talks there, but my favourite one was the one about Flipboard development tools/setup by Evan Doll.&lt;/p&gt;
+
+&lt;p&gt;Especially how they add version information on top of the icons.
+Unfortunately they didn&amp;rsquo;t share it with us.&lt;/p&gt;
+
+&lt;p&gt;So I wrote my own.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+

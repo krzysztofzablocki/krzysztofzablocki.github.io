@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Fitness on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://replace-this-with-your-hugo-site.com/tags/fitness/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Thu, 15 Jan 2015 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Simple way to scrape web with Ruby</title>
+      <link>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</link>
+      <pubDate>Thu, 15 Jan 2015 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</guid>
+      <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Swift introduction into fitness</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</link>
+      <pubDate>Tue, 30 Sep 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</guid>
+      <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
+
+&lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you burn more calories than you eat you will lose weight&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Two questions arise:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;how to estimate our caloric needs?&lt;/li&gt;
+&lt;li&gt;how fast should we lose or gain weight?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We&amp;rsquo;ll use Swift Playgrounds to explain it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fit geek</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/02/fit-geek/</link>
+      <pubDate>Mon, 10 Feb 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/02/fit-geek/</guid>
+      <description>&lt;p&gt;If you ever meet me you probably already know my second biggest passion after programming is Bodybuilding.
+I used to be a fat kid weighting 105 kg, now I&amp;rsquo;m ripped.&lt;/p&gt;
+
+&lt;p&gt;Want to learn how you too can become fit with ease?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+

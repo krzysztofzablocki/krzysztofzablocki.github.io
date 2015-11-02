@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Architecture on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://replace-this-with-your-hugo-site.com/tags/architecture/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Wed, 15 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>iOS Project Bootstrap</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</link>
+      <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</guid>
+      <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Behaviours and Xcode 6</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/</link>
+      <pubDate>Sun, 22 Jun 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/</guid>
+      <description>&lt;p&gt;Last time I&amp;rsquo;ve written about Behaviours in &lt;a href=&#34;http://www.objc.io/issue-13/behaviors.html&#34;&gt;objc.io&lt;/a&gt; Architecture Series.&lt;/p&gt;
+
+&lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS App Architecture, Part 2: Data parsing</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
+      <pubDate>Thu, 03 Apr 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS App Architecture, Part 1: Setting up</title>
+      <link>http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
+      <pubDate>Fri, 14 Mar 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
+      <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+

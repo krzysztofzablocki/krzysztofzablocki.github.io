@@ -1,80 +1,316 @@
-<!DOCTYPE HTML> <html> <head> <meta charset="utf-8"> <title>Behaviours and Xcode 6 - Krzysztof Zabłocki</title> <meta name="author" content="Krzysztof Zabłocki"> <meta name=”twitter:site” content=”@merowing_> <meta name="description" content="Behaviours and Xcode 6 I wrote about Behaviours in newest issue of objc.io Architecture series. Xcode 6 brought some great improvements to interface &hellip;"> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link href="/atom.xml" rel="alternate" title="Krzysztof Zabłocki" type="application/atom+xml"> <link rel="canonical" href="http://merowing.info/2014/06/behaviours-and-xcode-6"> <link href="/favicon.png" rel="shortcut icon"> <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"> <link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css"> <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--> <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <style type="text/css">
-  .fancybox-wrap { position: fixed !important; }
-  .fancybox-opened {
-    -webkit-border-radius: 4px !important;
-       -moz-border-radius: 4px !important;
-            border-radius: 4px !important;
-  }
-  .fancybox-close, .fancybox-prev span, .fancybox-next span {
-    background-color: transparent !important;
-    border: 0 !important;
-  }
-</style> <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-29400340-1']);
-		_gaq.push(['_trackPageview']);
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Behaviours and Xcode 6 - Krzysztof Zabłocki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <link rel="canonical" href="http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/">
+  <link href="/css/prism.css" rel="stylesheet" />
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
-		$('a').click(function() { 
-			var $a = $(this); var href = $a.attr('href');
-			// see if the link is external 
-			if ( (href.match(/^http/)) && (! href.match(document.domain)) ) {
+  
+  <link rel="stylesheet" type="text/css" href="http://replace-this-with-your-hugo-site.com//css/combined-min.css">
+</head>
+<body class="">
 
-			// if so, register an event
-			var category = 'outgoing'; // set this to whatever you want
-			var event = 'click'; // set this to whatever you want
-			var label = href; // set this to whatever you want
-			pageTracker._trackEvent(category, event, href);
-			}});
-	</script> </head> <body> <div class="container"> <div class="left-col"> <div class="intrude-less"> <header id="header" class="inner"><div class="profilepic"> <script src="/javascripts/md5.js"></script> <script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<a href='http://twitter.com/merowing_'><img src='http://www.gravatar.com/avatar/" + MD5("krzysztof.zablocki@pixle.pl") + "?s=120' alt='Profile Picture' style='width: 120px; float: left; margin: 0px 15px 15px 0px;' /></a> <div class='header_bio'><a href='/about/''>Krzysztof Zabłocki - Software Engineer.</a></div>");
-		});
-	</script> </div> <nav id="main-nav"><ul class="main"> <br/> <br/> <div class="indie_apps" style="clear:both;"> <a href="http://appstore.com/foldify"><img class="app_poster" src="http://www.merowing.info/images/foldify.png" alt="Foldify"></a> <a href="http://appstore.com/foldifyzoo"><img class="app_poster" src="http://www.merowing.info/images/foldifyzoo.png" alt="Foldify Zoo"></a> <a href="http://appstore.com/foldifydino"><img class="app_poster" src="http://www.merowing.info/images/foldifydino.png" alt="Foldify Dino"></a> <a href="https://itunes.apple.com/us/app/storest-kids-love-playing/id926102013?mt=8"><img class="app_poster" src="http://www.merowing.info/images/storest.png" alt="Bord"></a> <a href="http://appstore.com/bord"><img class="app_poster" src="http://www.merowing.info/images/bord.png" alt="Storest"></a> <br/> <br/> </div> <li><a href="/about">About me</a></li> <li><a href="/speaking">Speaking</a></li> <li><a href="/">Blog</a></li> <li><a href="/blog/archives">Archives</a></li> </ul> </nav> <nav id="popular"> <section> <h4>Recommended</h4> <li class="related"><a href="/2014/10/how-do-i-work/">How do I Work?</a></li> <li class="related"><a href="/2014/03/refactoring-tricks">Refactoring tricks</a> and <a href="/2014/02/ios-developer-tools">Developer Tools</a></li> <li class="related"><a href="/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper">Drawing smooth lines</a></li> <li class="related"><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Data Parsing</a> and <a href="https://github.com/krzysztofzablocki/KZBootstrap">Project bootstrap</a></li> </section> </nav> <nav id="sub-nav"> <div class="social"> <a class="email" href="mailto:krzysztof.zablocki@pixle.pl" title="Email">Email</a> <a class="facebook" href="http://www.facebook.com/100000315956630" title="Facebook">Facebook</a> <a class="twitter" href="http://twitter.com/merowing_" title="Twitter">Twitter</a> <a class="github" href="https://github.com/krzysztofzablocki" title="GitHub">GitHub</a> <a class="linkedin" href="http://www.linkedin.com/profile/view?id=90077810" title="LinkedIn">LinkedIn</a> <a class="rss" href="/atom.xml" title="RSS">RSS</a> </div> </nav></header> </div> </div> <div class="mid-col"> <div class="mid-col-container"> <div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting"> <h1 class="title" itemprop="name">Behaviours and Xcode 6</h1> <div class="entry-content" itemprop="articleBody"><p><a href="http://www.objc.io/issue-13/behaviors.html">I wrote about Behaviours in newest issue of objc.io Architecture series</a>.</p> <p>Xcode 6 brought some great improvements to interface builder, one of the coolest one is ability to design custom views, even cooler is the fact that few people realised - IBInspectable works on ANY object, this makes my Behaviours even better!</p> <h1>Behaviours</h1> <p>My behaviours are built on top of 3 principles:</p> <ol> <li>Use of runtime attributes for setting properties</li> <li>Reversing lifetime notation</li> <li>Generating events</li> </ol> <p>Both 2. and 3. were easy to use since they were powered by visual binding, it was only a matter of connecting proper outlets/actions.</p> <p>Using runtime attributes was far from ideal: 1. Error prone - since you need to enter keyPath correctly, spelling mistakes will lead to crash when deserialising Xib/Storyboard which gets annoying. 2. Need to read documentation / header to know what keyPaths are supported.</p> <h1>Enter Xcode 6</h1> <p>With introduction of Xcode 6 we’ve received live rendering of custom views (finally!?), to support custom views rendering you need to: 1. Put your view classes inside a separate framework 2. Specify IBDesignable attribute for your class interface 3. For each configurable custom property you should specify IBInspectable attribute</p> <p>If we add few IBInspectables like so:</p> <p><img src="http://merowing.info/uploads/2014/06/inspectable_code.png"></p> <p>Interface builder will now generate WYSIWYG editors for them:</p> <p><img src="http://merowing.info/uploads/2014/06/inspectable_ib.png"></p> <p>This is great improvement to workflow, especially if you look at how many different types of properties receive their own editors: - boolean - number - string - rectangle - point - size - color - range - image</p> <p>This is great improvement to workflow, especially when I work with designers, I no longer need them to read docs for each custom view we have in app, they can just use visual editor 100% of time!</p> <h1>How does that help with Behaviours?</h1> <p>Very few people realised that IBInspectable can work without IBDesignable, and it get’s better:</p> <blockquote><p>IBInspectable works without needing frameworks, on any class.</p></blockquote> <p>That means that each Behaviour property can be made IBInspectable and you get all the benefits of WYSIWYG editor for no cost, how great is that?</p> <p>Finally my Parallax behaviour get a nice visual editor:</p> <p><img src="http://merowing.info/uploads/2014/06/Inspectables.png"></p> <h1>Supporting older Xcode?</h1> <p>Xcode 6 is still beta and so are inspectables, fortunately for us Apple did great job of joining Runtime attributes and inspectables together:</p> <blockquote><p>If you have runtime attribute set for a specific keyPath that’s also IBInspectable property, it will show up as the value of that Inspectable</p></blockquote> <p>To be able to compile your IBInspectable enabled Behaviours on older Xcode 5 you just need to add empty macro for IBInspectable, like so:</p> <div> <button class='toggle-code' title='show'>Show Code</button><figure class='code hide'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">#ifndef IBInspectable</span>
-</span><span class='line'>    <span class="err">#</span><span class="n">define</span> <span class="n">IBInspectable</span>
-</span><span class='line'><span class="cp">#endif</span>
-</span></code></pre></td></tr></table></div></figure> </div> <p>All behaviours will now work as expected, you can use runtime attributes in Xcode 5 or Inspectable’s in Xcode 6.</p> <p><a href="https://github.com/krzysztofzablocki/BehavioursExample">Grab example code from GitHub.</a></p> <p>If you’d like to chat about Behaviours or anything else, <a href="http://twitter.com/merowing_">send me a tweet</a>.</p> </div> </article> <div class="share"> <div class="addthis_sharing_toolbox"></div> <script type="text/javascript">
-var addthis_share = addthis_share || {}
-addthis_share = {
-passthrough : {
-twitter: {
-via: "merowing_",
-text: "Great article"
-}
-}
-}
-</script> <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async></script> </div> </div> </div> <footer id="footer" class="inner">Copyright &copy; 2015 Krzysztof Zabłocki Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer> <script src="/javascripts/slash.js"></script> <script src="/javascripts/code-toggle.js"></script> <script src="/javascripts/jquery.fancybox.pack.js"></script> <script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-29400340-1']);
-		_gaq.push(['_trackPageview']);
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://replace-this-with-your-hugo-site.com/" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/speaking/">Speaking</a>
 
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
 
-		$('a').click(function() { 
-			var $a = $(this); var href = $a.attr('href');
-			// see if the link is external 
-			if ( (href.match(/^http/)) && (! href.match(document.domain)) ) {
 
-			// if so, register an event
-			var category = 'outgoing'; // set this to whatever you want
-			var event = 'click'; // set this to whatever you want
-			var label = href; // set this to whatever you want
-			pageTracker._trackEvent(category, event, href);
-			}});
-	</script> </div> </div> </body> </html>
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Behaviours and Xcode 6</h1>
+                <span class="post-meta">Jun 22, 2014</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>2 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+
+            <article class="post-content">
+                
+
+<p>Last time I&rsquo;ve written about Behaviours in <a href="http://www.objc.io/issue-13/behaviors.html">objc.io</a> Architecture Series.</p>
+
+<p>Xcode 6 has some great improvements, few people realise that <strong>IBInspectable</strong> works on any class, not just views.</p>
+
+<p>Let&rsquo;s use that to improve upon my original Behaviours.</p>
+
+<h1 id="behaviours:b7fafa0f1549e2baeec7e4985b489066">Behaviours</h1>
+
+<p>My behaviours are built on top of 3 principles:</p>
+
+<ol>
+<li>Use of runtime attributes for setting properties</li>
+<li>Reversing lifetime notation</li>
+<li>Generating events</li>
+</ol>
+
+<p>Both 2. and 3. were easy to use since they were powered by visual binding, it was only a matter of connecting proper outlets/actions.</p>
+
+<p>Using runtime attributes was far from ideal:</p>
+
+<ol>
+<li>Error prone - since you need to enter keyPath correctly, spelling mistakes will lead to crash when deserialising Xib/Storyboard which gets annoying.</li>
+<li>Need to read documentation / header to know what keyPaths are supported.</li>
+</ol>
+
+<h1 id="enter-xcode-6:b7fafa0f1549e2baeec7e4985b489066">Enter Xcode 6</h1>
+
+<p>With introduction of Xcode 6 we’ve received live rendering of custom views (finally!?), to support custom views rendering you need to:</p>
+
+<ol>
+<li>Put your view classes inside a separate framework</li>
+<li>Specify IBDesignable attribute for your class interface</li>
+<li>For each configurable custom property you should specify IBInspectable attribute</li>
+</ol>
+
+<p>If we add few IBInspectables like so:</p>
+
+<p>
+<figure >
+    
+        <img src="/2014/06/inspectable_code.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Interface builder will now generate WYSIWYG editors for them:</p>
+
+<p>
+<figure >
+    
+        <img src="/2014/06/inspectable_ib.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>This is great improvement to workflow, especially if you look at how many different types of properties receive their own editors:</p>
+
+<ul>
+<li>boolean</li>
+<li>number</li>
+<li>string</li>
+<li>rectangle</li>
+<li>point</li>
+<li>size</li>
+<li>color</li>
+<li>range</li>
+<li>image</li>
+</ul>
+
+<p>This is great improvement to workflow, especially when I work with designers, I no longer need them to read docs for each custom view we have in app, they can just use visual editor 100% of time!</p>
+
+<h1 id="how-does-that-help-with-behaviours:b7fafa0f1549e2baeec7e4985b489066">How does that help with Behaviours?</h1>
+
+<p>Very few people realised that IBInspectable can work without IBDesignable, and it get’s better:</p>
+
+<blockquote>
+<p>IBInspectable works without needing frameworks, on any class.</p>
+</blockquote>
+
+<p>That means that each Behaviour property can be made IBInspectable and you get all the benefits of WYSIWYG editor for no cost, how great is that?</p>
+
+<p>Finally my Parallax behaviour get a nice visual editor:</p>
+
+<p>
+<figure >
+    
+        <img src="/2014/06/Inspectables.png"  />
+    
+    
+</figure>
+
+</p>
+
+<h1 id="supporting-older-xcode:b7fafa0f1549e2baeec7e4985b489066">Supporting older Xcode?</h1>
+
+<p>Xcode 6 is still beta and so are inspectables, fortunately for us Apple did great job of joining Runtime attributes and inspectables together:</p>
+
+<blockquote>
+<p>If you have runtime attribute set for a specific keyPath that’s also IBInspectable property, it will show up as the value of that Inspectable</p>
+</blockquote>
+
+<p>To be able to compile your IBInspectable enabled Behaviours on older Xcode 5 you just need to add empty macro for IBInspectable, like so:</p>
+
+<pre><code class="language-objectivec">#ifndef IBInspectable
+    #define IBInspectable
+#endif
+</code></pre>
+
+<p>All behaviours will now work as expected, you can use runtime attributes in Xcode 5 or Inspectable’s in Xcode 6.</p>
+
+<p><a href="https://github.com/krzysztofzablocki/BehavioursExample">Grab example code from GitHub.</a></p>
+
+            </article>
+
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+
+            <br/>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://replace-this-with-your-hugo-site.com//tags/Architecture">Architecture</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/iOS">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://replace-this-with-your-hugo-site.com//tags/Tutorial">Tutorial</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="/js/readingtime.js"></script>
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script>
+    
+    window.jQuery || document.write('<script src=" src="//code.jquery.com/jquery-1.8.3.min.js""><\/script>');
+</script>
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
+
