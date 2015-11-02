@@ -3,7 +3,7 @@
   <channel>
       <title>Development Process on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/development-process/</link>
+    <link>http://merowing.info/tags/development-process/</link>
     <language>en-us</language>
     
     
@@ -11,20 +11,20 @@
     
     <item>
       <title>iOS tips</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/02/ios-tips/</link>
+      <link>http://merowing.info/2014/02/ios-tips/</link>
       <pubDate>Thu, 20 Feb 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/02/ios-tips/</guid>
+      <guid>http://merowing.info/2014/02/ios-tips/</guid>
       <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>iOS Developer Tools</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/02/ios-developer-tools/</link>
+      <link>http://merowing.info/2014/02/ios-developer-tools/</link>
       <pubDate>Fri, 07 Feb 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/02/ios-developer-tools/</guid>
+      <guid>http://merowing.info/2014/02/ios-developer-tools/</guid>
       <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
 
 &lt;p&gt;I recently gave talk about tools I use and why.&lt;/p&gt;
@@ -33,10 +33,10 @@
     
     <item>
       <title>Crafter - setup your cocoa projects with ease</title>
-      <link>http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
+      <link>http://merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
       <pubDate>Thu, 02 May 2013 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
+      <guid>http://merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
       <description>&lt;p&gt;How do you setup your Cocoa projects?
 Do you always set same warnings, clone configurations and do bunch of other stuff?&lt;/p&gt;
 
@@ -46,14 +46,14 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
     
     <item>
       <title>Statusboard and Jenkins</title>
-      <link>http://replace-this-with-your-hugo-site.com/2013/04/statusboard-and-jenkins/</link>
+      <link>http://merowing.info/2013/04/statusboard-and-jenkins/</link>
       <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2013/04/statusboard-and-jenkins/</guid>
+      <guid>http://merowing.info/2013/04/statusboard-and-jenkins/</guid>
       <description>&lt;p&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://replace-this-with-your-hugo-site.com/2013/04/statusboard-small.jpg&#34;  /&gt;
+        &lt;img src=&#34;http://merowing.info/2013/04/statusboard-small.jpg&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -66,14 +66,14 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
     
     <item>
       <title>Overlaying application version on top of your icon</title>
-      <link>http://replace-this-with-your-hugo-site.com/2013/03/overlaying-application-version-on-top-of-your-icon/</link>
+      <link>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</link>
       <pubDate>Thu, 07 Mar 2013 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
+      <guid>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
       <description>&lt;p&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://replace-this-with-your-hugo-site.com/2013/03/Icon.png&#34;  /&gt;
+        &lt;img src=&#34;http://merowing.info/2013/03/Icon.png&#34;  /&gt;
     
     
 &lt;/figure&gt;

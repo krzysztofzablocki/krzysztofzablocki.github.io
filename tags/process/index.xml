@@ -3,7 +3,7 @@
   <channel>
       <title>Process on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/process/</link>
+    <link>http://merowing.info/tags/process/</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Playgrounds for Objective C</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</link>
+      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</guid>
+      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
       <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
 
 &lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
@@ -52,10 +52,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>How do I work?</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/how-do-i-work/</link>
+      <link>http://merowing.info/2014/10/how-do-i-work/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/how-do-i-work/</guid>
+      <guid>http://merowing.info/2014/10/how-do-i-work/</guid>
       <description>&lt;p&gt;I’ve been programming for 18 years now, doing commercial work for the last 6.&lt;/p&gt;
 
 &lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affect the way I work.&lt;/p&gt;

@@ -3,7 +3,7 @@
   <channel>
       <title>Runtime on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/runtime/</link>
+    <link>http://merowing.info/tags/runtime/</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Using UIGestureRecognizers in cocos2d</title>
-      <link>http://replace-this-with-your-hugo-site.com/2012/03/using-uigesturerecognizers-in-cocos2d/</link>
+      <link>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</link>
       <pubDate>Mon, 05 Mar 2012 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2012/03/using-uigesturerecognizers-in-cocos2d/</guid>
+      <guid>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.cocos2d-iphone.org/&#34;&gt;cocos2d&lt;/a&gt; is one of the best gaming framework I’ve seen, but it doesn’t use UIKit.&lt;/p&gt;
 
 &lt;p&gt;When Apple introduced UIGestureRecognizers they unified how touch interaction should work.&lt;/p&gt;

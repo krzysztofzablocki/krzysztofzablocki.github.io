@@ -3,7 +3,7 @@
   <channel>
       <title>Swift on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/swift/</link>
+    <link>http://merowing.info/tags/swift/</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>A Swift introduction into fitness</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</link>
+      <link>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
       <pubDate>Tue, 30 Sep 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</guid>
+      <guid>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
       <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
 
 &lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
@@ -36,10 +36,10 @@
     
     <item>
       <title>Implementing observable in Swift</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/07/implementing-observable-in-swift/</link>
+      <link>http://merowing.info/2014/07/implementing-observable-in-swift/</link>
       <pubDate>Thu, 17 Jul 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/07/implementing-observable-in-swift/</guid>
+      <guid>http://merowing.info/2014/07/implementing-observable-in-swift/</guid>
       <description>&lt;p&gt;KVO has been integral part of Cocoa programming, yet it&amp;rsquo;s not available for pure Swift classes.&lt;/p&gt;
 
 &lt;p&gt;Is there a way to implement your own implementation of native KVO?&lt;/p&gt;

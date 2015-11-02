@@ -3,7 +3,7 @@
   <channel>
       <title>Ruby on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/ruby/</link>
+    <link>http://merowing.info/tags/ruby/</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Simple way to scrape web with Ruby</title>
-      <link>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</link>
+      <link>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</link>
       <pubDate>Thu, 15 Jan 2015 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</guid>
+      <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
       <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
 </description>
     </item>

@@ -3,7 +3,7 @@
   <channel>
       <title>Fitness on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/fitness/</link>
+    <link>http://merowing.info/tags/fitness/</link>
     <language>en-us</language>
     
     
@@ -11,20 +11,20 @@
     
     <item>
       <title>Simple way to scrape web with Ruby</title>
-      <link>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</link>
+      <link>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</link>
       <pubDate>Thu, 15 Jan 2015 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</guid>
+      <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
       <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>A Swift introduction into fitness</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</link>
+      <link>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
       <pubDate>Tue, 30 Sep 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</guid>
+      <guid>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
       <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
 
 &lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
@@ -46,10 +46,10 @@
     
     <item>
       <title>Fit geek</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/02/fit-geek/</link>
+      <link>http://merowing.info/2014/02/fit-geek/</link>
       <pubDate>Mon, 10 Feb 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/02/fit-geek/</guid>
+      <guid>http://merowing.info/2014/02/fit-geek/</guid>
       <description>&lt;p&gt;If you ever meet me you probably already know my second biggest passion after programming is Bodybuilding.
 I used to be a fat kid weighting 105 kg, now I&amp;rsquo;m ripped.&lt;/p&gt;
 

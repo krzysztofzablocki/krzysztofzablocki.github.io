@@ -3,7 +3,7 @@
   <channel>
       <title> on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/</link>
+    <link>http://merowing.info/</link>
     <language>en-us</language>
     
     
@@ -11,38 +11,38 @@
     
     <item>
       <title>About</title>
-      <link>http://replace-this-with-your-hugo-site.com/about/</link>
+      <link>http://merowing.info/about/</link>
       <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/about/</guid>
+      <guid>http://merowing.info/about/</guid>
       <description>I am a software engineer. For the last 5+ years iOS has been my main focus. Before that I used to do games and graphics programming. When I&amp;rsquo;m not programming, I&amp;rsquo;m usually training at the Gym or reading about Psychology. I was 8 years old when I started learning fast and I&amp;rsquo;ve never really stopped. Before getting involved with contract work, I was the Lead App Engineer at The App Business in London.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://replace-this-with-your-hugo-site.com/speaking/</link>
+      <link>http://merowing.info/speaking/</link>
       <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/speaking/</guid>
+      <guid>http://merowing.info/speaking/</guid>
       <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 9th October 2015 - EN Pragma Conference 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling. Mobile Central Europe 12th January 2015 - EN - Empower your Objective-C.</description>
     </item>
     
     <item>
       <title>Simple way to scrape web with Ruby</title>
-      <link>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</link>
+      <link>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</link>
       <pubDate>Thu, 15 Jan 2015 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2015/01/extracting-data-from-websites-without-api/</guid>
+      <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
       <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Playgrounds for Objective C</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</link>
+      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</guid>
+      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
       <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
 
 &lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
@@ -80,10 +80,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>iOS Project Bootstrap</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</link>
+      <link>http://merowing.info/2014/10/ios-project-bootstrap/</link>
       <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</guid>
+      <guid>http://merowing.info/2014/10/ios-project-bootstrap/</guid>
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
@@ -92,10 +92,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>How do I work?</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/how-do-i-work/</link>
+      <link>http://merowing.info/2014/10/how-do-i-work/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/how-do-i-work/</guid>
+      <guid>http://merowing.info/2014/10/how-do-i-work/</guid>
       <description>&lt;p&gt;I’ve been programming for 18 years now, doing commercial work for the last 6.&lt;/p&gt;
 
 &lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affect the way I work.&lt;/p&gt;
@@ -106,10 +106,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>A Swift introduction into fitness</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</link>
+      <link>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
       <pubDate>Tue, 30 Sep 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/09/a-swift-introduction-into-fitness/</guid>
+      <guid>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
       <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
 
 &lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
@@ -131,20 +131,20 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>Writing less code</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/08/writing-less-code/</link>
+      <link>http://merowing.info/2014/08/writing-less-code/</link>
       <pubDate>Wed, 27 Aug 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/08/writing-less-code/</guid>
+      <guid>http://merowing.info/2014/08/writing-less-code/</guid>
       <description>&lt;p&gt;What are some of my favorite techniques for cleaner and more readable code?&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Improving development speed</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/07/improving-development-speed/</link>
+      <link>http://merowing.info/2014/07/improving-development-speed/</link>
       <pubDate>Fri, 18 Jul 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/07/improving-development-speed/</guid>
+      <guid>http://merowing.info/2014/07/improving-development-speed/</guid>
       <description>&lt;p&gt;I wrote a blogpost about improving iteration speed and why code injection is awesome when you work on small changes.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www.lextech.com/2014/07/3-big-ways-to-speed-up-your-development-cycle/&#34;&gt;Read it on Lextech blog&lt;/a&gt;&lt;/p&gt;
@@ -153,10 +153,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>Implementing observable in Swift</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/07/implementing-observable-in-swift/</link>
+      <link>http://merowing.info/2014/07/implementing-observable-in-swift/</link>
       <pubDate>Thu, 17 Jul 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/07/implementing-observable-in-swift/</guid>
+      <guid>http://merowing.info/2014/07/implementing-observable-in-swift/</guid>
       <description>&lt;p&gt;KVO has been integral part of Cocoa programming, yet it&amp;rsquo;s not available for pure Swift classes.&lt;/p&gt;
 
 &lt;p&gt;Is there a way to implement your own implementation of native KVO?&lt;/p&gt;
@@ -165,10 +165,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>Behaviours and Xcode 6</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/</link>
+      <link>http://merowing.info/2014/06/behaviours-and-xcode-6/</link>
       <pubDate>Sun, 22 Jun 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/06/behaviours-and-xcode-6/</guid>
+      <guid>http://merowing.info/2014/06/behaviours-and-xcode-6/</guid>
       <description>&lt;p&gt;Last time I&amp;rsquo;ve written about Behaviours in &lt;a href=&#34;http://www.objc.io/issue-13/behaviors.html&#34;&gt;objc.io&lt;/a&gt; Architecture Series.&lt;/p&gt;
 
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
@@ -179,20 +179,20 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>iOS App Architecture, Part 2: Data parsing</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
+      <link>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
       <pubDate>Thu, 03 Apr 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
+      <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Refactoring tricks</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/03/refactoring-tricks/</link>
+      <link>http://merowing.info/2014/03/refactoring-tricks/</link>
       <pubDate>Mon, 24 Mar 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/03/refactoring-tricks/</guid>
+      <guid>http://merowing.info/2014/03/refactoring-tricks/</guid>
       <description>&lt;p&gt;I believe in boy scout rule: &lt;em&gt;&amp;lsquo;Always leave the campground cleaner than you found it.&amp;rsquo;&lt;/em&gt;, that&amp;rsquo;s why I constantly refactor my code so it&amp;rsquo;s clean and tidy.&lt;/p&gt;
 
 &lt;p&gt;What are few less-known refactoring tricks I use to simplify code and make it more readable?&lt;/p&gt;
@@ -201,20 +201,20 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>7 most common code issues</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/03/7-most-common-code-issues/</link>
+      <link>http://merowing.info/2014/03/7-most-common-code-issues/</link>
       <pubDate>Thu, 20 Mar 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/03/7-most-common-code-issues/</guid>
+      <guid>http://merowing.info/2014/03/7-most-common-code-issues/</guid>
       <description>&lt;p&gt;What are top 7 most common issues I find doing Code Reviews?&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>iOS App Architecture, Part 1: Setting up</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
+      <link>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
       <pubDate>Fri, 14 Mar 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
+      <guid>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
       <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
 </description>
     </item>

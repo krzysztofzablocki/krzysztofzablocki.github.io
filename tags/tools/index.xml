@@ -3,7 +3,7 @@
   <channel>
       <title>Tools on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://replace-this-with-your-hugo-site.com/tags/tools/</link>
+    <link>http://merowing.info/tags/tools/</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Playgrounds for Objective C</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</link>
+      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/playgrounds-for-objective-c/</guid>
+      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
       <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
 
 &lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
@@ -52,10 +52,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>iOS Project Bootstrap</title>
-      <link>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</link>
+      <link>http://merowing.info/2014/10/ios-project-bootstrap/</link>
       <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://replace-this-with-your-hugo-site.com/2014/10/ios-project-bootstrap/</guid>
+      <guid>http://merowing.info/2014/10/ios-project-bootstrap/</guid>
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
