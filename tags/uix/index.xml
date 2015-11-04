@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Uix on Krzysztof Zabłocki </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://merowing.info/tags/uix/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sun, 01 Jul 2012 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Pinch to reveal animation, like in Boeing Milestones</title>
+      <link>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
+      <pubDate>Sun, 01 Jul 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://itunes.apple.com/us/app/boeing-milestones/id510294916?mt=8&#34;&gt;Boeing made a nice app for iPad&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I was shown this app and asked if it’s hard to do this pinch to reveal animation.
+It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
+
+&lt;video width=&#34;100%&#34; controls&gt;
+  &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
+
