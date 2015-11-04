@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Prototyping floating burger menu with CAShapeLayer - Krzysztof Zabłocki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <link rel="canonical" href="http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/">
+  <link href="/css/prism.css" rel="stylesheet" />
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+
+
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/speaking/">Speaking</a>
+
+
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Prototyping floating burger menu with CAShapeLayer</h1>
+                <span class="post-meta">Nov 4, 2015</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+            <div class="center playground">
+                <a href="https://github.com/krzysztofzablocki/KZPlayground/blob/master/SwiftExample/SwiftExample/PlaygroundExample.swift">
+                    <img src="http://merowing.info/2015/01/github.jpg"/>
+                    <span>Source Code on GitHub.</span>
+                </a>
+            </div>
+            <br/>
+            
+
+            <article class="post-content">
+                
+
+<video autoplay loop>
+  <source src="/2015/11/Header-small.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+<p>Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&hellip;</p>
+
+<h2 id="intro:e0a6f3dca623305985d47b12797017e3">Intro</h2>
+
+<p>Since I wanted get back to blogging and learn more Swift, I&rsquo;ve decided to implement some of Dribble top UIX interactions on iOS.</p>
+
+<p>Let&rsquo;s see how I&rsquo;ve reproduced <a href="https://dribbble.com/shots/1746065-Floating-burger-2-0">&lsquo;Floating burger 2.0 by Eddie Lobanovskiy&rsquo;</a></p>
+
+<h2 id="how-to:e0a6f3dca623305985d47b12797017e3">How to?</h2>
+
+<p><strong>CAShapeLayer</strong> can be used to render <strong>CGPath</strong>, it has multitude of properties, but for the sake of this simple interaction, we only need 2:</p>
+
+<ul>
+<li><strong>strokeStart</strong> and <strong>strokeEnd</strong>, as they can be used to control how much of the path is actually drawn</li>
+</ul>
+
+<p>If we keep line more inset in regards to the screen, we can express our whole path as a single Path:
+
+<figure class="center">
+    
+        <img src="/2015/11/Path.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>That means we can use <strong>strokeStart</strong> and <strong>strokeEnd</strong> to trim the rendering to specific part for both states of our animation.</p>
+
+<p>Now we just need to be careful when creating the path.</p>
+
+<h3 id="line-path:e0a6f3dca623305985d47b12797017e3">Line path</h3>
+
+<p>To be able to fully control how our shape is displayed by using this 2 properties, it&rsquo;s better to manually compose our <strong>CGPath</strong>, instead of using functions like <strong>addArcWithCenter</strong>.</p>
+
+<p>Fortunately this Path is just a line with a circle:</p>
+
+<pre><code class="language-swift">let path = UIBezierPath()
+let radius: CGFloat = 20
+let inset: CGFloat = 30
+let lineLength = viewportWidth() - inset
+let lineStart = (viewportWidth() - (lineLength - radius)) / 2
+path.moveToPoint(CGPoint(x: lineStart, y: 0))
+path.addLineToPoint(CGPoint(x: lineLength, y: 0))
+
+let circleCenter = CGPoint(x:lineLength, y: -radius) 
+var nextPoint = CGPointZero
+
+let _ = (0..&lt;360).map {
+    nextPoint = CGPoint(x: CGFloat(sinf(toRadian($0))) * radius + circleCenter.x, y: CGFloat(cosf(toRadian($0))) * radius + circleCenter.y)
+    path.addLineToPoint(nextPoint)
+}
+</code></pre>
+
+<p></br>
+First we create the horizontal line, then we compose circle by using basic arithmetic&rsquo;s sin/cos.</p>
+
+<p>Because <strong>strokeEnd</strong> and <strong>strokeStart</strong> are in normalized coordinates (<em>0-1</em>), we need to normalize our line length.</p>
+
+<pre><code class="language-swift">let circleLength = 2.0 * CGFloat(M_PI) * radius
+let totalLength = circleLength + lineLength - lineStart
+let lineLengthNormalized = (lineLength - lineStart) / totalLength
+</code></pre>
+
+<p>for me that yields</p>
+
+<pre><code class="language-swift">lineLengthNormalized = 0.67833278554572718
+</code></pre>
+
+<h3 id="animation:e0a6f3dca623305985d47b12797017e3">Animation</h3>
+
+<p>For configuration</p>
+
+<pre><code class="language-swift">shapeLayer.strokeStart = 0
+shapeLayer.strokeEnd = lineLengthNormalized
+</code></pre>
+
+<p>We get our first animation state
+
+<figure class="center">
+    
+        <img src="/2015/11/StrokeEnd.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>For configuration</p>
+
+<pre><code class="language-swift">shapeLayer.strokeStart = lineLengthNormalized
+shapeLayer.strokeEnd = 1
+</code></pre>
+
+<p>We get our collapsed state
+
+<figure class="center">
+    
+        <img src="/2015/11/StrokeStart.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>We are only left with one task, animating between both states.</p>
+
+<p>CoreAnimation with <strong>CABasicAnimation</strong> is all you need, both <strong>strokeStart</strong> and <strong>strokeEnd</strong> are expressed by the same animation type.</p>
+
+<p>Given a function prototype like:</p>
+
+<pre><code class="language-swift">func animate(shape: CAShapeLayer, duration: CFTimeInterval, stroke: (start: CGFloat, end: CGFloat), headerAlpha: CGFloat)
+</code></pre>
+
+<p>The animation for each property looks like this:</p>
+
+<pre><code class="language-swift">//! 1
+let strokeEndAnimation = CABasicAnimation(keyPath: &quot;strokeEnd&quot;)
+strokeEndAnimation.fromValue = shape.strokeEnd
+strokeEndAnimation.toValue = stroke.end
+strokeEndAnimation.duration = duration
+strokeEndAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+strokeEndAnimation.fillMode = kCAFillModeBoth
+
+//! 2
+shape.strokeEnd = stroke.end
+shape.addAnimation(strokeEndAnimation, forKey: strokeEndAnimation.keyPath
+</code></pre>
+
+<p>The only important bit here is how we ensure that our model matches presentation:
+CoreAnimation have 2 layers, model and <strong>presentationLayer</strong>.</p>
+
+<p>When you perform CAAnimation you are only modyfing the presentation part.</p>
+
+<p>Once the animation finishes you will see your object in the old configuration.</p>
+
+<p>To keep our model and presentation in sync:</p>
+
+<ul>
+<li>set <strong>fromValue</strong> to current layer value</li>
+<li>before running animation set the layer value to our target <strong>toValue</strong></li>
+</ul>
+
+<p>Triggering both states on scroll is straightforward:</p>
+
+<pre><code class="language-swift">func scrollViewDidScroll(scrollView: UIScrollView) {
+  let deadZone = (start: CGFloat(10), end: CGFloat(50))
+  if (scrollView.contentOffset.y &lt; deadZone.start &amp;&amp; isCollapsed) {
+      animateToOpen(headerShapeLayer, duration: 0.25)
+  } else
+      if (scrollView.contentOffset.y &gt; deadZone.end &amp;&amp; !isCollapsed) {
+          animateToCollapsed(headerShapeLayer, duration: 0.25)
+      }
+  }
+</code></pre>
+
+<h2 id="conclusion:e0a6f3dca623305985d47b12797017e3">Conclusion</h2>
+
+<p>UIKit and CoreGraphics are very powerful, we can achieve a lot of great looking effects without a lot of work.</p>
+
+<p>It&rsquo;s worth investing your time into learning more about CoreGraphics. Make sure to read more about power of CALayer compositions.</p>
+
+<p>I wanted to use Swift Playgrounds, but since I wanted User interaction <a href="https://github.com/krzysztofzablocki/KZPlayground/">I&rsquo;ve used mine, they now support Swift as well as Objective-C</a>.</p>
+
+<p>Related:</p>
+
+<ul>
+<li><a href="/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/">Pinch to Reveal Animation</a></li>
+</ul>
+
+            </article>
+
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/iOS">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/Tutorial">Tutorial</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/Experiments">Experiments</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/UIX">UIX</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/Animation">Animation</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+<script src="/js/readingtime.js"></script>
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
+

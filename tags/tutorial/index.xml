@@ -7,7 +7,22 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 30 Sep 2014 00:00:00 UTC</updated>
+    <updated>Wed, 04 Nov 2015 13:29:44 &#43;0100</updated>
+    
+    <item>
+      <title>Prototyping floating burger menu with CAShapeLayer</title>
+      <link>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
+      <pubDate>Wed, 04 Nov 2015 13:29:44 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
+      <description>&lt;video autoplay loop&gt;
+  &lt;source src=&#34;http://merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+
+&lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A Swift introduction into fitness</title>

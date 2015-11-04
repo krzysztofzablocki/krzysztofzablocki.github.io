@@ -7,7 +7,22 @@
     <language>en-us</language>
     
     
-    <updated>Thu, 15 Jan 2015 00:00:00 UTC</updated>
+    <updated>Wed, 04 Nov 2015 13:29:44 &#43;0100</updated>
+    
+    <item>
+      <title>Prototyping floating burger menu with CAShapeLayer</title>
+      <link>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
+      <pubDate>Wed, 04 Nov 2015 13:29:44 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
+      <description>&lt;video autoplay loop&gt;
+  &lt;source src=&#34;http://merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
+Your browser does not support the video tag.
+&lt;/video&gt;
+
+&lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Simple way to scrape web with Ruby</title>
@@ -208,19 +223,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       
       <guid>http://merowing.info/2014/02/ios-tips/</guid>
       <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Fit geek</title>
-      <link>http://merowing.info/2014/02/fit-geek/</link>
-      <pubDate>Mon, 10 Feb 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/02/fit-geek/</guid>
-      <description>&lt;p&gt;If you ever meet me you probably already know my second biggest passion after programming is Bodybuilding.
-I used to be a fat kid weighting 105 kg, now I&amp;rsquo;m ripped.&lt;/p&gt;
-
-&lt;p&gt;Want to learn how you too can become fit with ease?&lt;/p&gt;
 </description>
     </item>
     
