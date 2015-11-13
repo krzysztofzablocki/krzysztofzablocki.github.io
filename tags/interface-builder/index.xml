@@ -7,7 +7,23 @@
     <language>en-us</language>
     
     
-    <updated>Thu, 11 Apr 2013 00:00:00 UTC</updated>
+    <updated>Fri, 13 Nov 2015 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Tips for Interface Builder</title>
+      <link>http://merowing.info/2015/11/tips-for-interface-builder/</link>
+      <pubDate>Fri, 13 Nov 2015 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2015/11/tips-for-interface-builder/</guid>
+      <description>&lt;p&gt;Young developers are happy when they write a lot of code, they like to brag about that project that has tens of thousands lines of code they wrote.&lt;/p&gt;
+
+&lt;p&gt;As we get more experienced, we realize that code is expensive. It&amp;rsquo;s expensive to maintain, debug and reason about.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s why we should aim to use tools that can help us avoid writing boilerplate code, one of those tools is Interface Builder.&lt;/p&gt;
+
+&lt;p&gt;Here are a few of my favourite tips &amp;amp; tricks.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS Game with Interface Builder</title>

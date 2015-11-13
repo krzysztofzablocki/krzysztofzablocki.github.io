@@ -7,7 +7,23 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 04 Nov 2015 13:29:44 &#43;0100</updated>
+    <updated>Fri, 13 Nov 2015 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Tips for Interface Builder</title>
+      <link>http://merowing.info/2015/11/tips-for-interface-builder/</link>
+      <pubDate>Fri, 13 Nov 2015 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2015/11/tips-for-interface-builder/</guid>
+      <description>&lt;p&gt;Young developers are happy when they write a lot of code, they like to brag about that project that has tens of thousands lines of code they wrote.&lt;/p&gt;
+
+&lt;p&gt;As we get more experienced, we realize that code is expensive. It&amp;rsquo;s expensive to maintain, debug and reason about.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s why we should aim to use tools that can help us avoid writing boilerplate code, one of those tools is Interface Builder.&lt;/p&gt;
+
+&lt;p&gt;Here are a few of my favourite tips &amp;amp; tricks.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Prototyping floating burger menu with CAShapeLayer</title>
@@ -210,16 +226,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <description>&lt;p&gt;I believe in boy scout rule: &lt;em&gt;&amp;lsquo;Always leave the campground cleaner than you found it.&amp;rsquo;&lt;/em&gt;, that&amp;rsquo;s why I constantly refactor my code so it&amp;rsquo;s clean and tidy.&lt;/p&gt;
 
 &lt;p&gt;What are few less-known refactoring tricks I use to simplify code and make it more readable?&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>7 most common code issues</title>
-      <link>http://merowing.info/2014/03/7-most-common-code-issues/</link>
-      <pubDate>Thu, 20 Mar 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/03/7-most-common-code-issues/</guid>
-      <description>&lt;p&gt;What are top 7 most common issues I find doing Code Reviews?&lt;/p&gt;
 </description>
     </item>
     
