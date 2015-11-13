@@ -289,7 +289,7 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
 {
     NSMutableArray *array = [NSMutableArray new];
     [viewControllersAndMocks enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL *stop) {
-        UIViewController *replacement = [viewController ugc_replacementController];
+        UIViewController *replacement = [viewController kz_replacementController];
         [array addObject:replacement ?: viewController];
     }];
     return [array copy];
@@ -388,8 +388,8 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
 <p>Having to deal with such a requirement, I&rsquo;ve created a simple DSL Syntax to describe our values for each device:</p>
 
 <pre><code class="language-objectivec">KZ_SPEC(Create, (@{
-  @&quot;create.size.captionTextWidth&quot; : ugc_spec(260, 250, 234, 220),
-  @&quot;create.size.segmentCollectionView.height&quot; : ugc_spec(116, 116, 116, 116).offsetBy(16)
+  @&quot;create.size.captionTextWidth&quot; : kz_spec(260, 250, 234, 220),
+  @&quot;create.size.segmentCollectionView.height&quot; : kz_spec(116, 116, 116, 116).offsetBy(16)
 }))
 </code></pre>
 
