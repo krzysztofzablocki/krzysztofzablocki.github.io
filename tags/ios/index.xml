@@ -7,7 +7,30 @@
     <language>en-us</language>
     
     
-    <updated>Fri, 13 Nov 2015 00:00:00 UTC</updated>
+    <updated>Tue, 17 Nov 2015 13:51:00 &#43;0100</updated>
+    
+    <item>
+      <title>Swift init()</title>
+      <link>http://merowing.info/2015/11/swift-init/</link>
+      <pubDate>Tue, 17 Nov 2015 13:51:00 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/11/swift-init/</guid>
+      <description>&lt;p&gt;With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.&lt;/p&gt;
+
+&lt;p&gt;I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>swift initializers</title>
+      <link>http://merowing.info/swift-initializers/</link>
+      <pubDate>Tue, 17 Nov 2015 13:32:53 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/swift-initializers/</guid>
+      <description>&lt;p&gt;With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.
+I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Tips for Interface Builder</title>
@@ -208,30 +231,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
 
 &lt;p&gt;I recently gave talk about tools I use and why.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Stop writing data parsing code in your apps</title>
-      <link>http://merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps/</link>
-      <pubDate>Thu, 25 Jul 2013 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps/</guid>
-      <description>&lt;p&gt;Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do this parsing by hand, always repeating the same code for each class they need to map.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ll show show you how you could simplify your code and make it more readable at the same time.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Expanded use of asserts</title>
-      <link>http://merowing.info/2013/07/expanded-use-of-asserts/</link>
-      <pubDate>Wed, 03 Jul 2013 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2013/07/expanded-use-of-asserts/</guid>
-      <description>&lt;p&gt;Do you use assertions in your code? What for? How do you handle release builds ?&lt;/p&gt;
-
-&lt;p&gt;There is a better way than NSAssert&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
