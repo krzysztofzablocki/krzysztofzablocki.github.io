@@ -60,7 +60,7 @@ I do not like having a function do more than one thing, so I like to split my in
 <meta itemprop="keywords" content="animation,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="317">
+<meta itemprop="wordCount" content="547">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -140,7 +140,7 @@ I do not like having a function do more than one thing, so I like to split my in
                 <h1 class="h2 py2">Swift init()</h1>
                 <span class="post-meta">Nov 17, 2015</span>
                 
-                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>2 minute read</em></span>
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
                 
                 <br>
 
@@ -166,44 +166,28 @@ I do not like having a function do more than one thing, so I like to split my in
 
 <p>I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.</p>
 
-<p>Let&rsquo;s say you have a class like(<em>random object types, just to show some basic complexity</em>):</p>
+<p>Let&rsquo;s say you have a class like:</p>
 
 <pre><code class="language-swift">class Foo {
-  private let window: UIWindow
-  private let controller: UIViewController
+  let coreDataStack: CoreDataStack
+  let mfpService = MFPService()
+  let integrator: IntegrationService
+  let flowController: FlowController
+  let window: UIWindow
 }
 </code></pre>
 
-<p>You could initialize them like:</p>
+<p>This kind of class might require quite a few lines to initialize all the variables, so we&rsquo;d like to split the initialization logic into functions, something like:</p>
 
-<pre><code class="language-swift">init() {
-  controller = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateInitialViewController()!    
-  window = UIWindow(frame: UIScreen.mainScreen().bounds)
-  window.backgroundColor = UIColor.whiteColor()
-  window.makeKeyAndVisible()
+<pre><code class="language-swift">init(coreDataStack stack: CoreDataStack) {
+  coreDataStack = stack
+  integrator = setupIntegrator(stack, provider: mfpService)
+  flowController = setupFlowController(stack)
+  window = setupWindow(flowController.rootViewController)
 }
 </code></pre>
 
-<p>Given this is a simple example, but you can have more complex objects or more variables, let&rsquo;s say you&rsquo;d like to split the code into specific functions e.g.</p>
-
-<pre><code class="language-swift">init() {
-  controller = setupController()
-  window = setupWindow()
-}
-  
-private func setupController() -&gt; UIViewController {
-  return UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateInitialViewController()!
-}
-  
-private func setupWindow() -&gt; UIWindow {
-  UIWindow(frame: UIScreen.mainScreen().bounds)
-  window.backgroundColor = UIColor.whiteColor()
-  window.makeKeyAndVisible()
-  return window
-}
-</code></pre>
-
-<p>Just refactored functions to a subroutine&hellip; guess what, it doesn&rsquo;t work:
+<p>So just a regular refactor&hellip; guess what, this won&rsquo;t work:
 
 <figure class="center">
     
@@ -216,43 +200,103 @@ private func setupWindow() -&gt; UIWindow {
 
 <p>Not cool.</p>
 
-<p>I wonder what is the best way to be able to split initialization code into subroutines but maintain immutability of the references?</p>
+<p>I talked with few smart people on twitter and looked at some options, here are the few I thought it will be good to mention.</p>
 
-<p>So far my favourite solution is using private lazy var&rsquo;s, and if you need to have it execute side-effect on init (making window active?) reference it on init.</p>
+<p>Let&rsquo;s look at some options</p>
 
-<pre><code class="language-swift">class Foo3 {
-    init() {
-        let _ = controller
-        let _ = window
+<h3 id="option-1-implicitly-unwraped-optional-var:c85725a1bc37aa8abd76c5fae53a5978">Option 1 - implicitly unwraped optional var!</h3>
+
+<pre><code class="language-swift">var integrator: IntegrationService!
+</code></pre>
+
+<p>This option sucks big time, the reason we have Swift is to write safer code.</p>
+
+<p>Please do not write it like this.</p>
+
+<h3 id="option-2-lazy-var-s-with-side-effects:c85725a1bc37aa8abd76c5fae53a5978">Option 2 - lazy var&rsquo;s with side-effects</h3>
+
+<p>We can use private lazy var&rsquo;s, and have it execute side-effects</p>
+
+<pre><code class="language-swift">class Foo_lazy {
+  let coreDataStack: CoreDataStack
+  let mfpService = MFPService()
+  
+  init(coreDataStack stack: CoreDataStack) {
+    coreDataStack = stack
+    let _ = integrator
+    let _ = rootFlowController
+    let _ = window
+  }
+  
+  lazy var rootFlowController: FlowController = {
+    return FlowController(coreDataStack: self.coreDataStack)
+  }()
+  
+  lazy var window: UIWindow = {
+    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window.backgroundColor = UIColor.whiteColor()
+    window.rootViewController = self.rootFlowController.rootViewController
+    window.makeKeyAndVisible()
+    return window
+  }()
+  
+  
+  lazy var integrator: IntegrationService = {
+    let coreDataProcessor = CoreDataReportProcessor(stack: self.coreDataStack)
+    let integrator = IntegrationService(provider: self.mfpService) {
+      coreDataProcessor.processReports($0)
     }
-    
-    private lazy var controller: UIViewController = {
-        return UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateInitialViewController()!
-    }()
-    
-    private lazy var window: UIWindow = {
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window.backgroundColor = UIColor.whiteColor()
-        window.makeKeyAndVisible()
-        return window
-    }()
+    return integrator
+  }()
 }
 </code></pre>
 
-<p>This gives me:</p>
+<p>This solution allows us to split code and compiles fine, but it&rsquo;s not so good because:</p>
 
 <ul>
-<li>Immutable variable</li>
-<li>Ensuring it&rsquo;s executed only once</li>
-<li>Code division</li>
-<li>Actually compile&hellip;</li>
+<li>Variables are not really immutable, we can make it private so nothing outside class scope can modify them but still, not immutable.</li>
+<li>I do not like triggering side effects like that, it feels very dirty</li>
+</ul>
+
+<h3 id="option-3-private-static-functions:c85725a1bc37aa8abd76c5fae53a5978">Option 3 - private static functions</h3>
+
+<p>We can define private static functions and use that to setup our variables (and we can also put them into private class extension):</p>
+
+<pre><code class="language-swift">class Foo_ext {
+  let coreDataStack: CoreDataStack
+  let mfpService = MFPService()
+  let integrator: IntegrationService
+  let flowController: FlowController
+  let window: UIWindow
+  
+  init(coreDataStack stack: CoreDataStack) {
+    coreDataStack = stack
+    integrator = Foo_ext.SetupIntegrator(stack, provider: self.mfpService)
+    flowController = Foo_ext.SetupFlowController(stack)
+    window = Foo_ext.SetupWindow(self.flowController.rootViewController)
+  }
+}
+</code></pre>
+
+<p>This is by far <strong>my favorite option</strong> now:</p>
+
+<ul>
+<li>Ensures immutable variables</li>
+<li>Doesn&rsquo;t need to use side-effects to trigger requested behaviour</li>
+<li>clean and without any hack&rsquo;s around the compiler</li>
 </ul>
 
 <h2 id="conclusion:c85725a1bc37aa8abd76c5fae53a5978">Conclusion</h2>
 
-<p>I&rsquo;m just learning Swift so I might have missed a better way to do things.</p>
+<p>There were few other ideas that my friends on twitter suggested, <a href="https://gist.github.com/krzysztofzablocki/6a1b6afab974f442f5ff">you can take a look here</a></p>
 
-<p>If you know one, please do let me know on Twitter as I&rsquo;d love to learn about it!</p>
+<p>As I just started learning Swift, I must say I&rsquo;m liking it more and more, especially since 2.0.</p>
+
+<p>After 20 years of programming experience, it&rsquo;s fun to feel like a rookie again, fortunately we have a great community that&rsquo;s willing to share their knowledge.</p>
+
+<p>Big shoutout to <a href="http://twitter.com/jessyMeow">@jessyMeow</a> and <a href="http://twitter.com/KostiaKoval">@KostiaKoval</a> as they pointed out some better ways to deal with this than I originaly thought :)</p>
+
+<p>If you have other solutions you like, please do let me know on Twitter as I&rsquo;d love to learn about it!</p>
 
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
