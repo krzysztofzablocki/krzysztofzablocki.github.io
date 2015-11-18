@@ -22,17 +22,6 @@
     </item>
     
     <item>
-      <title>swift initializers</title>
-      <link>http://merowing.info/swift-initializers/</link>
-      <pubDate>Tue, 17 Nov 2015 13:32:53 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/swift-initializers/</guid>
-      <description>&lt;p&gt;With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.
-I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Tips for Interface Builder</title>
       <link>http://merowing.info/2015/11/tips-for-interface-builder/</link>
       <pubDate>Fri, 13 Nov 2015 00:00:00 UTC</pubDate>
@@ -227,6 +216,16 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>iOS App Architecture, Part 2: Data parsing</title>
+      <link>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
+      <pubDate>Thu, 03 Apr 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
 </description>
     </item>
     
