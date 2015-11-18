@@ -60,7 +60,7 @@ I do not like having a function do more than one thing, so I like to split my in
 <meta itemprop="keywords" content="animation,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="547">
+<meta itemprop="wordCount" content="610">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -276,6 +276,29 @@ I do not like having a function do more than one thing, so I like to split my in
     window = Foo_ext.SetupWindow(self.flowController.rootViewController)
   }
 }
+
+private extension Foo_ext {
+  static func SetupIntegrator(stack: CoreDataStack, provider: Provider) -&gt; IntegrationService {
+    let coreDataProcessor = CoreDataReportProcessor(stack: stack)
+    let integrator = IntegrationService(provider: provider) {
+      coreDataProcessor.processReports($0)
+    }
+    return integrator
+  }
+  
+  static func SetupFlowController(stack: CoreDataStack) -&gt; FlowController {
+    return FlowController(coreDataStack: stack)
+  }
+  
+  static func SetupWindow(controller: UIViewController) -&gt; UIWindow {
+    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    window.backgroundColor = UIColor.whiteColor()
+    window.rootViewController = controller
+    window.makeKeyAndVisible()
+    return window
+  }
+}
+
 </code></pre>
 
 <p>This is by far <strong>my favorite option</strong> now:</p>
