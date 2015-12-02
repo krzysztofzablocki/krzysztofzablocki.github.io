@@ -7,7 +7,25 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 17 Nov 2015 13:51:00 &#43;0100</updated>
+    <updated>Tue, 24 Nov 2015 12:29:37 &#43;0100</updated>
+    
+    <item>
+      <title>The beauty of imperfection</title>
+      <link>http://merowing.info/2015/11/the-beauty-of-imperfection/</link>
+      <pubDate>Tue, 24 Nov 2015 12:29:37 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/11/the-beauty-of-imperfection/</guid>
+      <description>&lt;video autoplay loop&gt;
+  &lt;source src=&#34;http://merowing.info/2015/12/dot-animated.mov&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+
+&lt;p&gt;Perfection is not something one can truly achieve, so it’s very smart that one of the best meditation services called &lt;a href=&#34;https://www.headspace.com&#34;&gt;Headspace&lt;/a&gt; is using an imperfect dot as their brand logo.&lt;/p&gt;
+
+&lt;p&gt;If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.&lt;/p&gt;
+
+&lt;p&gt;When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Swift init()</title>
@@ -220,16 +238,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <description>&lt;p&gt;I believe in boy scout rule: &lt;em&gt;&amp;lsquo;Always leave the campground cleaner than you found it.&amp;rsquo;&lt;/em&gt;, that&amp;rsquo;s why I constantly refactor my code so it&amp;rsquo;s clean and tidy.&lt;/p&gt;
 
 &lt;p&gt;What are few less-known refactoring tricks I use to simplify code and make it more readable?&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>7 most common code issues</title>
-      <link>http://merowing.info/2014/03/7-most-common-code-issues/</link>
-      <pubDate>Thu, 20 Mar 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/03/7-most-common-code-issues/</guid>
-      <description>&lt;p&gt;What are top 7 most common issues I find doing Code Reviews?&lt;/p&gt;
 </description>
     </item>
     
