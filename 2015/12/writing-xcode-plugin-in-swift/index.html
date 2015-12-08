@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="881">
+<meta itemprop="wordCount" content="883">
 
 
 
@@ -187,8 +187,8 @@
 
 <p>That way you can either use your own logging mechanism and just add this simple prefix, e.g.</p>
 
-<pre><code class="language-swift">func logMessage(message: String, filename: String = __FILE__, line: Int = __LINE__, func: String = __FUNCTION__) {
-    print(&quot;\(filename.lastPathComponent):\(line) \(func):\r\(message)&quot;)
+<pre><code class="language-swift">func logMessage(message: String, filename: String = __FILE__, line: Int = __LINE__, funct: String = __FUNCTION__) {
+    print(&quot;\((filename as NSString).lastPathComponent):\(line) \(funct):\r\(message)&quot;)
 }
 </code></pre>
 
