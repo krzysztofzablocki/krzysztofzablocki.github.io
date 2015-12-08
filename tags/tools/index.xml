@@ -7,7 +7,33 @@
     <language>en-us</language>
     
     
-    <updated>Thu, 23 Oct 2014 00:00:00 UTC</updated>
+    <updated>Tue, 08 Dec 2015 11:07:09 &#43;0100</updated>
+    
+    <item>
+      <title>Writing Xcode plugin in Swift</title>
+      <link>http://merowing.info/2015/12/writing-xcode-plugin-in-swift/</link>
+      <pubDate>Tue, 08 Dec 2015 11:07:09 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/12/writing-xcode-plugin-in-swift/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2015/12/logs.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve found myself using Xcode a lot more than I did in Objective-C.&lt;/p&gt;
+
+&lt;p&gt;One of things I’ve missed a lot from my &lt;a href=&#34;https://www.jetbrains.com/objc/&#34;&gt;AppCode&lt;/a&gt; setup, is the  ability to jump to specific file &amp;amp; line that logged a console message.&lt;/p&gt;
+
+&lt;p&gt;Because Xcode doesn’t offer such functionality and because I do not like to complain, I’ve decided to write my own plugin for it.&lt;/p&gt;
+
+&lt;p&gt;I wrote it in Swift.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Playgrounds for Objective C</title>
