@@ -7,7 +7,16 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 08 Dec 2015 11:07:09 &#43;0100</updated>
+    <updated>Thu, 10 Dec 2015 12:14:28 &#43;0100</updated>
+    
+    <item>
+      <title>The best of my creations</title>
+      <link>http://merowing.info/bestOf/</link>
+      <pubDate>Thu, 10 Dec 2015 12:14:28 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/bestOf/</guid>
+      <description>This is an list of what I think are best things you should check out, a lot of it is based on usefulness / popularity but also my personal view how important or helpful they are. Libraries / Tools KZPlaygrounds - Playgrounds that can support both Swift and Objective-C + a lot of extra features that will make your life easier. KZPropertyMapper - If you have to map JSON in Objective-C, this is really helpful and it requires nothing at all from your code base, no subclassing, no dependencies and no restrictions.</description>
+    </item>
     
     <item>
       <title>Writing Xcode plugin in Swift</title>
@@ -184,7 +193,7 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <guid>http://merowing.info/2014/10/how-do-i-work/</guid>
       <description>&lt;p&gt;I’ve been programming for 18 years now, doing commercial work for the last 6.&lt;/p&gt;
 
-&lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affect the way I work.&lt;/p&gt;
+&lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affected the way I work.&lt;/p&gt;
 
 &lt;p&gt;What matters and how I go about working for my clients?&lt;/p&gt;
 </description>
@@ -234,18 +243,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <description>&lt;p&gt;I wrote a blogpost about improving iteration speed and why code injection is awesome when you work on small changes.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://www.lextech.com/2014/07/3-big-ways-to-speed-up-your-development-cycle/&#34;&gt;Read it on Lextech blog&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Implementing observable in Swift</title>
-      <link>http://merowing.info/2014/07/implementing-observable-in-swift/</link>
-      <pubDate>Thu, 17 Jul 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/07/implementing-observable-in-swift/</guid>
-      <description>&lt;p&gt;KVO has been integral part of Cocoa programming, yet it&amp;rsquo;s not available for pure Swift classes.&lt;/p&gt;
-
-&lt;p&gt;Is there a way to implement your own implementation of native KVO?&lt;/p&gt;
 </description>
     </item>
     
