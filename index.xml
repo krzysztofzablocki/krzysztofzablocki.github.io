@@ -7,7 +7,23 @@
     <language>en-us</language>
     
     
-    <updated>Thu, 10 Dec 2015 12:14:28 &#43;0100</updated>
+    <updated>Wed, 16 Dec 2015 22:23:13 &#43;0100</updated>
+    
+    <item>
+      <title>Details matter - harnessing the power of CoreAnimation</title>
+      <link>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</link>
+      <pubDate>Wed, 16 Dec 2015 22:23:13 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</guid>
+      <description>&lt;p&gt;A friend showed me animations from &lt;a href=&#34;https://medium.com/bridge-collection/improve-the-payment-experience-with-animations-3d1b0a9b810e#.15j1me98l&#34;&gt;Stripe Checkout&lt;/a&gt; and asked: &amp;ldquo;how we could implement that on iOS?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Quite simply, CoreAnimation is very powerful and if one learns how to harness that power, they do not need write a lot of code.&lt;/p&gt;
+
+&lt;video autoplay loop&gt;
+  &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+</description>
+    </item>
     
     <item>
       <title>The best of my creations</title>
@@ -231,18 +247,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       
       <guid>http://merowing.info/2014/08/writing-less-code/</guid>
       <description>&lt;p&gt;What are some of my favorite techniques for cleaner and more readable code?&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Improving development speed</title>
-      <link>http://merowing.info/2014/07/improving-development-speed/</link>
-      <pubDate>Fri, 18 Jul 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/07/improving-development-speed/</guid>
-      <description>&lt;p&gt;I wrote a blogpost about improving iteration speed and why code injection is awesome when you work on small changes.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.lextech.com/2014/07/3-big-ways-to-speed-up-your-development-cycle/&#34;&gt;Read it on Lextech blog&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
