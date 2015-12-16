@@ -11,10 +11,10 @@
     
     <item>
       <title>Details matter - harnessing the power of Core Animation</title>
-      <link>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-core-animation/</link>
+      <link>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</link>
       <pubDate>Wed, 16 Dec 2015 22:23:13 &#43;0100</pubDate>
       
-      <guid>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-core-animation/</guid>
+      <guid>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</guid>
       <description>&lt;p&gt;A friend showed me animations from &lt;a href=&#34;https://medium.com/bridge-collection/improve-the-payment-experience-with-animations-3d1b0a9b810e#.15j1me98l&#34;&gt;Stripe Checkout&lt;/a&gt; and asked: &amp;ldquo;how we could implement that on iOS?&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;Quite simply, Core Animation is very powerful and if one learns how to harness that power, they do not need write a lot of code.&lt;/p&gt;
