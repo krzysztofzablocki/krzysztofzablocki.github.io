@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <title>Details matter - harnessing the power of CoreAnimation - Krzysztof Zabłocki</title>
+  <title>Details matter - harnessing the power of Core Animation - Krzysztof Zabłocki</title>
   <link href="http://gmpg.org/xfn/11" rel="profile">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest CoreAnimation powers.">
+<meta name="description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest Core Animation powers.">
 
 <meta name="author" content="Krzysztof Zabłocki">
 
 
-<meta property="og:title" content="Details matter - harnessing the power of CoreAnimation" />
-<meta property="og:description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest CoreAnimation powers." />
+<meta property="og:title" content="Details matter - harnessing the power of Core Animation" />
+<meta property="og:description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest Core Animation powers." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/" />
+<meta property="og:url" content="http://merowing.info/2015/12/details-matter---harnessing-the-power-of-core-animation/" />
 
 <meta property="og:image" content="http://merowing.info/2015/12/details.gif" />
 
@@ -52,8 +52,8 @@
 <meta property="fb:app_id" content="406961899319006" />
 
 
-<meta itemprop="name" content="Details matter - harnessing the power of CoreAnimation">
-<meta itemprop="description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest CoreAnimation powers.">
+<meta itemprop="name" content="Details matter - harnessing the power of Core Animation">
+<meta itemprop="description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest Core Animation powers.">
 
 
 
@@ -64,7 +64,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="763">
+<meta itemprop="wordCount" content="766">
 
 
 
@@ -73,14 +73,14 @@
 
 
 
-<meta name="twitter:title" content="Details matter - harnessing the power of CoreAnimation"/>
-<meta name="twitter:description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest CoreAnimation powers."/>
+<meta name="twitter:title" content="Details matter - harnessing the power of Core Animation"/>
+<meta name="twitter:description" content="Animation can add a lot of beauty to your application, little details matter. Learn how to harnest Core Animation powers."/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
 
 
 
-  <link rel="canonical" href="http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/">
+  <link rel="canonical" href="http://merowing.info/2015/12/details-matter---harnessing-the-power-of-core-animation/">
   <link href="/css/prism.css" rel="stylesheet" />
 
   <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
@@ -139,7 +139,7 @@
     <div class="post p2 p-responsive wrap" role="main">
         <div class="measure">
             <div class="post-header mb2">
-                <h1 class="h2 py2">Details matter - harnessing the power of CoreAnimation</h1>
+                <h1 class="h2 py2">Details matter - harnessing the power of Core Animation</h1>
                 <span class="post-meta">Dec 16, 2015</span>
                 
                 <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>4 minute read</em></span>
@@ -166,7 +166,7 @@
 
 <p>A friend showed me animations from <a href="https://medium.com/bridge-collection/improve-the-payment-experience-with-animations-3d1b0a9b810e#.15j1me98l">Stripe Checkout</a> and asked: &ldquo;how we could implement that on iOS?&rdquo;</p>
 
-<p>Quite simply, CoreAnimation is very powerful and if one learns how to harness that power, they do not need write a lot of code.</p>
+<p>Quite simply, Core Animation is very powerful and if one learns how to harness that power, they do not need write a lot of code.</p>
 
 <video autoplay loop>
   <source src="/2015/12/details.mov" type="video/mp4">
@@ -302,7 +302,7 @@ self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 
 <p>A Layer content change is animated by leveraging <strong>transitions</strong>, few people know you can actually use that with built-in classes to achieve some pretty cool effects.</p>
 
-<p>The whole idea of animating the button in-place is really cool, and you can achieve that without any subclassing or other techniques, just leveraging CoreAnimation API and writing a few lines of code:</p>
+<p>The whole idea of animating the button in-place is really cool, and you can achieve that without any subclassing or other techniques, just leveraging Core Animation API and writing a few lines of code:</p>
 
 <pre><code class="language-swift">func animateButton(button: UIButton, toTitle title: String, color: UIColor) {
     let transition = CATransition()
@@ -323,7 +323,7 @@ self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 
 <h2 id="conclusion:c51e551faa7ee10598a1c76c42233dd4">Conclusion</h2>
 
-<p>CoreAnimation is powerful tool in your toolbox, learn how to wield it and you&rsquo;ll be able to achieve amazing results with little effort.</p>
+<p>Core Animation is powerful tool in your toolbox, learn how to wield it and you&rsquo;ll be able to achieve amazing results with little effort.</p>
 
 <p>Bonus points: if you realised that you should not use those colors for button text, they just don&rsquo;t match, and remember that Details Matter!</p>
 
@@ -334,8 +334,8 @@ self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 
             <div class="social-icons">
                 <p>Share this post:</p>
-                <div class="addthis_sharing_toolbox left" addthis:url="http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/"
-                     addthis:title="Details matter - harnessing the power of CoreAnimation"></div>
+                <div class="addthis_sharing_toolbox left" addthis:url="http://merowing.info/2015/12/details-matter---harnessing-the-power-of-core-animation/"
+                     addthis:title="Details matter - harnessing the power of Core Animation"></div>
             </div>
             <div class="clearfix"></div>
 
