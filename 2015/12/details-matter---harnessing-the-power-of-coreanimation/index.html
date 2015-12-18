@@ -64,7 +64,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="766">
+<meta itemprop="wordCount" content="768">
 
 
 
@@ -165,7 +165,7 @@
             <article class="post-content">
                 
 
-<p>A friend showed me animations from <a href="https://medium.com/bridge-collection/improve-the-payment-experience-with-animations-3d1b0a9b810e#.15j1me98l">Stripe Checkout</a> and asked: &ldquo;how we could implement that on iOS?&rdquo;</p>
+<p>A friend showed me animations from <a href="https://medium.com/bridge-collection/improve-the-payment-experience-with-animations-3d1b0a9b810e#.15j1me98l">Stripe Checkout</a> and asked: &ldquo;how could we implement that on iOS?&rdquo;</p>
 
 <p>Quite simply, Core Animation is very powerful and if one learns how to harness that power, they do not need write a lot of code.</p>
 
@@ -175,28 +175,28 @@
 
 <h2 id="dissecting-different-animations:c51e551faa7ee10598a1c76c42233dd4">Dissecting different animations</h2>
 
-<p>To achieve above effect, there are 3 different animations that we need to implement:</p>
+<p>To achieve the above effect, there are 3 different animations that we need to implement:</p>
 
 <ol>
-<li>Folding / Expanding - When an user selects remember me, it should grow the view and reveal (unfold) the extra checkboxes.</li>
-<li>Shaking animation - When there is invalid data, we should make it more obvious (adding some red color if we have more than 1 text field would be recommended).</li>
+<li>Folding / Expanding - When a user selects <em>&ldquo;remember me&rdquo;</em>, it should grow the view and reveal (unfold) the extra checkboxes.</li>
+<li>Shaking animation - When there is invalid data, we should make it more obvious (adding some red color if we have more than 1 text field is recommended).</li>
 <li>Animating the button state - Instead of introducing extra controls, let&rsquo;s animate our progression in-place inside our submit button.</li>
 </ol>
 
 <h3 id="common-setup:c51e551faa7ee10598a1c76c42233dd4">Common setup</h3>
 
-<p>I&rsquo;ll be using 3D transforms to achieve Folding and Shaking, as such we need to introduce perspective distortion into play.</p>
+<p>I&rsquo;ll be using 3D transforms to fold and shake, as such we need to introduce perspective distortion.</p>
 
-<p>If we didn&rsquo;t have perspective, objects that are far away in 3D would have same size as those that are near us, as such is required to any 3D effects.</p>
+<p>If we didn&rsquo;t have perspective, objects that are far away in 3D would have the same size as those that are near us, as such it is required to any 3D effects.</p>
 
-<p>In iOS perspective is quity simple, we just need to set <strong>m34</strong> inside our CATransform, as Apple states in documentation it&rsquo;s the zDistance of our camera, what I found works pretty well is <strong>-1 / 900.0f</strong>:</p>
+<p>In iOS perspective is quite simple, we just need to set <strong>m34</strong> inside our CATransform, as Apple states in documentation it&rsquo;s the zDistance of our camera. What I found works pretty well is <strong>-1 / 900.0f</strong>:</p>
 
 <pre><code class="language-swift">var perspectiveTransform = CATransform3DIdentity
 perspectiveTransform.m34 = 1 / -900
 self.worksheetView.layer.sublayerTransform = perspectiveTransform
 </code></pre>
 
-<p>Next we&rsquo;ll define our view, let&rsquo;s call it <strong>RememberView</strong>, this is how it looks in Interface Builder:</p>
+<p>Next we&rsquo;ll define our view, let&rsquo;s call it <strong>RememberView</strong>. This is how it looks in Interface Builder:</p>
 
 <p>
 <figure class="center">
@@ -218,11 +218,11 @@ self.worksheetView.layer.sublayerTransform = perspectiveTransform
 
 <h2 id="folding:c51e551faa7ee10598a1c76c42233dd4">Folding</h2>
 
-<p>To achieve folding we will be:</p>
+<p>To make it fold we will:</p>
 
 <ul>
-<li>animating the view around the X axis</li>
-<li>placing the anchor point to be on top of the view (instead default center), so it animates like a hinge.</li>
+<li>animate the view around the X axis</li>
+<li>place the anchor point to be on top of the view (instead of the default center), so it animates like a hinge.</li>
 <li>make the view single sided so it disappears completely when it&rsquo;s folded.</li>
 </ul>
 
@@ -243,7 +243,7 @@ foldView.layer.doubleSided = false
     }, completion: nil)
 </code></pre>
 
-<p>Now about that <strong>layoutStack()</strong>, unfortunately AutoLayout doesn&rsquo;t play well with 3D Transforms, fortunately there is no fancy logic to layout this manually:</p>
+<p>Now about that <strong>layoutStack()</strong>. Unfortunately AutoLayout doesn&rsquo;t play well with 3D Transforms, but fortunately there is no fancy logic to lay this out manually:</p>
 
 <pre><code class="language-swift">func layoutStack() {
     let margin: CGFloat = 10
@@ -260,32 +260,32 @@ foldView.layer.doubleSided = false
 
 <h2 id="shaking:c51e551faa7ee10598a1c76c42233dd4">Shaking</h2>
 
-<p>To implement shaking, we want to:</p>
+<p>To make it shake, we need to:</p>
 
 <ul>
-<li>Translate in X axis</li>
-<li>Rotate around Y axis</li>
-<li>We&rsquo;ll put both in same animation group for easier management</li>
+<li>Translate on the X axis</li>
+<li>Rotate around the Y axis</li>
+<li>We&rsquo;ll put both in the same animation group for easier management</li>
 </ul>
 
-<p>We could implement that using UIKit, but honestly the keypath animation API is pretty awful for so many steps we want to add here, instead let&rsquo;s use simple <strong>CAKeyFrameAnimation</strong></p>
+<p>We could implement that using UIKit, but honestly the keypath animation API is pretty awful for how many steps we want to add here. Instead let&rsquo;s use a simple <strong>CAKeyFrameAnimation</strong></p>
 
 <pre><code class="language-swift">let translation = CAKeyframeAnimation(keyPath: &quot;transform.translation.x&quot;);
 translation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-translation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0
+translation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0]
 </code></pre>
 
-<p>We create a KeyframeAnimation for our translation keyPath (it&rsquo;s <em>pretty cool</em> you can do this instead of creating whole Transform).
-Values are choosen so they are going back and forth but settling down to 0.</p>
+<p>We create a KeyframeAnimation for our translation keyPath (it&rsquo;s <em>pretty cool</em> you can do this instead of creating a whole Transform).
+Values are chosen so they go back and forth but settle down to 0.</p>
 
-<p>for rotation we do the same, but we need to express angles instead, how useful we have <strong>map</strong> function, we can write less repetitions:</p>
+<p>For rotation we do the same, but need to express angles instead, <strong>map</strong> is really useful to save us repeating code here:</p>
 
 <pre><code class="language-swift">rotation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0].map {
     self.toRadian($0)
 }
 </code></pre>
 
-<p>Then just put it into animation group and set some duration you like:</p>
+<p>Then just put it into an animation group and set a duration you like:</p>
 
 <pre><code class="language-swift">let shakeGroup: CAAnimationGroup = CAAnimationGroup()
 shakeGroup.animations = [translation, rotation]
@@ -293,7 +293,7 @@ shakeGroup.duration = 0.6
 self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 </code></pre>
 
-<p>All it takes to achieve:</p>
+<p>That&rsquo;s all it takes:</p>
 
 <video autoplay loop>
   <source src="/2015/12/shake.mov" type="video/mp4">
@@ -301,9 +301,9 @@ self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 
 <h2 id="animating-button:c51e551faa7ee10598a1c76c42233dd4">Animating button</h2>
 
-<p>A Layer content change is animated by leveraging <strong>transitions</strong>, few people know you can actually use that with built-in classes to achieve some pretty cool effects.</p>
+<p>A layer content change is animated with <strong>transitions</strong>. Few people know you can actually use transitions with built-in classes for some pretty cool effects.</p>
 
-<p>The whole idea of animating the button in-place is really cool, and you can achieve that without any subclassing or other techniques, just leveraging Core Animation API and writing a few lines of code:</p>
+<p>The whole idea of animating the button in-place is really cool, and you can do that without any subclassing or other techniques, just the Core Animation API and a few lines of code:</p>
 
 <pre><code class="language-swift">func animateButton(button: UIButton, toTitle title: String, color: UIColor) {
     let transition = CATransition()
@@ -316,7 +316,7 @@ self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 }
 </code></pre>
 
-<p>That&rsquo;s really all there is needed to achieve:</p>
+<p>That&rsquo;s really all we need for the final effect:</p>
 
 <video autoplay loop>
   <source src="/2015/12/button.mov" type="video/mp4">
@@ -324,9 +324,9 @@ self.layer.addAnimation(shakeGroup, forKey: &quot;shakeIt&quot;
 
 <h2 id="conclusion:c51e551faa7ee10598a1c76c42233dd4">Conclusion</h2>
 
-<p>Core Animation is powerful tool in your toolbox, learn how to wield it and you&rsquo;ll be able to achieve amazing results with little effort.</p>
+<p>Core Animation is a powerful tool in your toolbox. Learn how to wield it and can get amazing results with little effort.</p>
 
-<p>Bonus points: if you realised that you should not use those colors for button text, they just don&rsquo;t match, and remember that Details Matter!</p>
+<p>Bonus points if you realized that you should not use those colors for button text. They just don&rsquo;t match, and remember that Details Matter!</p>
 
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
