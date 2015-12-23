@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Little things that can make your life easier in 2016 - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="What are the little things you can do to be a more productive iOS Developer in 2016?">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Little things that can make your life easier in 2016" />
+<meta property="og:description" content="What are the little things you can do to be a more productive iOS Developer in 2016?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/" />
+
+
+
+<meta property="og:updated_time" content="2015-12-23 10:31:43 &#43;0100 &#43;0100"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2015-12-23 10:31:43 &#43;0100 &#43;0100" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Tools" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Little things that can make your life easier in 2016">
+<meta itemprop="description" content="What are the little things you can do to be a more productive iOS Developer in 2016?">
+
+
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="434">
+
+
+<meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="Little things that can make your life easier in 2016"/>
+<meta name="twitter:description" content="What are the little things you can do to be a more productive iOS Developer in 2016?"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/">
+  <link href="/css/prism.css" rel="stylesheet" />
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+
+
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/projects/">Projects</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Little things that can make your life easier in 2016</h1>
+                <span class="post-meta">Dec 23, 2015</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                
+
+<p>As we are closing this year, let&rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.</p>
+
+<h2 id="using-the-power-of-user-breakpoints:2569d792044389772f6dc17b9a5c9e5f">Using the power of User Breakpoints</h2>
+
+<p>We use breakpoints quite a lot, but I see that most of my friends only use regular breakpoints whilst debugging.</p>
+
+<p>There is much more you can do with them, e.g. you can elevate your custom breakpoint to User Breakpoint and have them work in all your projects, why would you do that?</p>
+
+<p>Because you can create symbolic breakpoint&rsquo;s that execute code whenever a specific point is reached, e.g. <strong>UIApplicationMain</strong>:</p>
+
+<p>
+<figure class="center">
+    
+        <img src="/2015/12/symbols.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Did you see what did I do there?</p>
+
+<p>Now whenever I debug ANY project I&rsquo;m working on, instead of:</p>
+
+<p>
+<figure class="center">
+    
+        <img src="/2015/12/before_symbols.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>I can get straight to business with:</p>
+
+<p>
+<figure class="center">
+    
+        <img src="/2015/12/after_symbols.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Without extra steps.</p>
+
+<p>And you can do so much more:</p>
+
+<ul>
+<li><p><a href="https://gist.github.com/krzysztofzablocki/4396302">Want to log all methods getting called in Objective-C?</a></p></li>
+
+<li><p><a href="https://gist.github.com/Ashton-W/5c1ede17f8cec1f8b529">Need some other good breakpoints ideas to add?</a></p></li>
+</ul>
+
+<h2 id="making-xcode-better:2569d792044389772f6dc17b9a5c9e5f">Making Xcode better</h2>
+
+<h4 id="plugins:2569d792044389772f6dc17b9a5c9e5f">Plugins</h4>
+
+<p>Here are some of my favourite plugins for Xcode, if you don&rsquo;t give them a try you might be missing out on some really great features:</p>
+
+<ul>
+<li><p><a href="http://alcatraz.io">Alcatraz</a> - this is a plugin that adds a PackageManager into Xcode, which you will use to install all other plugins.</p></li>
+
+<li><p><a href="https://github.com/krzysztofzablocki/KZLinkedConsole">KZLinkedConsole</a> - adds ability to jump straight to the source code that logged an error
+
+<figure class="center">
+    
+        <img src="https://github.com/krzysztofzablocki/KZLinkedConsole/raw/master/logs.gif?raw=true"  />
+    
+    
+</figure>
+
+</p></li>
+
+<li><p><a href="https://github.com/robbiehanson/XcodeColors">XCodeColors</a> - while would you not want to have colors in your Xcode console? makes error <strong>stand out</strong> so much more</p></li>
+
+<li><p><a href="https://github.com/ksuther/KSImageNamed-Xcode">KSImageNamed</a> - adds intelisense with preview to your <strong>imageNamed:</strong> calls</p></li>
+</ul>
+
+<p>
+<figure class="center">
+    
+        <img src="https://camo.githubusercontent.com/c354bf04524df86daeabe7a6d2b9926fac790f85/68747470733a2f2f7261772e6769746875622e636f6d2f6b7375746865722f4b53496d6167654e616d65642d58636f64652f6d61737465722f73637265656e73686f742e676966"  />
+    
+    
+</figure>
+
+</p>
+
+<ul>
+<li><p><a href="https://github.com/omz/ColorSense-for-Xcode">OMColorSense</a> - adds preview to your UIColors and it even allows you to use Color Picker straight from that to modify the code.</p></li>
+
+<li><p><a href="https://github.com/onevcat/VVDocumenter-Xcode">VVDocumenter</a> - if you write libraries you should be adding documentation to them, this plugin makes it easy by giving you context-aware templates</p></li>
+</ul>
+
+<p>
+<figure class="center">
+    
+        <img src="https://camo.githubusercontent.com/ca5518c9872e15b8a95b9d8c5f44bc331977d710/68747470733a2f2f7261772e6769746875622e636f6d2f6f6e65766361742f5656446f63756d656e7465722d58636f64652f6d61737465722f53637265656e53686f742e676966"  />
+    
+    
+</figure>
+
+</p>
+
+<h4 id="hidden-options:2569d792044389772f6dc17b9a5c9e5f">Hidden options</h4>
+
+<p>Open your terminal and type those:</p>
+
+<ul>
+<li>Want to see how long it takes to build your project?</li>
+</ul>
+
+<pre><code class="language-bash">defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
+</code></pre>
+
+<ul>
+<li>Better autocompletion with Fuzzy mode?</li>
+</ul>
+
+<pre><code class="language-bash">defaults write com.apple.dt.Xcode IDECodeCompletionFuzzyMode 3
+defaults write com.apple.dt.Xcode IDEWorkaroundForRadar6288283 3
+</code></pre>
+
+<ul>
+<li>Faster build times by leveraging multi-core CPU ?</li>
+</ul>
+
+<pre><code class="language-bash">defaults write com.apple.dt.Xcode IDEBuildOperationMaxNumberOfConcurrentCompileTasks `sysctl -n hw.ncpu`
+</code></pre>
+
+<h3 id="other:2569d792044389772f6dc17b9a5c9e5f">Other</h3>
+
+<ul>
+<li>Use <a href="https://itunes.apple.com/us/app/iramdisk/id492615400?mt=12">iRamDisk</a> to put your Derived Data and iOS Simulator on fastest memory you have. Even on new SSD it makes a difference.</li>
+<li>Use <a href="https://github.com/krzysztofzablocki/KZPlaygrounds">KZPlaygrounds</a> to implement your new features faster in both Swift and Objective-C</li>
+<li>Using interface builder? you probably got annoyed by view being added as a subview everytime you move it? Just hold <strong>cmd</strong> and it won’t do that ever again.</li>
+<li><a href="/2014/02/ios-developer-tools/">See if some other tools I&rsquo;ve used can save you time</a></li>
+</ul>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" addthis:url="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/"
+                     addthis:title="Little things that can make your life easier in 2016"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/iOS">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/Tools">Tools</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+
+</body>
+</html>
+

@@ -7,7 +7,17 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 16 Dec 2015 22:23:13 &#43;0100</updated>
+    <updated>Wed, 23 Dec 2015 10:31:43 &#43;0100</updated>
+    
+    <item>
+      <title>Little things that can make your life easier in 2016</title>
+      <link>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</link>
+      <pubDate>Wed, 23 Dec 2015 10:31:43 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</guid>
+      <description>&lt;p&gt;As we are closing this year, let&amp;rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Details matter - harnessing the power of Core Animation</title>
@@ -248,16 +258,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       
       <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>iOS App Architecture, Part 1: Setting up</title>
-      <link>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
-      <pubDate>Fri, 14 Mar 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
-      <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
 </description>
     </item>
     
