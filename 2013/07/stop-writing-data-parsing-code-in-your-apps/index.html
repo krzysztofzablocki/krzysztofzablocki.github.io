@@ -265,8 +265,8 @@ If you get data as JSON just write a simple category that transforms JSON to nat
 
             <div class="social-icons">
                 <p>Share this post:</p>
-                <div class="addthis_sharing_toolbox left" addthis:url="http://merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps/"
-                     addthis:title="Stop writing data parsing code in your apps"></div>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2013/07/stop-writing-data-parsing-code-in-your-apps/"
+                     data-title="Stop writing data parsing code in your apps"></div>
             </div>
             <div class="clearfix"></div>
 
@@ -372,7 +372,16 @@ If you get data as JSON just write a simple category that transforms JSON to nat
 
 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
-
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
 </body>
 </html>
 

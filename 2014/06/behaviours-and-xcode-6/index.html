@@ -285,8 +285,8 @@ Let&rsquo;s use that to improve upon my original Behaviours.
 
             <div class="social-icons">
                 <p>Share this post:</p>
-                <div class="addthis_sharing_toolbox left" addthis:url="http://merowing.info/2014/06/behaviours-and-xcode-6/"
-                     addthis:title="Behaviours and Xcode 6"></div>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/06/behaviours-and-xcode-6/"
+                     data-title="Behaviours and Xcode 6"></div>
             </div>
             <div class="clearfix"></div>
 
@@ -392,7 +392,16 @@ Let&rsquo;s use that to improve upon my original Behaviours.
 
 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
-
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
 </body>
 </html>
 

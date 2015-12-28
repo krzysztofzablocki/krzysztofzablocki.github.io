@@ -313,8 +313,8 @@ Your browser does not support the video tag.
 
             <div class="social-icons">
                 <p>Share this post:</p>
-                <div class="addthis_sharing_toolbox left" addthis:url="http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/"
-                     addthis:title="Pinch to reveal animation, like in Boeing Milestones"></div>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/"
+                     data-title="Pinch to reveal animation, like in Boeing Milestones"></div>
             </div>
             <div class="clearfix"></div>
 
@@ -429,7 +429,16 @@ Your browser does not support the video tag.
 
 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
-
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
 </body>
 </html>
 
