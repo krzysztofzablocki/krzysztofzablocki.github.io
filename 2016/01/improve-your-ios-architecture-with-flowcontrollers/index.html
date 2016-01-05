@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Improve your iOS Architecture with FlowControllers - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="What&#39;s an easy way you could improve your iOS app architecture today, regardless if you use MVVM, MVC or similar?">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Improve your iOS Architecture with FlowControllers" />
+<meta property="og:description" content="What&#39;s an easy way you could improve your iOS app architecture today, regardless if you use MVVM, MVC or similar?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/" />
+
+
+
+<meta property="og:updated_time" content="2016-01-05 11:23:46 &#43;0100 &#43;0100"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2016-01-05 11:23:46 &#43;0100 &#43;0100" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="Architecture " />
+
+<meta property="article:tag" content="iOS " />
+
+<meta property="article:tag" content="Tutorial" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Improve your iOS Architecture with FlowControllers">
+<meta itemprop="description" content="What&#39;s an easy way you could improve your iOS app architecture today, regardless if you use MVVM, MVC or similar?">
+
+
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,interface-builder,ios,ios-tips,library,mindset,open-source,process,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="1028">
+
+
+<meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="Improve your iOS Architecture with FlowControllers"/>
+<meta name="twitter:description" content="What&#39;s an easy way you could improve your iOS app architecture today, regardless if you use MVVM, MVC or similar?"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/">
+  <link href="/css/prism.css" rel="stylesheet" />
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+<script type="text/javascript" charset="utf-8" src="//code.jquery.com/jquery-1.8.3.min.js"></script>
+
+
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/about/">About</a>
+<a href="/projects/">Projects</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Improve your iOS Architecture with FlowControllers</h1>
+                <span class="post-meta">Jan 5, 2016</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>5 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                
+
+<p>When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.</p>
+
+<p>Why?</p>
+
+<h3 id="the-problem:752ec918500c63af34d974abc033d6ac">The problem</h3>
+
+<p>Modern apps need to support multiple presentation types for same VC, e.g., on iPhone you push a new view controller but on iPad you either embed it as a containment view controller or show it from popover.</p>
+
+<p>Also in many cases you might want to reuse the same ViewController in different scenario, e.g. Image Picking View Controller can appear in multiple places and be presented differently depending on it&rsquo;s context.</p>
+
+<p>ViewControllers should be implemented in such a way that they don’t depend on their presentation style, after all this is one of the reasons we have <strong>size classes</strong>.</p>
+
+<p>Let’s assume that you do naive version of presenting view controller from other VC’s / ViewModels, you will end up with a bunch of <strong>if statements</strong> and your code will be one <strong>big spaghetti of conditions</strong>.</p>
+
+<p>Since my work as a Consultant often involved reviewing projects and helping teams establish cleaner solutions.</p>
+
+<p>I&rsquo;ve seen a lot of spaghetti code, this is not even close to the worst I&rsquo;ve seen but it&rsquo;s pretty bad already:</p>
+
+<pre><code class="language-swift">func doneButtonTapped() {
+  let vc = NextViewController(prepareNeccesaryState())
+
+  if Device.isIPad() {
+    navigationController.pushViewController(vc, animated: true, completion: nil)
+  } else {
+    var nav = UINavigationController(rootViewController: vc)
+    nav.modalPresentationStyle = UIModalPresentationStyle.Popover
+    var popover = nav.popoverPresentationController
+    popoverContent.preferredContentSize = CGSizeMake(500, 600)
+    popover.delegate = self
+    popover.sourceView = self.view
+    popover.sourceRect = CGRectMake(100, 100, 0, 0)
+
+    presentViewController(nav, animated: true, completion: nil)
+  }
+}
+</code></pre>
+
+<p>The naive approach has lots of issues:</p>
+
+<ul>
+<li>Unnecessary dependencies - one view controller doesn&rsquo;t need to know about the other</li>
+<li>Poor reusability</li>
+<li>Spaghetti code in case your app needs different presentation mode - you end up with a lot of control flow.</li>
+<li>Singletons are tempting as they make it easier to write your code.</li>
+<li>Testing is harder, your VC/VM will have a lot of side-effects.</li>
+</ul>
+
+<h2 id="how-can-we-fix-it:752ec918500c63af34d974abc033d6ac">How can we fix it?</h2>
+
+<h3 id="cleaning-up-your-viewcontrollers-viewmodels:752ec918500c63af34d974abc033d6ac">Cleaning up your ViewControllers / ViewModels</h3>
+
+<blockquote>
+<p>This can be applied to MVVM, MVC and many other common patterns. When I talk about VC/VM, just think about the one you are using right now.</p>
+</blockquote>
+
+<p>Let&rsquo;s start by getting rid of all dependencies, instead of hardcoding related controllers, use <strong>Delegate</strong> or <strong>block based interface</strong></p>
+
+<pre><code class="language-swift">class MyViewController {
+  let onDone = (Void -&gt; Void)?
+
+  func doneButtonTapped() {
+    onDone?(prepareNeccesaryState())
+  }
+}
+</code></pre>
+
+<p>ViewController / ViewModel should:</p>
+
+<ul>
+<li>Not reference other screens</li>
+<li>Doesn&rsquo;t use any of UIKit presentation classes or methods like UINavigationController or presentViewController</li>
+<li>Has interface that other objects can register to known when the functionality is firing e.g. Delegate / Block</li>
+<li>Not reference any singletons, you&rsquo;ll see in a second how this requirement is easy to fill with my approach.</li>
+</ul>
+
+<p>At this point we already improved testability, as we can now test if our interfaces are triggered without having side-effects, pseudo-code:</p>
+
+<pre><code class="language-swift">let vc = createVC()
+var executed = false
+vc.onDone = {
+  executed = true
+}
+//! add code here to trigger done state
+expect(executed).toEventually(beTruthy())
+</code></pre>
+
+<p>But how do we coordinate our app view controllers?</p>
+
+<h3 id="introducing-flowcontroller-s:752ec918500c63af34d974abc033d6ac">Introducing FlowController&rsquo;s</h3>
+
+<p>A FlowController is a simple object that will manage part of your app, or as I like to think about it <strong>‚a subset of use cases’</strong>.</p>
+
+<p>Three main roles of FlowController are:</p>
+
+<ul>
+<li>Configuring view controller for specific context - e.g. different configuration for an Image Picker shown from application Create Post screen and different when changing user avatar</li>
+<li>Listening to important events on each ViewController and using that to coordinate flow between them.</li>
+<li>Providing view controller with objects it needs to fulfill it&rsquo;s role, thus removing any need for singletons in VC&rsquo;s</li>
+</ul>
+
+<pre><code class="language-swift">func configureProgramsViewController(viewController: ProgramsViewController, navigationController: UINavigationController) {
+    viewController.state = state
+    viewController.addProgram = { [weak self] barButton in
+        guard let strongSelf = self else { return }
+        let createVC = R.storyboard.createProgram.initialViewController!
+        strongSelf.configureCreateProgramViewController(createVC, navigationController: navigationController)
+        navigationController.pushViewController(createVC, animated: true)
+    }
+}
+</code></pre>
+
+<p>Common app architecture with FlowControllers looks like this:</p>
+
+<ul>
+<li>Each Application has at least 1 FlowController, the root one created by your AppDelegate.</li>
+</ul>
+
+<blockquote>
+<p>We actually have ApplicationController that creates it, which is owned by AppDelegate, as a rule of thumb you should never reference your AppDelegate, ever.</p>
+</blockquote>
+
+<ul>
+<li>Each FlowController can have child controllers.</li>
+</ul>
+
+<blockquote>
+<p>If you app has some significant subset of user stories that can be thought as a whole and would require multiple screens (e.g. Creating new workout program) then you would create a new child FlowController for that part, and present it from your main flow controller.</p>
+</blockquote>
+
+<ul>
+<li>VC/VM don&rsquo;t know about other VC/VM.</li>
+</ul>
+
+<blockquote>
+<p>Which means they can be re-used anywhere, if one step would be importing something from user photos framework, you can reuse that code in different part of app, e.g., EditProfile can use same picker to select user avatar.</p>
+</blockquote>
+
+<ul>
+<li>Flow Controller configures and coordinates different screens.</li>
+<li>Each VC/VM defines interface to listen to their actions.</li>
+<li>If you need to support multiple devices and different presentation modes, you have other FlowController class, no spaghetti code.</li>
+</ul>
+
+<p>The idea was originally introduced to me by <a href="https://twitter.com/JimRoepcke">Jim</a> and <a href="https://twitter.com/_sjs">Sami</a> over a year ago, we have been using it constantly.</p>
+
+<p>Even though our app changed drastically 3 times, our architecture took it with ease and we were able to reuse a lot of code, and quite a few controllers didn&rsquo;t require any changes.</p>
+
+<p>In my book the advantage of using an architecture like this are clear:</p>
+
+<ul>
+<li>Lack of dependencies between screens.</li>
+<li>High reuse rate.</li>
+<li>Simpler code injection and removal of any singletons.</li>
+<li>Cleaner code, the only spaghetti I see is the one I cook.</li>
+<li>More expressive way to guide the navigation.</li>
+<li>Ability to write different flow between devices while sharing most code.</li>
+<li>Testing each VC/VM in separation and with ease, since everything can be injected. No subclassing necessary.</li>
+</ul>
+
+<p>Now in some architectures there are similar concepts e.g. VIPER has wireframe for routing. But they are usually pretty complex and require a lot of up-front cost to adapt into existing app.</p>
+
+<p>What&rsquo;s great about this approach is the fact it&rsquo;s straightforward to adapt to it right now, no need to wait for new project to try it. And it works in small and big projects just as well.</p>
+
+<p>Doesn&rsquo;t matter if you use MVVM, MVC or other pattern, if you are pushing your screens from one to the other, give it a try.</p>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/"
+                     data-title="Improve your iOS Architecture with FlowControllers"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/architecture%20">Architecture </a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/ios%20">iOS </a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/tutorial">Tutorial</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+

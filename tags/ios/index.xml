@@ -7,7 +7,19 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 23 Dec 2015 10:31:43 &#43;0100</updated>
+    <updated>Tue, 05 Jan 2016 11:23:46 &#43;0100</updated>
+    
+    <item>
+      <title>Improve your iOS Architecture with FlowControllers</title>
+      <link>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</link>
+      <pubDate>Tue, 05 Jan 2016 11:23:46 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</guid>
+      <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
+
+&lt;p&gt;Why?&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Little things that can make your life easier in 2016</title>
@@ -248,16 +260,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>iOS App Architecture, Part 2: Data parsing</title>
-      <link>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
-      <pubDate>Thu, 03 Apr 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
 </description>
     </item>
     
