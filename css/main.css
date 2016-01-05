@@ -21,6 +21,14 @@ html, body {
   height: 100%;
 }
 
+/*video {
+    object-fit: cover;
+}*/
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 img {
   width: auto;
   max-width: 100%;
