@@ -3,9 +3,16 @@
   
   <url>
     <loc>http://merowing.info/</loc>
-    <lastmod>2016-01-14T16:21:06+01:00</lastmod>
+    <lastmod>2016-02-03T13:13:48+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/2016/02/8-books-that-everyone-should-read/</loc>
+    <lastmod>2016-02-03T13:13:48+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
