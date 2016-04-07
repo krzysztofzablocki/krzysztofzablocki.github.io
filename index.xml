@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title></title>
+      <link>http://merowing.info/projects-new-2/</link>
+      <pubDate>Fri, 18 Dec 2015 06:27:04 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/projects-new-2/</guid>
+      <description>Over the years I&amp;rsquo;ve written a lot of projects, here I will show only selected few from each area of my life. Contact me if you&amp;rsquo;d like to learn about more projects I&amp;rsquo;ve worked on. Indie - Pixle Foldify Foldify Zoo Foldify Dino Storest Bord -- Sun&amp;#43; Goals Headspace Explain Everything Beautiful Weather Robin Bold Poker Biznes.pl -- I&amp;rsquo;ve been the only developer on the project and I&amp;rsquo;ve also worked on their UX.</description>
+    </item>
+    
+    <item>
       <title>Selected projects</title>
       <link>http://merowing.info/projects-new/</link>
       <pubDate>Fri, 18 Dec 2015 06:27:04 &#43;0100</pubDate>
@@ -211,15 +220,6 @@
       
       <guid>http://merowing.info/about/</guid>
       <description>I started writing iOS applications when there was no official SDK for it, before that I&amp;rsquo;ve used to work on games and graphics programming. I&amp;rsquo;ve always focused on helping my clients not only with Code solutions but also on delivering the best UIX. My experience includes: Creating multiple award winning apps like Foldify, including Apple Essential, Best of Year and ADA nominee Creating libraries and tools used by thousands of developers, including immersive technologies like Playgrounds Creating 3D Game engines and games Leading development teams, e.g.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://merowing.info/speaking/</link>
-      <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/speaking/</guid>
-      <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling. Mobile Central Europe 12th January 2015 - EN - Empower your Objective-C. CocoaHeads Stockholm 17th December 2014 - EN - Empower your Objective-C.</description>
     </item>
     
   </channel>
