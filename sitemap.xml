@@ -37,6 +37,13 @@
   </url>
   
   <url>
+    <loc>http://merowing.info/projects/</loc>
+    <lastmod>2015-12-18T06:27:04+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://merowing.info/projects-new-2/</loc>
     <lastmod>2015-12-18T06:27:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -45,13 +52,6 @@
   
   <url>
     <loc>http://merowing.info/projects-new/</loc>
-    <lastmod>2015-12-18T06:27:04+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://merowing.info/projects/</loc>
     <lastmod>2015-12-18T06:27:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -310,14 +310,14 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app/</loc>
+    <loc>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</loc>
     <lastmod>2012-03-05T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</loc>
+    <loc>http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app/</loc>
     <lastmod>2012-03-05T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
