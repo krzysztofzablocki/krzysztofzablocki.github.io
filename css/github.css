@@ -1,3 +1,48 @@
+.app-icons ul {
+  margin: 2em auto;
+  width: 100%;
+  font-family: 'HelveticaNeue',Helvetica,sans-serif;
+  font-size: 14px;
+}
+
+.app-icons li {
+  border-radius: 20px;
+  float: left;
+  display: block;
+  width: 25%;
+  height: 120px;
+  margin-bottom: 2em;
+}
+
+.app-icons a {
+  display: block;
+  width: 100px;
+  height: 120px;
+  line-height: 0;
+  margin: 0 auto;
+}
+
+.app-icons img {
+  box-sizing: border-box;
+  border-radius: 20px;
+  height: 100px;
+  width: 100px;
+  position: relative;
+  z-index: -2;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3),inset 0 0 2px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.app-icons span {
+  display: block;
+  width: 100px;
+  height: 10px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1em;
+  padding: 8px 0 0;
+  color: #888;
+}
+
 /**
  * Github widget styles
  * ------------------------------------------------------------------
