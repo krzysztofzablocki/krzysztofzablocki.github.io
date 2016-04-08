@@ -597,6 +597,17 @@ blockquote {
   border-color: #DDD;
   overflow: hidden;
 }
+
+@media (max-width: 650px) {
+  .gh-profile-widget {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    display: none;
+  }
+}
+
+
 .gh-profile-widget a {
   text-decoration: none;
   color: #444;
@@ -685,6 +696,7 @@ blockquote {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-bottom: 10px;
 }
 .gh-profile-widget .follow-button:hover {
   color: inherit;
