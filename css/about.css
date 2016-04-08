@@ -1,0 +1,778 @@
+
+/**
+ * Quote Carousel styles
+ * ------------------------------------------------------------------
+ */
+/* carousel */
+
+#quote-carousel {
+  padding: 0 10px 30px 10px;
+  margin-top: 30px 0px 0px;
+}
+
+
+/* Control buttons  */
+
+#quote-carousel .carousel-control {
+  background: none;
+  color: #222;
+  font-size: 2.3em;
+  text-shadow: none;
+  margin-top: 30px;
+}
+
+
+/* Previous button  */
+
+#quote-carousel .carousel-control.left {
+  left: -12px;
+}
+
+
+/* Next button  */
+
+#quote-carousel .carousel-control.right {
+  right: -12px !important;
+}
+
+
+/* Changes the position of the indicators */
+
+#quote-carousel .carousel-indicators {
+  right: 50%;
+  top: auto;
+  bottom: 0px;
+  margin-right: -19px;
+}
+
+
+/* Changes the color of the indicators */
+
+#quote-carousel .carousel-indicators li {
+  background: #c0c0c0;
+}
+
+#quote-carousel .carousel-indicators .active {
+  background: #333333;
+}
+
+#quote-carousel img {
+  width: 250px;
+  height: 100px
+}
+
+
+/* End carousel */
+
+.item blockquote {
+  border-left: none;
+  margin: 0;
+}
+
+.item blockquote img {
+  margin-bottom: 10px;
+}
+
+.item blockquote p:before {
+  content: "\f10d";
+  font-family: 'Fontawesome';
+  float: left;
+  margin-right: 10px;
+}
+
+
+/**
+  MEDIA QUERIES
+*/
+
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+  #quote-carousel {
+    margin-bottom: 0;
+    padding: 0 40px 30px 40px;
+    margin-top: 30px;
+  }
+}
+
+
+/* Small devices (tablets, up to 768px) */
+
+@media (max-width: 768px) {
+  /* Make the indicators larger for easier clicking with fingers/thumb on mobile */
+  #quote-carousel .carousel-indicators {
+    bottom: -20px !important;
+  }
+  #quote-carousel .carousel-indicators li {
+    display: inline-block;
+    margin: 0px 5px;
+    width: 15px;
+    height: 15px;
+  }
+  #quote-carousel .carousel-indicators li.active {
+    margin: 0px 5px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+/*!
+ * Bootstrap v3.1.1 (http://getbootstrap.com)
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-inner > .item {
+  display: none;
+  position: relative;
+  -webkit-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  line-height: 1;
+}
+
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  display: block;
+}
+
+.carousel-inner > .active {
+  left: 0;
+}
+
+.carousel-inner > .next,
+.carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.carousel-inner > .next {
+  left: 100%;
+}
+
+.carousel-inner > .prev {
+  left: -100%;
+}
+
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+  left: 0;
+}
+
+.carousel-inner > .active.left {
+  left: -100%;
+}
+
+.carousel-inner > .active.right {
+  left: 100%;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15%;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.carousel-control.left {
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0%), color-stop(rgba(0, 0, 0, 0.0001) 100%));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+
+.carousel-control.right {
+  left: auto;
+  right: 0;
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0%), color-stop(rgba(0, 0, 0, 0.5) 100%));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+
+.carousel-control:hover,
+.carousel-control:focus {
+  outline: none;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+}
+
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+}
+
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+}
+
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  font-family: serif;
+}
+
+.carousel-control .icon-prev:before {
+  content: '\2039';
+}
+
+.carousel-control .icon-next:before {
+  content: '\203a';
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  margin-left: -30%;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.carousel-indicators .active {
+  margin: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+}
+
+.carousel-caption {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 20px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.carousel-caption .btn {
+  text-shadow: none;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-control .glyphicon-chevron-left,
+  .carousel-control .glyphicon-chevron-right,
+  .carousel-control .icon-prev,
+  .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -15px;
+    font-size: 30px;
+  }
+  .carousel-caption {
+    left: 20%;
+    right: 20%;
+    padding-bottom: 30px;
+  }
+  .carousel-indicators {
+    bottom: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .col-sm-1,
+  .col-sm-2,
+  .col-sm-3,
+  .col-sm-4,
+  .col-sm-5,
+  .col-sm-6,
+  .col-sm-7,
+  .col-sm-8,
+  .col-sm-9,
+  .col-sm-10,
+  .col-sm-11,
+  .col-sm-12 {
+    float: left;
+  }
+  .col-sm-12 {
+    width: 100%;
+  }
+  .col-sm-11 {
+    width: 91.66666667%;
+  }
+  .col-sm-10 {
+    width: 83.33333333%;
+  }
+  .col-sm-9 {
+    width: 75%;
+  }
+  .col-sm-8 {
+    width: 66.66666667%;
+  }
+  .col-sm-7 {
+    width: 58.33333333%;
+  }
+  .col-sm-6 {
+    width: 50%;
+  }
+  .col-sm-5 {
+    width: 41.66666667%;
+  }
+  .col-sm-4 {
+    width: 33.33333333%;
+  }
+  .col-sm-3 {
+    width: 25%;
+  }
+  .col-sm-2 {
+    width: 16.66666667%;
+  }
+  .col-sm-1 {
+    width: 8.33333333%;
+  }
+}
+
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  border-left: 5px solid #EEE;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/**
+ * App Icons styles
+ * ------------------------------------------------------------------
+ */
+
+.app-icons ul {
+  margin: 2em auto;
+  width: 100%;
+  font-family: 'HelveticaNeue',Helvetica,sans-serif;
+  font-size: 14px;
+}
+
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+  .app-icons li {
+    width: 20%;
+  }
+}
+
+/* Small devices (tablets, up to 768px) */
+
+@media (max-width: 768px) {
+  .app-icons li {
+    width: 40%;
+  }
+}
+
+@media (max-width: 568px) {
+  .app-icons li {
+    width: 50%;
+  }
+}
+
+.app-icons li {
+  border-radius: 20px;
+  float: left;
+  display: block;
+  height: 120px;
+  margin-bottom: 2em;
+}
+
+.app-icons a {
+  display: block;
+  width: 100px;
+  height: 120px;
+  line-height: 0;
+  margin: 0 auto;
+}
+
+.app-icons img {
+  box-sizing: border-box;
+  border-radius: 20px;
+  height: 100px;
+  width: 100px;
+  position: relative;
+  z-index: -2;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3),inset 0 0 2px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.app-icons span {
+  display: block;
+  width: 100px;
+  height: 10px;
+  font-weight: 300;
+  text-align: center;
+  line-height: 1em;
+  padding: 8px 0 0;
+  color: #888;
+}
+
+/**
+ * Github widget styles
+ * ------------------------------------------------------------------
+ */
+.gh-profile-widget {
+  /* followers number */
+  /* List of repositories */
+  float: right;
+
+}
+.gh-profile-widget {
+  width: 280px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: Helvetica;
+  background: #FAFAFA;
+  border-width: 1px 1px 2px;
+  border-style: solid;
+  border-color: #DDD;
+  overflow: hidden;
+}
+.gh-profile-widget a {
+  text-decoration: none;
+  color: #444;
+}
+.gh-profile-widget a:hover {
+  color: #4183C4;
+}
+.gh-profile-widget .name {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #222;
+}
+.gh-profile-widget .error {
+  font-size: 0.8em;
+  color: #444;
+  padding: 10px;
+}
+.gh-profile-widget .error span {
+  display: block;
+  border-bottom: 1px solid #DDD;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+.gh-profile-widget .error span.remain {
+  text-align: center;
+  font-weight: bold;
+}
+.gh-profile-widget .profile {
+  background: #FFF;
+  overflow: hidden;
+  padding: 15px 10px;
+  padding-bottom: 0;
+  min-height: 110px;
+}
+.gh-profile-widget .stats {
+  padding: 5px;
+}
+.gh-profile-widget .languages {
+  position: relative;
+  clear: both;
+  margin: 0 -10px;
+  padding: 10px;
+  border-top: 1px solid #DEDEDE;
+  font-size: 0.8em;
+}
+.gh-profile-widget .languages::before {
+  position: absolute;
+  top: -0.7em;
+  background: #FFF;
+  padding-right: 5px;
+  content: 'Top languages';
+  font-style: italic;
+  color: #555;
+}
+.gh-profile-widget .languages li {
+  display: inline-block;
+  color: #444;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.gh-profile-widget .languages li::after {
+  content: '\2022';
+  margin-left: 10px;
+  color: #999;
+}
+.gh-profile-widget .languages li:last-child::after {
+  content: '';
+}
+.gh-profile-widget .followMe {
+  margin-top: 3px;
+}
+.gh-profile-widget .follow-button {
+  font-size: 0.8em;
+  color: #333;
+  float: left;
+  padding: 0 10px;
+  line-height: 1.5em;
+  border: 1px solid #D5D5D5;
+  border-radius: 3px;
+  font-weight: bold;
+  background: #EAEAEA;
+  background-image: linear-gradient(#FAFAFA, #EAEAEA);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.gh-profile-widget .follow-button:hover {
+  color: inherit;
+  background: #DDD;
+  background-image: linear-gradient(#EEE, #DDD);
+}
+.gh-profile-widget .followMe span {
+  position: relative;
+  background: #FFF;
+  margin-left: 8px;
+  padding: 0 5px;
+  color: #444;
+  font-size: 0.8em;
+  border: 1px solid;
+  border-color: #BBB;
+}
+.gh-profile-widget .followMe span::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 5px;
+  height: 5px;
+  left: -4px;
+  top: 30%;
+  background: inherit;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  border-color: inherit;
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.gh-profile-widget .avatar {
+  width: 64px;
+  height: 64px;
+  float: left;
+  margin: 0 10px 15px 0;
+  margin-left: 0;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 0 #DDD;
+}
+.gh-profile-widget .repos {
+  clear: both;
+}
+.gh-profile-widget .repos .header {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  background: #EAEAEA;
+  background-image: linear-gradient(#FAFAFA, #EAEAEA);
+  border: solid #D5D5D5;
+  border-width: 1px 0;
+  color: #555;
+  font-size: 0.8em;
+  padding: 5px 10px;
+}
+.gh-profile-widget .repos a {
+  position: relative;
+  display: block;
+  padding: 7px 10px;
+  font-size: 0.9em;
+  border-top: 1px solid #DDD;
+}
+.gh-profile-widget .repos a:first-of-type {
+  border: none;
+}
+.gh-profile-widget .repos .repo-name {
+  max-width: 280px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+}
+.gh-profile-widget .repos .updated {
+  max-width: 200px;
+  display: block;
+  font-size: 0.75em;
+  font-style: italic;
+  color: #777;
+}
+.gh-profile-widget .repos .star {
+  position: absolute;
+  font-size: 0.9em;
+  right: 0.5em;
+  top: 1.1em;
+  color: #888;
+}
+.gh-profile-widget .repos .star::after {
+  content: '\a0\2605';
+  font-size: 1.1em;
+  font-weight: bold;
+}

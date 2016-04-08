@@ -114,6 +114,13 @@
   </url>
   
   <url>
+    <loc>http://merowing.info/hire/</loc>
+    <lastmod>2015-10-27T14:09:49+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://merowing.info/speaking/</loc>
     <lastmod>2015-10-27T14:09:49+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -319,6 +326,13 @@
   <url>
     <loc>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</loc>
     <lastmod>2012-03-05T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/test/</loc>
+    <lastmod>0001-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
