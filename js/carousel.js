@@ -306,6 +306,6 @@ $(document).ready(function () {
     //Set the carousel options
     $('#quote-carousel').carousel({
         pause: true,
-        interval: 9000,
+        interval: 15000,
     });
 });
