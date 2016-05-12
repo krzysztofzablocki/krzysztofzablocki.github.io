@@ -76,33 +76,6 @@
     </item>
     
     <item>
-      <title>Selected projects</title>
-      <link>http://merowing.info/projects-alternative/</link>
-      <pubDate>Fri, 18 Dec 2015 06:27:04 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/projects-alternative/</guid>
-      <description>Foldify -- Foldify Foldify Zoo Foldify Dino Storest Bord Sun&amp;#43; Goals Headspace Explain Everything Beautiful Weather Robin Bold Poker Biznes.pl -- Foldify is my most succesful Indie app, but all of them have been featured by Apple. Apple Best of 2013, Editor&amp;rsquo;s Choice Apple Essential app. Apple Design Award nominee. #3 in USA Top Paid Overall. Received multiple awards, including one from the National Ministry of Culture Received rave reviews from all major technical sites, you can read some interviews at Wired, The Next Web and Gigaom.</description>
-    </item>
-    
-    <item>
-      <title>Selected Projects</title>
-      <link>http://merowing.info/projects-original/</link>
-      <pubDate>Fri, 18 Dec 2015 06:27:04 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/projects-original/</guid>
-      <description>Playgrounds for Objective-C and Swift Faster than Swift playgrounds (a lot) Extra controls for tweaking IDE agnostic, once you run it, you can modify the code even from vim. Full iOS simulator and access to all iOS features, so you can prototype production ready code. That and few other useful projects are available on my GitHub page Foldify, Foldify Zoo, Foldify Dino Apple Best of 2013, Editor&amp;rsquo;s Choice Apple Essential app.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://merowing.info/projects/</link>
-      <pubDate>Fri, 18 Dec 2015 06:27:04 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/projects/</guid>
-      <description>I started making apps for iOS in 2008, when the first iPhone was released. Up until then, I was working in games and graphics programming, but I think I can say that I&amp;rsquo;ve settled most comfortably into app-making. Almost a decade later, I&amp;rsquo;m still making apps - across a broad range of industries and technologies. My experience allows me not only to deliver robust technical solutions, but also to add value to user experience and interface design for my clients.</description>
-    </item>
-    
-    <item>
       <title>Details matter - harnessing the power of Core Animation</title>
       <link>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</link>
       <pubDate>Wed, 16 Dec 2015 22:23:13 &#43;0100</pubDate>
@@ -215,11 +188,71 @@
     
     <item>
       <title>About</title>
-      <link>http://merowing.info/about/</link>
+      <link>http://merowing.info/hire/</link>
       <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
       
-      <guid>http://merowing.info/about/</guid>
+      <guid>http://merowing.info/hire/</guid>
       <description>I started making apps for iOS in 2008, when the first iPhone was released. Up until then, I was working in games and graphics programming, but I think I can say that I&amp;rsquo;ve settled most comfortably into app-making. Almost a decade later, I&amp;rsquo;m still making apps - across a broad range of industries and technologies. My experience allows me not only to deliver robust technical solutions, but also to add value to user experience and interface design for my clients.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://merowing.info/speaking/</link>
+      <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/speaking/</guid>
+      <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling. Mobile Central Europe 12th January 2015 - EN - Empower your Objective-C. CocoaHeads Stockholm 17th December 2014 - EN - Empower your Objective-C.</description>
+    </item>
+    
+    <item>
+      <title>Simple way to scrape web with Ruby</title>
+      <link>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</link>
+      <pubDate>Thu, 15 Jan 2015 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
+      <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Playgrounds for Objective C</title>
+      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
+      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
+      <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
+
+&lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
+
+&lt;p&gt;&lt;div 
+class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
+	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
+		allowfullscreen
+		frameborder=&#34;0&#34;
+		width=&#34;100%&#34;
+		height=&#34;385&#34;
+	&gt;&lt;/iframe&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
+&lt;li&gt;Extra controls for tweaking:&lt;/li&gt;
+&lt;li&gt;Adjustable values&lt;/li&gt;
+&lt;li&gt;Autoanimated values&lt;/li&gt;
+&lt;li&gt;Buttons&lt;/li&gt;
+&lt;li&gt;IDE agnostic, once you run it, you can modify the code even from vim.&lt;/li&gt;
+&lt;li&gt;Full iOS simulator and access to all iOS features, so you can prototype production ready code.&lt;/li&gt;
+&lt;li&gt;Nice DSL for rapid prototyping&lt;/li&gt;
+&lt;li&gt;CocoaPods support, so you can add it to existing projects to experiment&lt;/li&gt;
+&lt;li&gt;Open source, anyone can contribute to make them better!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

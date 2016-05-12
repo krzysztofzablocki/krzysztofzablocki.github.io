@@ -37,27 +37,6 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/projects-alternative/</loc>
-    <lastmod>2015-12-18T06:27:04+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://merowing.info/projects-original/</loc>
-    <lastmod>2015-12-18T06:27:04+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://merowing.info/projects/</loc>
-    <lastmod>2015-12-18T06:27:04+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</loc>
     <lastmod>2015-12-16T22:23:13+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -107,21 +86,7 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/about/</loc>
-    <lastmod>2015-10-27T14:09:49+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://merowing.info/hire/</loc>
-    <lastmod>2015-10-27T14:09:49+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://merowing.info/old-about/</loc>
     <lastmod>2015-10-27T14:09:49+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -333,13 +298,6 @@
   <url>
     <loc>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</loc>
     <lastmod>2012-03-05T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://merowing.info/test/</loc>
-    <lastmod>0001-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
