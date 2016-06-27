@@ -7,7 +7,17 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 03 Feb 2016 13:13:48 &#43;0100</updated>
+    <updated>Mon, 27 Jun 2016 00:00:00 UTC</updated>
+    
+    <item>
+      <title>iOS Architecture</title>
+      <link>http://merowing.info/2016/06/ios-architecture/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2016/06/ios-architecture/</guid>
+      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>8 Books that everyone should read</title>
@@ -201,7 +211,7 @@
       <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
       
       <guid>http://merowing.info/speaking/</guid>
-      <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling. Mobile Central Europe 12th January 2015 - EN - Empower your Objective-C. CocoaHeads Stockholm 17th December 2014 - EN - Empower your Objective-C.</description>
+      <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 17th June 2016 - EN - iOS Architecture. mDevCamp 18 February 2016 - EN - Programming without recompiling. Mobos 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling.</description>
     </item>
     
     <item>
@@ -211,47 +221,6 @@
       
       <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
       <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Playgrounds for Objective C</title>
-      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
-      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
-      <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
-
-&lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
-
-&lt;p&gt;&lt;div 
-class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
-	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
-		allowfullscreen
-		frameborder=&#34;0&#34;
-		width=&#34;100%&#34;
-		height=&#34;385&#34;
-	&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
-&lt;li&gt;Extra controls for tweaking:&lt;/li&gt;
-&lt;li&gt;Adjustable values&lt;/li&gt;
-&lt;li&gt;Autoanimated values&lt;/li&gt;
-&lt;li&gt;Buttons&lt;/li&gt;
-&lt;li&gt;IDE agnostic, once you run it, you can modify the code even from vim.&lt;/li&gt;
-&lt;li&gt;Full iOS simulator and access to all iOS features, so you can prototype production ready code.&lt;/li&gt;
-&lt;li&gt;Nice DSL for rapid prototyping&lt;/li&gt;
-&lt;li&gt;CocoaPods support, so you can add it to existing projects to experiment&lt;/li&gt;
-&lt;li&gt;Open source, anyone can contribute to make them better!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -7,7 +7,17 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 05 Jan 2016 11:23:46 &#43;0100</updated>
+    <updated>Mon, 27 Jun 2016 00:00:00 UTC</updated>
+    
+    <item>
+      <title>iOS Architecture</title>
+      <link>http://merowing.info/2016/06/ios-architecture/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2016/06/ios-architecture/</guid>
+      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Improve your iOS Architecture with FlowControllers</title>

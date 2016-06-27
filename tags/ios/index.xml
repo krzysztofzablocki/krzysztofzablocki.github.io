@@ -7,7 +7,17 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 03 Feb 2016 13:13:48 &#43;0100</updated>
+    <updated>Mon, 27 Jun 2016 00:00:00 UTC</updated>
+    
+    <item>
+      <title>iOS Architecture</title>
+      <link>http://merowing.info/2016/06/ios-architecture/</link>
+      <pubDate>Mon, 27 Jun 2016 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2016/06/ios-architecture/</guid>
+      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>8 Books that everyone should read</title>
@@ -266,18 +276,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;We&amp;rsquo;ll use Swift Playgrounds to explain it.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Improving development speed</title>
-      <link>http://merowing.info/2014/07/improving-development-speed/</link>
-      <pubDate>Fri, 18 Jul 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/07/improving-development-speed/</guid>
-      <description>&lt;p&gt;I wrote a blogpost about improving iteration speed and why code injection is awesome when you work on small changes.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://www.lextech.com/2014/07/3-big-ways-to-speed-up-your-development-cycle/&#34;&gt;Read it on Lextech blog&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
