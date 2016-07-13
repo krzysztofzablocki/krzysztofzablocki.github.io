@@ -7,7 +7,26 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 27 Jun 2016 00:00:00 UTC</updated>
+    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    
+    <item>
+      <title>Logging in Swift</title>
+      <link>http://merowing.info/2016/07/logging-in-swift/</link>
+      <pubDate>Wed, 13 Jul 2016 17:36:06 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/07/logging-in-swift/</guid>
+      <description>&lt;p&gt;Logging is one of rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&amp;rsquo;t need to.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s integrate Logging in a way that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Doesn&amp;rsquo;t cause 3rd party dependencies to leak across your codebase&lt;/li&gt;
+&lt;li&gt;Hides the existence of singleton from the codebase&lt;/li&gt;
+&lt;li&gt;Supports writing fully testable code&lt;/li&gt;
+&lt;li&gt;Ability to supress logs from specific modules or classes&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS Architecture</title>
@@ -212,16 +231,6 @@
       
       <guid>http://merowing.info/speaking/</guid>
       <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 17th June 2016 - EN - iOS Architecture. mDevCamp 18 February 2016 - EN - Programming without recompiling. Mobos 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling.</description>
-    </item>
-    
-    <item>
-      <title>Simple way to scrape web with Ruby</title>
-      <link>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</link>
-      <pubDate>Thu, 15 Jan 2015 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
-      <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
-</description>
     </item>
     
   </channel>

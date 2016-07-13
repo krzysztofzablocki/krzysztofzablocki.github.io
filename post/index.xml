@@ -7,7 +7,26 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 27 Jun 2016 00:00:00 UTC</updated>
+    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    
+    <item>
+      <title>Logging in Swift</title>
+      <link>http://merowing.info/2016/07/logging-in-swift/</link>
+      <pubDate>Wed, 13 Jul 2016 17:36:06 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/07/logging-in-swift/</guid>
+      <description>&lt;p&gt;Logging is one of rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&amp;rsquo;t need to.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s integrate Logging in a way that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Doesn&amp;rsquo;t cause 3rd party dependencies to leak across your codebase&lt;/li&gt;
+&lt;li&gt;Hides the existence of singleton from the codebase&lt;/li&gt;
+&lt;li&gt;Supports writing fully testable code&lt;/li&gt;
+&lt;li&gt;Ability to supress logs from specific modules or classes&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>iOS Architecture</title>
@@ -247,20 +266,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How do I work?</title>
-      <link>http://merowing.info/2014/10/how-do-i-work/</link>
-      <pubDate>Mon, 06 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/10/how-do-i-work/</guid>
-      <description>&lt;p&gt;I’ve been programming for 20 years now, doing commercial work for the last 8.&lt;/p&gt;
-
-&lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affected the way I work.&lt;/p&gt;
-
-&lt;p&gt;What matters and how I go about working for my clients?&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Logging in Swift - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="How to setup logging support in Swift, while avoiding exposing any Singletons?">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Logging in Swift" />
+<meta property="og:description" content="How to setup logging support in Swift, while avoiding exposing any Singletons?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2016/07/logging-in-swift/" />
+
+
+
+<meta property="og:updated_time" content="2016-07-13 17:36:06 &#43;0200 &#43;0200"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2016-07-13 17:36:06 &#43;0200 &#43;0200" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="Tutorial" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Swift" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Logging in Swift">
+<meta itemprop="description" content="How to setup logging support in Swift, while avoiding exposing any Singletons?">
+
+
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="778">
+
+
+<meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="Logging in Swift"/>
+<meta name="twitter:description" content="How to setup logging support in Swift, while avoiding exposing any Singletons?"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2016/07/logging-in-swift/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/hire/">About Me</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Logging in Swift</h1>
+                <span class="post-meta">Jul 13, 2016</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>4 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                
+
+<p>Logging is one of rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&rsquo;t need to.</p>
+
+<p>Let&rsquo;s integrate Logging in a way that:</p>
+
+<ul>
+<li>Doesn&rsquo;t cause 3rd party dependencies to leak across your codebase</li>
+<li>Hides the existence of singleton from the codebase</li>
+<li>Supports writing fully testable code</li>
+<li>Ability to supress logs from specific modules or classes</li>
+</ul>
+
+<h3 id="interface:3f3af53408cff75953b33723c0b061bb">Interface</h3>
+
+<p>Protocol oriented programming is a very useful technique for Swift source, we can create protocols and provide default implementations for whole or specific parts of it.</p>
+
+<p>Let&rsquo;s declare our interfaces first:</p>
+
+<pre><code class="language-swift">public enum LogTag: String {
+    case Observable
+    case Model
+    case ViewModel
+    case View
+}
+
+public enum LogLevel: Int {
+    case Verbose = 0
+    case Debug = 1
+    case Info = 2
+    case Warning = 3
+    case Error = 4
+}
+
+public protocol Loggable {
+    var defaultLoggingTag: LogTag { get }
+
+    func log(level: LogLevel, @autoclosure _ message: () -&gt; Any, _ path: String, _ function: String, line: Int)
+    func log(level: LogLevel, tag: LogTag, @autoclosure message: () -&gt; Any, _ path: String, _ function: String, line: Int)
+}
+</code></pre>
+
+<ul>
+<li><code>LogTag</code> is an enumeration declaring specific module in our application.</li>
+<li><code>LogLevel</code> is enumeration for the severity of the log.</li>
+<li><code>log</code> is a function that we will use for logging, one version will use underlying type <code>defaultLoggingTag</code> and the other one allows us to provide it explicitly.</li>
+</ul>
+
+<h3 id="default-implementation:3f3af53408cff75953b33723c0b061bb">Default implementation</h3>
+
+<p>We want to provide default implementation for our logging function, and only require the users of our protocol to provide <code>defaultLoggingTag</code>:</p>
+
+<pre><code class="language-swift">public extension Loggable {
+    func log(level: LogLevel, @autoclosure _ message: () -&gt; Any, _ path: String = #file, _ function: String = #function, line: Int = #line) {
+        log(level, tag: defaultLoggingTag, message: message, path, function, line: line)
+    }
+
+    func log(level: LogLevel, tag: LogTag, @autoclosure message: () -&gt; Any, _ path: String = #file, _ function: String = #function, line: Int = #line) {
+        Logger.sharedInstance.log(level, tag: tag, className: String(self.dynamicType), message: message, path, function, line: line)
+    }
+}
+</code></pre>
+
+<h3 id="logger-singleton:3f3af53408cff75953b33723c0b061bb">Logger singleton</h3>
+
+<p>We need to provide implementation of <code>Logger</code> that our protocol extension is supposed to use:</p>
+
+<pre><code class="language-swift">protocol LoggerType {
+    func log(level: LogLevel, tag: LogTag, className: String, @autoclosure message: () -&gt; Any, _ path: String, _ function: String, line: Int)
+}
+
+final class Logger {
+    internal var activeLogger: LoggerType?
+    internal var disabledSymbols = Set&lt;String&gt;()
+    private(set) static var sharedInstance = Logger()
+
+    /// Overrides shared instance, useful for testing
+    static func setSharedInstance(logger: Logger) {
+        sharedInstance = logger
+    }
+
+    func setupLogger(logger: LoggerType) {
+        assert(activeLogger == nil, &quot;Changing logger is disallowed to maintain consistency&quot;)
+        activeLogger = logger
+    }
+
+    func ignoreClass(type: AnyClass) {
+        disabledSymbols.insert(String(type))
+    }
+
+    func ignoreTag(tag: LogTag) {
+        disabledSymbols.insert(tag.rawValue)
+    }
+
+    func log(level: LogLevel, tag: LogTag, className: String, @autoclosure message: () -&gt; Any, _ path: String, _ function: String, line: Int) {
+        guard logAllowed(tag, className: className) else { return }
+        activeLogger?.log(level, tag: tag, className: className, message: message, path, function, line: line)
+    }
+
+    private func logAllowed(tag: LogTag, className: String) -&gt; Bool {
+        return !disabledSymbols.contains(className) &amp;&amp; !disabledSymbols.contains(tag.rawValue)
+    }
+}
+</code></pre>
+
+<p>Our <code>Logger</code> instance is only responsible for log surpressing symbols, as this is functionality often missing from external loggers.</p>
+
+<p>It doesn&rsquo;t log message anywhere directly, instead it forwards it to specific <code>LoggerType</code> implementation:</p>
+
+<ul>
+<li>We can use any 3rd party logger solution we want, and changing it later on requires no changes in the codebase, other than the adapter itself.</li>
+<li>We can provide a fake logger for writing tests:</li>
+</ul>
+
+<pre><code class="language-swift">final class LoggerStub: LoggerType {
+
+    var prototype: LogMessagePrototype?
+    var flushTimeout: Int64?
+
+    func log(level: LogLevel, tag: LogTag, className: String, @autoclosure message: () -&gt; Any, _ path: String, _ function: String, line: Int) {
+        prototype = LogMessagePrototype(level: level, tag: tag, className: className, message: &quot;\(message())&quot;, path: path, function: function, line: line)
+    }
+
+    func flush(secondTimeout: Int64) {
+        flushTimeout = secondTimeout
+    }
+}
+
+let setup: () -&gt; (sut: Logger, stub: LoggerStub) = {
+    let sut = Logger()
+    let stub = LoggerStub()
+    sut.setupLogger(stub)
+    Logger.setSharedInstance(sut)
+    return (sut, stub)
+}
+
+func testLoggableLogWithDefaultTagArgumentIsForwarded() {
+    let (_, stub) = setup()
+    let expected = LogMessagePrototype(level: .Warning, tag: defaultLoggingTag, className: String(self.dynamicType), message: &quot;Test&quot;, path: &quot;path&quot;, function: &quot;function&quot;, line: 66)
+    let actual: LogMessagePrototype? = {
+        self.log(expected.level, expected.message, expected.path, expected.function, line: expected.line)
+        return stub.prototype
+    }()
+
+    XCTAssertEqual(expected, actual)
+}
+
+func testIgnoredTagsAreHonored() {
+    let (sut, stub) = setup()
+    let expected: LogMessagePrototype? = nil
+    let actual: LogMessagePrototype? = {
+        sut.ignoreTag(.Model)
+        sut.log(.Info, tag: .Model, className: &quot;&quot;, message: &quot;&quot;, &quot;&quot;, &quot;&quot;, line: 0)
+        return stub.prototype
+    }()
+
+    XCTAssertEqual(expected, actual)
+}
+</code></pre>
+
+<p><em><strong>Note</strong>: <code>LogMessagePrototype</code> is just a struct containing all params the function accepts.</em></p>
+
+<p>If you are working on a Model layer in your app, and you don&rsquo;t care about UI logs, you can create an user breakpoint on the configuration point and do:
+</br></p>
+
+<p><a href="/2016/07/UserBreakpoint.png"
+	
+	
+	class="image-gallery-photo"
+	
+>
+	
+		
+		<img src="/2016/07/UserBreakpoint.png"
+			class="img-responsive
+				"
+			
+			
+			
+				style="display: inline-block; "
+			
+			
+			width="320"
+			height="240"
+		></img>
+	
+	
+</a>
+
+</p>
+
+<p></br>
+Simple implementation that fullfills all of our initial requirements. It&rsquo;s also an example of how you can create testable protocol extensions.</p>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/07/logging-in-swift/"
+                     data-title="Logging in Swift"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/tutorial">Tutorial</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/swift">Swift</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+

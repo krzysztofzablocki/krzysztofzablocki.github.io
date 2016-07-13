@@ -7,7 +7,26 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 05 Jan 2016 11:23:46 &#43;0100</updated>
+    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    
+    <item>
+      <title>Logging in Swift</title>
+      <link>http://merowing.info/2016/07/logging-in-swift/</link>
+      <pubDate>Wed, 13 Jul 2016 17:36:06 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/07/logging-in-swift/</guid>
+      <description>&lt;p&gt;Logging is one of rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&amp;rsquo;t need to.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s integrate Logging in a way that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Doesn&amp;rsquo;t cause 3rd party dependencies to leak across your codebase&lt;/li&gt;
+&lt;li&gt;Hides the existence of singleton from the codebase&lt;/li&gt;
+&lt;li&gt;Supports writing fully testable code&lt;/li&gt;
+&lt;li&gt;Ability to supress logs from specific modules or classes&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Improve your iOS Architecture with FlowControllers</title>
