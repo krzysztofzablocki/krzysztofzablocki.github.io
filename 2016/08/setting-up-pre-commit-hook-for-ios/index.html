@@ -240,7 +240,7 @@ set -eu
 
 if git diff-index -p -M --cached HEAD -- '*Tests.swift' | grep '^+' | egrep '(fdescribe|fit|fcontext|xdescribe|xit|xcontext)' &gt;/dev/null 2&gt;&amp;1
 then
-  echo &quot;COMMIT REJECTED because it contains describe/fit/fcontext/xdescribe/xit/xcontext; please remove focused and disabled tests before committing.&quot;
+  echo &quot;COMMIT REJECTED because it contains fdescribe/fit/fcontext/xdescribe/xit/xcontext; please remove focused and disabled tests before committing.&quot;
   exit 1
 fi
 
