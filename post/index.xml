@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    <updated>Wed, 03 Aug 2016 12:12:55 &#43;0200</updated>
+    
+    <item>
+      <title>Setting up pre-commit hook for iOS</title>
+      <link>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</link>
+      <pubDate>Wed, 03 Aug 2016 12:12:55 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/git-up.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Many of us already write unit tests and run continuous integration servers, we can also leverage great tools like &lt;a href=&#34;https://github.com/danger/danger#what-is-danger&#34;&gt;Danger&lt;/a&gt; to easily add some checks to the pull requests.&lt;/p&gt;
+
+&lt;p&gt;If we&amp;rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use &lt;strong&gt;pre-commit&lt;/strong&gt; hook.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Logging in Swift</title>
@@ -254,18 +276,6 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>iOS Project Bootstrap</title>
-      <link>http://merowing.info/2014/10/ios-project-bootstrap/</link>
-      <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/10/ios-project-bootstrap/</guid>
-      <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

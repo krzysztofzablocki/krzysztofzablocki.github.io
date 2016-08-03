@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    <updated>Wed, 03 Aug 2016 12:12:55 &#43;0200</updated>
+    
+    <item>
+      <title>Setting up pre-commit hook for iOS</title>
+      <link>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</link>
+      <pubDate>Wed, 03 Aug 2016 12:12:55 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/git-up.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Many of us already write unit tests and run continuous integration servers, we can also leverage great tools like &lt;a href=&#34;https://github.com/danger/danger#what-is-danger&#34;&gt;Danger&lt;/a&gt; to easily add some checks to the pull requests.&lt;/p&gt;
+
+&lt;p&gt;If we&amp;rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use &lt;strong&gt;pre-commit&lt;/strong&gt; hook.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Logging in Swift</title>
@@ -222,15 +244,6 @@
       
       <guid>http://merowing.info/hire/</guid>
       <description>I started making apps for iOS in 2008, when the first iPhone was released. Up until then, I was working in games and graphics programming, but I think I can say that I&amp;rsquo;ve settled most comfortably into app-making. Almost a decade later, I&amp;rsquo;m still making apps - across a broad range of industries and technologies. My experience allows me not only to deliver robust technical solutions, but also to add value to user experience and interface design for my clients.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://merowing.info/speaking/</link>
-      <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/speaking/</guid>
-      <description>I speak mostly about technical topics around iOS platform. If you&amp;rsquo;d like to invite me to speak at your conference, send me an email.. Talks 17th June 2016 - EN - iOS Architecture. mDevCamp 18 February 2016 - EN - Programming without recompiling. Mobos 17th April 2015 - EN - Stop recompiling. Mobile Days 10th February 2015 - EN - Stop recompiling. New York iOS Developer Meetup 4th February 2015 - EN - Stop recompiling.</description>
     </item>
     
   </channel>
