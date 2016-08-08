@@ -60,7 +60,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="576">
+<meta itemprop="wordCount" content="611">
 
 
 
@@ -168,6 +168,8 @@
 
 <p>If we&rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use <strong>pre-commit</strong> hook.</p>
 
+<p><strong>Edit: My friend <a href="http://twitter.com/_sjs">Sami Samhuri</a> has <a href="https://samhuri.net/posts/2016/08/ios-git-pre-commit-hook">improved my shell script</a>, the article has been updated to reflect that.</strong></p>
+
 <h2 id="keeping-hook-in-sync-across-team:885f4d898f46f60e29d50aef4ff1ef24">Keeping hook in sync across team</h2>
 
 <p>Since most apps are made in teams, we&rsquo;d like to have the git hook in the repository, which isn&rsquo;t how git works, how we can make it happen? <strong>symlinks</strong></p>
@@ -181,13 +183,7 @@
 
 set -eu
 
-ABSOLUTE_PATH=&quot;$(cd &quot;$(dirname &quot;${BASH_SOURCE[0]}&quot;)&quot; &amp;&amp; pwd)&quot;
-
-SCRIPT_DIR=$(dirname &quot;$0&quot;)
-cd &quot;$SCRIPT_DIR/..&quot;
-
-ln -s &quot;$ABSOLUTE_PATH/pre-commit.sh&quot; .git/hooks/pre-commit
-
+ln -s ../../scripts/pre-commit.sh .git/hooks/pre-commit
 </code></pre>
 
 <ol>
@@ -238,19 +234,31 @@ ln -s &quot;$ABSOLUTE_PATH/pre-commit.sh&quot; .git/hooks/pre-commit
 <pre><code class="language-bash">#!/usr/bin/env bash
 set -eu
 
-if git diff-index -p -M --cached HEAD -- '*Tests.swift' | grep '^+' | egrep '(fdescribe|fit|fcontext|xdescribe|xit|xcontext)' &gt;/dev/null 2&gt;&amp;1
+failed=0
+
+test_pattern='\b(fdescribe|fit|fcontext|xdescribe|xit|xcontext)\b'
+if git diff-index -p -M --cached HEAD -- '*Tests.swift' '*Specs.swift' | grep '^+' | egrep &quot;$test_pattern&quot; &gt;/dev/null 2&gt;&amp;1
 then
-  echo &quot;COMMIT REJECTED because it contains fdescribe/fit/fcontext/xdescribe/xit/xcontext; please remove focused and disabled tests before committing.&quot;
-  exit 1
+  echo &quot;COMMIT REJECTED for fdescribe/fit/fcontext/xdescribe/xit/xcontext.&quot; &gt;&amp;2
+  echo &quot;Remove focused and disabled tests before committing.&quot; &gt;&amp;2
+  echo '----' &gt;&amp;2
+  git grep -E &quot;$test_pattern&quot; '*Tests.swift' '*Specs.swift'  &gt;&amp;2
+  echo '----' &gt;&amp;2
+  failed=1
 fi
 
-if git diff-index -p -M --cached HEAD -- '*.xib' '*.storyboard' | grep '^+' | egrep 'misplaced=&quot;YES&quot;' &gt;/dev/null 2&gt;&amp;1
+misplaced_pattern='misplaced=&quot;YES&quot;'
+
+if git diff-index -p -M --cached HEAD -- '*.xib' '*.storyboard' | grep '^+' | egrep &quot;$misplaced_pattern&quot; &gt;/dev/null 2&gt;&amp;1
 then
-  echo &quot;COMMIT REJECTED because it contains misplaced views; please correct them before committing.&quot;
-  exit 1
+  echo &quot;COMMIT REJECTED for misplaced views. Correct them before committing.&quot; &gt;&amp;2
+  echo '----' &gt;&amp;2
+  git grep -E &quot;$misplaced_pattern&quot; '*.xib' '*.storyboard' &gt;&amp;2
+  echo '----' &gt;&amp;2
+  failed=1
 fi
 
-exit 0
+exit $failed
 </code></pre>
 
 <p>This works work in both console and in macOS git clients.</p>
