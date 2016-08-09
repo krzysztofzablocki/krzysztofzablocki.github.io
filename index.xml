@@ -25,6 +25,8 @@
 
 &lt;/p&gt;
 
+&lt;p&gt;As I open source &lt;a href=&#34;https://github.com/krzysztofzablocki/KZFileWatchers&#34;&gt;another framework&lt;/a&gt; this week, I wanted to share few thoughts about building developer tools.&lt;/p&gt;
+
 &lt;p&gt;Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.&lt;/p&gt;
 
 &lt;p&gt;One would think that we&amp;rsquo;d use the same principles in our jobs, yet I&amp;rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.&lt;/p&gt;
