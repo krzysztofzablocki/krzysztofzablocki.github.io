@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 03 Aug 2016 12:12:55 &#43;0200</updated>
+    <updated>Mon, 08 Aug 2016 12:47:33 &#43;0200</updated>
+    
+    <item>
+      <title>Investing time into developer tools</title>
+      <link>http://merowing.info/2016/08/investing-time-into-developer-tools/</link>
+      <pubDate>Mon, 08 Aug 2016 12:47:33 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.&lt;/p&gt;
+
+&lt;p&gt;One would think that we&amp;rsquo;d use the same principles in our jobs, yet I&amp;rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Setting up pre-commit hook for iOS</title>
@@ -235,15 +257,6 @@
 
 &lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://merowing.info/hire/</link>
-      <pubDate>Tue, 27 Oct 2015 14:09:49 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/hire/</guid>
-      <description>I started making apps for iOS in 2008, when the first iPhone was released. Up until then, I was working in games and graphics programming, but I think I can say that I&amp;rsquo;ve settled most comfortably into app-making. Almost a decade later, I&amp;rsquo;m still making apps - across a broad range of industries and technologies. My experience allows me not only to deliver robust technical solutions, but also to add value to user experience and interface design for my clients.</description>
     </item>
     
   </channel>

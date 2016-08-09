@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 03 Aug 2016 12:12:55 &#43;0200</updated>
+    <updated>Mon, 08 Aug 2016 12:47:33 &#43;0200</updated>
+    
+    <item>
+      <title>Investing time into developer tools</title>
+      <link>http://merowing.info/2016/08/investing-time-into-developer-tools/</link>
+      <pubDate>Mon, 08 Aug 2016 12:47:33 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.&lt;/p&gt;
+
+&lt;p&gt;One would think that we&amp;rsquo;d use the same principles in our jobs, yet I&amp;rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Setting up pre-commit hook for iOS</title>
@@ -235,47 +257,6 @@
       
       <guid>http://merowing.info/2015/01/extracting-data-from-websites-without-api/</guid>
       <description>&lt;p&gt;MyFitnessPal didn&amp;rsquo;t give me API access, so I wrote some Ruby to get it anyway.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Playgrounds for Objective C</title>
-      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
-      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
-      <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
-
-&lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
-
-&lt;p&gt;&lt;div 
-class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
-	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
-		allowfullscreen
-		frameborder=&#34;0&#34;
-		width=&#34;100%&#34;
-		height=&#34;385&#34;
-	&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
-&lt;li&gt;Extra controls for tweaking:&lt;/li&gt;
-&lt;li&gt;Adjustable values&lt;/li&gt;
-&lt;li&gt;Autoanimated values&lt;/li&gt;
-&lt;li&gt;Buttons&lt;/li&gt;
-&lt;li&gt;IDE agnostic, once you run it, you can modify the code even from vim.&lt;/li&gt;
-&lt;li&gt;Full iOS simulator and access to all iOS features, so you can prototype production ready code.&lt;/li&gt;
-&lt;li&gt;Nice DSL for rapid prototyping&lt;/li&gt;
-&lt;li&gt;CocoaPods support, so you can add it to existing projects to experiment&lt;/li&gt;
-&lt;li&gt;Open source, anyone can contribute to make them better!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Investing time into developer tools - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Why should we invest time into developer tools?">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Investing time into developer tools" />
+<meta property="og:description" content="Why should we invest time into developer tools?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2016/08/investing-time-into-developer-tools/" />
+
+<meta property="og:image" content="http://merowing.info/2016/08/file-watchers.gif" />
+
+
+
+<meta property="og:updated_time" content="2016-08-08 12:47:33 &#43;0200 &#43;0200"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2016-08-08 12:47:33 &#43;0200 &#43;0200" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Tools" />
+
+<meta property="article:tag" content="Development process" />
+
+<meta property="article:tag" content="Mindset" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Investing time into developer tools">
+<meta itemprop="description" content="Why should we invest time into developer tools?">
+
+
+
+<meta itemprop="image" content="http://merowing.info/2016/08/file-watchers.gif">
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="661">
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="http://merowing.info/2016/08/file-watchers.gif"/>
+
+
+
+<meta name="twitter:title" content="Investing time into developer tools"/>
+<meta name="twitter:description" content="Why should we invest time into developer tools?"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2016/08/investing-time-into-developer-tools/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/hire/">About Me</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Investing time into developer tools</h1>
+                <span class="post-meta">Aug 8, 2016</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>4 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                
+
+<p>
+<figure class="center">
+    
+        <img src="/2016/08/file-watchers.gif"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.</p>
+
+<p>One would think that we&rsquo;d use the same principles in our jobs, yet I&rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.</p>
+
+<h2 id="looking-beyond-current-state-of-union:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Looking beyond current state of union</h2>
+
+<p>I believe we should always try to find more efficient ways to do things, come up with processes and tools that can help us become more efficient.</p>
+
+<p>This often requires us to think outside the box and what&rsquo;s currently available on the platform.</p>
+
+<p>You don&rsquo;t need to wait for Apple to come up with new solutions, build them yourself.</p>
+
+<p>My favorite quote applies here well:</p>
+
+<blockquote>
+<p>You can have excuses or results. Not both.</p>
+</blockquote>
+
+<p>Couple of things that were doable long before Apple added it to the platform, they might have been far from ideal but they allowed us to save tens of hours of development time:</p>
+
+<ul>
+<li><a href="http://merowing.info/2012/12/quick-tip-for-interface-builder/">Xib / Storyboard references</a></li>
+<li><a href="http://merowing.info/2012/03/automatic-removal-of-nsnotificationcenter-or-kvo-observers/">Automatic removal of NSNotificationCenter observers</a></li>
+<li><a href="https://github.com/AliSoftware/SwiftGen">Compile time resource identifiers</a></li>
+<li><a href="https://github.com/krzysztofzablocki/KZPlayground">Playgrounds</a></li>
+</ul>
+
+<h2 id="small-things:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Small things</h2>
+
+<p>But even beyond that, there are often simple things I see developers do over and over again instead of making it easier.</p>
+
+<p>Some common examples:</p>
+
+<h3 id="login:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Login</h3>
+
+<p>If your app requires login credentials:</p>
+
+<p>Add a <a href="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/">user breakpoint</a> that fills them out and automatically progresses</p>
+
+<h3 id="long-running-features:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Long-running features</h3>
+
+<p>If you are working on a feature that will take you a long time, configure the project so that when you run it, it will automatically jump straight to the screen you can test your feature on.</p>
+
+<p>Again either via <a href="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/">user breakpoint</a> or by <a href="https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/PerUserLogLevels.md">adding build phase script</a> that will allow you to write code like:</p>
+
+<pre><code class="language-swift">#if merowing
+    runMyFreakingFeature()
+#endif
+</code></pre>
+
+<h3 id="reproducible-environment:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Reproducible environment</h3>
+
+<p>If you are working on an app that requires specific kind of data e.g. Images, make sure to build up a stubbed data source for it.</p>
+
+<p>Especially since often times building those tools allows you to work:</p>
+
+<ul>
+<li>using Simulator</li>
+<li>without Network connectivity</li>
+<li>with <a href="https://github.com/johnno1962/injectionforxcode">code injection</a></li>
+</ul>
+
+<p>That way you can not only save time by not requiring to do manual steps, but you can easily test regressions in performance and functionality.</p>
+
+<h3 id="feeds:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Feeds</h3>
+
+<p>Most apps consume external feed, instead of having to wait for your backend developers to deliver new features, write a stub data providers, or better yet use <a href="https://github.com/krzysztofzablocki/KZFileWatchers">a framework I open sourced this week</a> to be able to see how feed changes affect your app in real time.</p>
+
+<p>If you architect your app in a functional manner, you should just need to replace your feed provider to leverage the file watcher:</p>
+
+<pre><code class="language-swift">let fileWatcher = FileWatcher.Remote(url: myDropboxURL)
+try fileWatcher.start { result in
+    switch result {
+        case .noChanges:
+            break
+
+        case let .updated(data):
+            myUpdateClosure(data)
+    }
+}
+</code></pre>
+
+<h2 id="is-it-worth-it:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Is it worth it?</h2>
+
+<p>When we start considering whether to invest time up front to build something we might be tempted to postpone it until further if it&rsquo;s low pain point, but be aware of <a href="https://en.wikipedia.org/wiki/Boiling_frog">boiling a frog</a>?</p>
+
+<blockquote>
+<p>If you plunge a frog into boiling water, it will immediately jump out. But if you place the frog into cool water and slowly heat it to boiling, the frog won’t notice and will slowly cook to death</p>
+</blockquote>
+
+<p>Instead, ask some questions:</p>
+
+<ul>
+<li>How often will I need to do it?</li>
+<li>How long does it take?</li>
+<li>How much time will it take to automate this?</li>
+<li>How long before the invested time pays off?</li>
+<li>Is doing this manually is annoying the crap out of me?</li>
+</ul>
+
+<p>I often say YES, especially to the last point there, so I <a href="http://github.com/krzysztofzablocki">build a lot of dev tools and frameworks</a> over the years.</p>
+
+<h2 id="conclusion:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Conclusion</h2>
+
+<p>Writing developer tools and setting up right processes requires time, but more often than not, that time pays off for itself with a big return on investment.</p>
+
+<p>Especially if you work on a bigger team, the payoff can be huge.</p>
+
+<p>If you are looking for inspiration, take a look what <a href="http://twitter.com/orta">Orta</a>, <a href="https://twitter.com/aligatr">Olivier</a>, <a href="https://twitter.com/KrauseFx">Felix</a> and <a href="https://twitter.com/kylefuller">Kyle</a> build.</p>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/08/investing-time-into-developer-tools/"
+                     data-title="Investing time into developer tools"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/tools">Tools</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/development%20process">Development process</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/mindset">Mindset</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+
