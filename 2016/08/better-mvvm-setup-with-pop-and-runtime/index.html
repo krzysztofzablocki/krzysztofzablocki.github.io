@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Better MVVM setup with POP and Runtime - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic.">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Better MVVM setup with POP and Runtime" />
+<meta property="og:description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/" />
+
+<meta property="og:image" content="http://merowing.info/2016/08/better-mvvm.png" />
+
+
+
+<meta property="og:updated_time" content="2016-08-17 18:17:19 &#43;0200 &#43;0200"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2016-08-17 18:17:19 &#43;0200 &#43;0200" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Swift" />
+
+<meta property="article:tag" content="Runtime" />
+
+<meta property="article:tag" content="MVVM" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Better MVVM setup with POP and Runtime">
+<meta itemprop="description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic.">
+
+
+
+<meta itemprop="image" content="http://merowing.info/2016/08/better-mvvm.png">
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="1224">
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="http://merowing.info/2016/08/better-mvvm.png"/>
+
+
+
+<meta name="twitter:title" content="Better MVVM setup with POP and Runtime"/>
+<meta name="twitter:description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic."/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/hire/">About Me</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Better MVVM setup with POP and Runtime</h1>
+                <span class="post-meta">Aug 17, 2016</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>6 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                
+
+<p>
+<figure class="center">
+    
+        <img src="/2016/08/better-mvvm.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.</p>
+
+<p>Let&rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.</p>
+
+<h2 id="popular-mvvm-setup:b88731cf59f638344ffef1f5d9fa5f93">Popular MVVM setup</h2>
+
+<p>Pretty standard approach for MVVM architecture is to have both <code>UIView</code> and <code>UIViewController</code> have a corresponding <code>ViewModel</code>.</p>
+
+<p>An improvement would be to introduce a <code>ViewModelProtocol</code> that would contain a minimal interface that the View layer needs.
+Advantages of using a <code>protocol</code>:</p>
+
+<ul>
+<li>You can provide completely different implementations of said protocol without any View changes
+
+<ul>
+<li>You can provide a simple stub ViewModel for tests</li>
+<li>If you have multiple sources for the ViewModel, this makes it easy to keep them completely separate instead of adding logic cases.</li>
+</ul></li>
+<li>You are required to think through what is needed for the View to function properly
+
+<ul>
+<li>Simpler to define minimal public interface</li>
+<li>Allows to hide underlying complexity from the View</li>
+</ul></li>
+</ul>
+
+<p>e.g.</p>
+
+<pre><code class="language-swift">protocol ListViewModelType {
+  var title: NSAttributedString { get }
+  var numberOfItems: { get }
+
+  func item(forIndexPath indexPath: NSIndexPath) -&gt; ItemViewModel
+}
+
+final class ListViewController: UIViewController {
+
+  var viewModel: ListViewModelType? {
+    didSet {
+      label.attributedText = viewModel?.title
+      tableView.reloadData()
+    }
+  }
+
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
+    return viewModel?.numberOfItems(section) ?? 0
+  }
+  // rest of the implementation...
+}
+</code></pre>
+
+<h2 id="problems:b88731cf59f638344ffef1f5d9fa5f93">Problems</h2>
+
+<p>Let&rsquo;s start with one distinction first.
+A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
+
+<p>It is important that the developer designing the class prepares it for reuse scenario, it requires properly managing state around the <code>viewModel</code> that might be changing.</p>
+
+<p>The distinction between those 2 cases is significant.</p>
+
+<p>I noticed few issues with a standard approach like that:</p>
+
+<ul>
+<li>There is no indication whether class supports Reuse or not in the first setup.</li>
+<li>You can pass it <code>nil</code> as the ViewModel</li>
+<li>Skipping <code>nil</code> and returning some stub value is not great, in fact, it might be <strong>hiding potential serious programmer mistake</strong>.</li>
+<li>Doing <code>nil</code> handling can get you only so far before you have to crash. The moment you hit API that is not optional you are in trouble e.g.</li>
+</ul>
+
+<pre><code class="language-swift">override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell {
+    guard let itemViewModel = viewModel.item(forIndexPath: indexPath) else {
+        fatalError(&quot;Asked viewModel for a cell out of range&quot;)
+    }
+    // rest of the implementation...
+}
+</code></pre>
+
+<h2 id="alternatives:b88731cf59f638344ffef1f5d9fa5f93">Alternatives</h2>
+
+<h3 id="not-leveraging-interface-builder:b88731cf59f638344ffef1f5d9fa5f93">Not leveraging Interface Builder</h3>
+
+<pre><code class="language-swift">final class ListViewController: UIViewController {
+  let viewModel: ListViewModelType
+
+  init(viewModel: ListViewModelType)
+  // ...
+}
+</code></pre>
+
+<p><i class="fa fa-plus" aria-hidden="true"></i> Pros:</p>
+
+<ul>
+<li>Clear indication whether ViewModel is reusable or not (<code>var</code> vs <code>let</code>).</li>
+<li><code>NonReusable</code> case no longer needs to deal with potential <code>nil</code> values.</li>
+<li>Can&rsquo;t pass nil to <code>NonReusable</code> view.</li>
+</ul>
+
+<p><i class="fa fa-minus" aria-hidden="true"></i> Cons:</p>
+
+<ul>
+<li>You have to write all layouts in code</li>
+<li>Can&rsquo;t leverage all good things Interface Builder brings to the table, because it does not support custom <code>init</code> injection</li>
+</ul>
+
+<p><strong>Note</strong>: <em>from now on this article now assumes you still want to leverage interface builder, and can&rsquo;t just use initializer injection</em></p>
+
+<h3 id="implicitly-unwrapped-optional:b88731cf59f638344ffef1f5d9fa5f93">Implicitly Unwrapped Optional</h3>
+
+<pre><code class="language-swift">var viewModel: ListViewModelType!
+</code></pre>
+
+<p><i class="fa fa-plus" aria-hidden="true"></i> Pros:</p>
+
+<ul>
+<li>Gets rid of wishy washy handling of <code>nil</code> values, it improves on that by following &ldquo;crash early crash often&rdquo; approach.</li>
+</ul>
+
+<p><i class="fa fa-minus" aria-hidden="true"></i> Cons:</p>
+
+<ul>
+<li>There is no indication whether class supports Reuse or not.</li>
+<li>You can pass it <code>nil</code> as the ViewModel</li>
+</ul>
+
+<h3 id="default-value:b88731cf59f638344ffef1f5d9fa5f93">Default value</h3>
+
+<p>Example from <a href="http://artsy.github.io/blog/2015/09/24/mvvm-in-swift/">Artsy MVVM in Swift</a></p>
+
+<pre><code class="language-swift">lazy var viewModel: ListingsViewModelType = {
+    return ListingsViewModel(
+        selectedIndexSignal: self.switchView.selectedIndexSignal,
+        showDetails: self.showDetailsForSaleArtwork,
+        presentModal: self.presentModalForSaleArtwork
+    )
+}()
+</code></pre>
+
+<p><i class="fa fa-plus" aria-hidden="true"></i> Pros:</p>
+
+<ul>
+<li>Get&rsquo;s rid of <code>nil</code> values</li>
+</ul>
+
+<p><i class="fa fa-minus" aria-hidden="true"></i> Cons:</p>
+
+<ul>
+<li>Forces you to introduce dependencies and concrete implementation details into your View</li>
+<li>No <code>Reusable</code> variant with <code>lazy var</code> approach</li>
+<li>There is no indication whether class supports Reuse or not.</li>
+<li>Complicates dependency injection and <a href="http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/">Flow Coordination</a></li>
+</ul>
+
+<h2 id="a-new-hope-mvvm-with-protocol-oriented-programming-and-runtime:b88731cf59f638344ffef1f5d9fa5f93">A New Hope - MVVM+ with Protocol Oriented Programming and Runtime</h2>
+
+<p>Let&rsquo;s create an alternative approach.
+One that removes unnecessary boilerplate and leverages:</p>
+
+<ul>
+<li><a href="https://realm.io/news/appbuilders-natasha-muraschev-practical-protocol-oriented-programming/">Protocol Oriented Programming</a></li>
+<li>Objective-C runtime</li>
+<li>Crash early crash often principles</li>
+</ul>
+
+<h3 id="design-goals:b88731cf59f638344ffef1f5d9fa5f93">Design goals</h3>
+
+<p>MVVM goes well in pair with some <code>Observable</code> library like <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.</p>
+
+<p>Rx has a type called <code>DisposeBag</code>, and it is a container for any subscriptions / cleanup logic.</p>
+
+<ul>
+<li>Minimal boilerplate</li>
+<li>Automatic cleanup</li>
+<li>It has to work with pure Swift value types and classes</li>
+<li>Clean distinction between <code>Reusable</code> and <code>NonReusable</code> support</li>
+<li><code>NonReusableViewModelOwner</code>
+
+<ul>
+<li>Impossible to pass in nil, generating <em>compile time error</em>.</li>
+<li>assertionFailure when you set subsequent `viewModel&rsquo;.</li>
+<li>fatalError if you try to access <code>viewModel</code> before it is configured</li>
+</ul></li>
+<li><code>ReusableViewModelOwner</code>
+
+<ul>
+<li>Allows setting nil as the <code>viewModel</code>.</li>
+<li>Don&rsquo;t require users to react to <code>nil</code> values</li>
+</ul></li>
+</ul>
+
+<p>Let&rsquo;s start with <strong>minimal interface</strong> goal and <strong>clean distinction</strong> between different <code>Reuse</code> versions.</p>
+
+<p>This is the only requirement you have to provide in your classes:</p>
+
+<p><code>NonReusableViewModelOwner</code>:</p>
+
+<pre><code class="language-swift">class ListViewController: UIViewController, NonReusableViewModelOwner {
+
+  func viewModelDidChange(vm: ListViewModelType, disposeBag: DisposeBag) {}
+}
+</code></pre>
+
+<p><code>ReusableViewModelOwner</code>:</p>
+
+<pre><code class="language-swift">class ListReusableView: UIView, ReusableViewModelOwner {
+
+  func viewModelDidChange(vm: ItemViewModelType, disposeBag: DisposeBag) {}
+  func prepareForReuse() {}
+}
+</code></pre>
+
+<p><strong>Note</strong>: <em>If your base class implements <code>prepareForReuse</code> then it already fills prepareForReuse requirement. This requirement exists only to force you to think about <code>Reuse</code> when conforming to that <code>protocol</code></em></p>
+
+<p>This is what will happen:</p>
+
+<pre><code class="language-swift">let nonReusable = ListViewController()
+let x = nonReusable.viewModel // not configured, fatalError(Programmer mistake)
+nonReusable.viewModel = ListViewModel()  //! initial configuration
+nonReusable.viewModel = ListViewModel()  //! assertFailure(This object isn't supporting reusable viewModel)
+
+let reusable = ListReusableView()
+reusable.viewModel = ItemViewModel()  // didSetViewModel
+reusable.viewModel = nil  // cleanup()
+reusable.viewModel = ItemViewModel()  // didSetViewModel
+reusable.viewModel = ItemViewModel()  // cleanup() -&gt; didSetViewModel
+</code></pre>
+
+<h3 id="implementation-tidbits:b88731cf59f638344ffef1f5d9fa5f93">Implementation tidbits</h3>
+
+<p>Let&rsquo;s take a look at the <code>protocol</code> for <code>NonReusableViewModelOwner</code>:</p>
+
+<pre><code class="language-swift">public protocol NonReusableViewModelOwner: class {
+  associatedtype ViewModelProtocol
+  var viewModel: ViewModelProtocol { get set }
+
+  func didSetViewModel(viewModel: ViewModelProtocol, disposeBag: DisposeBag)
+}
+</code></pre>
+
+<ul>
+<li>The owner has to be a class. Otherwise, there is no identity we can use.</li>
+<li>The type of the <code>ViewModelProtocol</code> will be inferred from the <code>didSetViewModel</code> function</li>
+<li>The only interface difference between <code>NonReusableViewModelOwner</code> and <code>ReusableViewModelOwner</code> is the fact that <code>ReusableViewModelOwner</code> uses optional for <code>ViewModelProtocol?</code>.</li>
+</ul>
+
+<p>Now let&rsquo;s implement default implementation for this:</p>
+
+<pre><code class="language-swift">
+private func viewModelDisposeBag(fromObject owner: NSObject, dispose: Bool = false) -&gt; DisposeBag {
+    let bag: DisposeBag = {
+        let currentBag: DisposeBag? = owner.getAssociatedObject(forKey: &amp;ViewModelOwnerKeys.reuseBag)
+        return currentBag ?? DisposeBag()
+    }()
+
+    if dispose {
+        bag.dispose()
+    }
+
+    owner.setAssociatedObject(bag, forKey: &amp;ViewModelOwnerKeys.reuseBag, policy: .retain)
+    return bag
+}
+
+extension NonReusableViewModelOwner where Self: NSObject {
+  public var viewModel: ViewModelProtocol {
+    set {
+      let previousVM: ViewModelProtocol? = getAssociatedObject(forKey: &amp;ViewModelOwnerKeys.viewModel)
+
+      assert(previousVM == nil, &quot;\(self.dynamicType) doesn't support reusable viewModel. Use ReusableViewModelOwner instead.&quot;)
+
+      setAssociatedObject(newValue, forKey: &amp;ViewModelOwnerKeys.viewModel, policy: .retain)
+
+      let bag = viewModelDisposeBag(fromObject: self, dispose: true)
+      didSetViewModel(newValue, disposeBag: bag)
+    }
+
+    get {
+        // swiftlint:disable:next force_unwrapping
+        return getAssociatedObject(forKey: &amp;ViewModelOwnerKeys.viewModel)!
+      }
+    }
+}
+</code></pre>
+
+<ul>
+<li><code>setAssociatedObject</code> and <code>getAssociatedObject</code> are just wrappers for <a href="http://nshipster.com/associated-objects/">Objective-C associated objects</a> that support pure Swift value types via a <code>Box</code> wrapper.</li>
+<li>We use runtime to store the <code>viewModel</code> property, the underlying value will always either be <code>nil</code> or <code>ViewModelProtocol</code> type because there is no way of setting it outside of strongly Typed interface.</li>
+<li><strong>Safety net</strong>: If somehow we did not find our mistake in development or QA stage and passed in subsequent <code>viewModel</code> values after initial configuration: this implementation behaves correctly by removing previous registrations and acting as <code>ReusableViewModelOwner</code>.</li>
+</ul>
+
+<h2 id="using-this-approach-in-your-app-is-simple:b88731cf59f638344ffef1f5d9fa5f93">Using this approach in your app is simple</h2>
+
+<ul>
+<li>Conform to either <code>NonReusableViewModelOwner</code> or <code>ViewModelOwner</code></li>
+<li>Implement <code>didSetViewModel</code> function and implement your logic</li>
+</ul>
+
+<p>e.g.</p>
+
+<pre><code class="language-swift">class UserSettingsTextSizeFooter: UITableViewHeaderFooterView, ReusableViewModelOwner {
+  func didSetViewModel(viewModel: ViewModel, disposeBag: DisposeBag) {
+    //! if using observables
+    viewModel.observableTitle.bindTo(instructionsLabel.rx_text)
+
+    //! if not using observables
+    instructionsLabel.text = viewModel.title
+    instructionsLabel.accessibilityLabel = viewModel.title
+  }
+}
+</code></pre>
+
+<p><em>You do not even have to declare <code>viewModel</code> property, you get that for free.</em></p>
+
+<h3 id="conclusion:b88731cf59f638344ffef1f5d9fa5f93">Conclusion</h3>
+
+<p>MVVM+ approach might not be ideal, but I believe it is a significant improvement over many popular approaches.</p>
+
+<p>Give it a try! Let me know if you have ideas for improvement.</p>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/"
+                     data-title="Better MVVM setup with POP and Runtime"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/swift">Swift</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/runtime">Runtime</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/mvvm">MVVM</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+

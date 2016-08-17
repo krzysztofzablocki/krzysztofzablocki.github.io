@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 08 Aug 2016 12:47:33 &#43;0200</updated>
+    <updated>Wed, 17 Aug 2016 18:17:19 &#43;0200</updated>
+    
+    <item>
+      <title>Better MVVM setup with POP and Runtime</title>
+      <link>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
+      <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Investing time into developer tools</title>
@@ -249,47 +271,6 @@
 &lt;/video&gt;
 
 &lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Playgrounds for Objective C</title>
-      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
-      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
-      <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
-
-&lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
-
-&lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
-
-&lt;p&gt;&lt;div 
-class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
-	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
-		allowfullscreen
-		frameborder=&#34;0&#34;
-		width=&#34;100%&#34;
-		height=&#34;385&#34;
-	&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
-
-&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
-&lt;li&gt;Extra controls for tweaking:&lt;/li&gt;
-&lt;li&gt;Adjustable values&lt;/li&gt;
-&lt;li&gt;Autoanimated values&lt;/li&gt;
-&lt;li&gt;Buttons&lt;/li&gt;
-&lt;li&gt;IDE agnostic, once you run it, you can modify the code even from vim.&lt;/li&gt;
-&lt;li&gt;Full iOS simulator and access to all iOS features, so you can prototype production ready code.&lt;/li&gt;
-&lt;li&gt;Nice DSL for rapid prototyping&lt;/li&gt;
-&lt;li&gt;CocoaPods support, so you can add it to existing projects to experiment&lt;/li&gt;
-&lt;li&gt;Open source, anyone can contribute to make them better!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

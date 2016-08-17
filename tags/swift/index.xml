@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    <updated>Wed, 17 Aug 2016 18:17:19 &#43;0200</updated>
+    
+    <item>
+      <title>Better MVVM setup with POP and Runtime</title>
+      <link>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
+      <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Logging in Swift</title>

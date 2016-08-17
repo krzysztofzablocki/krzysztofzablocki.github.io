@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Runtime on Krzysztof Zabłocki </title>
+      <title>Mvvm on Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://merowing.info/tags/runtime/</link>
+    <link>http://merowing.info/tags/mvvm/</link>
     <language>en-us</language>
     
     
@@ -28,20 +28,6 @@
 &lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Using UIGestureRecognizers in cocos2d</title>
-      <link>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</link>
-      <pubDate>Mon, 05 Mar 2012 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://www.cocos2d-iphone.org/&#34;&gt;cocos2d&lt;/a&gt; is one of the best gaming framework I’ve seen, but it doesn’t use UIKit.&lt;/p&gt;
-
-&lt;p&gt;When Apple introduced UIGestureRecognizers they unified how touch interaction should work.&lt;/p&gt;
-
-&lt;p&gt;Is there a way we can add UIGestureRecognizers to cocos2d architecture, without modyfing cocos2d source?&lt;/p&gt;
 </description>
     </item>
     

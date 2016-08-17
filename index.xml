@@ -7,7 +7,29 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 08 Aug 2016 12:47:33 &#43;0200</updated>
+    <updated>Wed, 17 Aug 2016 18:17:19 &#43;0200</updated>
+    
+    <item>
+      <title>Better MVVM setup with POP and Runtime</title>
+      <link>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
+      <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Investing time into developer tools</title>
@@ -244,20 +266,6 @@
 &lt;p&gt;That&amp;rsquo;s why we should aim to use tools that can help us avoid writing boilerplate code, one of those tools is Interface Builder.&lt;/p&gt;
 
 &lt;p&gt;Here are a few of my favourite tips &amp;amp; tricks.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Prototyping floating burger menu with CAShapeLayer</title>
-      <link>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
-      <pubDate>Wed, 04 Nov 2015 13:29:44 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
-      <description>&lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
-&lt;/video&gt;
-
-&lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     
