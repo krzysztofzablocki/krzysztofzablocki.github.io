@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="1224">
+<meta itemprop="wordCount" content="1257">
 
 
 
@@ -267,7 +267,8 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 
 <ul>
 <li>You have to write all layouts in code</li>
-<li>Can&rsquo;t leverage all good things Interface Builder brings to the table, because it does not support custom <code>init</code> injection</li>
+<li>Can&rsquo;t leverage all good things Storyboards brings to the table, because they do not support custom <code>init</code> injection. <a href="http://holko.pl/2016/03/29/storyboards-and-alternatives/">Arek Holko wrote great article</a> on how you can use init injection with Xib&rsquo;s.</li>
+<li>Won&rsquo;t help remove boilerplate from <code>Reusable</code> scenario and things like <code>UICollectionViewCell</code> / <code>UITableViewCell</code> since that still can&rsquo;t use init injection.</li>
 </ul>
 
 <p><strong>Note</strong>: <em>from now on this article now assumes you still want to leverage interface builder, and can&rsquo;t just use initializer injection</em></p>
