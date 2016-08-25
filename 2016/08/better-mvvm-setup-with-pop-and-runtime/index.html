@@ -8,13 +8,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic.">
+<meta name="description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s improve MVVM with some Runtime and POP.">
 
 <meta name="author" content="Krzysztof Zabłocki">
 
 
 <meta property="og:title" content="Better MVVM setup with POP and Runtime" />
-<meta property="og:description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic." />
+<meta property="og:description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s improve MVVM with some Runtime and POP." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/" />
 
@@ -51,7 +51,7 @@
 
 
 <meta itemprop="name" content="Better MVVM setup with POP and Runtime">
-<meta itemprop="description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic.">
+<meta itemprop="description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s improve MVVM with some Runtime and POP.">
 
 
 
@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="1257">
+<meta itemprop="wordCount" content="1260">
 
 
 
@@ -72,7 +72,7 @@
 
 
 <meta name="twitter:title" content="Better MVVM setup with POP and Runtime"/>
-<meta name="twitter:description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s add some runtime magic."/>
+<meta name="twitter:description" content="Swift is great, but knowing Objective-C can still improve your code. Let&#39;s improve MVVM with some Runtime and POP."/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
 
@@ -231,8 +231,8 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 <ul>
 <li>There is no indication whether class supports Reuse or not in the first setup.</li>
 <li>You can pass it <code>nil</code> as the ViewModel</li>
-<li>Skipping <code>nil</code> and returning some stub value is not great, in fact, it might be <strong>hiding potential serious programmer mistake</strong>.</li>
-<li>Doing <code>nil</code> handling can get you only so far before you have to crash. The moment you hit API that is not optional you are in trouble e.g.</li>
+<li>Skipping <code>nil</code> and returning some stub value is not great, in fact, it might be <strong>hiding a potential serious programmer mistake</strong>.</li>
+<li>Doing <code>nil</code> handling can get you only so far before you have to crash. The moment you hit an API that is not optional you are in trouble e.g.</li>
 </ul>
 
 <pre><code class="language-swift">override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell {
@@ -267,7 +267,7 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 
 <ul>
 <li>You have to write all layouts in code</li>
-<li>Can&rsquo;t leverage all good things Storyboards brings to the table, because they do not support custom <code>init</code> injection. <a href="http://holko.pl/2016/03/29/storyboards-and-alternatives/">Arek Holko wrote great article</a> on how you can use init injection with Xib&rsquo;s.</li>
+<li>Can&rsquo;t leverage all the good things Storyboards brings to the table, because they do not support custom <code>init</code> injection. <a href="http://holko.pl/2016/03/29/storyboards-and-alternatives/">Arek Holko wrote great article</a> on how you can use init injection with Xib&rsquo;s.</li>
 <li>Won&rsquo;t help remove boilerplate from <code>Reusable</code> scenario and things like <code>UICollectionViewCell</code> / <code>UITableViewCell</code> since that still can&rsquo;t use init injection.</li>
 </ul>
 

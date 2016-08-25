@@ -64,7 +64,7 @@ There is a better way than NSAssert&hellip;
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="762">
+<meta itemprop="wordCount" content="755">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -178,26 +178,27 @@ There is a better way than NSAssert&hellip;
 <pre><code class="language-objectivec">- (void)expensiveOperationWithCompletion:(void(^)(NSError *, id))completion {
 NSParameterAssert(completion != nil);
 }
-{% endcodeblock lang:objc &gt;}}
+</code></pre>
 
-Most people would only use assertions when checking our own assumptions, but I'm big fan of *&quot;Crash Early, Crash Often&quot;* and so I tend to write more asserts than most people, one place when I add extra assertions is integration points, especially with data coming from server.
+<p>Most people would only use assertions when checking our own assumptions, but I&rsquo;m big fan of <em>&ldquo;Crash Early, Crash Often&rdquo;</em> and so I tend to write more asserts than most people, one place when I add extra assertions is integration points, especially with data coming from server.</p>
 
-E.g. I'm expecting to get Dictionary inside Array not the other way around. If I crash I'll know straight away that backend developer has changed something and didn't notify me.
+<p>E.g. I&rsquo;m expecting to get Dictionary inside Array not the other way around. If I crash I&rsquo;ll know straight away that backend developer has changed something and didn&rsquo;t notify me.</p>
 
-### How should I handle user-facing release builds?
-User should never see crash if possible, the only crash I can accept is when there is unavoidable data corruption if we don't crash, which is pretty much always avoidable, especially with my approach.
+<h3 id="how-should-i-handle-user-facing-release-builds:e2c77ec1f887e2af82d542e7ae216e3f">How should I handle user-facing release builds?</h3>
 
-So how people handle release builds ? They are *2 camps here*, some people strip asserts on release builds (*Apple* does that by default in Xcode), some people think you should have them on release as well ([*mikeash* does that][2]).
+<p>User should never see crash if possible, the only crash I can accept is when there is unavoidable data corruption if we don&rsquo;t crash, which is pretty much always avoidable, especially with my approach.</p>
 
-I think you should strip assertions on release builds, but I also think just striping them is wrong, especially with the extended way I'm using them. What if you assert when working with data coming from server and server changes ? 
+<p>So how people handle release builds ? They are <em>2 camps here</em>, some people strip asserts on release builds (<em>Apple</em> does that by default in Xcode), some people think you should have them on release as well (<a href="http://www.mikeash.com/pyblog/friday-qa-2013-05-03-proper-use-of-asserts.html"><em>mikeash</em> does that</a>).</p>
 
-It's gonna crash because some of your code expected something else, this is **very bad UIX**. 
+<p>I think you should strip assertions on release builds, but I also think just striping them is wrong, especially with the extended way I&rsquo;m using them. What if you assert when working with data coming from server and server changes ?</p>
 
-### How you could handle Assert on server integration parts?
-One could advocate that you might solve this problem like this:
+<p>It&rsquo;s gonna crash because some of your code expected something else, this is <strong>very bad UIX</strong>.</p>
 
-~~~objectivec
-NSParameterAssert([dataFromServer isKindOfClass:[NSDictionary class]]);
+<h3 id="how-you-could-handle-assert-on-server-integration-parts:e2c77ec1f887e2af82d542e7ae216e3f">How you could handle Assert on server integration parts?</h3>
+
+<p>One could advocate that you might solve this problem like this:</p>
+
+<pre><code class="language-objectivec">NSParameterAssert([dataFromServer isKindOfClass:[NSDictionary class]]);
 if ([dataFromServer isKindOfClass:[NSDictionary class]]) {
 	//! release code
 }
@@ -222,7 +223,7 @@ if ([dataFromServer isKindOfClass:[NSDictionary class]]) {
 
 <pre><code class="language-objectivec">#define AssertTrueOrReturn(condition) do {\
 NSAssert((condition), @&quot;Invalid condition not satisfying: %s&quot;, #condition);\
-    if(!(condition)) { 
+    if(!(condition)) {
     	pixle_NSErrorMake([NSString stringWithFormat:@&quot;Unexpected behaviour not satisfying: %s&quot;, #condition], kErrorCodeInternal, nil, _cmd); return;\
     } } while(0)
 </code></pre>
