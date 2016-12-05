@@ -60,7 +60,7 @@ Is there a way to implement your own implementation of native KVO?
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="461">
+<meta itemprop="wordCount" content="459">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -195,11 +195,11 @@ Is there a way to implement your own implementation of native KVO?
 <p>Let’s say user of our library has a function that processes ints:</p>
 
 <pre><code class="language-objectivec">func processInt(value : Int)
-~~~	
+</code></pre>
 
-Now I want the users of my module to be able to just use my code, regardless of it beining observable or not:
-~~~objectivec
-let object = Foo()
+<p>Now I want the users of my module to be able to just use my code, regardless of it beining observable or not:</p>
+
+<pre><code class="language-objectivec">let object = Foo()
 processInt(object.rawInt)
 processInt(object.observableInt)
 </code></pre>
