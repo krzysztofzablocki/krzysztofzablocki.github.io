@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="1260">
+<meta itemprop="wordCount" content="1261">
 
 
 
@@ -196,7 +196,7 @@ Advantages of using a <code>protocol</code>:</p>
 
 <pre><code class="language-swift">protocol ListViewModelType {
   var title: NSAttributedString { get }
-  var numberOfItems: { get }
+  var numberOfItems: Int { get }
 
   func item(forIndexPath indexPath: NSIndexPath) -&gt; ItemViewModel
 }
