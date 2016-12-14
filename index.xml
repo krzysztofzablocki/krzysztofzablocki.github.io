@@ -7,7 +7,35 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 17 Aug 2016 18:17:19 &#43;0200</updated>
+    <updated>Wed, 14 Dec 2016 11:54:13 &#43;0100</updated>
+    
+    <item>
+      <title>Introducing Sourcery</title>
+      <link>http://merowing.info/2016/12/introducing-sourcery/</link>
+      <pubDate>Wed, 14 Dec 2016 11:54:13 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2016/12/introducing-sourcery/</guid>
+      <description>&lt;p&gt;Swift is a beautiful language that powers a lot of great iOS apps.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately it features very limited runtime and no meta-programming features.&lt;/p&gt;
+
+&lt;p&gt;Could we introduce meta-programming features, while maintaining strong type safety?&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve created a new tool for just that, &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;check out Sourcery&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I truly believe that this can become a massive time saver for a lot of Swift projects, other people are already contributing to the project which makes me extremely happy.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2016/12/daemon.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Better MVVM setup with POP and Runtime</title>
@@ -250,22 +278,6 @@
       <description>&lt;p&gt;With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.&lt;/p&gt;
 
 &lt;p&gt;I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Tips for Interface Builder</title>
-      <link>http://merowing.info/2015/11/tips-for-interface-builder/</link>
-      <pubDate>Fri, 13 Nov 2015 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2015/11/tips-for-interface-builder/</guid>
-      <description>&lt;p&gt;Young developers are happy when they write a lot of code, they like to brag about that project that has tens of thousands lines of code they wrote.&lt;/p&gt;
-
-&lt;p&gt;As we get more experienced, we realize that code is expensive. It&amp;rsquo;s expensive to maintain, debug and reason about.&lt;/p&gt;
-
-&lt;p&gt;That&amp;rsquo;s why we should aim to use tools that can help us avoid writing boilerplate code, one of those tools is Interface Builder.&lt;/p&gt;
-
-&lt;p&gt;Here are a few of my favourite tips &amp;amp; tricks.&lt;/p&gt;
 </description>
     </item>
     
