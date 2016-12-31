@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <title>Introducing Sourcery - Krzysztof Zabłocki</title>
+  <title>Meta-programming in Swift - Krzysztof Zabłocki</title>
   <link href="http://gmpg.org/xfn/11" rel="profile">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -13,7 +13,7 @@
 <meta name="author" content="Krzysztof Zabłocki">
 
 
-<meta property="og:title" content="Introducing Sourcery" />
+<meta property="og:title" content="Meta-programming in Swift" />
 <meta property="og:description" content="Bringing type-safe meta-programming to Swift" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2016/12/introducing-sourcery/" />
@@ -46,7 +46,7 @@
 <meta property="fb:app_id" content="406961899319006" />
 
 
-<meta itemprop="name" content="Introducing Sourcery">
+<meta itemprop="name" content="Meta-programming in Swift">
 <meta itemprop="description" content="Bringing type-safe meta-programming to Swift">
 
 
@@ -58,7 +58,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="74">
+<meta itemprop="wordCount" content="109">
 
 
 
@@ -67,7 +67,7 @@
 
 
 
-<meta name="twitter:title" content="Introducing Sourcery"/>
+<meta name="twitter:title" content="Meta-programming in Swift"/>
 <meta name="twitter:description" content="Bringing type-safe meta-programming to Swift"/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -135,7 +135,7 @@
     <div class="post p2 p-responsive wrap" role="main">
         <div class="measure">
             <div class="post-header mb2">
-                <h1 class="h2 py2">Introducing Sourcery</h1>
+                <h1 class="h2 py2">Meta-programming in Swift</h1>
                 <span class="post-meta">Dec 14, 2016</span>
                 
                 <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>1 minute read</em></span>
@@ -148,19 +148,17 @@
             
 
             
+            <div class="center playground">
+                <a href="https://github.com/krzysztofzablocki/Sourcery">
+                    <img src="http://merowing.info/2015/01/github.jpg"/>
+                    <span>Source Code on GitHub.</span>
+                </a>
+            </div>
+            <br/>
+            
 
             <article class="post-content">
-                <p>Swift is a beautiful language that powers a lot of great iOS apps.</p>
-
-<p>Unfortunately it features very limited runtime and no meta-programming features.</p>
-
-<p>Could we introduce meta-programming features, while maintaining strong type safety?</p>
-
-<p>I&rsquo;ve created a new tool for just that, <a href="https://github.com/krzysztofzablocki/Sourcery">check out Sourcery</a></p>
-
-<p>I truly believe that this can become a massive time saver for a lot of Swift projects, other people are already contributing to the project which makes me extremely happy.</p>
-
-<p><a href="https://github.com/krzysztofzablocki/Sourcery">
+                <p><a href="https://github.com/krzysztofzablocki/Sourcery">
 <figure class="center">
     
         <img src="/2016/12/daemon.gif"  />
@@ -170,6 +168,20 @@
 
 </a></p>
 
+<p>Swift has very limited runtime support and no meta-programming features.</p>
+
+<p>I created a new tool that changes that, it&rsquo;s called <a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a></p>
+
+<p>Using it offers many benefits:</p>
+
+<ul>
+<li>Write less repetitive code and make it easy to adhere to <a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY principle</a>.</li>
+<li>It allows you to create better code, one that would be hard to maintain without it, e.g. <a href="https://github.com/krzysztofzablocki/Sourcery/blob/master/Sourcery/Templates/Diffable.stencil">performing automatic property level difference in tests</a></li>
+<li>Limits the risk of introducing human error when refactoring.</li>
+<li>Sourcery <strong>doesn&rsquo;t use runtime tricks</strong>, in fact, it allows you to leverage compiler, even more, creating more safety.</li>
+<li><strong>Immediate feedback:</strong> Sourcery features built-in daemon support, enabling you to write your templates in real-time side-by-side with generated code.</li>
+</ul>
+
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -178,7 +190,7 @@
             <div class="social-icons">
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/12/introducing-sourcery/"
-                     data-title="Introducing Sourcery"></div>
+                     data-title="Meta-programming in Swift"></div>
             </div>
             <div class="clearfix"></div>
 

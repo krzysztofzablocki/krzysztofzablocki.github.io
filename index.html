@@ -138,7 +138,7 @@
 
         <div class="clearfix"></div>
 
-        <h3 class="h2 post-title">Introducing Sourcery </h3></a>
+        <h3 class="h2 post-title">Meta-programming in Swift </h3></a>
 
     
 
@@ -146,17 +146,7 @@
 
     <br/>
 
-    <p class="post-summary"><p>Swift is a beautiful language that powers a lot of great iOS apps.</p>
-
-<p>Unfortunately it features very limited runtime and no meta-programming features.</p>
-
-<p>Could we introduce meta-programming features, while maintaining strong type safety?</p>
-
-<p>I&rsquo;ve created a new tool for just that, <a href="https://github.com/krzysztofzablocki/Sourcery">check out Sourcery</a></p>
-
-<p>I truly believe that this can become a massive time saver for a lot of Swift projects, other people are already contributing to the project which makes me extremely happy.</p>
-
-<p><a href="https://github.com/krzysztofzablocki/Sourcery">
+    <p class="post-summary"><p><a href="https://github.com/krzysztofzablocki/Sourcery">
 <figure class="center">
     
         <img src="/2016/12/daemon.gif"  />
@@ -165,6 +155,20 @@
 </figure>
 
 </a></p>
+
+<p>Swift has very limited runtime support and no meta-programming features.</p>
+
+<p>I created a new tool that changes that, it&rsquo;s called <a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a></p>
+
+<p>Using it offers many benefits:</p>
+
+<ul>
+<li>Write less repetitive code and make it easy to adhere to <a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY principle</a>.</li>
+<li>It allows you to create better code, one that would be hard to maintain without it, e.g. <a href="https://github.com/krzysztofzablocki/Sourcery/blob/master/Sourcery/Templates/Diffable.stencil">performing automatic property level difference in tests</a></li>
+<li>Limits the risk of introducing human error when refactoring.</li>
+<li>Sourcery <strong>doesn&rsquo;t use runtime tricks</strong>, in fact, it allows you to leverage compiler, even more, creating more safety.</li>
+<li><strong>Immediate feedback:</strong> Sourcery features built-in daemon support, enabling you to write your templates in real-time side-by-side with generated code.</li>
+</ul>
 </p>
 
     
