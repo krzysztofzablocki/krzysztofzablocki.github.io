@@ -60,7 +60,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="1322">
+<meta itemprop="wordCount" content="1321">
 
 
 
@@ -224,7 +224,7 @@ sourceView == view
 
 <h4 id="persistence:c74be9b17bc91cd593608d83085a01f3">Persistence</h4>
 
-<p>Using just functions would be pretty great for understanding the code.</p>
+<p>Using just functions would be great for understanding the code.</p>
 
 <p>However, it would make implementing our remaining features problematic, because of that our <code>Trait</code> is a type containing the bespoke function along with required metadata.</p>
 
@@ -280,7 +280,7 @@ sourceView == view
 
 <p>Each view might have different traits, so how can we identify which traits to apply to which entity? Simply, we can introduce identifiers using associated objects.</p>
 
-<p>Simplify write extension on the types we are interested in like:</p>
+<p>Simply write extension on the types we are interested in like:</p>
 
 <pre><code class="language-swift">public extension NSObject {
   var traitSpec: String? {
