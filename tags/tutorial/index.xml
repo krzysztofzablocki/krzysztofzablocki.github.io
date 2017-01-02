@@ -7,7 +7,33 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 13 Jul 2016 17:36:06 &#43;0200</updated>
+    <updated>Mon, 02 Jan 2017 17:21:09 &#43;0200</updated>
+    
+    <item>
+      <title>How hard would it be to adjust your iOS app in real-time?</title>
+      <link>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
+      <pubDate>Mon, 02 Jan 2017 17:21:09 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Traits&#34;&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2017/01/demo.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Iterating over design that needs to be reflected in code can be tedious and time-consuming.&lt;/p&gt;
+
+&lt;p&gt;Typically the designer works in graphics editing software and then submits flat art to the developer who implements the design in code. Refining the design requires going through the same laborious process.&lt;/p&gt;
+
+&lt;p&gt;Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Logging in Swift</title>

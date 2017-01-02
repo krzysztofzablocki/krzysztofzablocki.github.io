@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>How hard would it be to adjust your iOS app in real-time? - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="How hard would it be to adjust your iOS apps in real-time? Lets look at building a library that will make this really easy">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="How hard would it be to adjust your iOS app in real-time?" />
+<meta property="og:description" content="How hard would it be to adjust your iOS apps in real-time? Lets look at building a library that will make this really easy" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/" />
+
+<meta property="og:image" content="http://merowing.info/2017/01/demo.gif" />
+
+
+
+<meta property="og:updated_time" content="2017-01-02 17:21:09 &#43;0200 &#43;0200"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2017-01-02 17:21:09 &#43;0200 &#43;0200" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Tools" />
+
+<meta property="article:tag" content="Tutorial" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="How hard would it be to adjust your iOS app in real-time?">
+<meta itemprop="description" content="How hard would it be to adjust your iOS apps in real-time? Lets look at building a library that will make this really easy">
+
+
+
+<meta itemprop="image" content="http://merowing.info/2017/01/demo.gif">
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="1322">
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="http://merowing.info/2017/01/demo.gif"/>
+
+
+
+<meta name="twitter:title" content="How hard would it be to adjust your iOS app in real-time?"/>
+<meta name="twitter:description" content="How hard would it be to adjust your iOS apps in real-time? Lets look at building a library that will make this really easy"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/hire/">About Me</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">How hard would it be to adjust your iOS app in real-time?</h1>
+                <span class="post-meta">Jan 2, 2017</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>7 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+            <div class="center playground">
+                <a href="https://github.com/krzysztofzablocki/Traits">
+                    <img src="http://merowing.info/2015/01/github.jpg"/>
+                    <span>Source Code on GitHub.</span>
+                </a>
+            </div>
+            <br/>
+            
+
+            <article class="post-content">
+                
+
+<p><a href="https://github.com/krzysztofzablocki/Traits">
+<figure class="center">
+    
+        <img src="/2017/01/demo.gif"  />
+    
+    
+</figure>
+
+</a></p>
+
+<p>Iterating over design that needs to be reflected in code can be tedious and time-consuming.</p>
+
+<p>Typically the designer works in graphics editing software and then submits flat art to the developer who implements the design in code. Refining the design requires going through the same laborious process.</p>
+
+<p>Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?</p>
+
+<p>Let&rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.</p>
+
+<h2 id="features:c74be9b17bc91cd593608d83085a01f3">Features</h2>
+
+<p>First, let&rsquo;s consider all the features that we would like to have</p>
+
+<ul>
+<li>Immediate feedback - we want to make changes and immediately see them reflected, rather than having to recompile and re-run application</li>
+<li>Ability to update live applications - because nothing looks cooler</li>
+<li>It has to support both Code and Interface Builder based UI</li>
+<li>It has potential to be used for more than UI, e.g. tweaking internal data</li>
+<li>Simple to integrate - We should have minimal impact on the codebase of the projects using the library</li>
+<li>We want to be able to test everything. It makes our life easier</li>
+<li>We want to be able to write the library in real-time, without having to recompile the project, in Xcode 8 using <a href="http://johnholdsworth.com/injection.html">code injection</a></li>
+</ul>
+
+<h2 id="designing:c74be9b17bc91cd593608d83085a01f3">Designing</h2>
+
+<p>As much as I enjoy writing pure Swift for apps, I find myself leveraging a lot of Objective-C runtime powers for developer tools, and I think they are worth using.</p>
+
+<p>I often joke that Mutation is a source of all evil, but it is very much true.</p>
+
+<p>If we want to be able to perform real-time changes of running applications and have minimal impact on the codebase we need to try to avoid unnecesary state changes.</p>
+
+<p>There is this concept in programming called <a href="https://en.wikipedia.org/wiki/Trait_(computer_programming">Trait</a>), it allows us to extend existing entities with additional functionality. Lets mimick that.</p>
+
+<h3 id="trait:c74be9b17bc91cd593608d83085a01f3">Trait</h3>
+
+<p>If the user of our library has some custom classes, we want to be able to modify them but in a restorable way.</p>
+
+<p>In our library, Trait contains a pure function that can be passed in an entity to mutate its state, and it returns another function that would reverse that mutation.</p>
+
+<p>So that when we apply and reverse, we will end up in the initial state.</p>
+
+<pre><code class="language-swift">let sourceView = view.copy
+
+let reverse = Trait.apply(view)
+reverse(view)
+
+sourceView == view
+</code></pre>
+
+<p>This pattern will make it very easy to keep changing the live application with controllable side-effects, instead of allowing the mutation to go freely.</p>
+
+<h4 id="persistence:c74be9b17bc91cd593608d83085a01f3">Persistence</h4>
+
+<p>Using just functions would be pretty great for understanding the code.</p>
+
+<p>However, it would make implementing our remaining features problematic, because of that our <code>Trait</code> is a type containing the bespoke function along with required metadata.</p>
+
+<p>Looking at the feature lists, especially around ability to update live applications we can see that we need some persistence so that we can send our settings via the network.</p>
+
+<p>Our requirements dictate support for 2-way conversion (serialize and deserialize), since JSON is industry standard we can use <a href="https://github.com/Hearst-DD/ObjectMapper">Object-Mapper</a>.</p>
+
+<blockquote>
+<p>Outside of prototype scope, I would highly recommend using something easier to read/modify by humans e.g. YAML, JSON is better for machine than humans</p>
+</blockquote>
+
+<p>We will be persisting the configuration of our functions, as to be able to use the same prototype for all different Traits, e.g DropShadow.</p>
+
+<pre><code class="language-swift">open override func mapping(map: Map) {
+    super.mapping(map: map)
+    color &lt;- (map[&quot;color&quot;], ColorTransform())
+    offset &lt;- (map[&quot;offset&quot;], SizeTransform())
+    opacity &lt;- map[&quot;opacity&quot;]
+}
+</code></pre>
+
+<h4 id="real-time-reloading:c74be9b17bc91cd593608d83085a01f3">Real-time reloading</h4>
+
+<p>Leveraging the fact our data can be transformed to JSON format, we can now support both live-reloading and remote changes.</p>
+
+<p>First off we need a daemon to observe changes, this is where you can leverage my <a href="https://github.com/krzysztofzablocki/KZFileWatchers">KZFileWatchers</a> for both local and remote observing.</p>
+
+<p>Next, we need a way to inject the deserialized Traits into running application, that is the role of <code>TraitsProvider</code>.</p>
+
+<p><code>TraitsProvider</code> role is simple:</p>
+
+<ul>
+<li>Find existing traits</li>
+<li>Use their reverse functions to remove all existing side-effects and return to original state</li>
+<li>Apply new traits, storing their reverse functions for future use</li>
+</ul>
+
+<pre><code class="language-swift">traits.forEach {
+  var removeClosure = {}
+  $0.apply(to: target, remove: &amp;removeClosure)
+
+  var stack = target.traitsReversal
+  stack.append(RemoveClosureWrapper(block: removeClosure))
+  target.traitsReversal = stack
+}
+</code></pre>
+
+<blockquote>
+<p>I have had to introduce <code>inout</code> param for remove closure because when migrating to Swift3 I discovered compiler bug with my previous approach of just returning closure</p>
+</blockquote>
+
+<h4 id="identifying-traits-and-minimizing-user-code-impact:c74be9b17bc91cd593608d83085a01f3">Identifying traits and minimizing user code impact</h4>
+
+<p>Each view might have different traits, so how can we identify which traits to apply to which entity? Simply, we can introduce identifiers using associated objects.</p>
+
+<p>Simplify write extension on the types we are interested in like:</p>
+
+<pre><code class="language-swift">public extension NSObject {
+  var traitSpec: String? {
+      get { return objc_getAssociatedObject(self, &amp;Keys.specKey) as? String }
+
+      set {
+          if let key = newValue {
+              TraitsProvider.loadSpecForKey(key, target: self)
+          }
+
+          objc_setAssociatedObject(self, &amp;Keys.specKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+      }
+  }
+}
+
+public extension UIView {
+    /// Defines an identifier for trait specification.
+    @IBInspectable override var traitSpec: String? { get { return super.traitSpec } set { super.traitSpec = newValue } }
+}
+</code></pre>
+
+<p>When an identifier is set, ask our <code>TraitsProvider</code> to load trait specification for it.</p>
+
+<p>It can be used from IB and Code all the same.</p>
+
+<h4 id="supporting-live-programming-the-library-itself:c74be9b17bc91cd593608d83085a01f3">Supporting live-programming the library itself</h4>
+
+<p>We want to be able to write a new Trait and have it supported immediately, without even recompiling the project.</p>
+
+<p>The first step is to use <a href="http://johnholdsworth.com/injection.html">code injection</a>, second step is designing our system in a way that doesn&rsquo;t require us to register supported Traits manually.</p>
+
+<p>We can use runtime to find all types that inherit from <code>Trait</code> class, it&rsquo;s straightforward:</p>
+
+<pre><code class="language-swift">typealias Factory = (_ map: Map) -&gt; Trait?
+static func getTraitFactories() -&gt; [String: Factory] {
+    let classes = classList()
+    var ret = [String: Factory]()
+
+    for cls in classes {
+        var current: AnyClass? = cls
+        repeat {
+            current = class_getSuperclass(current)
+        } while (current != nil &amp;&amp; current != Trait.self)
+
+        if current == nil { continue }
+
+        if let typed = cls as? Trait.Type {
+            ret[String(describing: cls)] = typed.init
+        }
+    }
+    return ret
+}
+</code></pre>
+
+<p>Then we only need to automatically re-register existing Traits on code injection:</p>
+
+<pre><code class="language-swift">/// This function will be called on code injection, thus allowing us to load new Trait classes as they appear.
+class func injected() {
+    Trait.factories = Trait.getTraitFactories()
+}
+</code></pre>
+
+<p>This means we can now write new Traits without having to restart the application at all, this is how I implemented <code>CornerRadius</code> into Traits:</p>
+
+<p><a href="https://github.com/krzysztofzablocki/Traits">
+<figure class="center">
+    
+        <img src="/2017/01/Traits-ExpandingInRealTime.gif"  />
+    
+    
+</figure>
+
+</a></p>
+
+<h4 id="ability-to-use-for-more-than-just-ui:c74be9b17bc91cd593608d83085a01f3">Ability to use for more than just UI</h4>
+
+<p>This pattern can be used for so much more than UI, and it would be great to leverage all of those realtime benefits for other parts of the app. How can we make it safer?</p>
+
+<p>We want to avoid someone trying to add DropShadow to a Model object, so how can we define what kind of types a given <code>Trait</code> support?</p>
+
+<p>We can make each trait list Classes it supports:</p>
+
+<pre><code class="language-swift">var restrictedTypes: [AnyClass]? { return [UIView.self] }
+</code></pre>
+
+<p>Our <code>TraitsProvider</code> might then verify type requirements before ever applying the <code>Trait</code>, thus ensuring that <code>apply</code> will only be called with targets that are supported.</p>
+
+<h4 id="bonus-avoiding-strings:c74be9b17bc91cd593608d83085a01f3">Bonus: Avoiding Strings</h4>
+
+<p>Strings are ugly. We cannot avoid them in Interface Builder case but we can in the Code.</p>
+
+<p>We can write a simple script that would scan all storyboards/xibs and create a typed interface for them. Then we just add it as build-phase, and we can use safer API.</p>
+
+<p>That&rsquo;s what I used at the above live programming demo.</p>
+
+<h2 id="conclusion:c74be9b17bc91cd593608d83085a01f3">Conclusion</h2>
+
+<p><a href="https://github.com/krzysztofzablocki/Traits">Full source code, with documentation and tests is available on GitHub</a>.</p>
+
+<p>The only thing that the users of the library has to do is to assign identifiers to the objects they want to be able to tweak, and run our daemon.</p>
+
+<p>We designed architecture that allows rapid development of new Traits, without having to recompile the project, ability to change traits of your entities remotely (via JSON) or local via changing your code, all in real-time.</p>
+
+<p>Configuring theming in our application would now be consistent between Views defined in Code and those defined in Interface Builder, and the whole library is very straighforward.</p>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/"
+                     data-title="How hard would it be to adjust your iOS app in real-time?"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/tools">Tools</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/tutorial">Tutorial</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+
