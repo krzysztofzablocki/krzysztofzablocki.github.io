@@ -252,7 +252,7 @@
       <pubDate>Thu, 10 Dec 2015 12:14:28 &#43;0100</pubDate>
       
       <guid>http://merowing.info/bestOf/</guid>
-      <description>This is an list of what I think are best things you should check out, a lot of it is based on usefulness / popularity but also my personal view how important or helpful they are. Libraries / Tools KZPlaygrounds - Playgrounds that can support both Swift and Objective-C + a lot of extra features that will make your life easier. KZPropertyMapper - If you have to map JSON in Objective-C, this is really helpful and it requires nothing at all from your code base, no subclassing, no dependencies and no restrictions.</description>
+      <description>Libraries / Tools Sourcery - Type-safe metaprogramming for Swift KZPlaygrounds - Playgrounds that can support both Swift and Objective-C, and offer a lot of extra features that will make your life easier. KZPropertyMapper - If you have to map JSON in Objective-C, this is really helpful and it requires nothing at all from your code base, no subclassing, no dependencies and no restrictions. Talks &amp;amp; Articles How do I Work? - Describes my approach to working with clients, coordinating teams and establishing good practices.</description>
     </item>
     
     <item>
