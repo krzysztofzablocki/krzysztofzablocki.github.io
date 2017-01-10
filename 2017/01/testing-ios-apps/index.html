@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Testing iOS Apps - Krzysztof Zabłocki</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Writing tests in Swift isn&#39;t that hard, lets look at some good practices">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Testing iOS Apps" />
+<meta property="og:description" content="Writing tests in Swift isn&#39;t that hard, lets look at some good practices" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2017/01/testing-ios-apps/" />
+
+<meta property="og:image" content="http://merowing.info/2017/01/testing.png" />
+
+
+
+<meta property="og:updated_time" content="2017-01-11 09:17:47 &#43;0200 &#43;0200"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2017-01-11 09:17:47 &#43;0200 &#43;0200" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="Architecture" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Swift" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Testing iOS Apps">
+<meta itemprop="description" content="Writing tests in Swift isn&#39;t that hard, lets look at some good practices">
+
+
+
+<meta itemprop="image" content="http://merowing.info/2017/01/testing.png">
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="1952">
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="http://merowing.info/2017/01/testing.png"/>
+
+
+
+<meta name="twitter:title" content="Testing iOS Apps"/>
+<meta name="twitter:description" content="Writing tests in Swift isn&#39;t that hard, lets look at some good practices"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2017/01/testing-ios-apps/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/hire/">About Me</a>
+<a href="/speaking/">Speaking</a>
+<a href="/bestOf/">Best Of</a>
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Testing iOS Apps</h1>
+                <span class="post-meta">Jan 11, 2017</span>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>10 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                
+
+<p>
+<figure class="center">
+    
+        <img src="/2017/01/testing.png"  />
+    
+    
+</figure>
+
+</p>
+
+<p>Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.</p>
+
+<p>Some people have full control over their development process and choose not to write tests, maybe because they have had a bad experience with it or they just don&rsquo;t see the value in them.</p>
+
+<p>I would argue that if you are part of a smaller team, tests can even be more helpful than in big corporations.</p>
+
+<p>A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.</p>
+
+<p>Let us look at practices and tips for writing maintainable tests in your iOS Apps.</p>
+
+<h2 id="basics:3047d71ccf1370a2898eb92c70273f56">Basics</h2>
+
+<h3 id="red-green-refactor:3047d71ccf1370a2898eb92c70273f56">Red - Green - Refactor</h3>
+
+<ul>
+<li><strong>RED</strong>: Write failing tests first.</li>
+<li><strong>GREEN</strong>: Write whatever code it takes to make those tests pass.</li>
+<li><strong>REFACTOR</strong>: Refactor code to improve quality. <strong>Do not</strong> skip this step.</li>
+</ul>
+
+<p>Repeat this cycle until you have code that is clean and tested.</p>
+
+<h4 id="benefits:3047d71ccf1370a2898eb92c70273f56">Benefits:</h4>
+
+<ul>
+<li>Writing tests first gives you a clear perspective on the API design, by getting into the mindset of being a client of the API before it exists.</li>
+<li>Good tests serve as great documentation of expected behavior.</li>
+<li>It gives you confidence to constantly refactor your code because you know that if you break anything your tests fail.</li>
+<li>Do you understand the problem enough to write good test requirements?</li>
+<li>If tests are hard to write its usually a sign architecture could be improved. Following RGR helps you make improvements early on.</li>
+</ul>
+
+<p>Its fine to write untested code to better understand problem at hand, and then rewrite it doing RGR once you have more understanding, the rewrite part is important because writing tests after the product code has been writen is significantly harder.</p>
+
+<p>When you refactor production code, you should not be doing <strong>RGR</strong>. Instead, you should be going from Green to Green, thus ensuring you did not cause regression.</p>
+
+<h3 id="arrange-act-assert-http-c2-com-cgi-wiki-arrangeactassert:3047d71ccf1370a2898eb92c70273f56"><a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange - Act - Assert</a></h3>
+
+<p><strong>AAA</strong> is a pattern for arranging and formatting code in Unit Tests.</p>
+
+<p>If you were to write pure XCTests each of your tests would group these functional sections, separated by blank lines:</p>
+
+<ul>
+<li>Arrange all necessary preconditions and inputs.</li>
+<li>Act on the object or method under test.</li>
+<li>Assert that the expected results have occurred.</li>
+</ul>
+
+<pre><code class="language-swift">func testArticleIsProvidedCorrectly() {
+        let URL = ...
+        let articleProvider = ArticleProvider()
+
+        let article = articleProvider.articleFromURL(URL: URL)
+
+        XCTAssertNotNil(article)
+    }
+</code></pre>
+
+<h4 id="benefits-1:3047d71ccf1370a2898eb92c70273f56">Benefits</h4>
+
+<ul>
+<li>Separates tested functionality from the setup and assertion.</li>
+<li>Clear focused on a minimal set of test steps.</li>
+<li>Makes test smells more evident:
+
+<ul>
+<li>Assertions intermixed with &ldquo;Act&rdquo; code.</li>
+<li>Test methods that try to test too many different things at once.</li>
+<li>Test methods that have to much setup are good sign refactor should happen</li>
+</ul></li>
+</ul>
+
+<h2 id="quality-of-test-code:3047d71ccf1370a2898eb92c70273f56">Quality of test code</h2>
+
+<p>One of the most common complaints about testing I hear is the fact that they are hard to maintain.</p>
+
+<p>Many people write good application code, but they write pretty bad test cases, because they treat tests as an artifact, something they do not need to care about so much.</p>
+
+<p>I&rsquo;ve to quote Klaas here:</p>
+
+<blockquote>
+<p>Tests are the first consumer of your API. If the first consumer has to do questionable things to work with the API, chances are your production code will too.</p>
+</blockquote>
+
+<p>I think tests are part of your product. Consider putting them next to your classes in project structure to make it sink into your subconscious.
+So what else can we do other than <em>RGR</em> and <em>AAA</em> to make test cases more maintainable?</p>
+
+<h3 id="use-type-inferred-factories:3047d71ccf1370a2898eb92c70273f56">Use type-inferred factories</h3>
+
+<p>Instead of repeating the same initialization patterns, introduce simple factories and leverage type inference.</p>
+
+<p>e.g. Instead of feeding each of your test cases different strings, make it easy to generate arbitrary length sentences:</p>
+
+<pre><code class="language-swift">extension String {
+    func make(_ words: Int = 2) -&gt; String {
+        let wordList = [
+            &quot;alias&quot;, &quot;consequatur&quot;, &quot;aut&quot;, &quot;perferendis&quot;, &quot;sit&quot;, &quot;voluptatem&quot;,
+            &quot;accusantium&quot;, &quot;doloremque&quot;, &quot;aperiam&quot;, &quot;eaque&quot;, &quot;ipsa&quot;, &quot;quae&quot;, &quot;ab&quot;,
+            &quot;illo&quot;, &quot;inventore&quot;, &quot;veritatis&quot;, &quot;et&quot;, &quot;quasi&quot;, &quot;architecto&quot;,
+            &quot;beatae&quot;, &quot;vitae&quot;, &quot;dicta&quot;, &quot;sunt&quot;, &quot;explicabo&quot;, &quot;aspernatur&quot;, &quot;aut&quot;,
+            ...
+        ]
+
+        var result = &quot;$START$ &quot;
+        (0..&lt;words - 2).forEach { idx in
+            result += wordList[idx % wordList.count] + &quot; &quot;
+        }
+
+        result += &quot;$END$&quot;
+        return result
+    }
+}
+</code></pre>
+
+<p>You can create <code>make</code> functions for all different kinds of data you need to feed, including your model objects, if you add it as extensions you get great intelisense suggestions.</p>
+
+<p>This pattern allows your test cases to be light and highlight what matters, not deal with stubbing data.</p>
+
+<pre><code class="language-swift">Snapshot&lt;ThumbnailNode&gt;.verify(&quot;short summary&quot;, with:
+    ThumbnailNodeViewModel(
+        url: .make(),
+        headline: .make(),
+        summary: .make(words: 5),
+        promotionalImageCrop: .make()
+    )
+</code></pre>
+
+<h3 id="do-not-test-layouts-in-code:3047d71ccf1370a2898eb92c70273f56">Do not test layouts in code</h3>
+
+<p>Testing item placement and particular frames in your test suites is not going to end up well, when those kind of tests fail, most people just update the numbers with the expected ones and move on. Don&rsquo;t do it.</p>
+
+<p>Instead leverage <a href="https://www.objc.io/issues/15-testing/snapshot-testing/">Snapshot tests</a>, where you can easily see whether something is wrong with your layout.</p>
+
+<p>They can also be very useful for Visual Quality Assurance sessions, as you can generate many different versions of the same UI element in a manner of few seconds.</p>
+
+<p><strong>Note:</strong> I recommend adding explicit approval for Screenshot changes in your project, otherwise people will do the same thing they can do with layouts, just updated the snapshots. You can use <a href="http://danger.systems">danger</a> to inform users when a screenshot is changed.</p>
+
+<h3 id="write-custom-matchers:3047d71ccf1370a2898eb92c70273f56">Write custom matchers</h3>
+
+<p>It often happens that we have to test similar kind of patterns, instead of repeating them, introduce custom matcher that can make this much easier.</p>
+
+<p>e.g. Testing NSAttributedStrings can be PITA unless you create a simple matcher to make it easy:</p>
+
+<pre><code class="language-swift">it(&quot;has an attributed kicker with the expected font&quot;) {
+  expect(sut?.attributedKicker).to(haveFont(&quot;NYTFranklin-Medium&quot;, size: 13.0))
+}
+</code></pre>
+
+<pre><code class="language-swift">it(&quot;has an attributed string with the expected kicker font&quot;) {
+    expect(sut?.attributedString).to(
+        haveFont(&quot;NYTFranklin-Bold&quot;, size: 13.0,
+        forRange: .firstOccurrence(substring: expectedSubstring))
+    )
+}
+</code></pre>
+
+<h3 id="replacing-apple-or-3rd-party-interfaces:3047d71ccf1370a2898eb92c70273f56">Replacing Apple or 3rd party interfaces</h3>
+
+<p>Its convienent to be able to replace 3rd party dependencies in tests, so that we can test our object in isolation. Some classes Apple exposes don&rsquo;t even have public interface for creating them e.g. <code>UITouch</code>.</p>
+
+<p>One way to deal with those scenarios is to get rid of dependencies as soon as we can, e.g. Instead of relying on <code>UITouch</code> instances, we rely on our own protocol and we make <code>UITouch</code> adhere to it.</p>
+
+<pre><code class="language-swift">protocol TouchEvent {
+    func location(in view: UIView?) -&gt; CGPoint
+    var view: UIView?
+}
+
+extension UITouch: TouchEvent {}
+</code></pre>
+
+<p>The added benefit is that we now control what interface we really care about, when we want to trigger something relying on <code>TouchEvent</code>s we can create a fake struct in our tests that adheres to <code>TouchEvent</code>.</p>
+
+<p>In case of 3rd party dependencies, we should not be leaking them into our codebase even without testing so both using protocols and composition are going to be helpful.</p>
+
+<p><a href="http://chris.eidhof.nl/post/protocol-oriented-programming/">Keep in mind that protocols like anything else can be abused</a></p>
+
+<h3 id="limit-public-interfaces:3047d71ccf1370a2898eb92c70273f56">Limit public interfaces</h3>
+
+<p>You are responsible for testing all public interfaces, the less you have, the fewer tests you need, but more importantly, you avoid writing fragile tests, focusing on the big picture instead of implementation details.</p>
+
+<p>Avoid testing private methods directly, only test behaviour of those methods via public interfaces.</p>
+
+<p><a href="http://www.artima.com/lejava/articles/designprinciples.html">We should be programming to an interface, not an implementation.</a></p>
+
+<h3 id="focus-on-readability:3047d71ccf1370a2898eb92c70273f56">Focus on readability</h3>
+
+<p>It is important that <a href="https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d#.kn8a3pyi8">a failing test should read like a high-quality bug report.</a>.</p>
+
+<p>RSpec style of testing can improve this aspect of your test cases.</p>
+
+<h4 id="rspec-bdd:3047d71ccf1370a2898eb92c70273f56">RSpec / BDD</h4>
+
+<p><a href="http://rspec.info">RSpec</a> is common with the behavior-driven development (BDD) process of writing human readable specifications that focus the development of your application.</p>
+
+<p>For iOS I prefer <a href="https://github.com/Quick/Quick">Quick</a> BDD framework and its “matcher framework,” called <a href="https://github.com/Quick/Nimble">Nimble</a>.</p>
+
+<p>The main difference between BDD and TDD is the fact that BDD test cases can be read by non-engineers, which can be very useful in teams.</p>
+
+<p>If you need to verify product requirements for the feature you are working on, you could copy the test specifications and ask your manager whether the expectations are correct, this often uncovers either lack of knowledge or wrong assumptions.</p>
+
+<p>BDD R-Spec is more verbose than standard <code>XCTest</code>, but this is a good thing when you want to share it with your team, example specification might look like:</p>
+
+<pre><code class="language-swift">describe(&quot;Dolphin&quot;) {
+      var sut: Dolphin?
+
+      beforeEach {
+        sut = Dolphin()
+      }
+
+      afterEach {
+        sut = nil
+      }
+
+      describe(&quot;click&quot;) {
+        context(&quot;when it is not near anything interesting&quot;) {
+          it(&quot;emits once&quot;) {
+            expect(sut?.click().count).to(equal(1))
+          }
+        }
+
+        context(&quot;when it is near something interesting&quot;) {
+          beforeEach {
+            let ship = SunkenShip()
+            Jamaica.dolphinCove.add(ship)
+            Jamaica.dolphinCove.add(sut!)
+          }
+
+          it(&quot;emits three times&quot;) {
+            expect(sut?.click().count).to(equal(3))
+          }
+        }
+      }
+    }
+}
+</code></pre>
+
+<h5 id="best-practices:3047d71ccf1370a2898eb92c70273f56">Best practices</h5>
+
+<p>There are 3 scoping indicators in RSpec:</p>
+
+<ul>
+<li><code>describe</code></li>
+<li><code>context</code></li>
+<li><code>it</code></li>
+</ul>
+
+<p>The purpose of “describe” is to wrap a set of tests against one functionality while “context” is to wrap a set of tests against one functionality under the same state.</p>
+
+<h4 id="describe:3047d71ccf1370a2898eb92c70273f56"><code>describe</code></h4>
+
+<ul>
+<li><code>describe</code> is used for <em>Things</em>.</li>
+<li><code>beforeEach</code> specifies what <em>Things</em> you are going to test.</li>
+</ul>
+
+<pre><code class="language-swift">describe(&quot;Observable&quot;) {
+ beforeEach {
+   sut = Observable(155)
+ }
+</code></pre>
+
+<ul>
+<li>Wording:
+
+<ul>
+<li>use function / object name.</li>
+<li>add &lsquo;when&rsquo; for grouping functionality together.</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-swift"> describe(&quot;when using the transforming operator&quot;) {
+    describe(&quot;map&quot;) {
+</code></pre>
+
+<h4 id="context:3047d71ccf1370a2898eb92c70273f56"><code>context</code></h4>
+
+<ul>
+<li><code>context</code> is used for <em>State</em>.</li>
+<li><code>beforeEach</code> lists the <em>Actions</em> to get to that state.</li>
+</ul>
+
+<pre><code class="language-swift">context(&quot;given a full queue&quot;) {
+  beforeEach {
+    (1...Queue.max).forEach { queue.insert( arc4random() ) }
+  }
+}
+</code></pre>
+
+<ul>
+<li>Wording:
+
+<ul>
+<li>use &lsquo;given&rsquo;, &lsquo;with&rsquo; or &lsquo;when&rsquo;, which ever makes it more readable</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-swift">context(&quot;given the second observable has a send value&quot;)
+context(&quot;with logged-in user&quot;)
+</code></pre>
+
+<h4 id="it:3047d71ccf1370a2898eb92c70273f56"><code>it</code></h4>
+
+<ul>
+<li>Immediately shows what&rsquo;s broken.</li>
+<li>Most <code>it</code> blocks should solely contain an assertion.</li>
+<li>Prefer creating custom matchers (after first verifying they do not exist already) if you need multiple steps.</li>
+<li>Wording:
+
+<ul>
+<li>Don&rsquo;t use &lsquo;should&rsquo;.</li>
+<li>Say what will happen.</li>
+<li>Running tests will verify whether it&rsquo;s <strong>true</strong> or <strong>false</strong>.</li>
+</ul></li>
+</ul>
+
+<pre><code class="language-swift">it(&quot;sends transformed value to subscriber&quot;) {
+    expect(received).to(equal(&quot;String containing 3&quot;))
+}
+</code></pre>
+
+<h3 id="selectively-running-tests:3047d71ccf1370a2898eb92c70273f56">Selectively running tests</h3>
+
+<ul>
+<li>You can prefix any of the above keywords with:
+
+<ul>
+<li>&ldquo;<code>x</code>&rdquo; to disable specific group of tests temporarily</li>
+<li>&ldquo;<code>f</code>&rdquo; to focus executing only specific group of tests to improve performance</li>
+</ul></li>
+<li>alternatively, replace them with <code>pending</code>, the difference between pending and &ldquo;<code>x</code>&rdquo; is that pending groups will be logged when running your tests.</li>
+</ul>
+
+<p><em><strong>Note</strong>: Be careful <strong>not</strong> to commit focused or disabled tests by mistake. It&rsquo;s best if you use pre-commit hook to ensure that.</em></p>
+
+<pre><code class="language-bash">#!/usr/bin/env bash
+set -eu
+
+if git diff-index -p -M --cached HEAD -- '*Specs.swift' | grep '^+' | egrep '(fdescribe|fit|fcontext|xdescribe|xit|xcontext)' &gt;/dev/null 2&gt;&amp;1
+then
+  echo &quot;COMMIT REJECTED because it contains fdescribe/fit/fcontext/xdescribe/xit/xcontext; please remove focused and disabled tests before committing.&quot;
+  exit 1
+fi
+
+exit 0
+</code></pre>
+
+<h4 id="aaa-in-rspec:3047d71ccf1370a2898eb92c70273f56">AAA in RSpec</h4>
+
+<p>Usually <code>beforeEach</code> takes the role of <strong>Arrange</strong> and <strong>Act</strong>, leaving only the role of <strong>Assert</strong> to particular <code>it</code> tests.</p>
+
+<p>In some scenarios, using <code>beforeEach</code> might make test smells less evident and make it harder to see AAA in action, you might consider performing <strong>Act</strong> and <strong>Assert</strong> in <code>it</code> directly, though be aware that sometimes this might <strong>require refactoring</strong> later on when adding more tests.</p>
+
+<p>It&rsquo;s up to each team to decide which approach they prefer.</p>
+
+<p><a href="https://robots.thoughtbot.com/lets-not">Related reading</a></p>
+
+<h2 id="conclusion:3047d71ccf1370a2898eb92c70273f56">Conclusion</h2>
+
+<p>Writing maintainable tests in iOS is not that hard or time-consuming, once you get a hang out of it, it can even make you develop faster. The iteration cycle is much shorter with tests, which means you will get feedback faster.</p>
+
+<p>Writing tests allows you to:</p>
+
+<ul>
+<li>Understand requirements better, communicate clearer with non-engineers</li>
+<li>Confidence to perform big refactorings</li>
+<li>Have better documentation. Good test suites serve as excellent documentation</li>
+<li>Focus on the feature in development</li>
+<li>Design better API&rsquo;s, because you design it from the perspective of the user</li>
+<li>Limit available mutations and public interfaces</li>
+<li>Fewer bugs</li>
+</ul>
+
+<p>Testing has increasing returns, the longer the project is alive, the more you appreciate the investments in tests you made in the beginning.</p>
+
+<p>I&rsquo;d like to thank <a href="https://twitter.com/eldudi">Paweł Dudek</a> and <a href="https://github.com/klaaspieter">Klaas Pieter Annema</a> for reviewing this article.</p>
+
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/01/testing-ios-apps/"
+                     data-title="Testing iOS Apps"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/architecture">Architecture</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/swift">Swift</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2015<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+

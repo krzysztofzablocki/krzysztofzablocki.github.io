@@ -7,7 +7,35 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 17 Aug 2016 18:17:19 &#43;0200</updated>
+    <updated>Wed, 11 Jan 2017 09:17:47 &#43;0200</updated>
+    
+    <item>
+      <title>Testing iOS Apps</title>
+      <link>http://merowing.info/2017/01/testing-ios-apps/</link>
+      <pubDate>Wed, 11 Jan 2017 09:17:47 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.&lt;/p&gt;
+
+&lt;p&gt;Some people have full control over their development process and choose not to write tests, maybe because they have had a bad experience with it or they just don&amp;rsquo;t see the value in them.&lt;/p&gt;
+
+&lt;p&gt;I would argue that if you are part of a smaller team, tests can even be more helpful than in big corporations.&lt;/p&gt;
+
+&lt;p&gt;A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.&lt;/p&gt;
+
+&lt;p&gt;Let us look at practices and tips for writing maintainable tests in your iOS Apps.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Better MVVM setup with POP and Runtime</title>
