@@ -7,7 +7,19 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 11 Jan 2017 09:17:47 &#43;0200</updated>
+    <updated>Wed, 18 Jan 2017 15:43:04 &#43;0100</updated>
+    
+    <item>
+      <title>Seniority</title>
+      <link>http://merowing.info/2017/01/seniority/</link>
+      <pubDate>Wed, 18 Jan 2017 15:43:04 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2017/01/seniority/</guid>
+      <description>&lt;p&gt;People use different words to classify Engineer skill, some companies give you more senior role just based on a number of years you have been working there, but what does it mean to be Senior?&lt;/p&gt;
+
+&lt;p&gt;In this article, I composed a complete and final list of API&amp;rsquo;s that you need to know to classify yourself as Senior Engineer.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Testing iOS Apps</title>
@@ -297,24 +309,6 @@
 &lt;p&gt;Because Xcode doesn’t offer such functionality and because I do not like to complain, I’ve decided to write my own plugin for it.&lt;/p&gt;
 
 &lt;p&gt;I wrote it in Swift.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The beauty of imperfection</title>
-      <link>http://merowing.info/2015/11/the-beauty-of-imperfection/</link>
-      <pubDate>Tue, 24 Nov 2015 12:29:37 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/2015/11/the-beauty-of-imperfection/</guid>
-      <description>&lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/12/dot-animated.mov&#34; type=&#34;video/mp4&#34;&gt;
-&lt;/video&gt;
-
-&lt;p&gt;Perfection is not something one can truly achieve, so it’s very smart that one of the best meditation services called &lt;a href=&#34;https://www.headspace.com&#34;&gt;Headspace&lt;/a&gt; is using an imperfect dot as their brand logo.&lt;/p&gt;
-
-&lt;p&gt;If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.&lt;/p&gt;
-
-&lt;p&gt;When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.&lt;/p&gt;
 </description>
     </item>
     
