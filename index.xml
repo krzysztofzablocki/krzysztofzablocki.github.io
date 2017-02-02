@@ -7,7 +7,23 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 18 Jan 2017 15:43:04 &#43;0100</updated>
+    <updated>Thu, 02 Feb 2017 18:50:14 &#43;0100</updated>
+    
+    <item>
+      <title>Swift Coders interview</title>
+      <link>http://merowing.info/2017/02/swift-coders-interview/</link>
+      <pubDate>Thu, 02 Feb 2017 18:50:14 &#43;0100</pubDate>
+      
+      <guid>http://merowing.info/2017/02/swift-coders-interview/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been interviewed at Swift Coders podcast:&lt;/p&gt;
+
+&lt;iframe id=&#34;audio_iframe&#34; src=&#34;https://www.podbean.com/media/player/6eh75-6737ed?skin=103&#34; width=&#34;100%&#34; height=&#34;100&#34; frameborder=&#34;0&#34; scrolling=&#34;no&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;I&amp;rsquo;m definitely investing into a better Microphone next time I&amp;rsquo;m doing any audio recording.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://benscheirman.com/2017/01/an-affordable-dynamic-mic-recommendation/&#34;&gt;Ben Scheirman from NSPodcast has good recommendations for affordable microphone&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Seniority</title>
@@ -288,15 +304,6 @@
   &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>The best of my creations</title>
-      <link>http://merowing.info/bestOf/</link>
-      <pubDate>Thu, 10 Dec 2015 12:14:28 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/bestOf/</guid>
-      <description>Libraries / Tools Sourcery - Type-safe metaprogramming for Swift KZPlaygrounds - Playgrounds that can support both Swift and Objective-C, and offer a lot of extra features that will make your life easier. KZPropertyMapper - If you have to map JSON in Objective-C, this is really helpful and it requires nothing at all from your code base, no subclassing, no dependencies and no restrictions. Talks &amp;amp; Articles How do I Work? - Describes my approach to working with clients, coordinating teams and establishing good practices.</description>
     </item>
     
   </channel>
