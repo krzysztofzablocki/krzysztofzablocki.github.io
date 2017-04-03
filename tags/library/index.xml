@@ -7,7 +7,21 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 08 Dec 2015 11:07:09 &#43;0100</updated>
+    <updated>Mon, 03 Apr 2017 16:52:42 &#43;0200</updated>
+    
+    <item>
+      <title>Stop weak-strong dance</title>
+      <link>http://merowing.info/2017/04/stop-weak-strong-dance/</link>
+      <pubDate>Mon, 03 Apr 2017 16:52:42 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/04/stop-weak-strong-dance/</guid>
+      <description>&lt;p&gt;Closures in Swift are extremely useful, they are interchangeable with functions and that creates a lot of opportunities for useful use-cases. One thing we have to be careful when using them is to avoid &lt;strong&gt;retain cycles&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Can we improve the call-site API?&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Writing Xcode plugin in Swift</title>
