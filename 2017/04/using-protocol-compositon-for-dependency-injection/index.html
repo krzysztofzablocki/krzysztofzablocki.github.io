@@ -263,7 +263,7 @@
 <p>If down the line it needs more dependencies, e.g. a dependency of <code>PersistanceProvider</code>, the only thing we need to change in our code base is to tweak the typealias:</p>
 
 <pre><code class="language-swift">class FooCoordinator {
-    typealias Dependencies = HasImageProider &amp; HasArticleProvider &amp; HasPersistanceProvider
+    typealias Dependencies = HasImageProvider &amp; HasArticleProvider &amp; HasPersistanceProvider
 }
 </code></pre>
 
