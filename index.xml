@@ -7,7 +7,31 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 03 Apr 2017 16:52:42 &#43;0200</updated>
+    <updated>Wed, 12 Apr 2017 18:13:31 &#43;0200</updated>
+    
+    <item>
+      <title>Using protocol compositon for dependency injection</title>
+      <link>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</link>
+      <pubDate>Wed, 12 Apr 2017 18:13:31 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</guid>
+      <description>&lt;p&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;http://merowing.info/2017/04/RefactorSwift.jpg&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;I like using composition and dependency injection, but when you need to inject each entity with multiple dependencies, it can get cumbersome fast.&lt;/p&gt;
+
+&lt;p&gt;As the project grows and you need to inject more dependencies into your objects, you will end up having to refactor your methods a lot of times, as we all know Xcode doesn&amp;rsquo;t help with that.&lt;/p&gt;
+
+&lt;p&gt;There is a more manageable way.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Stop weak-strong dance</title>
@@ -291,16 +315,6 @@
       <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
 
 &lt;p&gt;Why?&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Little things that can make your life easier in 2016</title>
-      <link>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</link>
-      <pubDate>Wed, 23 Dec 2015 10:31:43 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</guid>
-      <description>&lt;p&gt;As we are closing this year, let&amp;rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.&lt;/p&gt;
 </description>
     </item>
     
