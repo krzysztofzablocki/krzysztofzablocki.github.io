@@ -226,7 +226,7 @@
 <p>Swift allows us to compose protocol requirements by using <code>&amp;</code> operator, that means that our entities can now contain just a single dependency storage:</p>
 
 <pre><code class="language-swift">class FooCoordinator {
-    typealias Dependencies = HasImageProider &amp; HasArticleProvider
+    typealias Dependencies = HasImageProvider &amp; HasArticleProvider
     
     let Dependencies: Dependencies
     
