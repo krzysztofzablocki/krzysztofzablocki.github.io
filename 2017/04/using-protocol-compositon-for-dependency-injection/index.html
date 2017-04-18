@@ -168,7 +168,7 @@
 
 <p>Let&rsquo;s say you have an object that starts needing an image provider, so you write its init something like that:</p>
 
-<pre><code class="language-swift">class FooCoordinator {
+<pre><code class="language-swift">class FooViewModel {
   let imageProvider: ImageProvider
   init(..., imageProvider: ImageProvider)
   ///...
@@ -187,7 +187,7 @@
 
 <p>e.g. after few months this object might have 3 dependencies:</p>
 
-<pre><code class="language-swift">class FooCoordinator {
+<pre><code class="language-swift">class FooViewModel {
   let imageProvider: ImageProvider
   let articleProvider: ArticleProvider
   let persistanceProvider: PersistanceProvider
@@ -225,7 +225,7 @@
 
 <p>Swift allows us to compose protocol requirements by using <code>&amp;</code> operator, that means that our entities can now contain just a single dependency storage:</p>
 
-<pre><code class="language-swift">class FooCoordinator {
+<pre><code class="language-swift">class FooViewModel {
     typealias Dependencies = HasImageProvider &amp; HasArticleProvider
     
     let dependencies: Dependencies
@@ -258,11 +258,11 @@
 
 <p>Each object defines what dependencies it uses, and those are the only ones it will receive.</p>
 
-<p>e.g. a <code>FooCoordinator</code> might require <code>ImageProvider</code> and our <code>FlowCoordinator</code> passes in it&rsquo;s real <code>AppDependency</code> struct, Swift type handling takes care of only giving us access to ImageProvider</p>
+<p>e.g. a <code>FooViewModel</code> might require <code>ImageProvider</code> and our <code>FlowCoordinator</code> passes in it&rsquo;s real <code>AppDependency</code> struct, Swift type handling takes care of only giving us access to ImageProvider</p>
 
 <p>If down the line it needs more dependencies, e.g. a dependency of <code>PersistanceProvider</code>, the only thing we need to change in our code base is to tweak the typealias:</p>
 
-<pre><code class="language-swift">class FooCoordinator {
+<pre><code class="language-swift">class FooViewModel {
     typealias Dependencies = HasImageProvider &amp; HasArticleProvider &amp; HasPersistanceProvider
 }
 </code></pre>
