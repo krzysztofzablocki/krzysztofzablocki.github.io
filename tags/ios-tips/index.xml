@@ -16,7 +16,8 @@
       
       <guid>http://merowing.info/2014/08/writing-less-code/</guid>
       <description>&lt;p&gt;What are some of my favorite techniques for cleaner and more readable code?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,7 +29,8 @@
       <description>&lt;p&gt;I believe in boy scout rule: &lt;em&gt;&amp;lsquo;Always leave the campground cleaner than you found it.&amp;rsquo;&lt;/em&gt;, that&amp;rsquo;s why I constantly refactor my code so it&amp;rsquo;s clean and tidy.&lt;/p&gt;
 
 &lt;p&gt;What are few less-known refactoring tricks I use to simplify code and make it more readable?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

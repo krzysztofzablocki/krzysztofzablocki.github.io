@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://merowing.info/</loc>
-    <lastmod>2017-04-12T18:13:31+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</loc>
     <lastmod>2017-04-12T18:13:31+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -128,7 +121,7 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/bestOf/</loc>
+    <loc>http://merowing.info/bestof/</loc>
     <lastmod>2015-12-10T12:14:28+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -170,14 +163,21 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/hire/</loc>
+    <loc>http://merowing.info/speaking/</loc>
     <lastmod>2015-10-27T14:09:49+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://merowing.info/speaking/</loc>
+    <loc>http://merowing.info/</loc>
+    <lastmod>2015-10-27T14:09:49+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/hire/</loc>
     <lastmod>2015-10-27T14:09:49+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -317,14 +317,14 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</loc>
+    <loc>http://merowing.info/2013/04/statusboard-and-jenkins/</loc>
     <lastmod>2013-04-11T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://merowing.info/2013/04/statusboard-and-jenkins/</loc>
+    <loc>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</loc>
     <lastmod>2013-04-11T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -384,6 +384,216 @@
     <lastmod>2012-03-05T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/animation/</loc>
+    <lastmod>2015-11-24T12:29:37+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/animations/</loc>
+    <lastmod>2015-12-16T22:23:13+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/architecture/</loc>
+    <lastmod>2017-01-11T09:17:47+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/categories/</loc>
+    <lastmod>0001-01-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/clean-code/</loc>
+    <lastmod>2014-08-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/development-process/</loc>
+    <lastmod>2016-08-08T12:47:33+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/experiments/</loc>
+    <lastmod>2015-11-24T12:29:37+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/fitness/</loc>
+    <lastmod>2015-01-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/gamedev/</loc>
+    <lastmod>2013-04-11T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/general/</loc>
+    <lastmod>2017-01-18T15:43:04+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/interface-builder/</loc>
+    <lastmod>2015-11-13T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/ios/</loc>
+    <lastmod>2017-04-03T16:52:42+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/ios-tips/</loc>
+    <lastmod>2014-08-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/library/</loc>
+    <lastmod>2017-04-03T16:52:42+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/mindset/</loc>
+    <lastmod>2017-01-18T15:43:04+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/mvvm/</loc>
+    <lastmod>2016-08-17T18:17:19+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/open-source/</loc>
+    <lastmod>2013-07-25T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/post/</loc>
+    <lastmod>2017-04-12T18:13:31+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/process/</loc>
+    <lastmod>2017-01-18T15:43:04+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/psychology/</loc>
+    <lastmod>2016-02-03T13:13:48+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/reading/</loc>
+    <lastmod>2016-02-03T13:13:48+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/ruby/</loc>
+    <lastmod>2015-01-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/runtime/</loc>
+    <lastmod>2016-08-17T18:17:19+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/script/</loc>
+    <lastmod>2016-08-03T12:12:55+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/swift/</loc>
+    <lastmod>2017-01-11T09:17:47+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/</loc>
+    <lastmod>2015-11-24T12:29:37+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/tip/</loc>
+    <lastmod>2012-12-26T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/tools/</loc>
+    <lastmod>2017-01-02T17:21:09+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/tutorial/</loc>
+    <lastmod>2017-04-03T16:52:42+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/tags/uix/</loc>
+    <lastmod>2015-12-16T22:23:13+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
   </url>
   
 </urlset>

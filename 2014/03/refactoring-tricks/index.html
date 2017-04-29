@@ -92,7 +92,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -144,13 +145,13 @@
             
 
             <article class="post-content">
-                
-
-<p>I believe in boy scout rule: <em>&lsquo;Always leave the campground cleaner than you found it.&rsquo;</em>, that&rsquo;s why I constantly refactor my code so it&rsquo;s clean and tidy.</p>
+                <p>I believe in boy scout rule: <em>&lsquo;Always leave the campground cleaner than you found it.&rsquo;</em>, that&rsquo;s why I constantly refactor my code so it&rsquo;s clean and tidy.</p>
 
 <p>What are few less-known refactoring tricks I use to simplify code and make it more readable?</p>
 
-<h2 id="dictionary-mappings:b2adfd86a6be5d8e7949746ca6f9b879">Dictionary mappings</h2>
+<p></p>
+
+<h2 id="dictionary-mappings">Dictionary mappings</h2>
 
 <p>Let&rsquo;s say you have a switch statement that assigns some value:</p>
 
@@ -194,7 +195,7 @@ Let&rsquo;s use dictionary mapping to simplify it:</p>
 		return mapping[@value] ?: @&quot;valueForDefault&quot;;
 </code></pre>
 
-<h3 id="pros:b2adfd86a6be5d8e7949746ca6f9b879">Pros</h3>
+<h3 id="pros">Pros</h3>
 
 <ul>
 <li>Simpler to read, even more so if there are more values in original switch.</li>
@@ -203,7 +204,7 @@ Let&rsquo;s use dictionary mapping to simplify it:</p>
 <li>Very easy to extract this mapping to some kind of static data like JSON, PLIST file due to nature of the code mapping.</li>
 </ul>
 
-<h2 id="dynamic-mapping-with-blocks:b2adfd86a6be5d8e7949746ca6f9b879">Dynamic Mapping with blocks</h2>
+<h2 id="dynamic-mapping-with-blocks">Dynamic Mapping with blocks</h2>
 
 <p>How about more complicated switches, that actually do something dynamic? We can use blocks to simplify the code.</p>
 
@@ -263,7 +264,7 @@ if (!titleMapping) {
   return getTitle ? getTitle(self) : nil;
 </code></pre>
 
-<h3 id="pros-1:b2adfd86a6be5d8e7949746ca6f9b879">Pros</h3>
+<h3 id="pros-1">Pros</h3>
 
 <ul>
 <li>Safer since there is no way of screwing up if-else chain</li>
@@ -273,7 +274,7 @@ if (!titleMapping) {
 
 <p>PS. I could&rsquo;ve used string matching to implement it with even less code but I didn&rsquo;t think it will make it more readable.</p>
 
-<h2 id="simpler-flow-by-using-early-returns-and-reversing-if-s:b2adfd86a6be5d8e7949746ca6f9b879">Simpler flow by using early returns and reversing if&rsquo;s</h2>
+<h2 id="simpler-flow-by-using-early-returns-and-reversing-if-s">Simpler flow by using early returns and reversing if&rsquo;s</h2>
 
 <p>As you probably figured out by now I don&rsquo;t like too many if&rsquo;s and I <strong>hate</strong> long if-else chains. Instead I prefer to keep if statements as simple as possible and use early returns.</p>
 
@@ -296,14 +297,14 @@ if (!titleMapping) {
 //! success code
 </code></pre>
 
-<h3 id="pros-2:b2adfd86a6be5d8e7949746ca6f9b879">Pros</h3>
+<h3 id="pros-2">Pros</h3>
 
 <ul>
 <li>I don&rsquo;t need to read further code if I&rsquo;m only interested in error case.</li>
 <li>In longer code I don&rsquo;t need to remember all the flow since I can clearly see early returns/break</li>
 </ul>
 
-<h2 id="using-dynamic-method-resolution:b2adfd86a6be5d8e7949746ca6f9b879">Using dynamic method resolution</h2>
+<h2 id="using-dynamic-method-resolution">Using dynamic method resolution</h2>
 
 <p>Sometimes we might see code similar to this:</p>
 
@@ -331,7 +332,7 @@ if(![self respondsToSelector:dynamicSelector]) {
 [self performSelector:dynamicSelector withObject:dictionary];
 </code></pre>
 
-<h3 id="pros-3:b2adfd86a6be5d8e7949746ca6f9b879">Pros</h3>
+<h3 id="pros-3">Pros</h3>
 
 <ul>
 <li>Very easy to read and understand</li>
@@ -339,12 +340,11 @@ if(![self respondsToSelector:dynamicSelector]) {
 <li>Easy to expand, I can add new widgets types in categories, eg. when doing a spin-off app I don&rsquo;t even need to touch the base class</li>
 </ul>
 
-<h2 id="conclusion:b2adfd86a6be5d8e7949746ca6f9b879">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>I constantly refactor my code, this are just few tricks that are less-known but can be helpful to make your code simpler.</p>
 
 <p>I usually write my code in <a href="http://www.jetbrains.com/objc/">AppCode</a> which is a great IDE that has lots of refactoring functions that I use every-day, check it out.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -353,7 +353,7 @@ if(![self respondsToSelector:dynamicSelector]) {
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/03/refactoring-tricks/"

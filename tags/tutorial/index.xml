@@ -20,7 +20,8 @@
 &lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Can we improve the call-site API?&lt;/strong&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -46,7 +47,8 @@
 &lt;p&gt;Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,7 +67,8 @@
 &lt;li&gt;Supports writing fully testable code&lt;/li&gt;
 &lt;li&gt;Ability to suppress logs from specific modules or classes&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -77,7 +80,8 @@
       <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
 
 &lt;p&gt;Why?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -93,7 +97,8 @@
 &lt;video autoplay loop&gt;
   &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -111,7 +116,8 @@
 &lt;p&gt;If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.&lt;/p&gt;
 
 &lt;p&gt;When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -125,7 +131,8 @@
 &lt;/video&gt;
 
 &lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -150,7 +157,8 @@
 &lt;/ol&gt;
 
 &lt;p&gt;We&amp;rsquo;ll use Swift Playgrounds to explain it.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -163,8 +171,8 @@
 
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
 
-&lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.&lt;/p&gt;
-</description>
+&lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -174,7 +182,8 @@
       
       <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -184,7 +193,8 @@
       
       <guid>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
       <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -196,7 +206,8 @@
       <description>&lt;p&gt;Do you use assertions in your code? What for? How do you handle release builds ?&lt;/p&gt;
 
 &lt;p&gt;There is a better way than NSAssert&amp;hellip;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -205,18 +216,18 @@
       <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</guid>
-      <description>&lt;p&gt;
-&lt;figure &gt;
+      <description>&lt;figure &gt;
     
         &lt;img src=&#34;http://merowing.info/2013/04/clone-small.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;By the end of this tutorial you will have a simple game with level editor under 250 lines of code.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -234,7 +245,8 @@ It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
   &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -247,8 +259,8 @@ Your browser does not support the video tag.
 
 &lt;p&gt;I’m working on my personal app that needs something similar, and after doing some research I’ve not seen a proper solution.&lt;/p&gt;
 
-&lt;p&gt;So I wrote one.&lt;/p&gt;
-</description>
+&lt;p&gt;So I wrote one.
+&lt;/p&gt;</description>
     </item>
     
   </channel>

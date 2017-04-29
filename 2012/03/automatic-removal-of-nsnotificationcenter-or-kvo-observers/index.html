@@ -109,7 +109,8 @@ What if you could automate it ?
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -161,15 +162,14 @@ What if you could automate it ?
             
 
             <article class="post-content">
-                
-
-<p>Observer pattern is common on iOS platform, you use observers in NSNotificationCenter and in Key Value Observing.</p>
+                <p>Observer pattern is common on iOS platform, you use observers in NSNotificationCenter and in Key Value Observing.</p>
 
 <p>You need to remember to unregister before you release your observer object, if you don’t you are going to have crashes.</p>
 
-<p>What if you could automate it ?</p>
+<p>What if you could automate it ?
+</p>
 
-<h2 id="idea:0e4b3b6636ba7500cb75e44b22282b5f">Idea</h2>
+<h2 id="idea">Idea</h2>
 
 <p>There are actually 2 categories, one for NSNotificationCenter and second for KVO. They use very similar code so I will just explain a few tricks used to make it work. You are free to look at whole code but I will explain only key points…</p>
 
@@ -198,7 +198,7 @@ What if you could automate it ?
 
 <p>sf_swapSelector changes default selectors to call sf_ prefixed ones, it also creates a new selectors called sf_original_”originalSelector” that point to original code.</p>
 
-<h2 id="data-storage:0e4b3b6636ba7500cb75e44b22282b5f">Data storage</h2>
+<h2 id="data-storage">Data storage</h2>
 
 <p>Next time someone adds / removes observer we need to store that data so that we can operate on it later. Since we need this data when working with the observer object we should store it inside it. <strong>We can use associated references for that.</strong></p>
 
@@ -213,7 +213,7 @@ What if you could automate it ?
 
 <p>keyPath and context are self explanatory, blockKey is a key used to access block created by <a href="https://github.com/krzysztofzablocki/NSObject-SFExecuteOnDealloc">SFExecuteOnDealloc</a>( very handy category that allows you to execute any block when an object get’s deallocated,  useful especially when you create advanced categories like this one ).</p>
 
-<h2 id="execute-on-dealloc:0e4b3b6636ba7500cb75e44b22282b5f">Execute on dealloc</h2>
+<h2 id="execute-on-dealloc">Execute on dealloc</h2>
 
 <p>Each time we add new observer, we need to make sure that it will be deallocated automatically, this is the place that SFExecuteOnDealloc get’s really useful:</p>
 
@@ -242,7 +242,7 @@ void *key = [observer performBlockOnDealloc:^{
 <li>Calls original method, we are using** NSSelectorFromString to prevent compiler warnings about unknown selectors, just a clever trick I came up with.**</li>
 </ol>
 
-<h2 id="method-forwarding:0e4b3b6636ba7500cb75e44b22282b5f">Method Forwarding</h2>
+<h2 id="method-forwarding">Method Forwarding</h2>
 
 <p>Let me explain what happens in point 4.</p>
 
@@ -287,14 +287,13 @@ void *key = [observer performBlockOnDealloc:^{
 <li>Since this is called by our code and not by method forwarding, enable method forwarding in case original code calls other swizzled selectors then disable it afterwards.</li>
 </ol>
 
-<h2 id="conclusion:0e4b3b6636ba7500cb75e44b22282b5f">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>You no longer need to call removeObserver in your dealloc methods, that especially useful when using ARC as you won’t need to create dealloc at all in 95 % classes in your application. You also learned, that you could use <strong>NSSelectorFromString **to prevent compiler from generating warning for dynamically created methods, that **__unsafe_unretained \__block</strong> specifier is the correct way to break retain cycles on code that needs to be run both on ARC and non ARC.</p>
+<p>You no longer need to call removeObserver in your dealloc methods, that especially useful when using ARC as you won’t need to create dealloc at all in 95 % classes in your application. You also learned, that you could use **NSSelectorFromString **to prevent compiler from generating warning for dynamically created methods, that <strong>__unsafe_unretained \__block</strong> specifier is the correct way to break retain cycles on code that needs to be run both on ARC and non ARC.</p>
 
 <p>Also you can have seen how to be on the safe side when swizzling multiples methods that can call each other by identifing <strong>methodForwarding</strong>,  instead of trying to recreate system behavior that could change <strong>at any iOS update.</strong></p>
 
 <p><a href="https://github.com/krzysztofzablocki/SFObservers">grab it from GitHub</a></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -303,7 +302,7 @@ void *key = [observer performBlockOnDealloc:^{
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2012/03/automatic-removal-of-nsnotificationcenter-or-kvo-observers/"

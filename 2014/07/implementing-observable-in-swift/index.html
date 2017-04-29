@@ -101,7 +101,8 @@ Is there a way to implement your own implementation of native KVO?
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -161,13 +162,12 @@ Is there a way to implement your own implementation of native KVO?
             
 
             <article class="post-content">
-                
+                <p>KVO has been integral part of Cocoa programming, yet it&rsquo;s not available for pure Swift classes.</p>
 
-<p>KVO has been integral part of Cocoa programming, yet it&rsquo;s not available for pure Swift classes.</p>
+<p>Is there a way to implement your own implementation of native KVO?
+</p>
 
-<p>Is there a way to implement your own implementation of native KVO?</p>
-
-<h2 id="api-design:19185c215e64f49f26a7f988087058cc">API Design</h2>
+<h2 id="api-design">API Design</h2>
 
 <p>When I thought of how I want to implement Observable properties, I’ve had few things in mind:</p>
 
@@ -206,7 +206,7 @@ processInt(object.observableInt)
 
 <p>Having a code like this would mean that you as an user of my code doesn’t need to care if it’s observable or not, yet you could leverage that power if you needed/wanted.</p>
 
-<h2 id="swift-types-and-implict-conversions:19185c215e64f49f26a7f988087058cc">Swift Types and Implict conversions</h2>
+<h2 id="swift-types-and-implict-conversions">Swift Types and Implict conversions</h2>
 
 <p>Implementing compliance with above requirement (3rd) wouldn’t be  possible in Swift because of Type difference if not for a little known function called <strong>__conversion()</strong>, conversion as the name clearly states gives you implicit conversion between types, this is how we can use it for our Observable properties:</p>
 
@@ -221,7 +221,7 @@ processInt(object.observableInt)
 
 <p>Now each time a parameter of T is required, we can use Observable<T> instead.</p>
 
-<h2 id="swift-issues-and-wish-list:19185c215e64f49f26a7f988087058cc">Swift issues and Wish-list</h2>
+<h2 id="swift-issues-and-wish-list">Swift issues and Wish-list</h2>
 
 <p>When I was playing with the idea of Observables I’ve found few things that either crashed the compiler (<em>Ouch</em>) or just didn’t work in language (yet?).</p>
 
@@ -245,7 +245,6 @@ processInt(object.observableInt)
 </ol>
 
 <p>Hopefully Apple is working on at least some of those points.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -254,7 +253,7 @@ processInt(object.observableInt)
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/07/implementing-observable-in-swift/"

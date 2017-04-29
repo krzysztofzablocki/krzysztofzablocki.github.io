@@ -32,7 +32,8 @@
 &lt;p&gt;Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,7 +65,8 @@
 &lt;li&gt;Sourcery &lt;strong&gt;doesn&amp;rsquo;t use runtime tricks&lt;/strong&gt;, in fact, it allows you to leverage compiler, even more, creating more safety.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Immediate feedback:&lt;/strong&gt; Sourcery features built-in daemon support, enabling you to write your templates in real-time side-by-side with generated code.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,22 +75,22 @@
       <pubDate>Mon, 08 Aug 2016 12:47:33 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;As I open source &lt;a href=&#34;https://github.com/krzysztofzablocki/KZFileWatchers&#34;&gt;another framework&lt;/a&gt; this week, I wanted to share few thoughts about building developer tools.&lt;/p&gt;
 
 &lt;p&gt;Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.&lt;/p&gt;
 
 &lt;p&gt;One would think that we&amp;rsquo;d use the same principles in our jobs, yet I&amp;rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,7 +100,8 @@
       
       <guid>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</guid>
       <description>&lt;p&gt;As we are closing this year, let&amp;rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -107,15 +110,14 @@
       <pubDate>Tue, 08 Dec 2015 11:07:09 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2015/12/writing-xcode-plugin-in-swift/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2015/12/logs.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;I&amp;rsquo;ve found myself using Xcode a lot more than I did in Objective-C.&lt;/p&gt;
 
@@ -124,7 +126,8 @@
 &lt;p&gt;Because Xcode doesn’t offer such functionality and because I do not like to complain, I’ve decided to write my own plugin for it.&lt;/p&gt;
 
 &lt;p&gt;I wrote it in Swift.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -139,7 +142,7 @@
 
 &lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
 
-&lt;p&gt;&lt;div 
+&lt;div 
 class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
 		allowfullscreen
@@ -147,9 +150,9 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 		width=&#34;100%&#34;
 		height=&#34;385&#34;
 	&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
+&lt;h3 id=&#34;features&#34;&gt;Features&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
@@ -165,7 +168,8 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -177,7 +181,8 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

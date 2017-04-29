@@ -111,7 +111,8 @@ So I wrote one.
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -163,15 +164,14 @@ So I wrote one.
             
 
             <article class="post-content">
-                
-
-<p>You’ve probably seen <a href="http://www.fiftythree.com/">Paper</a>, the app is pretty cool and the drawings look really nice and smooth.</p>
+                <p>You’ve probably seen <a href="http://www.fiftythree.com/">Paper</a>, the app is pretty cool and the drawings look really nice and smooth.</p>
 
 <p>I’m working on my personal app that needs something similar, and after doing some research I’ve not seen a proper solution.</p>
 
-<p>So I wrote one.</p>
+<p>So I wrote one.
+</p>
 
-<h2 id="analyzing:8915563a09d2776cf4df201fce9b275a">Analyzing</h2>
+<h2 id="analyzing">Analyzing</h2>
 
 <p>If you play with first Paper tool, you will notice few key points that we need to duplicate:</p>
 
@@ -238,11 +238,11 @@ to this:
 
 <p>Let’s get to work.</p>
 
-<h2 id="connecting-the-dots:8915563a09d2776cf4df201fce9b275a">Connecting the dots</h2>
+<h2 id="connecting-the-dots">Connecting the dots</h2>
 
 <p>To draw anything we first need to collect touches positions for drawing. I’ve used UIPanGestureRecognizer to collect them, to have them working with cocos2d I just included <a href="https://github.com/krzysztofzablocki/CCNode-SFGestureRecognizers">my category</a>. After you have some points we need to render them, and since we will be needing line segments that can start at arbitrary width and end at totally different one, we need to make our own rendering. To render the lines with variable width at both ends of a single line segment we need to draw them by using triangles, this is how we can do that:</p>
 
-<p><a href="/2012/04/figure_1.png"
+<a href="/2012/04/figure_1.png"
 	
 	
 	class="image-gallery-photo"
@@ -266,7 +266,7 @@ to this:
 	
 </a>
 
-</p>
+
 
 <p>As you can see here:</p>
 
@@ -298,7 +298,7 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 
 <p>But there is something more you need to do, if you would just calculate each of this vertices per segment, you would end up with disconnected segments:</p>
 
-<p><a href="/2012/04/figure_2.png"
+<a href="/2012/04/figure_2.png"
 	
 	
 	class="image-gallery-photo"
@@ -322,7 +322,7 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 	
 </a>
 
-</p>
+
 
 <p>We don’t want that. To make it work let’s make each line C, D vertices the A, B vertices of the next segment, that way we will have proper connection’s between segments, generating full line.</p>
 
@@ -340,11 +340,11 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 @end
 </code></pre>
 
-<h3 id="performance-note:8915563a09d2776cf4df201fce9b275a">Performance note</h3>
+<h3 id="performance-note">Performance note</h3>
 
 <p>Since the user can draw as many lines as he want and they can be of arbitrary length, if we would draw them in each frame that would very quickly become performance problem. There is a simple solution for that i.e. draw each line segment we get into a texture, that way it doesn’t really matter how many lines user draws or how long they will be. At this point we would just get straight lines connecting our points:</p>
 
-<p><a href="/2012/04/Step_1.png"
+<a href="/2012/04/Step_1.png"
 	
 	
 	class="image-gallery-photo"
@@ -368,11 +368,11 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 	
 </a>
 
-</p>
+
 
 <p>Nothing impressive, but this is just the first step…</p>
 
-<h2 id="calculating-width-based-on-speed-of-panning:8915563a09d2776cf4df201fce9b275a">Calculating width based on speed of panning</h2>
+<h2 id="calculating-width-based-on-speed-of-panning">Calculating width based on speed of panning</h2>
 
 <p>We need to have slim lines when the user is panning slowly and fat lines if he is moving very quickly, we can use UIPanGestureRecognizer <strong>velocityInView</strong>: method to recognize that:</p>
 
@@ -399,7 +399,7 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 
 <p>Remember that this function was result of trial &amp; error, so feel free and play around with it if you wan’t…</p>
 
-<h2 id="bending-the-lines:8915563a09d2776cf4df201fce9b275a">Bending the lines</h2>
+<h2 id="bending-the-lines">Bending the lines</h2>
 
 <p>Research in the internet would suggest to use Catmull-rom algorithm for drawing smooth lines that we want. This splines are one of few splines that go through all control points you specify, it’s really good algorithm for some cases e.g. interpolating Camera position for cutscenes.</p>
 
@@ -474,7 +474,7 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 
 <p>Now we use this smoothed points for drawing, exactly as we did with the old ones… At this point the app generates something like this:</p>
 
-<p><a href="/2012/04/Step_3.png"
+<a href="/2012/04/Step_3.png"
 	
 	
 	class="image-gallery-photo"
@@ -498,11 +498,11 @@ CGPoint D = ccpSub(curPoint, ccpMult(perpendicular, curValue / 2));
 	
 </a>
 
-</p>
+
 
 <p>It start’s to look interesting, the lines are bending pretty nice ( we could play around with number of segments we used to smooth our lines to get even more quality ). There is quite a bit of aliasing visible here that doesn’t look nice, and also the start / end point of line don’t look nice…</p>
 
-<h2 id="anti-aliasing-lines:8915563a09d2776cf4df201fce9b275a">Anti-Aliasing lines</h2>
+<h2 id="anti-aliasing-lines">Anti-Aliasing lines</h2>
 
 <p>Aliasing is pretty common problem in computer graphics, usually you could just use hardware Multisampling, cocos also supports that ( just set proper flags in CCGLView creation ). But this is overkill for our drawing, if we would enable multisampling here, not only we would get performance hit but that way we would also make rest of the app use multisampling… There is a lot simpler solution… Aliasing is so visible because we go from full color straight to an empty one ( black to white ) in an instant. So <strong>let’s not do that</strong>, let’s make the color linearly interpolate from full color to an empty one. We just need to modify alpha value from 1 to 0 over some range of pixels and hardware blending will do the rest for us… Let’s create additional triangles at the edges of our line and modify alpha there:</p>
 
@@ -517,11 +517,11 @@ CGPoint I = ccpSub(D, ccpMult(perpendicular, overdraw));
 <pre><code class="language-objectivec">glBlend(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 </code></pre>
 
-<h2 id="final-touches:8915563a09d2776cf4df201fce9b275a">Final touches</h2>
+<h2 id="final-touches">Final touches</h2>
 
 <p>Last thing we need to do is make sure our start / end line points are circular and smooth instead of hard cut off. But we can’t draw full circles at end points or the overdraw alpha would add up and it would look weird, instead we will draw just the half circle placed exactly at the last or first point of line. We need to calculate the exact angle we should start our circle fragment from,</p>
 
-<p><a href="/2012/04/figure_3.png"
+<a href="/2012/04/figure_3.png"
 	
 	
 	class="image-gallery-photo"
@@ -545,7 +545,7 @@ CGPoint I = ccpSub(D, ccpMult(perpendicular, overdraw));
 	
 </a>
 
-</p>
+
 
 <p>As you can see here, we need to figure out what angle of our circle is pointing at C ( Circle is not rotated, it’s just placed at the end point ) , again we can use Perpendicular to line direction to calculate that. I like dot products, so let’s use them to calculate the angle.</p>
 
@@ -559,7 +559,7 @@ if (rightDot &lt; 0.0f) {
 
 <p>As you probably remember from school the value of dot product of normalized vectors is equal to cos angle between them, we will calculate dot product between the perpendicular to line direction and vector (0, 1). Since we also need to take into consideration the direction of our angle, we should also calculate dot product between perpendicular and right vector, then according to that we can modify the angle. When calculating aLineDir make sure that for start of the line you reverse the direction. The final result of our algorithm should look like this:</p>
 
-<p><a href="/2012/04/Step_4.png"
+<a href="/2012/04/Step_4.png"
 	
 	
 	class="image-gallery-photo"
@@ -583,16 +583,15 @@ if (rightDot &lt; 0.0f) {
 	
 </a>
 
-</p>
 
-<h2 id="conclusion:8915563a09d2776cf4df201fce9b275a">Conclusion</h2>
+
+<h2 id="conclusion">Conclusion</h2>
 
 <p><a href="https://github.com/krzysztofzablocki/smooth-drawing">Download project from GitHub.</a></p>
 
 <p>At this point we have a really nice drawing application.</p>
 
 <p>I decided to share my solution because I couldn’t find a complete one shared by anyone else…</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -601,7 +600,7 @@ if (rightDot &lt; 0.0f) {
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/"

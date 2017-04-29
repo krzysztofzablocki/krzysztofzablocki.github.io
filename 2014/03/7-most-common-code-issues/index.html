@@ -15,6 +15,7 @@
 
 <meta property="og:title" content="7 most common code issues" />
 <meta property="og:description" content="What are top 7 most common issues I find doing Code Reviews?
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2014/03/7-most-common-code-issues/" />
@@ -45,6 +46,7 @@
 
 <meta itemprop="name" content="7 most common code issues">
 <meta itemprop="description" content="What are top 7 most common issues I find doing Code Reviews?
+
 ">
 
 
@@ -63,6 +65,7 @@
 
 <meta name="twitter:title" content="7 most common code issues"/>
 <meta name="twitter:description" content="What are top 7 most common issues I find doing Code Reviews?
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -93,7 +96,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -145,52 +149,51 @@
             
 
             <article class="post-content">
-                
+                <p>What are top 7 most common issues I find doing Code Reviews?</p>
 
-<p>What are top 7 most common issues I find doing Code Reviews?</p>
+<p></p>
 
-<h2 id="commented-out-code:bd16e5452f1823f3ac60cfe585cf3c69">Commented out code</h2>
+<h2 id="commented-out-code">Commented out code</h2>
 
 <p>It makes me think that you didn&rsquo;t learn how to use version control and tagging, why the hell do I need to read that old code, if it&rsquo;s no longer valid!?</p>
 
 <p>If it&rsquo;s important and you might need to get back to it in the future tag it properly, then remove from current code.</p>
 
-<h2 id="useless-comments:bd16e5452f1823f3ac60cfe585cf3c69">Useless comments</h2>
+<h2 id="useless-comments">Useless comments</h2>
 
 <p>Comments that don&rsquo;t bring any value, they are obvious or they mark part of code that should be put in a method.</p>
 
 <p><strong>Remember</strong>: comments get outdated very quickly and people don&rsquo;t maintain them.</p>
 
-<h2 id="empty-methods:bd16e5452f1823f3ac60cfe585cf3c69">Empty methods</h2>
+<h2 id="empty-methods">Empty methods</h2>
 
 <p>A method only calling super is considered empty. Remove it.</p>
 
-<h2 id="files-are-too-long:bd16e5452f1823f3ac60cfe585cf3c69">Files are too long</h2>
+<h2 id="files-are-too-long">Files are too long</h2>
 
 <p>How can you keep reading file that has over 400 lines of code? It makes my eyes bleed, please use composition, categories or other ways of organising your code.</p>
 
 <p>When I see a file that has so many lines I assume it&rsquo;s breaking SRP unless proven otherwise.</p>
 
-<h2 id="immutable-object-properties-with-wrong-qualifiers:bd16e5452f1823f3ac60cfe585cf3c69">Immutable object properties with wrong qualifiers</h2>
+<h2 id="immutable-object-properties-with-wrong-qualifiers">Immutable object properties with wrong qualifiers</h2>
 
 <p>If you have immutable object property that has mutable counterpart, always use copy. Otherwise you can end up having nasty bugs, if someone assigns you mutable counterpart and modified it.</p>
 
 <p><strong>Remember</strong>: if you call copy on immutable object like NSString, it will really only call retain, 0 performance hit.</p>
 
-<h2 id="not-caring-about-results:bd16e5452f1823f3ac60cfe585cf3c69">Not caring about results</h2>
+<h2 id="not-caring-about-results">Not caring about results</h2>
 
 <p>If you call my API without passing errorHandler, I&rsquo;m gonna make you pay dearly(crash). Same goes for completion results.</p>
 
 <p><strong>Remember</strong>: When you create API don&rsquo;t allow people to call expensive methods without them caring about results, your users will appreciate longer battery life.</p>
 
-<h2 id="no-assertions-or-validation:bd16e5452f1823f3ac60cfe585cf3c69">No assertions or validation</h2>
+<h2 id="no-assertions-or-validation">No assertions or validation</h2>
 
 <p>Assert your assumptions, use asserts to enforce proper API usage or to make sure your assumptions are actually valid. If they are not, you&rsquo;ll get to know about that quickly.</p>
 
-<h2 id="conclusion:bd16e5452f1823f3ac60cfe585cf3c69">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>That&rsquo;s the most common mistakes I usually see, let me know if you know other recurring ones.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -199,7 +202,7 @@
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/03/7-most-common-code-issues/"

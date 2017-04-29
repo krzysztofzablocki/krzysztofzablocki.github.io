@@ -22,7 +22,8 @@
 &lt;p&gt;Here’s a list of all the APIs you must know:&lt;/p&gt;
 
 &lt;p&gt;•&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,22 +32,22 @@
       <pubDate>Thu, 14 Jan 2016 16:21:06 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2016/01/programming/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/01/programming.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;What is programming?&lt;/p&gt;
 
 &lt;p&gt;For me it has always been about solving problems, and analytical thinking.&lt;/p&gt;
 
 &lt;p&gt;Does it matter what language or platform you solve problems on? How do you learn more on your selected platform?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,7 +62,7 @@
 
 &lt;p&gt;&amp;ldquo;But surely playgrounds aren&amp;rsquo;t possible in Objective-C?&amp;rdquo; you say&amp;hellip; Think again.&lt;/p&gt;
 
-&lt;p&gt;&lt;div 
+&lt;div 
 class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
 		allowfullscreen
@@ -69,9 +70,9 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 		width=&#34;100%&#34;
 		height=&#34;385&#34;
 	&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;h3 id=&#34;features:628f4197a88d9024a7ea07216490739a&#34;&gt;Features&lt;/h3&gt;
+&lt;h3 id=&#34;features&#34;&gt;Features&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Faster than Swift playgrounds (a lot)&lt;/li&gt;
@@ -87,7 +88,8 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZPlayground&#34;&gt;Source code on GitHub&lt;/a&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -100,8 +102,8 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
 
 &lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affected the way I work.&lt;/p&gt;
 
-&lt;p&gt;What matters and how I go about working for my clients?&lt;/p&gt;
-</description>
+&lt;p&gt;What matters and how I go about working for my clients?
+&lt;/p&gt;</description>
     </item>
     
   </channel>

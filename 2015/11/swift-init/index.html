@@ -92,7 +92,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -152,11 +153,11 @@
             
 
             <article class="post-content">
-                
-
-<p>With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.</p>
+                <p>With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.</p>
 
 <p>I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.</p>
+
+<p></p>
 
 <p>Let&rsquo;s say you have a class like:</p>
 
@@ -196,7 +197,7 @@
 
 <p>Let&rsquo;s look at some options</p>
 
-<h3 id="option-1-implicitly-unwraped-optional-var:c85725a1bc37aa8abd76c5fae53a5978">Option 1 - implicitly unwraped optional var!</h3>
+<h3 id="option-1-implicitly-unwraped-optional-var">Option 1 - implicitly unwraped optional var!</h3>
 
 <pre><code class="language-swift">var integrator: IntegrationService!
 </code></pre>
@@ -205,7 +206,7 @@
 
 <p>Please do not write it like this.</p>
 
-<h3 id="option-2-lazy-var-s-with-side-effects:c85725a1bc37aa8abd76c5fae53a5978">Option 2 - lazy var&rsquo;s with side-effects</h3>
+<h3 id="option-2-lazy-var-s-with-side-effects">Option 2 - lazy var&rsquo;s with side-effects</h3>
 
 <p>We can use private lazy var&rsquo;s, and have it execute side-effects</p>
 
@@ -250,7 +251,7 @@
 <li>I do not like triggering side effects like that, it feels very dirty</li>
 </ul>
 
-<h3 id="option-3-private-static-functions:c85725a1bc37aa8abd76c5fae53a5978">Option 3 - private static functions</h3>
+<h3 id="option-3-private-static-functions">Option 3 - private static functions</h3>
 
 <p>We can define private static functions and use that to setup our variables (and we can also put them into private class extension):</p>
 
@@ -301,7 +302,7 @@ private extension Foo_ext {
 <li>clean and without any hack&rsquo;s around the compiler</li>
 </ul>
 
-<h2 id="conclusion:c85725a1bc37aa8abd76c5fae53a5978">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>There were few other ideas that my friends on twitter suggested, <a href="https://gist.github.com/krzysztofzablocki/6a1b6afab974f442f5ff">you can take a look here</a></p>
 
@@ -312,7 +313,6 @@ private extension Foo_ext {
 <p>Big shoutout to <a href="http://twitter.com/jessyMeow">@jessyMeow</a> and <a href="http://twitter.com/KostiaKoval">@KostiaKoval</a> as they pointed out some better ways to deal with this than I originaly thought :)</p>
 
 <p>If you have other solutions you like, please do let me know on Twitter as I&rsquo;d love to learn about it!</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -321,7 +321,7 @@ private extension Foo_ext {
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/11/swift-init/"

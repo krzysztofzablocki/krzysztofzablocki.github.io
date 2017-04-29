@@ -16,7 +16,8 @@
       
       <guid>http://merowing.info/2012/12/quick-tip-for-interface-builder/</guid>
       <description>&lt;p&gt;Do you use Interface Builder ? Even if you don’t like IB, read this short tip and referenced articles.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,7 +29,8 @@
       <description>&lt;p&gt;So you want to know when user is interacting with your app and you don’t really care which screen is he using or what is he doing.&lt;/p&gt;
 
 &lt;p&gt;You only want to know when he touches your app, for example: you make a game and you would like to automatically go into pause mode if user didn’t use your app for N minutes…&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

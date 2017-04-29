@@ -92,7 +92,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -144,9 +145,9 @@
             
 
             <article class="post-content">
-                
+                <p>What are some of my favorite techniques for cleaner and more readable code?</p>
 
-<p>What are some of my favorite techniques for cleaner and more readable code?</p>
+<p></p>
 
 <p>Over the years I’ve become very pedantic when it comes to code quality.</p>
 
@@ -170,7 +171,7 @@
 <p>I’d like to share few techniques I’ve been using to simplify code.
 &gt; Before we start looking at examples, be aware that pretty much ANY code technique can be misused, that doesn’t mean you should avoid it altogether.</p>
 
-<h3 id="kzasserts-https-github-com-krzysztofzablocki-kzasserts:9dd65fb6bef2befcb996b97035de0744"><a href="https://github.com/krzysztofzablocki/KZAsserts">KZAsserts</a></h3>
+<h3 id="kzasserts-https-github-com-krzysztofzablocki-kzasserts"><a href="https://github.com/krzysztofzablocki/KZAsserts">KZAsserts</a></h3>
 
 <p>Asserts are great for adhearing to first part of the equation, they’ll crash your app, but they are usually stripped in release(they should), so we need to have proper error handling in release code.</p>
 
@@ -196,11 +197,11 @@ if ([something isKindOfClass:[NSString class]]) {
 AssertTrueOrReturnError([something isKindOfClass:[NSString class]]);
 </code></pre>
 
-<h3 id="preprocesor-macros:9dd65fb6bef2befcb996b97035de0744">Preprocesor Macros</h3>
+<h3 id="preprocesor-macros">Preprocesor Macros</h3>
 
 <p>Contrary to Apple beliefs (Swift language doc), macros are used for much more than constants (using them for constants is plain wrong).</p>
 
-<h4 id="what-are-common-techniques-for-leveraging-macros:9dd65fb6bef2befcb996b97035de0744">What are common techniques for leveraging macros ?</h4>
+<h4 id="what-are-common-techniques-for-leveraging-macros">What are common techniques for leveraging macros ?</h4>
 
 <p>Given a macro definition:</p>
 
@@ -257,7 +258,7 @@ AssertTrueOrReturnError([something isKindOfClass:[NSString class]]);
 
 <p>Macro’s we already discussed, KZBox/KZProperty are macros that use above techniques.</p>
 
-<h3 id="dsl-for-validators:9dd65fb6bef2befcb996b97035de0744">DSL for validators.</h3>
+<h3 id="dsl-for-validators">DSL for validators.</h3>
 
 <p>I bet you appreciate how readable and easy to use validators are. Imagine them written as standard objc method calls, it wouldn’t be as easy to write or read.
 Instead of nice</p>
@@ -305,7 +306,7 @@ Instead of nice</p>
 
 <p><a href="https://github.com/krzysztofzablocki/KZPropertyMapper/blob/master/KZPropertyMapper/KZPropertyDescriptor%2BValidators.m">Just take a look at other validators here</a>.</p>
 
-<h3 id="key-value-coding:9dd65fb6bef2befcb996b97035de0744">Key Value Coding</h3>
+<h3 id="key-value-coding">Key Value Coding</h3>
 
 <p>Key value coding is really cool technique that I use in normal code but also very often while debugging.</p>
 
@@ -377,7 +378,7 @@ Collection will only contain NSNumbers, but if your class uses NSInteger or othe
 <pre><code class="language-objectivec">[self setValue:@2 forKeyPath:@&quot;primitiveNSInteger&quot;]
 </code></pre>
 
-<h3 id="runtime:9dd65fb6bef2befcb996b97035de0744">Runtime</h3>
+<h3 id="runtime">Runtime</h3>
 
 <p>Meta programming is one of my beloved techniques, I just hate repetition, DRY all the way.</p>
 
@@ -408,10 +409,9 @@ Collection will only contain NSNumbers, but if your class uses NSInteger or othe
 <code>[[windowsArray do] setHidesOnDeactivate:YES];</code></li>
 </ul>
 
-<h2 id="conclusion:9dd65fb6bef2befcb996b97035de0744">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>There are many techniques to keep your code clean and DRY, let me know what are yours.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -420,7 +420,7 @@ Collection will only contain NSNumbers, but if your class uses NSInteger or othe
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/08/writing-less-code/"

@@ -15,6 +15,7 @@
 
 <meta property="og:title" content="Simple way to scrape web with Ruby" />
 <meta property="og:description" content="MyFitnessPal didn&rsquo;t give me API access, so I wrote some Ruby to get it anyway.
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2015/01/extracting-data-from-websites-without-api/" />
@@ -47,6 +48,7 @@
 
 <meta itemprop="name" content="Simple way to scrape web with Ruby">
 <meta itemprop="description" content="MyFitnessPal didn&rsquo;t give me API access, so I wrote some Ruby to get it anyway.
+
 ">
 
 
@@ -65,6 +67,7 @@
 
 <meta name="twitter:title" content="Simple way to scrape web with Ruby"/>
 <meta name="twitter:description" content="MyFitnessPal didn&rsquo;t give me API access, so I wrote some Ruby to get it anyway.
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -95,7 +98,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -147,17 +151,17 @@
             
 
             <article class="post-content">
-                
+                <p>MyFitnessPal didn&rsquo;t give me API access, so I wrote some Ruby to get it anyway.</p>
 
-<p>MyFitnessPal didn&rsquo;t give me API access, so I wrote some Ruby to get it anyway.</p>
+<p></p>
 
-<h2 id="finding-good-entry-point:b3f63eb4d90f7d8abeef61b014dae2e3">Finding good entry-point</h2>
+<h2 id="finding-good-entry-point">Finding good entry-point</h2>
 
 <p>Logging in into MyFitnessPal, go to Reports Tab.</p>
 
 <p>You can now see Graphs of your data, how do they display the graphs? Let&rsquo;s use <strong>View Page Source</strong>:</p>
 
-<p>
+
 <figure >
     
         <img src="/2015/01/report1.png"  />
@@ -165,7 +169,7 @@
     
 </figure>
 
-</p>
+
 
 <p>We can see that the data is available under:
 <a href="http://www.myfitnesspal.com/reports/results/progress/1/30.json">http://www.myfitnesspal.com/reports/results/progress/1/30.json</a></p>
@@ -178,7 +182,7 @@
 <li>Nutrition/Calories Nutrition/Protein Nutrition/Carbs Nutrition/Fat are some of the other available reports</li>
 </ul>
 
-<h2 id="accessing-data-from-code:b3f63eb4d90f7d8abeef61b014dae2e3">Accessing data from code</h2>
+<h2 id="accessing-data-from-code">Accessing data from code</h2>
 
 <p>The data is protected by cookie access. So we&rsquo;ll need to use some Ruby to first obtain said cookie.</p>
 
@@ -192,12 +196,12 @@
 
 <p><a href="http://tryruby.org">Want to learn more Ruby?</a></p>
 
-<h2 id="obtaining-the-cookie:b3f63eb4d90f7d8abeef61b014dae2e3">Obtaining the cookie</h2>
+<h2 id="obtaining-the-cookie">Obtaining the cookie</h2>
 
 <p>Login website:
 <a href="https://www.myfitnesspal.com/account/login">https://www.myfitnesspal.com/account/login</a></p>
 
-<p>
+
 <figure >
     
         <img src="/2015/01/login.png"  />
@@ -205,7 +209,7 @@
     
 </figure>
 
-</p>
+
 
 <p>Again looking at the Page Source we know that:</p>
 
@@ -235,7 +239,7 @@ form.submit
 <li>After submitting our form, mechanize will store the login cookie in the agent, which means all further requests on this agent will be properly authorised.</li>
 </ol>
 
-<h2 id="retrieving-reports:b3f63eb4d90f7d8abeef61b014dae2e3">Retrieving reports</h2>
+<h2 id="retrieving-reports">Retrieving reports</h2>
 
 <p>With valid cookie, grab 30 days worth of our weight and calories data:</p>
 
@@ -252,7 +256,7 @@ calories = JSON.parse(calories_report.body)[&quot;data&quot;]
 
 <p><strong>We could end here, but since I like fitness, let&rsquo;s use this data to do some diet calculations.</strong></p>
 
-<h2 id="calculating-our-caloric-needs:b3f63eb4d90f7d8abeef61b014dae2e3">Calculating our caloric needs</h2>
+<h2 id="calculating-our-caloric-needs">Calculating our caloric needs</h2>
 
 <p>Now that we have both weight and intake calories, we can calculate our maintenance calories.</p>
 
@@ -276,13 +280,13 @@ calories = JSON.parse(calories_report.body)[&quot;data&quot;]
 
 <p>Now I got <em>1796.5 calories</em>, this seems to look correct since I’m in cutting phase.</p>
 
-<h3 id="weight-change:b3f63eb4d90f7d8abeef61b014dae2e3">Weight change</h3>
+<h3 id="weight-change">Weight change</h3>
 
 <p>It’s crucial that we smooth our weight data, weight can fluctuate quite a lot and we want to see the trend we are having, not just the values.</p>
 
 <p>Graph of my weight changes, the diamonds are the raw measurements, if I didn’t apply smoothing function it would be really hard to see the trends of my weight changes.</p>
 
-<p>
+
 <figure >
     
         <img src="/2015/01/weight.png"  />
@@ -290,7 +294,7 @@ calories = JSON.parse(calories_report.body)[&quot;data&quot;]
     
 </figure>
 
-</p>
+
 
 <p>With weights we want to calculate smoothed average for each entry, there is a ruby gem <code>moving_average</code> that we can use:</p>
 
@@ -320,7 +324,7 @@ end
 
 <p>Each kg of weight is approximately <em>7700 kcal</em>.</p>
 
-<h3 id="how-much-do-we-need-to-eat-to-maintain-our-weight:b3f63eb4d90f7d8abeef61b014dae2e3">How much do we need to eat to maintain our weight?</h3>
+<h3 id="how-much-do-we-need-to-eat-to-maintain-our-weight">How much do we need to eat to maintain our weight?</h3>
 
 <p>Now that we know our average intake and weight change, we can calculate our TDEE, which means calories we should be eating to keep our weight stable.</p>
 
@@ -331,7 +335,7 @@ end
 
 <p>Evaluate that once every 10-14 days, as it changes.</p>
 
-<h2 id="diet-composition:b3f63eb4d90f7d8abeef61b014dae2e3">Diet composition</h2>
+<h2 id="diet-composition">Diet composition</h2>
 
 <p>How should you divide your calories into macros, like Protein/Fat/Carbs?</p>
 
@@ -359,9 +363,9 @@ fat = 76 kg * 0.8 = 60.8 fat
 carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
 </code></pre>
 
-<h3 id="goals:b3f63eb4d90f7d8abeef61b014dae2e3">Goals</h3>
+<h3 id="goals">Goals</h3>
 
-<h4 id="bulking-gaining-muscle:b3f63eb4d90f7d8abeef61b014dae2e3">Bulking - Gaining Muscle</h4>
+<h4 id="bulking-gaining-muscle">Bulking - Gaining Muscle</h4>
 
 <p>If you are looking to gain muscle, you should be looking at maximum 0.2 kg per week.</p>
 
@@ -370,7 +374,7 @@ carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
 
 <p>Eat around <em>200</em> kcal over your TDEE and you should be gaining mostly lean muscle, eat a <em>1000</em> over and you&rsquo;ll end up fat.</p>
 
-<h4 id="cutting-loosing-weight:b3f63eb4d90f7d8abeef61b014dae2e3">Cutting - Loosing weight</h4>
+<h4 id="cutting-loosing-weight">Cutting - Loosing weight</h4>
 
 <p>Loosing weight is actually simpler than gaining lean muscle, you need to eat less than your TDEE, how much less will depend on your goal and bodyfat level.</p>
 
@@ -382,13 +386,13 @@ carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
 <li>&lt;8% bodyfat: eat 300-500 kcal below TDEE – reefed every 3-7 days</li>
 </ul>
 
-<h4 id="refeed-day:b3f63eb4d90f7d8abeef61b014dae2e3">Refeed day</h4>
+<h4 id="refeed-day">Refeed day</h4>
 
 <p>A refeed day is a day that you want to eat around your TDEE, let your body rest and relax, increase your carbs and try to keep fat the same.</p>
 
 <p>It’s beneficial for your body and mind, if you were on spot with your diet, you deserve to have a little treat.</p>
 
-<h2 id="conclusion:b3f63eb4d90f7d8abeef61b014dae2e3">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>So now that you know how to calculate your real TDEE, you should calculate it and then apply either surplus or deficit as I just described, evaluate for next 2 weeks and adjust if needed.</p>
 
@@ -400,7 +404,6 @@ carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
 <li><a href="http://www.merowing.info/2014/02/fit-geek/">Fit Geek</a></li>
 <li><a href="http://www.merowing.info/2014/09/a-swift-introduction-into-fitness/#.VLfecsaJn8s">Swift introduction to Fitness</a></li>
 </ul>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -409,7 +412,7 @@ carbs = (2256 - (152*4 + 60.8 * 9))/4 =&gt; 275.2 carbs
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/01/extracting-data-from-websites-without-api/"

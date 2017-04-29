@@ -56,7 +56,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="895">
+<meta itemprop="wordCount" content="899">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -146,15 +147,15 @@
             
 
             <article class="post-content">
-                
+                <p>This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.</p>
 
-<p>This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.</p>
+<p></p>
 
-<h2 id="project-setup:47f01b2955e89ad5538ffefdb4921636">Project setup</h2>
+<h2 id="project-setup">Project setup</h2>
 
 <p>I usually start with empty project, then I use my <a href="http://github.com/krzysztofzablocki/crafter">crafter</a> gem to apply some default scripts and settings.</p>
 
-<h4 id="settings:47f01b2955e89ad5538ffefdb4921636">Settings</h4>
+<h4 id="settings">Settings</h4>
 
 <ol>
 <li>Copy release configuration as Adhoc</li>
@@ -177,38 +178,35 @@
 </ul></li>
 </ol>
 
-<h4 id="scripts:47f01b2955e89ad5538ffefdb4921636">Scripts</h4>
+<h4 id="scripts">Scripts</h4>
 
 <p>There is a set of scripts that I always use.</p>
 
 <ul>
 <li><a href="http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Icon versioning.</a></li>
-<li>Turning todos/hacks into warnings.</li>
+<li>Turning todos/hacks into warnings.
+~~~bash
+KEYWORDS=&ldquo;TODO:|FIXME:|\?\?\?:|!!!:&rdquo;
+find &ldquo;${SRCROOT}&rdquo; -name &ldquo;<em>.h&rdquo; -or -name &ldquo;</em>.m&rdquo; -print0 | xargs -0 egrep &ndash;with-filename &ndash;line-number &ndash;only-matching &ldquo;($KEYWORDS).*\$&rdquo; | perl -p -e &ldquo;s/($KEYWORDS)/ warning: \$1/&rdquo;
+~~~</li>
+<li>Generating warnings when files are longer than N lines.
+~~~bash
+find &ldquo;${SRCROOT}&rdquo; ( -name &ldquo;<em>.h&rdquo; -or -name &ldquo;</em>.m&rdquo; ) -and ( -path &ldquo;${SRCROOT}/Pods/*&rdquo; -prune -o -print0 ) | xargs -0 wc -l | awk &lsquo;$1 &gt; 250 &amp;&amp; $2 != &ldquo;total&rdquo; {for(i=2;i&lt;NF;i++){printf &ldquo;%s%s&rdquo;, $i, &ldquo; &ldquo;} print $NF &ldquo;:1: warning: File more than 250 lines (&rdquo; $1 &ldquo;), consider refactoring.&rdquo; }&rsquo;</li>
 </ul>
 
-<pre><code class="language-bash">KEYWORDS=&quot;TODO:|FIXME:|\?\?\?:|\!\!\!:&quot;
-find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -print0 | xargs -0 egrep --with-filename --line-number --only-matching &quot;($KEYWORDS).*\$&quot; | perl -p -e &quot;s/($KEYWORDS)/ warning: \$1/&quot; 
-</code></pre>
-
-<ul>
-<li>Generating warnings when files are longer than N lines.</li>
-</ul>
-
-<pre><code class="language-bash">find &quot;${SRCROOT}&quot; \( -name &quot;*.h&quot; -or -name &quot;*.m&quot; \) -and \( -path &quot;${SRCROOT}/Pods/*&quot; -prune -o -print0 \) | xargs -0 wc -l | awk '$1 &gt; 250 &amp;&amp; $2 != &quot;total&quot; {for(i=2;i&lt;NF;i++){printf &quot;%s%s&quot;, $i, &quot; &quot;} print $NF &quot;:1: warning: File more than 250 lines (&quot; $1 &quot;), consider refactoring.&quot; }'
-
-</code></pre>
+<p>~~~</p>
 
 <p>Most of my project also add other scripts, <a href="http://foldifyapp.com">Foldify</a> does pre-processing and post-processing steps.</p>
 
-<h2 id="project-structure:47f01b2955e89ad5538ffefdb4921636">Project structure</h2>
+<h2 id="project-structure">Project structure</h2>
 
 <p>Let&rsquo;s start with fact that I use <a href="http://cocoapods.org">CocoaPods</a> for managing dependencies(hate it or love it but @alloy and the team spend lots of their free time to make Cocoapods and you should at least respect that).</p>
 
 <p>Now there are 2 approaches I&rsquo;d consider for setting up my project structure, whichever one I&rsquo;d choose I&rsquo;ll make sure that project grouping in Xcode matches the one on disk perfectly.</p>
 
-<h3 id="classic-organisation-by-role-division:47f01b2955e89ad5538ffefdb4921636">Classic organisation by role division</h3>
+<h3 id="classic-organisation-by-role-division">Classic organisation by role division</h3>
 
-<p>
+
 <figure >
     
         <img src="/2014/03/Folders1.png"  />
@@ -216,29 +214,29 @@ find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -pri
     
 </figure>
 
-</p>
+
 
 <p>This way we have separation between Our Code, Resources and Libs that we might use (sometimes Libs outside Cocoapods are needed).</p>
 
-<h4 id="pros:47f01b2955e89ad5538ffefdb4921636">Pros</h4>
+<h4 id="pros">Pros</h4>
 
 <ul>
 <li>Clear separation between file roles in project.</li>
 <li>All our code is under Classes folder, which makes it easy to run scripts and advanced code analyses (More on this later in the series).</li>
 </ul>
 
-<h4 id="cons:47f01b2955e89ad5538ffefdb4921636">Cons</h4>
+<h4 id="cons">Cons</h4>
 
 <ul>
 <li>If you&rsquo;d like to move part of the code to other project, is very likely you&rsquo;ll need to go to move some Resources along with it.</li>
 <li>Keeping resources properly organised requires more work.</li>
 </ul>
 
-<h3 id="composition-modular-approach:47f01b2955e89ad5538ffefdb4921636">Composition / Modular approach</h3>
+<h3 id="composition-modular-approach">Composition / Modular approach</h3>
 
 <p>Other option would be to store code and resources together and group by Features / Modules. eg. if you are working on a widget based app that could make a lot of sense.</p>
 
-<p>
+
 <figure >
     
         <img src="/2014/03/Folders2.png"  />
@@ -246,9 +244,9 @@ find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -pri
     
 </figure>
 
-</p>
 
-<h4 id="pros-1:47f01b2955e89ad5538ffefdb4921636">Pros</h4>
+
+<h4 id="pros-1">Pros</h4>
 
 <ul>
 <li>Easy to keep resources and code organised</li>
@@ -256,35 +254,35 @@ find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -pri
 <li>Very simple to reuse module in different project</li>
 </ul>
 
-<h4 id="cons-1:47f01b2955e89ad5538ffefdb4921636">Cons</h4>
+<h4 id="cons-1">Cons</h4>
 
 <ul>
 <li>Resources and code will be close together, so no separation between roles of files</li>
 </ul>
 
-<h3 id="which-one-to-choose:47f01b2955e89ad5538ffefdb4921636">Which one to choose?</h3>
+<h3 id="which-one-to-choose">Which one to choose?</h3>
 
 <p>I like to think I&rsquo;m a pragmatic programmer, I&rsquo;ve used both approaches and believe it depends on the project and the architecture decision you&rsquo;ll be making. #1 is more popular in general iOS apps, #2 makes a lot of sense for flexible architectures / frameworks etc.</p>
 
 <p>Try both and make a conscious choice for yourself, maybe hybrid approach makes more sense, Core of the app #1 and some modular part (Widgets?) as #2.</p>
 
-<h2 id="source-control-code-reviews-branching-strategy:47f01b2955e89ad5538ffefdb4921636">Source control, Code Reviews &amp; branching strategy</h2>
+<h2 id="source-control-code-reviews-branching-strategy">Source control, Code Reviews &amp; branching strategy</h2>
 
 <p>I&rsquo;ve completely moved to git as dvcs, I even use it for important personal documents. Used mercurial before and it wasn&rsquo;t bad, but most companies use git and I decided it&rsquo;s more useful to master one, especially since git is more powerful.</p>
 
 <p>To make sure code quality is high my teams always use Code Reviews, depending on the size of the project team I&rsquo;d say at least 2 reviewers have to accept changes. To be able to employ Code Reviews, one have to use proper branching strategy. I&rsquo;ve tried few approaches and my favourite one is <a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a>, it works very well in big and small teams.</p>
 
-<h2 id="more-quality-please:47f01b2955e89ad5538ffefdb4921636">More quality please</h2>
+<h2 id="more-quality-please">More quality please</h2>
 
 <p>Other techniques I use to make sure quality is good and project can have a long lifetime are:</p>
 
-<h4 id="bdd:47f01b2955e89ad5538ffefdb4921636">BDD</h4>
+<h4 id="bdd">BDD</h4>
 
 <p>I like to use <a href="https://github.com/allending/Kiwi">Kiwi</a> When writing tests you&rsquo;ll probably need to simulate web-services, we don&rsquo;t want to do real requests because tests should give us immediate feedback, <a href="https://github.com/AliSoftware/OHHTTPStubs">I use OHHTTPStubs to make that happen</a></p>
 
 <p>You can also add acceptance tests with something like <a href="https://github.com/kif-framework/KIF">KIF</a>, <a href="https://github.com/moredip/Frank">Frank</a> or <a href="http://calaba.sh/">Calabash</a>. Calabash has advantage as it&rsquo;s multi-platform and backed by Xamarin.</p>
 
-<h4 id="pair-programming:47f01b2955e89ad5538ffefdb4921636">Pair Programming</h4>
+<h4 id="pair-programming">Pair Programming</h4>
 
 <p>This is great technique for solving hard problems and working on the most important parts of your app, there is no point in pairing on UI layout, but when writing core architecture modules in your app there is a HUGE benefit from pairing.</p>
 
@@ -292,14 +290,13 @@ find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -pri
 
 <p>If you are working remotely, like I&rsquo;m currently, you can still do pair programming with services like <a href="http://screenhero.com/">Screenhero</a>.</p>
 
-<h4 id="composition-http-en-wikipedia-org-wiki-object-composition:47f01b2955e89ad5538ffefdb4921636"><a href="http://en.wikipedia.org/wiki/Object_composition">Composition</a></h4>
+<h4 id="composition-http-en-wikipedia-org-wiki-object-composition"><a href="http://en.wikipedia.org/wiki/Object_composition">Composition</a></h4>
 
 <p>Whatever architecture choice I&rsquo;ll select in next part of this series, I&rsquo;ll defienietly use <a href="http://en.wikipedia.org/wiki/Object_composition">composition</a>, because it&rsquo;s great pattern, it leads to cleaner code, smaller classes, makes it easier to test code and write it with <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> &amp;&amp; <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">SRP</a> principles in mind.</p>
 
-<h2 id="up-next:47f01b2955e89ad5538ffefdb4921636">Up next</h2>
+<h2 id="up-next">Up next</h2>
 
 <p><a href="/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/">In next part of this series</a>, we&rsquo;ll look at Model Layer and parsing, (probably) the most important layer in your app.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -308,7 +305,7 @@ find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -pri
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/"

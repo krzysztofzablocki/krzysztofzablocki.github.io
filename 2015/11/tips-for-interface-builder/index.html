@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -146,9 +147,7 @@
             
 
             <article class="post-content">
-                
-
-<p>Young developers are happy when they write a lot of code, they like to brag about that project that has tens of thousands lines of code they wrote.</p>
+                <p>Young developers are happy when they write a lot of code, they like to brag about that project that has tens of thousands lines of code they wrote.</p>
 
 <p>As we get more experienced, we realize that code is expensive. It&rsquo;s expensive to maintain, debug and reason about.</p>
 
@@ -156,7 +155,9 @@
 
 <p>Here are a few of my favourite tips &amp; tricks.</p>
 
-<h2 id="storyboards-or-xib-s:21300c1b9953a6f1683528d8c9c33895">Storyboards or Xib&rsquo;s</h2>
+<p></p>
+
+<h2 id="storyboards-or-xib-s">Storyboards or Xib&rsquo;s</h2>
 
 <p>It&rsquo;s pretty clear that Storyboards are what Apple want&rsquo;s us to use as some of the IB features are only available in Storyboard files:</p>
 
@@ -182,7 +183,7 @@
 
 <p>What about if I need to target older iOS?</p>
 
-<h3 id="rolling-your-own-storyboard-xib-or-class-references:21300c1b9953a6f1683528d8c9c33895">Rolling your own Storyboard, Xib or Class References</h3>
+<h3 id="rolling-your-own-storyboard-xib-or-class-references">Rolling your own Storyboard, Xib or Class References</h3>
 
 <p>If you are not lucky enough to target iOS 9 as min deplyoment target, you can still roll your own implementation, it&rsquo;s a little bit more work but still worth the effort.
 For years now I&rsquo;ve been using a very simple extension to have my own Storyboard, Xib or Class references in interface builder.</p>
@@ -276,7 +277,7 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
 }
 </code></pre>
 
-<h2 id="using-behaviours:21300c1b9953a6f1683528d8c9c33895">Using Behaviours</h2>
+<h2 id="using-behaviours">Using Behaviours</h2>
 
 <p>If there was one Pattern that I would recommend you use it would without any doubt be Composition, a pattern so great that it leads to other good ones naturally.</p>
 
@@ -284,13 +285,13 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
 
 <p>I&rsquo;ve written about it in <a href="http://www.objc.io/issue-13/behaviors.html">objc.io</a> Architecture Guide.</p>
 
-<h2 id="runtime-attributes-and-ibinspectable:21300c1b9953a6f1683528d8c9c33895">Runtime Attributes and @IBInspectable</h2>
+<h2 id="runtime-attributes-and-ibinspectable">Runtime Attributes and @IBInspectable</h2>
 
 <p>For years we were able to set custom properties straight from <strong>IB</strong>, yet a lot of people had no idea, they would create a <strong>UIView</strong> in Interface Builder and then configure some of it&rsquo;s properties in code.</p>
 
 <p>With Xcode 6 Runtime Attributes got upgraded to <strong>@IBInspectable</strong>, turning old and fragile:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/11/old_runtime_attributes.png"  />
@@ -298,11 +299,11 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
     
 </figure>
 
-</p>
+
 
 <p>into a proper editable property, one that we cannot misspell:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/11/inspectable.png"  />
@@ -310,7 +311,7 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
     
 </figure>
 
-</p>
+
 
 <p>They support any properties of type:</p>
 
@@ -327,7 +328,7 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
 <li>UIImage</li>
 </ul>
 
-<h3 id="extending-uikit:21300c1b9953a6f1683528d8c9c33895">Extending UIKit</h3>
+<h3 id="extending-uikit">Extending UIKit</h3>
 
 <p>And you can even extend existing types, like UIKit classes:</p>
 
@@ -349,7 +350,7 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
 
 <p>Gives each UIView a nice editor for border colors:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/11/border_color.png"  />
@@ -357,9 +358,9 @@ For years now I&rsquo;ve been using a very simple extension to have my own Story
     
 </figure>
 
-</p>
 
-<h3 id="driving-side-effects:21300c1b9953a6f1683528d8c9c33895">Driving side-effects</h3>
+
+<h3 id="driving-side-effects">Driving side-effects</h3>
 
 <p>How about adding a identifier to <strong>NSLayoutConstraint</strong>, iOS 7 added <strong>identifier</strong> field that can be used for debuging purpose, but I had a different use case for a custom identifier.</p>
 
@@ -397,7 +398,7 @@ static void const *kDesignSpecKey = &amp;kDesignSpecKey;
 @end
 </code></pre>
 
-<h2 id="shortcuts-and-hidden-options:21300c1b9953a6f1683528d8c9c33895">Shortcuts and hidden options</h2>
+<h2 id="shortcuts-and-hidden-options">Shortcuts and hidden options</h2>
 
 <p>Be sure to know your shortcuts and hidden options of Interface Builder.</p>
 
@@ -407,7 +408,7 @@ static void const *kDesignSpecKey = &amp;kDesignSpecKey;
 
 <p>When working with AutoLayout, be sure to use Option Key when dragging constraints, or Edit menu.</p>
 
-<h2 id="conclusion:21300c1b9953a6f1683528d8c9c33895">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Interface Builder is far from Perfect, but it&rsquo;s also far from the wretched tool that some Developers consider it to be.</p>
 
@@ -418,7 +419,6 @@ static void const *kDesignSpecKey = &amp;kDesignSpecKey;
 <p>Be Pragmatic, in many cases IB will suffice, especially with some smart extensions that I shown you, or the ones you&rsquo;ll write for yourself.</p>
 
 <p>In other cases use Code, it doesn&rsquo;t have to be one or the other.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -427,7 +427,7 @@ static void const *kDesignSpecKey = &amp;kDesignSpecKey;
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/11/tips-for-interface-builder/"

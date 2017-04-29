@@ -22,7 +22,8 @@
 &lt;video autoplay loop&gt;
   &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -100,7 +100,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -152,17 +153,14 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2017/01/testing.png"  />
     
     
 </figure>
 
-</p>
+
 
 <p>Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.</p>
 
@@ -174,9 +172,11 @@
 
 <p>Let us look at practices and tips for writing maintainable tests in your iOS Apps.</p>
 
-<h2 id="basics:3047d71ccf1370a2898eb92c70273f56">Basics</h2>
+<p></p>
 
-<h3 id="red-green-refactor:3047d71ccf1370a2898eb92c70273f56">Red - Green - Refactor</h3>
+<h2 id="basics">Basics</h2>
+
+<h3 id="red-green-refactor">Red - Green - Refactor</h3>
 
 <ul>
 <li><strong>RED</strong>: Write failing tests first.</li>
@@ -186,7 +186,7 @@
 
 <p>Repeat this cycle until you have code that is clean and tested.</p>
 
-<h4 id="benefits:3047d71ccf1370a2898eb92c70273f56">Benefits:</h4>
+<h4 id="benefits">Benefits:</h4>
 
 <ul>
 <li>Writing tests first gives you a clear perspective on the API design, by getting into the mindset of being a client of the API before it exists.</li>
@@ -200,7 +200,7 @@
 
 <p>When you refactor production code, you should not be doing <strong>RGR</strong>. Instead, you should be going from Green to Green, thus ensuring you did not cause regression.</p>
 
-<h3 id="arrange-act-assert-http-c2-com-cgi-wiki-arrangeactassert:3047d71ccf1370a2898eb92c70273f56"><a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange - Act - Assert</a></h3>
+<h3 id="arrange-act-assert-http-c2-com-cgi-wiki-arrangeactassert"><a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange - Act - Assert</a></h3>
 
 <p><strong>AAA</strong> is a pattern for arranging and formatting code in Unit Tests.</p>
 
@@ -222,7 +222,7 @@
     }
 </code></pre>
 
-<h4 id="benefits-1:3047d71ccf1370a2898eb92c70273f56">Benefits</h4>
+<h4 id="benefits-1">Benefits</h4>
 
 <ul>
 <li>Separates tested functionality from the setup and assertion.</li>
@@ -236,7 +236,7 @@
 </ul></li>
 </ul>
 
-<h2 id="quality-of-test-code:3047d71ccf1370a2898eb92c70273f56">Quality of test code</h2>
+<h2 id="quality-of-test-code">Quality of test code</h2>
 
 <p>One of the most common complaints about testing I hear is the fact that they are hard to maintain.</p>
 
@@ -251,7 +251,7 @@
 <p>I think tests are part of your product. Consider putting them next to your classes in project structure to make it sink into your subconscious.
 So what else can we do other than <em>RGR</em> and <em>AAA</em> to make test cases more maintainable?</p>
 
-<h3 id="use-type-inferred-factories:3047d71ccf1370a2898eb92c70273f56">Use type-inferred factories</h3>
+<h3 id="use-type-inferred-factories">Use type-inferred factories</h3>
 
 <p>Instead of repeating the same initialization patterns, introduce simple factories and leverage type inference.</p>
 
@@ -291,7 +291,7 @@ So what else can we do other than <em>RGR</em> and <em>AAA</em> to make test cas
     )
 </code></pre>
 
-<h3 id="do-not-test-layouts-in-code:3047d71ccf1370a2898eb92c70273f56">Do not test layouts in code</h3>
+<h3 id="do-not-test-layouts-in-code">Do not test layouts in code</h3>
 
 <p>Testing item placement and particular frames in your test suites is not going to end up well, when those kind of tests fail, most people just update the numbers with the expected ones and move on. Don&rsquo;t do it.</p>
 
@@ -301,7 +301,7 @@ So what else can we do other than <em>RGR</em> and <em>AAA</em> to make test cas
 
 <p><strong>Note:</strong> I recommend adding explicit approval for Screenshot changes in your project, otherwise people will do the same thing they can do with layouts, just update the snapshots to pass without thinking about it. You can use <a href="http://danger.systems">danger</a> to inform users when a screenshot is changed.</p>
 
-<h3 id="write-custom-matchers:3047d71ccf1370a2898eb92c70273f56">Write custom matchers</h3>
+<h3 id="write-custom-matchers">Write custom matchers</h3>
 
 <p>It often happens that we have to test similar kind of patterns, instead of repeating them, introduce custom matcher that can make this much easier.</p>
 
@@ -320,7 +320,7 @@ So what else can we do other than <em>RGR</em> and <em>AAA</em> to make test cas
 }
 </code></pre>
 
-<h3 id="replacing-apple-or-3rd-party-interfaces:3047d71ccf1370a2898eb92c70273f56">Replacing Apple or 3rd party interfaces</h3>
+<h3 id="replacing-apple-or-3rd-party-interfaces">Replacing Apple or 3rd party interfaces</h3>
 
 <p>Its convienent to be able to replace 3rd party dependencies in tests, so that we can test our object in isolation. Some classes Apple exposes don&rsquo;t even have public interface for creating them e.g. <code>UITouch</code>.</p>
 
@@ -340,7 +340,7 @@ extension UITouch: TouchEvent {}
 
 <p><a href="http://chris.eidhof.nl/post/protocol-oriented-programming/">Keep in mind that protocols like anything else can be abused</a></p>
 
-<h3 id="limit-public-interfaces:3047d71ccf1370a2898eb92c70273f56">Limit public interfaces</h3>
+<h3 id="limit-public-interfaces">Limit public interfaces</h3>
 
 <p>You are responsible for testing all public interfaces, the less you have, the fewer tests you need, but more importantly, you avoid writing fragile tests, focusing on the big picture instead of implementation details.</p>
 
@@ -348,13 +348,13 @@ extension UITouch: TouchEvent {}
 
 <p><a href="http://www.artima.com/lejava/articles/designprinciples.html">We should be programming to an interface, not an implementation.</a></p>
 
-<h3 id="focus-on-readability:3047d71ccf1370a2898eb92c70273f56">Focus on readability</h3>
+<h3 id="focus-on-readability">Focus on readability</h3>
 
 <p>It is important that <a href="https://medium.com/javascript-scene/what-every-unit-test-needs-f6cd34d9836d#.kn8a3pyi8">a failing test should read like a high-quality bug report.</a>.</p>
 
 <p>RSpec style of testing can improve this aspect of your test cases.</p>
 
-<h4 id="rspec-bdd:3047d71ccf1370a2898eb92c70273f56">RSpec / BDD</h4>
+<h4 id="rspec-bdd">RSpec / BDD</h4>
 
 <p><a href="http://rspec.info">RSpec</a> is common with the behavior-driven development (BDD) process of writing human readable specifications that focus the development of your application.</p>
 
@@ -400,7 +400,7 @@ extension UITouch: TouchEvent {}
 }
 </code></pre>
 
-<h5 id="best-practices:3047d71ccf1370a2898eb92c70273f56">Best practices</h5>
+<h5 id="best-practices">Best practices</h5>
 
 <p>There are 3 scoping indicators in RSpec:</p>
 
@@ -412,7 +412,7 @@ extension UITouch: TouchEvent {}
 
 <p>The purpose of “describe” is to wrap a set of tests against one functionality while “context” is to wrap a set of tests against one functionality under the same state.</p>
 
-<h4 id="describe:3047d71ccf1370a2898eb92c70273f56"><code>describe</code></h4>
+<h4 id="describe"><code>describe</code></h4>
 
 <ul>
 <li><code>describe</code> is used for <em>Things</em>.</li>
@@ -438,7 +438,7 @@ extension UITouch: TouchEvent {}
     describe(&quot;map&quot;) {
 </code></pre>
 
-<h4 id="context:3047d71ccf1370a2898eb92c70273f56"><code>context</code></h4>
+<h4 id="context"><code>context</code></h4>
 
 <ul>
 <li><code>context</code> is used for <em>State</em>.</li>
@@ -464,7 +464,7 @@ extension UITouch: TouchEvent {}
 context(&quot;with logged-in user&quot;)
 </code></pre>
 
-<h4 id="it:3047d71ccf1370a2898eb92c70273f56"><code>it</code></h4>
+<h4 id="it"><code>it</code></h4>
 
 <ul>
 <li>Immediately shows what&rsquo;s broken.</li>
@@ -484,7 +484,7 @@ context(&quot;with logged-in user&quot;)
 }
 </code></pre>
 
-<h3 id="selectively-running-tests:3047d71ccf1370a2898eb92c70273f56">Selectively running tests</h3>
+<h3 id="selectively-running-tests">Selectively running tests</h3>
 
 <ul>
 <li>You can prefix any of the above keywords with:
@@ -510,7 +510,7 @@ fi
 exit 0
 </code></pre>
 
-<h4 id="aaa-in-rspec:3047d71ccf1370a2898eb92c70273f56">AAA in RSpec</h4>
+<h4 id="aaa-in-rspec">AAA in RSpec</h4>
 
 <p>Usually <code>beforeEach</code> takes the role of <strong>Arrange</strong> and <strong>Act</strong>, leaving only the role of <strong>Assert</strong> to particular <code>it</code> tests.</p>
 
@@ -520,7 +520,7 @@ exit 0
 
 <p><a href="https://robots.thoughtbot.com/lets-not">Related reading</a></p>
 
-<h2 id="conclusion:3047d71ccf1370a2898eb92c70273f56">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Writing maintainable tests in iOS is not that hard or time-consuming, once you get a hang out of it, it can even make you develop faster. The iteration cycle is much shorter with tests, which means you will get feedback faster.</p>
 
@@ -539,7 +539,6 @@ exit 0
 <p>Testing has increasing returns, the longer the project is alive, the more you appreciate the investments in tests you made in the beginning.</p>
 
 <p>I&rsquo;d like to thank <a href="https://twitter.com/eldudi">Paweł Dudek</a> and <a href="https://github.com/klaaspieter">Klaas Pieter Annema</a> for reviewing this article.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -548,7 +547,7 @@ exit 0
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/01/testing-ios-apps/"

@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -152,6 +153,8 @@
 
 <p><strong>Can we improve the call-site API?</strong></p>
 
+<p></p>
+
 <p>The usual way of dealing with that is using either <code>unowned</code> or <code>weak</code> capture, wheres <code>unowned</code> requires almost no boilerplate, using <code>weak</code> usually requires this annoying dancing pattern:</p>
 
 <pre><code class="language-swift">obj.closure = { [weak self, weak other] some, arguments in 
@@ -206,7 +209,6 @@
 <p>Basically we generate a variant that takes N context arguments and N original function arguments and <code>strongify</code> them. A little boilerplate to remove a lot of boilerplate from your call-sites.</p>
 
 <p><a href="https://github.com/krzysztofzablocki/Strongify">I put a 1-file µframework on my GitHub repo.</a></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -215,7 +217,7 @@
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/04/stop-weak-strong-dance/"

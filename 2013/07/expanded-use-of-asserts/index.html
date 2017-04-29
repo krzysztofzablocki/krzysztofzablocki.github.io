@@ -17,6 +17,7 @@
 <meta property="og:description" content="Do you use assertions in your code? What for? How do you handle release builds ?
 
 There is a better way than NSAssert&hellip;
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2013/07/expanded-use-of-asserts/" />
@@ -55,6 +56,7 @@ There is a better way than NSAssert&hellip;
 <meta itemprop="description" content="Do you use assertions in your code? What for? How do you handle release builds ?
 
 There is a better way than NSAssert&hellip;
+
 ">
 
 
@@ -75,6 +77,7 @@ There is a better way than NSAssert&hellip;
 <meta name="twitter:description" content="Do you use assertions in your code? What for? How do you handle release builds ?
 
 There is a better way than NSAssert&hellip;
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -105,7 +108,8 @@ There is a better way than NSAssert&hellip;
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -157,15 +161,15 @@ There is a better way than NSAssert&hellip;
             
 
             <article class="post-content">
-                
-
-<p>Do you use assertions in your code? What for? How do you handle release builds ?</p>
+                <p>Do you use assertions in your code? What for? How do you handle release builds ?</p>
 
 <p>There is a better way than NSAssert&hellip;</p>
 
-<h3 id="assertions-when-should-i-use-them:e2c77ec1f887e2af82d542e7ae216e3f">Assertions, when should I use them ?</h3>
+<p></p>
 
-<h2 id="update:e2c77ec1f887e2af82d542e7ae216e3f">Update</h2>
+<h3 id="assertions-when-should-i-use-them">Assertions, when should I use them ?</h3>
+
+<h2 id="update">Update</h2>
 
 <p><a href="https://github.com/krzysztofzablocki/KZAsserts">New version of assert macros and more reasoning behind it is available here</a></p>
 
@@ -184,7 +188,7 @@ NSParameterAssert(completion != nil);
 
 <p>E.g. I&rsquo;m expecting to get Dictionary inside Array not the other way around. If I crash I&rsquo;ll know straight away that backend developer has changed something and didn&rsquo;t notify me.</p>
 
-<h3 id="how-should-i-handle-user-facing-release-builds:e2c77ec1f887e2af82d542e7ae216e3f">How should I handle user-facing release builds?</h3>
+<h3 id="how-should-i-handle-user-facing-release-builds">How should I handle user-facing release builds?</h3>
 
 <p>User should never see crash if possible, the only crash I can accept is when there is unavoidable data corruption if we don&rsquo;t crash, which is pretty much always avoidable, especially with my approach.</p>
 
@@ -194,7 +198,7 @@ NSParameterAssert(completion != nil);
 
 <p>It&rsquo;s gonna crash because some of your code expected something else, this is <strong>very bad UIX</strong>.</p>
 
-<h3 id="how-you-could-handle-assert-on-server-integration-parts:e2c77ec1f887e2af82d542e7ae216e3f">How you could handle Assert on server integration parts?</h3>
+<h3 id="how-you-could-handle-assert-on-server-integration-parts">How you could handle Assert on server integration parts?</h3>
 
 <p>One could advocate that you might solve this problem like this:</p>
 
@@ -208,7 +212,7 @@ if ([dataFromServer isKindOfClass:[NSDictionary class]]) {
 
 <p>Now imagine that most integration code would require multiple asserts (easily 5+), that&rsquo;s a lot of code that you <strong>don&rsquo;t want to write</strong>.</p>
 
-<h3 id="how-i-want-assertions-to-work:e2c77ec1f887e2af82d542e7ae216e3f">How I want assertions to work ?</h3>
+<h3 id="how-i-want-assertions-to-work">How I want assertions to work ?</h3>
 
 <p>My preferred assertions should work as follows:</p>
 
@@ -258,10 +262,9 @@ NSAssert((condition), @&quot;Invalid condition not satisfying: %s&quot;, #condit
 <li>AssertTrueOrReturnError &lt;- assert + execute block + return error;</li>
 </ul>
 
-<h2 id="conclusion:e2c77ec1f887e2af82d542e7ae216e3f">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>I made a library that you can use in your project: <a href="https://github.com/krzysztofzablocki/KZAsserts">KZAsserts</a></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -270,7 +273,7 @@ NSAssert((condition), @&quot;Invalid condition not satisfying: %s&quot;, #condit
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2013/07/expanded-use-of-asserts/"

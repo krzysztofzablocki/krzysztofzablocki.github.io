@@ -92,7 +92,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -144,11 +145,11 @@
             
 
             <article class="post-content">
-                
+                <p>As we are closing this year, let&rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.</p>
 
-<p>As we are closing this year, let&rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.</p>
+<p></p>
 
-<h2 id="using-the-power-of-user-breakpoints:2569d792044389772f6dc17b9a5c9e5f">Using the power of User Breakpoints</h2>
+<h2 id="using-the-power-of-user-breakpoints">Using the power of User Breakpoints</h2>
 
 <p>We use breakpoints quite a lot, but I see that most of my friends only use regular breakpoints whilst debugging.</p>
 
@@ -156,7 +157,7 @@
 
 <p>Because you can create symbolic breakpoint&rsquo;s that execute code whenever a specific point is reached, e.g. <strong>UIApplicationMain</strong>:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/12/symbols.png"  />
@@ -164,13 +165,13 @@
     
 </figure>
 
-</p>
+
 
 <p>Did you see what did I do there?</p>
 
 <p>Now whenever I debug ANY project I&rsquo;m working on, instead of:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/12/before_symbols.png"  />
@@ -178,11 +179,11 @@
     
 </figure>
 
-</p>
+
 
 <p>I can get straight to business with:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/12/after_symbols.png"  />
@@ -190,7 +191,7 @@
     
 </figure>
 
-</p>
+
 
 <p>Without extra steps.</p>
 
@@ -204,9 +205,9 @@
 <li><p><a href="https://gist.github.com/Ashton-W/5c1ede17f8cec1f8b529">Need some other good breakpoints ideas to add?</a></p></li>
 </ul>
 
-<h2 id="making-xcode-better:2569d792044389772f6dc17b9a5c9e5f">Making Xcode better</h2>
+<h2 id="making-xcode-better">Making Xcode better</h2>
 
-<h4 id="plugins:2569d792044389772f6dc17b9a5c9e5f">Plugins</h4>
+<h4 id="plugins">Plugins</h4>
 
 <p>Here are some of my favourite plugins for Xcode, if you don&rsquo;t give them a try you might be missing out on some really great features:</p>
 
@@ -229,7 +230,7 @@
 <li><p><a href="https://github.com/ksuther/KSImageNamed-Xcode">KSImageNamed</a> - adds intelisense with preview to your <strong>imageNamed:</strong> calls</p></li>
 </ul>
 
-<p>
+
 <figure class="center">
     
         <img src="https://camo.githubusercontent.com/c354bf04524df86daeabe7a6d2b9926fac790f85/68747470733a2f2f7261772e6769746875622e636f6d2f6b7375746865722f4b53496d6167654e616d65642d58636f64652f6d61737465722f73637265656e73686f742e676966"  />
@@ -237,7 +238,7 @@
     
 </figure>
 
-</p>
+
 
 <ul>
 <li><p><a href="https://github.com/omz/ColorSense-for-Xcode">OMColorSense</a> - adds preview to your UIColors and it even allows you to use Color Picker straight from that to modify the code.</p></li>
@@ -245,7 +246,7 @@
 <li><p><a href="https://github.com/onevcat/VVDocumenter-Xcode">VVDocumenter</a> - if you write libraries you should be adding documentation to them, this plugin makes it easy by giving you context-aware templates</p></li>
 </ul>
 
-<p>
+
 <figure class="center">
     
         <img src="https://camo.githubusercontent.com/ca5518c9872e15b8a95b9d8c5f44bc331977d710/68747470733a2f2f7261772e6769746875622e636f6d2f6f6e65766361742f5656446f63756d656e7465722d58636f64652f6d61737465722f53637265656e53686f742e676966"  />
@@ -253,35 +254,31 @@
     
 </figure>
 
-</p>
 
-<h4 id="hidden-options:2569d792044389772f6dc17b9a5c9e5f">Hidden options</h4>
+
+<h4 id="hidden-options">Hidden options</h4>
 
 <p>Open your terminal and type those:</p>
 
 <ul>
-<li>Want to see how long it takes to build your project?</li>
-</ul>
+<li><p>Want to see how long it takes to build your project?</p>
 
 <pre><code class="language-bash">defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Better autocompletion with Fuzzy mode?</li>
-</ul>
+<li><p>Better autocompletion with Fuzzy mode?</p>
 
 <pre><code class="language-bash">defaults write com.apple.dt.Xcode IDECodeCompletionFuzzyMode 3
 defaults write com.apple.dt.Xcode IDEWorkaroundForRadar6288283 3
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>Faster build times by leveraging multi-core CPU ?</li>
-</ul>
+<li><p>Faster build times by leveraging multi-core CPU ?</p>
 
 <pre><code class="language-bash">defaults write com.apple.dt.Xcode IDEBuildOperationMaxNumberOfConcurrentCompileTasks `sysctl -n hw.ncpu`
-</code></pre>
+</code></pre></li>
+</ul>
 
-<h3 id="other:2569d792044389772f6dc17b9a5c9e5f">Other</h3>
+<h3 id="other">Other</h3>
 
 <ul>
 <li>Use <a href="https://itunes.apple.com/us/app/iramdisk/id492615400?mt=12">iRamDisk</a> to put your Derived Data and iOS Simulator on fastest memory you have. Even on new SSD it makes a difference.</li>
@@ -289,7 +286,6 @@ defaults write com.apple.dt.Xcode IDEWorkaroundForRadar6288283 3
 <li>Using interface builder? you probably got annoyed by view being added as a subview everytime you move it? Just hold <strong>cmd</strong> and it won’t do that ever again.</li>
 <li><a href="/2014/02/ios-developer-tools/">See if some other tools I&rsquo;ve used can save you time</a></li>
 </ul>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -298,7 +294,7 @@ defaults write com.apple.dt.Xcode IDEWorkaroundForRadar6288283 3
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/"

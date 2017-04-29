@@ -15,7 +15,6 @@
 
 <meta property="og:title" content="Overlaying application version on top of your icon" />
 <meta property="og:description" content="
-
     
         
     
@@ -30,6 +29,7 @@ Especially how they add version information on top of the icons.
 Unfortunately they didn&rsquo;t share it with us.
 
 So I wrote my own.
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/" />
@@ -64,7 +64,6 @@ So I wrote my own.
 
 <meta itemprop="name" content="Overlaying application version on top of your icon">
 <meta itemprop="description" content="
-
     
         
     
@@ -79,6 +78,7 @@ Especially how they add version information on top of the icons.
 Unfortunately they didn&rsquo;t share it with us.
 
 So I wrote my own.
+
 ">
 
 
@@ -88,7 +88,7 @@ So I wrote my own.
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="440">
+<meta itemprop="wordCount" content="442">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -97,7 +97,6 @@ So I wrote my own.
 
 <meta name="twitter:title" content="Overlaying application version on top of your icon"/>
 <meta name="twitter:description" content="
-
     
         
     
@@ -112,6 +111,7 @@ Especially how they add version information on top of the icons.
 Unfortunately they didn&rsquo;t share it with us.
 
 So I wrote my own.
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -142,7 +142,8 @@ So I wrote my own.
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -194,17 +195,14 @@ So I wrote my own.
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2013/03/Icon.png"  />
     
     
 </figure>
 
-</p>
+
 
 <p>I&rsquo;ve just returned from NSConference #5, there were many good talks there, but my favourite one was the one about Flipboard development tools/setup by Evan Doll.</p>
 
@@ -213,7 +211,9 @@ Unfortunately they didn&rsquo;t share it with us.</p>
 
 <p>So I wrote my own.</p>
 
-<h1 id="what-we-will-be-overlaying:4b89687aee098e14a10d2ff4e4a39111">What we will be overlaying ?</h1>
+<p></p>
+
+<h1 id="what-we-will-be-overlaying">What we will be overlaying ?</h1>
 
 <p>I&rsquo;ve decided that 3 parts of information should be enough:</p>
 
@@ -223,7 +223,7 @@ Unfortunately they didn&rsquo;t share it with us.</p>
 <li>short commit hash</li>
 </ul>
 
-<h2 id="version-number:4b89687aee098e14a10d2ff4e4a39111">Version number</h2>
+<h2 id="version-number">Version number</h2>
 
 <p>We can extract version number straight from our application .plist file by using PlistBuddy tool:</p>
 
@@ -232,7 +232,7 @@ Unfortunately they didn&rsquo;t share it with us.</p>
 
 <p>PS. <em>You could extract any plist entry with this tool, just change CFBundleVersion to different key (show raw keys in Xcode)</em></p>
 
-<h2 id="branch-and-short-commit-hash:4b89687aee098e14a10d2ff4e4a39111">Branch and short commit hash</h2>
+<h2 id="branch-and-short-commit-hash">Branch and short commit hash</h2>
 
 <p>git command line tool offers rev-parse command which let&rsquo;s you both of those variables:</p>
 
@@ -240,7 +240,7 @@ Unfortunately they didn&rsquo;t share it with us.</p>
 branch=`git rev-parse --abbrev-ref HEAD`
 </code></pre>
 
-<h1 id="how-to-overlay-it:4b89687aee098e14a10d2ff4e4a39111">How to overlay it ?</h1>
+<h1 id="how-to-overlay-it">How to overlay it ?</h1>
 
 <p>ImageMagic is my go-to tool for playing with images from command line, it offers crazy amount of functions.</p>
 
@@ -257,52 +257,54 @@ brew install ghostscript
     ${base_file} +swap -gravity south -composite  &quot;${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${target_file}&quot;
 </code></pre>
 
-<h1 id="setting-it-up-in-xcode-project:4b89687aee098e14a10d2ff4e4a39111">Setting it up in Xcode project</h1>
+<h1 id="setting-it-up-in-xcode-project">Setting it up in Xcode project</h1>
 
 <p>There are few steps we need to take in order to set this up as part of Xcode build:</p>
 
 <ol>
 <li>Rename your Icon* files (where * is @2x, -568h etc.) to Icon_base*, e.g. Icon@2x_base.png</li>
 <li>Add run script for your target under Build Phases</li>
-<li>Paste this code:</li>
+<li>Paste this code:
+~~~bash
+commit=<code>git rev-parse --short HEAD</code>
+branch=<code>git rev-parse --abbrev-ref HEAD</code>
+version=<code>/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;${INFOPLIST_FILE}&quot;</code></li>
 </ol>
 
-<pre><code class="language-bash">commit=`git rev-parse --short HEAD`
-branch=`git rev-parse --abbrev-ref HEAD`
-version=`/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; &quot;${INFOPLIST_FILE}&quot;`
-
-function processIcon() {
+<p>function processIcon() {
     export PATH=$PATH:/usr/local/bin
     base_file=$1
-    base_path=`find ${SRCROOT} -name $base_file`
+    base_path=<code>find ${SRCROOT} -name $base_file</code></p>
 
-    if [[ ! -f ${base_path} || -z ${base_path} ]]; then
-        return;
-    fi
+<pre><code>if [[ ! -f ${base_path} || -z ${base_path} ]]; then
+    return;
+fi
 
-    target_file=`echo $base_file | sed &quot;s/_base//&quot;`
-    target_path=&quot;${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${target_file}&quot;
+target_file=`echo $base_file | sed &quot;s/_base//&quot;`
+target_path=&quot;${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/${target_file}&quot;
 
-    if [ $CONFIGURATION = &quot;Release&quot; ]; then
-    cp ${base_file} $target_path
-    return
-    fi
+if [ $CONFIGURATION = &quot;Release&quot; ]; then
+cp ${base_file} $target_path
+return
+fi
 
-    width=`identify -format %w ${base_path}`
+width=`identify -format %w ${base_path}`
 
-    convert -background '#0008' -fill white -gravity center -size ${width}x40\
-    caption:&quot;${version} ${branch} ${commit}&quot;\
-    ${base_path} +swap -gravity south -composite ${target_path}
-}
-
-processIcon &quot;Icon_base.png&quot;
-processIcon &quot;Icon@2x_base.png&quot;
-processIcon &quot;Icon-72_base.png&quot;
-processIcon &quot;Icon-72@2x_base.png&quot;
-
+convert -background '#0008' -fill white -gravity center -size ${width}x40\
+caption:&quot;${version} ${branch} ${commit}&quot;\
+${base_path} +swap -gravity south -composite ${target_path}
 </code></pre>
 
-<h2 id="conclusion:4b89687aee098e14a10d2ff4e4a39111">Conclusion</h2>
+<p>}</p>
+
+<p>processIcon &ldquo;Icon_base.png&rdquo;
+processIcon &ldquo;Icon@2x_base.png&rdquo;
+processIcon &ldquo;Icon-72_base.png&rdquo;
+processIcon &ldquo;Icon-72@2x_base.png&rdquo;</p>
+
+<p>~~~</p>
+
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Few things about final script:</p>
 
@@ -341,7 +343,6 @@ processIcon &quot;Icon-72@2x_base.png&quot;
 </p>
 
 <p><a href="https://github.com/krzysztofzablocki/IconOverlaying">Sample project on GitHub</a></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -350,7 +351,7 @@ processIcon &quot;Icon-72@2x_base.png&quot;
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/"

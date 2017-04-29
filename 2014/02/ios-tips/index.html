@@ -58,7 +58,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="545">
+<meta itemprop="wordCount" content="548">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -97,7 +97,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -149,16 +150,15 @@
             
 
             <article class="post-content">
-                
+                <p>Easy to apply tips that can improve your development workflow.
+</p>
 
-<p>Easy to apply tips that can improve your development workflow.</p>
-
-<h2 id="know-available-tools-and-how-to-use-them:ec74d5863319207341a434b36c49143f">Know available tools and how to use them.</h2>
+<h2 id="know-available-tools-and-how-to-use-them">Know available tools and how to use them.</h2>
 
 <p>I believe you should use best tool for the job, and there are lots of tools that are perfect for specific tasks.
 <a href="http://www.merowing.info/2014/02/ios-developer-tools/">I wrote about tools I&rsquo;m using</a></p>
 
-<h2 id="write-and-use-code-snippets:ec74d5863319207341a434b36c49143f">Write and use code snippets.</h2>
+<h2 id="write-and-use-code-snippets">Write and use code snippets.</h2>
 
 <p>We often write similar code, stuff like dispatch to main thread, dispatch after, KVO etc. Use code snippets for that, this can save you lots of keystrokes and time.</p>
 
@@ -186,9 +186,9 @@
 
 <p>Just be careful not to break <a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY principle</a>.</p>
 
-<h2 id="read-clang-gcc-documentation-http-clang-llvm-org-docs-languageextensions-html-to-explore-some-interesting-possibilities:ec74d5863319207341a434b36c49143f">Read <a href="http://clang.llvm.org/docs/LanguageExtensions.html">clang/gcc documentation</a> to explore some interesting possibilities</h2>
+<h2 id="read-clang-gcc-documentation-http-clang-llvm-org-docs-languageextensions-html-to-explore-some-interesting-possibilities">Read <a href="http://clang.llvm.org/docs/LanguageExtensions.html">clang/gcc documentation</a> to explore some interesting possibilities</h2>
 
-<h3 id="examples:ec74d5863319207341a434b36c49143f">Examples:</h3>
+<h3 id="examples">Examples:</h3>
 
 <ul>
 <li><strong>Vector extensions and component swizzle</strong>, useful when doing lots of math.</li>
@@ -201,44 +201,42 @@
 </code></pre>
 
 <ul>
-<li><strong>C Function overloading</strong> to simplify code, instead of calling fabsf, fabsf you could have (<strong>Obviously</strong> that&rsquo;s more interesting for your functions)</li>
+<li><strong>C Function overloading</strong> to simplify code, instead of calling fabsf, fabsf you could have (<strong>Obviously</strong> that&rsquo;s more interesting for your functions)
+~~~objectivec
+<strong>attribute</strong>((overloadable)) float smart_abs(float x) {
+NSLog(@&ldquo;floats&rdquo;);
+return fabsf(x);
+}</li>
 </ul>
 
-<pre><code class="language-objectivec">__attribute__((overloadable)) float smart_abs(float x) {
-  NSLog(@&quot;floats&quot;);
-  return fabsf(x);
-}
-
-__attribute__((overloadable)) double smart_abs(double x) {
-  NSLog(@&quot;doubles&quot;);
+<p><strong>attribute</strong>((overloadable)) double smart_abs(double x) {
+  NSLog(@&ldquo;doubles&rdquo;);
   return fabs(x);
-}
-</code></pre>
+}</p>
 
-<ul>
-<li><strong>require_super</strong>, useful whenever you are creating base classes and want to make sure your subclasses actually remember to call super.</li>
-</ul>
-
-<pre><code class="language-objectivec"> __attribute((objc_requires_super))
+<pre><code>
+* **require_super**, useful whenever you are creating base classes and want to make sure your subclasses actually remember to call super.
+~~~objectivec
+ __attribute((objc_requires_super))
 </code></pre>
 
 <ul>
 <li><p><strong>using braces to have implicit return</strong> (last references value is returned, same as in ruby). <a href="https://github.com/krzysztofzablocki/KZPropertyMapper/blob/master/KZPropertyMapper/KZPropertyMapper.h#L20">I&rsquo;m using this in KZPropertyMapper for a neat trick that allows me to execute some arbitrary code and still control returned value</a></p></li>
 
-<li><p><strong><strong>attribute</strong>((constructor))</strong> can be used on C functions for <a href="http://stackoverflow.com/questions/2053029/how-exactly-does-attribute-constructor-work">similar</a> behaviour to +(void)<strong>load</strong>;</p></li>
-</ul>
+<li><p><strong><strong>attribute</strong>((constructor))</strong> can be used on C functions for <a href="http://stackoverflow.com/questions/2053029/how-exactly-does-attribute-constructor-work">similar</a> behaviour to +(void)<strong>load</strong>;</p>
 
 <pre><code class="language-objectivec">__attribute__((constructor))
 static void someFunction() {
 @autoreleasepool {
-  	//! some code
-  }
+	//! some code
 }
-</code></pre>
+}
+</code></pre></li>
+</ul>
 
-<h2 id="use-build-phases-scripting-and-automation-for-your-projects:ec74d5863319207341a434b36c49143f">Use build phases, scripting and automation for your projects</h2>
+<h2 id="use-build-phases-scripting-and-automation-for-your-projects">Use build phases, scripting and automation for your projects</h2>
 
-<h4 id="warnings:ec74d5863319207341a434b36c49143f">Warnings</h4>
+<h4 id="warnings">Warnings</h4>
 
 <p>Add this build-phase script AFTER compilation and you will turn all TODO/HACKS etc into warnings (but still be able to use treat warnings as errors)</p>
 
@@ -246,9 +244,9 @@ static void someFunction() {
 find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -print0 | xargs -0 egrep --with-filename --line-number --only-matching &quot;($KEYWORDS).*\$&quot; | perl -p -e &quot;s/($KEYWORDS)/ warning: \$1/&quot;
 </code></pre>
 
-<h4 id="icon-versioning-http-www-merowing-info-2013-03-overlaying-application-version-on-top-of-your-icon:ec74d5863319207341a434b36c49143f"><a href="http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Icon versioning</a></h4>
+<h4 id="icon-versioning-http-www-merowing-info-2013-03-overlaying-application-version-on-top-of-your-icon"><a href="http://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/">Icon versioning</a></h4>
 
-<p>
+
 <figure >
     
         <img src="/2013/03/Icon.png"  />
@@ -256,11 +254,11 @@ find &quot;${SRCROOT}&quot; -name &quot;*.h&quot; -or -name &quot;*.m&quot; -pri
     
 </figure>
 
-</p>
+
 
 <p>Never again have someone test wrong version of your application.</p>
 
-<h4 id="build-number:ec74d5863319207341a434b36c49143f">Build number</h4>
+<h4 id="build-number">Build number</h4>
 
 <p>You can use either very simple script like this one:</p>
 
@@ -271,19 +269,19 @@ buildNumber=$(($buildNumber + 1))
 
 <p>or <a href="http://useyourloaf.com/blog/2010/08/18/setting-iphone-application-build-versions.html">do it properly by using agvtool</a></p>
 
-<h4 id="script-for-graphing-dependencies-in-cocoa-project-https-github-com-nst-objc-dep:ec74d5863319207341a434b36c49143f"><a href="https://github.com/nst/objc_dep/">Script for graphing dependencies in Cocoa project</a></h4>
+<h4 id="script-for-graphing-dependencies-in-cocoa-project-https-github-com-nst-objc-dep"><a href="https://github.com/nst/objc_dep/">Script for graphing dependencies in Cocoa project</a></h4>
 
 <p>Great tool for seeing how tangled is your (or vendor&rsquo;s) code, useful for refactoring or checking if agency that just send you some code knows anything about quality coding.</p>
 
-<h2 id="use-smarter-breakpoints:ec74d5863319207341a434b36c49143f">Use smarter breakpoints</h2>
+<h2 id="use-smarter-breakpoints">Use smarter breakpoints</h2>
 
-<h4 id="log-all-methods-that-are-executed-in-your-app-https-gist-github-com-krzysztofzablocki-4396302:ec74d5863319207341a434b36c49143f"><a href="https://gist.github.com/krzysztofzablocki/4396302">Log all methods that are executed in your app</a></h4>
+<h4 id="log-all-methods-that-are-executed-in-your-app-https-gist-github-com-krzysztofzablocki-4396302"><a href="https://gist.github.com/krzysztofzablocki/4396302">Log all methods that are executed in your app</a></h4>
 
-<h4 id="avoid-temporarly-modifying-code:ec74d5863319207341a434b36c49143f">Avoid temporarly modifying code</h4>
+<h4 id="avoid-temporarly-modifying-code">Avoid temporarly modifying code</h4>
 
 <p>Instead you can call NSLog from breakpoints and continue execution.</p>
 
-<p><a href="/2014/02/log_breakpoint.png"
+<a href="/2014/02/log_breakpoint.png"
 	
 	
 	class="image-gallery-photo"
@@ -307,13 +305,13 @@ buildNumber=$(($buildNumber + 1))
 	
 </a>
 
-</p>
 
-<h4 id="user-space-breakpoints:ec74d5863319207341a434b36c49143f">User space breakpoints</h4>
+
+<h4 id="user-space-breakpoints">User space breakpoints</h4>
 
 <p>By promoting breakpoints to <strong>user space</strong> you can have breakpoints that exist only on your machine.</p>
 
-<p><a href="/2014/02/user_breakpoint.png"
+<a href="/2014/02/user_breakpoint.png"
 	
 	
 	class="image-gallery-photo"
@@ -337,13 +335,13 @@ buildNumber=$(($buildNumber + 1))
 	
 </a>
 
-</p>
 
-<h4 id="fast-jump-to-feature-you-are-working-on:ec74d5863319207341a434b36c49143f">Fast jump to feature you are working on</h4>
+
+<h4 id="fast-jump-to-feature-you-are-working-on">Fast jump to feature you are working on</h4>
 
 <p>By combining above 2 ideas you can execute arbitrary code eg. to enable some feature without modifying code, and you can promote it to user space so <strong>only you</strong> get that behaviour.</p>
 
-<p><a href="/2014/02/action_breakpoint.png"
+<a href="/2014/02/action_breakpoint.png"
 	
 	
 	class="image-gallery-photo"
@@ -367,12 +365,11 @@ buildNumber=$(($buildNumber + 1))
 	
 </a>
 
-</p>
 
-<h2 id="conclusion:ec74d5863319207341a434b36c49143f">Conclusion</h2>
+
+<h2 id="conclusion">Conclusion</h2>
 
 <p>There is way more tips we could mention, but let&rsquo;s leave something for future blog posts.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -381,7 +378,7 @@ buildNumber=$(($buildNumber + 1))
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/02/ios-tips/"

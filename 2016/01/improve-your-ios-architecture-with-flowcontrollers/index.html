@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -146,13 +147,13 @@
             
 
             <article class="post-content">
-                
-
-<p>When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.</p>
+                <p>When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.</p>
 
 <p>Why?</p>
 
-<h3 id="the-problem:752ec918500c63af34d974abc033d6ac">The problem</h3>
+<p></p>
+
+<h3 id="the-problem">The problem</h3>
 
 <p>Modern apps need to support multiple presentation types for same VC, e.g., on iPhone you push a new view controller but on iPad you either embed it as a containment view controller or show it from popover.</p>
 
@@ -195,9 +196,9 @@
 <li>Testing is harder, your VC/VM will have a lot of side-effects.</li>
 </ul>
 
-<h2 id="how-can-we-fix-it:752ec918500c63af34d974abc033d6ac">How can we fix it?</h2>
+<h2 id="how-can-we-fix-it">How can we fix it?</h2>
 
-<h3 id="cleaning-up-your-viewcontrollers-viewmodels:752ec918500c63af34d974abc033d6ac">Cleaning up your ViewControllers / ViewModels</h3>
+<h3 id="cleaning-up-your-viewcontrollers-viewmodels">Cleaning up your ViewControllers / ViewModels</h3>
 
 <blockquote>
 <p>This can be applied to MVVM, MVC and many other common patterns. When I talk about VC/VM, just think about the one you are using right now.</p>
@@ -236,7 +237,7 @@ expect(executed).toEventually(beTruthy())
 
 <p>But how do we coordinate our app view controllers?</p>
 
-<h3 id="introducing-flowcontroller-s:752ec918500c63af34d974abc033d6ac">Introducing FlowController&rsquo;s</h3>
+<h3 id="introducing-flowcontroller-s">Introducing FlowController&rsquo;s</h3>
 
 <p>A FlowController is a simple object that will manage part of your app, or as I like to think about it <strong>‚a subset of use cases’</strong>.</p>
 
@@ -312,7 +313,6 @@ expect(executed).toEventually(beTruthy())
 <p>What&rsquo;s great about this approach is the fact it&rsquo;s straightforward to adapt to it right now, no need to wait for new project to try it. And it works in small and big projects just as well.</p>
 
 <p>Doesn&rsquo;t matter if you use MVVM, MVC or other pattern, if you are pushing your screens from one to the other, give it a try.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -321,7 +321,7 @@ expect(executed).toEventually(beTruthy())
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/"

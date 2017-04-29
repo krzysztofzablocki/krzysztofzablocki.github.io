@@ -106,7 +106,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -166,21 +167,21 @@
             
 
             <article class="post-content">
-                
-
-<video autoplay loop>
+                <video autoplay loop>
   <source src="/2015/11/Header-small.mp4" type="video/mp4">
 </video>
 
 <p>Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&hellip;</p>
 
-<h2 id="intro:e0a6f3dca623305985d47b12797017e3">Intro</h2>
+<p></p>
+
+<h2 id="intro">Intro</h2>
 
 <p>Since I wanted get back to blogging and learn more Swift, I&rsquo;ve decided to implement some of Dribble top UIX interactions on iOS.</p>
 
 <p>Let&rsquo;s see how I&rsquo;ve reproduced <a href="https://dribbble.com/shots/1746065-Floating-burger-2-0">&lsquo;Floating burger 2.0 by Eddie Lobanovskiy&rsquo;</a></p>
 
-<h2 id="how-to:e0a6f3dca623305985d47b12797017e3">How to?</h2>
+<h2 id="how-to">How to?</h2>
 
 <p><strong>CAShapeLayer</strong> can be used to render <strong>CGPath</strong>, it has multitude of properties, but for the sake of this simple interaction, we only need 2:</p>
 
@@ -203,7 +204,7 @@
 
 <p>Now we just need to be careful when creating the path.</p>
 
-<h3 id="line-path:e0a6f3dca623305985d47b12797017e3">Line path</h3>
+<h3 id="line-path">Line path</h3>
 
 <p>To be able to fully control how our shape is displayed by using this 2 properties, it&rsquo;s better to manually compose our <strong>CGPath</strong>, instead of using functions like <strong>addArcWithCenter</strong>.</p>
 
@@ -241,7 +242,7 @@ let lineLengthNormalized = (lineLength - lineStart) / totalLength
 <pre><code class="language-swift">lineLengthNormalized = 0.67833278554572718
 </code></pre>
 
-<h3 id="animation:e0a6f3dca623305985d47b12797017e3">Animation</h3>
+<h3 id="animation">Animation</h3>
 
 <p>For configuration</p>
 
@@ -328,7 +329,7 @@ CoreAnimation have 2 layers, model and <strong>presentationLayer</strong>.</p>
   }
 </code></pre>
 
-<h2 id="conclusion:e0a6f3dca623305985d47b12797017e3">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>UIKit and CoreGraphics are very powerful, we can achieve a lot of great looking effects without a lot of work.</p>
 
@@ -341,7 +342,6 @@ CoreAnimation have 2 layers, model and <strong>presentationLayer</strong>.</p>
 <ul>
 <li><a href="/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/">Pinch to Reveal Animation</a></li>
 </ul>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -350,7 +350,7 @@ CoreAnimation have 2 layers, model and <strong>presentationLayer</strong>.</p>
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/"

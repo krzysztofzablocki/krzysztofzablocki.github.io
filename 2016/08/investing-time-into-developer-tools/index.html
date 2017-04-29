@@ -102,7 +102,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -154,17 +155,14 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2016/08/file-watchers.gif"  />
     
     
 </figure>
 
-</p>
+
 
 <p>As I open source <a href="https://github.com/krzysztofzablocki/KZFileWatchers">another framework</a> this week, I wanted to share few thoughts about building developer tools.</p>
 
@@ -172,7 +170,9 @@
 
 <p>One would think that we&rsquo;d use the same principles in our jobs, yet I&rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.</p>
 
-<h2 id="looking-beyond-the-current-state-of-union:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Looking beyond the current state of union</h2>
+<p></p>
+
+<h2 id="looking-beyond-the-current-state-of-union">Looking beyond the current state of union</h2>
 
 <p>I believe we should always try to find more efficient ways to do things, come up with processes and tools that can help us become more efficient.</p>
 
@@ -199,19 +199,19 @@
 
 <p>If they did good job, you now have a tool that someone is paid to maintain and improve over the years, and this is something we should all be glad about as this gives us more time to work on another great idea we might have.</p>
 
-<h2 id="small-things:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Small things</h2>
+<h2 id="small-things">Small things</h2>
 
 <p>But even beyond that, there are often simple things I see developers do over and over again instead of making it easier.</p>
 
 <p>Some common examples:</p>
 
-<h3 id="login:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Login</h3>
+<h3 id="login">Login</h3>
 
 <p>If your app requires login credentials:</p>
 
 <p>Add a <a href="http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/">user breakpoint</a> that fills them out and automatically progresses</p>
 
-<h3 id="long-running-features:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Long-running features</h3>
+<h3 id="long-running-features">Long-running features</h3>
 
 <p>If you are working on a feature that will take you a long time, configure the project so that when you run it, it will automatically jump straight to the screen you can test your feature on.</p>
 
@@ -222,7 +222,7 @@
 #endif
 </code></pre>
 
-<h3 id="reproducible-environment:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Reproducible environment</h3>
+<h3 id="reproducible-environment">Reproducible environment</h3>
 
 <p>If you are working on an app that requires specific kind of data e.g. Images, make sure to build up a stubbed data source for it.</p>
 
@@ -236,7 +236,7 @@
 
 <p>That way you can not only save time by not requiring to do manual steps, but you can easily test regressions in performance and functionality.</p>
 
-<h3 id="feeds:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Feeds</h3>
+<h3 id="feeds">Feeds</h3>
 
 <p>Most apps consume external feed, instead of having to wait for your backend developers to deliver new features, write a stub data providers, or better yet use <a href="https://github.com/krzysztofzablocki/KZFileWatchers">a framework I open sourced this week</a> to be able to see how feed changes affect your app in real time.</p>
 
@@ -254,7 +254,7 @@ try fileWatcher.start { result in
 }
 </code></pre>
 
-<h2 id="is-it-worth-it:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Is it worth it?</h2>
+<h2 id="is-it-worth-it">Is it worth it?</h2>
 
 <p>When we start considering whether to invest time up front to build something we might be tempted to postpone it until further if it&rsquo;s low pain point, but be aware of <a href="https://en.wikipedia.org/wiki/Boiling_frog">boiling a frog</a>?</p>
 
@@ -274,14 +274,13 @@ try fileWatcher.start { result in
 
 <p>I often say YES, especially to the last point there, so I <a href="http://github.com/krzysztofzablocki">build a lot of dev tools and frameworks</a> over the years.</p>
 
-<h2 id="conclusion:c7bb3fbd4e8d12da4ccd272d0dd48e3e">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Writing developer tools and setting up right processes requires time, but more often than not, that time pays off for itself with a big return on investment.</p>
 
 <p>Especially if you work on a bigger team, the payoff can be huge.</p>
 
 <p>If you are looking for inspiration, take a look what <a href="http://twitter.com/orta">Orta</a>, <a href="https://twitter.com/aligatr">Olivier</a>, <a href="https://twitter.com/KrauseFx">Felix</a> and <a href="https://twitter.com/kylefuller">Kyle</a> build.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -290,7 +289,7 @@ try fileWatcher.start { result in
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/08/investing-time-into-developer-tools/"

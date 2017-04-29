@@ -20,7 +20,8 @@
 &lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Can we improve the call-site API?&lt;/strong&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +37,8 @@
 &lt;p&gt;Here’s a list of all the APIs you must know:&lt;/p&gt;
 
 &lt;p&gt;•&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -45,15 +47,14 @@
       <pubDate>Wed, 11 Jan 2017 09:17:47 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.&lt;/p&gt;
 
@@ -64,7 +65,8 @@
 &lt;p&gt;A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.&lt;/p&gt;
 
 &lt;p&gt;Let us look at practices and tips for writing maintainable tests in your iOS Apps.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -90,7 +92,8 @@
 &lt;p&gt;Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -122,7 +125,8 @@
 &lt;li&gt;Sourcery &lt;strong&gt;doesn&amp;rsquo;t use runtime tricks&lt;/strong&gt;, in fact, it allows you to leverage compiler, even more, creating more safety.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Immediate feedback:&lt;/strong&gt; Sourcery features built-in daemon support, enabling you to write your templates in real-time side-by-side with generated code.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -131,20 +135,20 @@
       <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -153,22 +157,22 @@
       <pubDate>Mon, 08 Aug 2016 12:47:33 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;As I open source &lt;a href=&#34;https://github.com/krzysztofzablocki/KZFileWatchers&#34;&gt;another framework&lt;/a&gt; this week, I wanted to share few thoughts about building developer tools.&lt;/p&gt;
 
 &lt;p&gt;Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.&lt;/p&gt;
 
 &lt;p&gt;One would think that we&amp;rsquo;d use the same principles in our jobs, yet I&amp;rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -177,20 +181,20 @@
       <pubDate>Wed, 03 Aug 2016 12:12:55 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/git-up.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Many of us already write unit tests and run continuous integration servers, we can also leverage great tools like &lt;a href=&#34;https://github.com/danger/danger#what-is-danger&#34;&gt;Danger&lt;/a&gt; to easily add some checks to the pull requests.&lt;/p&gt;
 
 &lt;p&gt;If we&amp;rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use &lt;strong&gt;pre-commit&lt;/strong&gt; hook.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -209,7 +213,8 @@
 &lt;li&gt;Supports writing fully testable code&lt;/li&gt;
 &lt;li&gt;Ability to suppress logs from specific modules or classes&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -218,8 +223,8 @@
       <pubDate>Mon, 27 Jun 2016 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2016/06/ios-architecture/</guid>
-      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -228,18 +233,18 @@
       <pubDate>Wed, 03 Feb 2016 13:13:48 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2016/02/8-books-that-everyone-should-read/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/02/books.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Looking for new books to read?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -248,22 +253,22 @@
       <pubDate>Thu, 14 Jan 2016 16:21:06 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2016/01/programming/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/01/programming.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;What is programming?&lt;/p&gt;
 
 &lt;p&gt;For me it has always been about solving problems, and analytical thinking.&lt;/p&gt;
 
 &lt;p&gt;Does it matter what language or platform you solve problems on? How do you learn more on your selected platform?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -275,7 +280,8 @@
       <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
 
 &lt;p&gt;Why?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -285,7 +291,8 @@
       
       <guid>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</guid>
       <description>&lt;p&gt;As we are closing this year, let&amp;rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -301,7 +308,8 @@
 &lt;video autoplay loop&gt;
   &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

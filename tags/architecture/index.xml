@@ -15,15 +15,14 @@
       <pubDate>Wed, 11 Jan 2017 09:17:47 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.&lt;/p&gt;
 
@@ -34,7 +33,8 @@
 &lt;p&gt;A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.&lt;/p&gt;
 
 &lt;p&gt;Let us look at practices and tips for writing maintainable tests in your iOS Apps.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,8 +43,8 @@
       <pubDate>Mon, 27 Jun 2016 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2016/06/ios-architecture/</guid>
-      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -56,7 +56,8 @@
       <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
 
 &lt;p&gt;Why?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -68,7 +69,8 @@
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -81,8 +83,8 @@
 
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
 
-&lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.&lt;/p&gt;
-</description>
+&lt;p&gt;Let&amp;rsquo;s use that to improve upon my original Behaviours.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -92,7 +94,8 @@
       
       <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -102,7 +105,8 @@
       
       <guid>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
       <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

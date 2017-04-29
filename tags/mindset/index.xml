@@ -22,7 +22,8 @@
 &lt;p&gt;Here’s a list of all the APIs you must know:&lt;/p&gt;
 
 &lt;p&gt;•&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,22 +32,22 @@
       <pubDate>Mon, 08 Aug 2016 12:47:33 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;As I open source &lt;a href=&#34;https://github.com/krzysztofzablocki/KZFileWatchers&#34;&gt;another framework&lt;/a&gt; this week, I wanted to share few thoughts about building developer tools.&lt;/p&gt;
 
 &lt;p&gt;Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.&lt;/p&gt;
 
 &lt;p&gt;One would think that we&amp;rsquo;d use the same principles in our jobs, yet I&amp;rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -55,18 +56,18 @@
       <pubDate>Wed, 03 Feb 2016 13:13:48 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2016/02/8-books-that-everyone-should-read/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/02/books.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Looking for new books to read?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -75,22 +76,22 @@
       <pubDate>Thu, 14 Jan 2016 16:21:06 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2016/01/programming/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/01/programming.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;What is programming?&lt;/p&gt;
 
 &lt;p&gt;For me it has always been about solving problems, and analytical thinking.&lt;/p&gt;
 
 &lt;p&gt;Does it matter what language or platform you solve problems on? How do you learn more on your selected platform?&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -103,8 +104,8 @@
 
 &lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affected the way I work.&lt;/p&gt;
 
-&lt;p&gt;What matters and how I go about working for my clients?&lt;/p&gt;
-</description>
+&lt;p&gt;What matters and how I go about working for my clients?
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -113,20 +114,20 @@
       <pubDate>Tue, 29 May 2012 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2012/05/programmers-bad-habits/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2012/05/reuse.jpg&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;We evolve and change our habits, probably many times every few years. Your code style changes, your approach to writing code in general.&lt;/p&gt;
 
 &lt;p&gt;That’s usually good but sometimes bad habits are introduced into that process and remain with you for long time.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

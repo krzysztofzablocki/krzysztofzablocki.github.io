@@ -15,20 +15,20 @@
       <pubDate>Wed, 03 Aug 2016 12:12:55 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/git-up.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Many of us already write unit tests and run continuous integration servers, we can also leverage great tools like &lt;a href=&#34;https://github.com/danger/danger#what-is-danger&#34;&gt;Danger&lt;/a&gt; to easily add some checks to the pull requests.&lt;/p&gt;
 
 &lt;p&gt;If we&amp;rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use &lt;strong&gt;pre-commit&lt;/strong&gt; hook.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -37,8 +37,8 @@
       <pubDate>Thu, 20 Feb 2014 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2014/02/ios-tips/</guid>
-      <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -49,8 +49,8 @@
       <guid>http://merowing.info/2014/02/ios-developer-tools/</guid>
       <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
 
-&lt;p&gt;I recently gave talk about tools I use and why.&lt;/p&gt;
-</description>
+&lt;p&gt;I recently gave talk about tools I use and why.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,8 +62,8 @@
       <description>&lt;p&gt;How do you setup your Cocoa projects?
 Do you always set same warnings, clone configurations and do bunch of other stuff?&lt;/p&gt;
 
-&lt;p&gt;I made a tool that might help.&lt;/p&gt;
-</description>
+&lt;p&gt;I made a tool that might help.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -72,18 +72,18 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
       <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2013/04/statusboard-and-jenkins/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2013/04/statusboard-small.jpg&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;You probably saw &lt;a href=&#34;http://panic.com/statusboard/&#34;&gt;StatusBoard by Panic&lt;/a&gt;. I&amp;rsquo;ve immediately thought it needs simple Jenkins widget.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -92,15 +92,14 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
       <pubDate>Thu, 07 Mar 2013 00:00:00 UTC</pubDate>
       
       <guid>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2013/03/Icon.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;I&amp;rsquo;ve just returned from NSConference #5, there were many good talks there, but my favourite one was the one about Flipboard development tools/setup by Evan Doll.&lt;/p&gt;
 
@@ -108,7 +107,8 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
 Unfortunately they didn&amp;rsquo;t share it with us.&lt;/p&gt;
 
 &lt;p&gt;So I wrote my own.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

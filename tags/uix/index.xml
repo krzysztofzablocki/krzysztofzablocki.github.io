@@ -22,7 +22,8 @@
 &lt;video autoplay loop&gt;
   &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,7 +41,8 @@
 &lt;p&gt;If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.&lt;/p&gt;
 
 &lt;p&gt;When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,7 +56,8 @@
 &lt;/video&gt;
 
 &lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -72,7 +75,8 @@ It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
   &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

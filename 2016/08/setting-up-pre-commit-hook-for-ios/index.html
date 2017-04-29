@@ -100,7 +100,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -152,25 +153,24 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2016/08/git-up.png"  />
     
     
 </figure>
 
-</p>
+
 
 <p>Many of us already write unit tests and run continuous integration servers, we can also leverage great tools like <a href="https://github.com/danger/danger#what-is-danger">Danger</a> to easily add some checks to the pull requests.</p>
 
 <p>If we&rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use <strong>pre-commit</strong> hook.</p>
 
+<p></p>
+
 <p><strong>Edit: My friend <a href="http://twitter.com/_sjs">Sami Samhuri</a> has <a href="https://samhuri.net/posts/2016/08/ios-git-pre-commit-hook">improved my shell script</a>, the article has been updated to reflect that.</strong></p>
 
-<h2 id="keeping-hook-in-sync-across-team:885f4d898f46f60e29d50aef4ff1ef24">Keeping hook in sync across team</h2>
+<h2 id="keeping-hook-in-sync-across-team">Keeping hook in sync across team</h2>
 
 <p>Since most apps are made in teams, we&rsquo;d like to have the git hook in the repository, which isn&rsquo;t how git works, how we can make it happen? <strong>symlinks</strong></p>
 
@@ -193,9 +193,9 @@ ln -s ../../scripts/pre-commit.sh .git/hooks/pre-commit
 
 <p>Assumes that both <strong>pre-commit.sh</strong> and <strong>bootstrap</strong> files under <strong>Scripts</strong> folder in your repo.</p>
 
-<h2 id="things-we-want-to-prevent:885f4d898f46f60e29d50aef4ff1ef24">Things we want to prevent</h2>
+<h2 id="things-we-want-to-prevent">Things we want to prevent</h2>
 
-<h3 id="misplaced-views:885f4d898f46f60e29d50aef4ff1ef24">Misplaced Views</h3>
+<h3 id="misplaced-views">Misplaced Views</h3>
 
 <p>Have you ever committed misplaced views to your repository, just to fix it in some later commits?</p>
 
@@ -210,7 +210,7 @@ ln -s ../../scripts/pre-commit.sh .git/hooks/pre-commit
 <li>files: <code>*Specs.swift *.storyboard</code></li>
 </ul>
 
-<h3 id="focused-tests:885f4d898f46f60e29d50aef4ff1ef24">Focused tests</h3>
+<h3 id="focused-tests">Focused tests</h3>
 
 <p>When using libraries like <a href="https://github.com/kiwi-bdd/Kiwi">Kiwi</a> or <a href="https://github.com/Quick/Quick">Quick</a> we have access to focused tests, which are great for development as they increase speed.</p>
 
@@ -223,7 +223,7 @@ ln -s ../../scripts/pre-commit.sh .git/hooks/pre-commit
 <li>files: <code>*Specs.swift</code></li>
 </ul>
 
-<h2 id="putting-it-together:885f4d898f46f60e29d50aef4ff1ef24">Putting it together</h2>
+<h2 id="putting-it-together">Putting it together</h2>
 
 <p>We only want to verify whether the <strong>staged</strong> changes contain any of the above, and not just run it on all files as this get&rsquo;s really annoying while developing.</p>
 
@@ -263,7 +263,7 @@ exit $failed
 
 <p>This works work in both console and in macOS git clients.</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2016/08/console.png"  />
@@ -271,9 +271,9 @@ exit $failed
     
 </figure>
 
-</p>
 
-<h2 id="conclusion:885f4d898f46f60e29d50aef4ff1ef24">Conclusion</h2>
+
+<h2 id="conclusion">Conclusion</h2>
 
 <p>Pre-commit hooks offer us a very simple way to prevent common mistakes, and with the setup I described:</p>
 
@@ -287,7 +287,6 @@ exit $failed
 <p>We use this approach at <a href="http://www.nytimes.com">The New York Times</a> and it has been really helpful.</p>
 
 <p>If you have other uses for the pre-commit hook, I&rsquo;d love to hear your ideas!</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -296,7 +295,7 @@ exit $failed
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/"

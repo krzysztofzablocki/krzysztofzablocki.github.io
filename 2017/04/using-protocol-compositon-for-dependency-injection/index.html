@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -146,17 +147,14 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2017/04/RefactorSwift.jpg"  />
     
     
 </figure>
 
-</p>
+
 
 <p>I like using composition and dependency injection, but when you need to inject each entity with multiple dependencies, it can get cumbersome fast.</p>
 
@@ -164,7 +162,9 @@
 
 <p>There is a more manageable way.</p>
 
-<h2 id="problem:6749ac136cf2150f78c1bb83b6577d94">Problem</h2>
+<p></p>
+
+<h2 id="problem">Problem</h2>
 
 <p>Let&rsquo;s say you have an object that starts needing an image provider, so you write its init something like that:</p>
 
@@ -210,7 +210,7 @@
 
 <p><em>We want to have easy maintenance, while still getting all the benefits of direct and straightforward code injection.</em></p>
 
-<h2 id="alternative:6749ac136cf2150f78c1bb83b6577d94">Alternative</h2>
+<h2 id="alternative">Alternative</h2>
 
 <p>We can leverage protocol composition to make our maintenance cost lower and even increase readability.</p>
 
@@ -277,7 +277,6 @@
 <li>Neither initializer nor configuration functions need to change</li>
 <li>Each object receiving dependencies is <strong>not</strong> getting all of them. Instead, we leverage Swift type inference and each object defines <strong>exactly what it needs</strong></li>
 </ul>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -286,7 +285,7 @@
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/"

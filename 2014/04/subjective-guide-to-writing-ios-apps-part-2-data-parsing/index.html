@@ -56,7 +56,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="3924">
+<meta itemprop="wordCount" content="3928">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -146,17 +147,17 @@
             
 
             <article class="post-content">
-                
+                <p><a href="/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction">Last time</a> we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.</p>
 
-<p><a href="/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction">Last time</a> we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.</p>
+<p></p>
 
-<h2 id="design:fd951e324cfb842935b28484e5c9836e">Design</h2>
+<h2 id="design">Design</h2>
 
 <p>What I like to do is create a modular architecture, one in which I can add new types of objects without modifying the core of the app, that way I can expand the application without much fuss.</p>
 
 <p>Since UI will come later in this series, I&rsquo;ll write this part using tests.</p>
 
-<h3 id="choices:fd951e324cfb842935b28484e5c9836e">Choices</h3>
+<h3 id="choices">Choices</h3>
 
 <p>Let&rsquo;s start with a few choices before we design the architecture:</p>
 
@@ -173,7 +174,7 @@
 <p>I&rsquo;m not a huge fan of CoreData, but It gives me a nice way to have separation of concern.
 When I use a Fetched Results Controller my UI can be automatically updated and I end up having something like this:</p>
 
-<p><a href="/2014/04/Flow.png"
+<a href="/2014/04/Flow.png"
 	
 	
 	class="image-gallery-photo"
@@ -197,12 +198,12 @@ When I use a Fetched Results Controller my UI can be automatically updated and I
 	
 </a>
 
-</p>
+
 
 <p>In this article I&rsquo;ll talk about the data path.
 <a href="https://github.com/krzysztofzablocki/KZBootstrap">Grab source code from GitHub</a></p>
 
-<h2 id="implementation:fd951e324cfb842935b28484e5c9836e">Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 
 <p>First I start by setting up a project with <a href="https://github.com/krzysztofzablocki/crafter">crafter</a></p>
 
@@ -230,7 +231,7 @@ Finished.
 
 <p>Using <a href="https://github.com/krzysztofzablocki/crafter">crafter</a> I now have all of my preferred libraries and custom warning levels without wasting time doing manual configuration.</p>
 
-<h3 id="fetching:fd951e324cfb842935b28484e5c9836e">Fetching</h3>
+<h3 id="fetching">Fetching</h3>
 
 <p>We won&rsquo;t be using a real backend server, instead we&rsquo;ll use the OHHTTPStubs library to stub network requests and return canned JSON responses. The library also provides us with simulated network speed (How cool is that?).</p>
 
@@ -318,7 +319,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 <li>Since I don&rsquo;t have any value in exposing AFNetworking internal classes to my code I&rsquo;ll be using my cancelable protocol.</li>
 </ul>
 
-<h3 id="parsing-data:fd951e324cfb842935b28484e5c9836e">Parsing data</h3>
+<h3 id="parsing-data">Parsing data</h3>
 
 <p>When it comes to parsing data, I&rsquo;d like to make sure this implementation handles a few requirements:</p>
 
@@ -330,19 +331,19 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>Let&rsquo;s look how we can create a design that will take care of all of these requirements:</p>
 
-<h4 id="source-format:fd951e324cfb842935b28484e5c9836e">Source format</h4>
+<h4 id="source-format">Source format</h4>
 
 <p>This requirement is very simple to satisfy since we&rsquo;ll be using KZPropertyMapper for mapping.</p>
 
 <p>It doesn&rsquo;t rely on JSON/XML or any other format. It uses native data structures, so the only thing we need to make sure of is that our parser converts the source format into native types before passing the data to KZPropertyMapper.</p>
 
-<h4 id="supporting-new-classes:fd951e324cfb842935b28484e5c9836e">Supporting new classes</h4>
+<h4 id="supporting-new-classes">Supporting new classes</h4>
 
 <p>This is the requirement that affects the design of this architecture the most.</p>
 
 <p>I want to drop-in a new class to the project, and <em>&lsquo;somehow&rsquo;</em> have it picked up by the parser and handled.</p>
 
-<h5 id="protocol:fd951e324cfb842935b28484e5c9836e">Protocol</h5>
+<h5 id="protocol">Protocol</h5>
 
 <pre><code class="language-objectivec">@protocol KZBParsableObjectProtocol &lt;NSObject&gt;
 @required
@@ -362,7 +363,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>It&rsquo;s a nice simple protocol, but it doesn&rsquo;t help us automatically support any new classes.</p>
 
-<h5 id="finding-parsable-classes:fd951e324cfb842935b28484e5c9836e">Finding parsable classes</h5>
+<h5 id="finding-parsable-classes">Finding parsable classes</h5>
 
 <p>It&rsquo;s actually quite simple to use the Obj-C runtime to get a list of all classes that conform to our protocol.</p>
 
@@ -404,18 +405,16 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 <ol>
 <li>First we need to establish the total number of classes in our application, so that we can allocate enough memory to hold them all.</li>
 <li>We allocate memory for our classes array and then ask the runtime to fill this allocated memory with the classes.</li>
-<li>While we are enumerating over all classes we need to use</li>
+<li>While we are enumerating over all classes we need to use
+~~~objectivec
+class_conformsToProtocol
+~~~
+Instead of NSObject:
+~~~objectivec
+[class conformsToProtocol:]
+~~~
+This is because <strong>not all</strong> classes have to inherit from NSObject or implement the NSObject Protocol and that method will fail.</li>
 </ol>
-
-<pre><code class="language-objectivec">class_conformsToProtocol
-</code></pre>
-
-<p>Instead of NSObject:</p>
-
-<pre><code class="language-objectivec">[class conformsToProtocol:]
-</code></pre>
-
-<p>This is because <strong>not all</strong> classes have to inherit from NSObject or implement the NSObject Protocol and that method will fail.</p>
 
 <p>Next we&rsquo;d like to be able to grab a class corresponding to a specific serverType value:</p>
 
@@ -467,7 +466,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 <li>Use associated objects to retrieve a mapping from the class.</li>
 </ol>
 
-<h5 id="parser:fd951e324cfb842935b28484e5c9836e">Parser</h5>
+<h5 id="parser">Parser</h5>
 
 <p>Let&rsquo;s define a simple DataParser protocol:</p>
 
@@ -482,7 +481,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 <li>Completion is called with error and parsingInfo, parsingInfo might be useful for specific parsers.</li>
 </ol>
 
-<h5 id="json-parser-coredata:fd951e324cfb842935b28484e5c9836e">JSON Parser &amp; CoreData</h5>
+<h5 id="json-parser-coredata">JSON Parser &amp; CoreData</h5>
 
 <p>Let&rsquo;s implement a base JSON parser that can work with CoreData, this will be a base class for implementing format specific JSON parsers later on.</p>
 
@@ -562,7 +561,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>As nice as REST is, not every client you have to work with have proper REST services, sometimes you might need to handle custom endpoints.</p>
 
-<h3 id="server-api:fd951e324cfb842935b28484e5c9836e">Server API?</h3>
+<h3 id="server-api">Server API?</h3>
 
 <p>While I was lead dev at <a href="http://theappbusiness.com">TAB</a> one of our apps had a diff-like API:</p>
 
@@ -601,7 +600,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>Let&rsquo;s implement a JSON Diff parser to handle our custom format, with some space for extensibility later on.</p>
 
-<h4 id="json-diff-parser:fd951e324cfb842935b28484e5c9836e">JSON Diff parser</h4>
+<h4 id="json-diff-parser">JSON Diff parser</h4>
 
 <p>The nice thing about our base JSON parser is the fact that we only need to override one method to implement our diff format:</p>
 
@@ -806,7 +805,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>Let&rsquo;s start with a very basic data model:</p>
 
-<p><a href="/2014/04/Model.png"
+<a href="/2014/04/Model.png"
 	
 	
 	class="image-gallery-photo"
@@ -830,7 +829,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 	
 </a>
 
-</p>
+
 
 <p>To be able to write tests with CoreData I&rsquo;d recommend using beforeEach/afterEach blocks in Kiwi, this is how they look after adding CD memory store:</p>
 
@@ -959,7 +958,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>Now all tests pass. Our architecture is finally ready to parse some data.</p>
 
-<h4 id="parsing-object-data:fd951e324cfb842935b28484e5c9836e">Parsing object data</h4>
+<h4 id="parsing-object-data">Parsing object data</h4>
 
 <p>Let&rsquo;s add parsing to our ImageWidget, since we spennt some time creating a nice architecture, it&rsquo;s going to be very straightforward.</p>
 
@@ -1000,7 +999,7 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p>And that&rsquo;s it. Pretty simple isn&rsquo;t it? You just conform to the protocol, specify the class and describe the mapping.</p>
 
-<h4 id="yeah-right:fd951e324cfb842935b28484e5c9836e">Yeah right</h4>
+<h4 id="yeah-right">Yeah right</h4>
 
 <p>That was really simple data, what if I&rsquo;d like to have a CoreData relationship? It&rsquo;s probably going to be <em>dreadful and hard</em>?</p>
 
@@ -1078,12 +1077,12 @@ it(@&quot;should return operations that can be canceled&quot;, ^() {
 
 <p><a href="https://github.com/krzysztofzablocki/KZPropertyMapper">Read more at it&rsquo;s github page.</a></p>
 
-<h2 id="conclusion:fd951e324cfb842935b28484e5c9836e">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>By now you should know how to create simple, yet flexible architecture.
 I also hope you noticed that by writing tests, you can find your mistakes and verify assumptions with ease.</p>
 
-<h4 id="keep-in-mind:fd951e324cfb842935b28484e5c9836e">Keep in mind</h4>
+<h4 id="keep-in-mind">Keep in mind</h4>
 
 <ul>
 <li>In normal projects you should definitely have more tests and they could be refactored a little bit.</li>
@@ -1091,7 +1090,6 @@ I also hope you noticed that by writing tests, you can find your mistakes and ve
 </ul>
 
 <p><a href="https://github.com/krzysztofzablocki/KZBootstrap">Grab source code from GitHub</a></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -1100,7 +1098,7 @@ I also hope you noticed that by writing tests, you can find your mistakes and ve
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/"

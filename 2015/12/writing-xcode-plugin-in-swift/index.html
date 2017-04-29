@@ -102,7 +102,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -162,17 +163,14 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2015/12/logs.gif"  />
     
     
 </figure>
 
-</p>
+
 
 <p>I&rsquo;ve found myself using Xcode a lot more than I did in Objective-C.</p>
 
@@ -182,7 +180,9 @@
 
 <p>I wrote it in Swift.</p>
 
-<h2 id="idea:92e87d3b21c37213f4db3aee20ef73b9">Idea</h2>
+<p></p>
+
+<h2 id="idea">Idea</h2>
 
 <p>If a console logs a <strong>fileName.extension:XX</strong> that name turns into a clickable hyperlink that will open the specific file and highlight the line.</p>
 
@@ -234,7 +234,7 @@ class KZFormatter: DDDispatchQueueLogFormatter {
 }
 </code></pre>
 
-<h2 id="implementation-selected-bites:92e87d3b21c37213f4db3aee20ef73b9">Implementation - selected bites</h2>
+<h2 id="implementation-selected-bites">Implementation - selected bites</h2>
 
 <p>There are 2 action points we need in order to implement those requirements:</p>
 
@@ -243,7 +243,7 @@ class KZFormatter: DDDispatchQueueLogFormatter {
 <li>NSTextView mouseDown - so that when a mouse is clicked in console and it&rsquo;s under our attributed links we can force xcode to open the file and highlight our line.</li>
 </ol>
 
-<h3 id="how-do-we-inject-our-functionality-into-those-actions:92e87d3b21c37213f4db3aee20ef73b9">How do we inject our functionality into those actions?</h3>
+<h3 id="how-do-we-inject-our-functionality-into-those-actions">How do we inject our functionality into those actions?</h3>
 
 <p>Simple Swizzling:</p>
 
@@ -256,7 +256,7 @@ class KZFormatter: DDDispatchQueueLogFormatter {
 }
 </code></pre>
 
-<h3 id="how-do-we-determine-if-a-nstextstorage-is-actually-the-console-one:92e87d3b21c37213f4db3aee20ef73b9">How do we determine if a NSTextStorage is actually the console one?</h3>
+<h3 id="how-do-we-determine-if-a-nstextstorage-is-actually-the-console-one">How do we determine if a NSTextStorage is actually the console one?</h3>
 
 <p>We can observe <strong>IDEControlGroupDidChangeNotification</strong>, find IDEConsoleTextView and use associated objects to mark that storage as Console one, which will come in handy later on.</p>
 
@@ -267,7 +267,7 @@ let textStorage = consoleTextView.valueForKey(&quot;textStorage&quot;) as? NSTex
 textStorage.kz_isUsedInXcodeConsole = true
 </code></pre>
 
-<h3 id="how-can-we-find-the-path-of-a-file-while-only-having-relative-path-in-the-logs:92e87d3b21c37213f4db3aee20ef73b9">How can we find the path of a file, while only having relative path in the logs?</h3>
+<h3 id="how-can-we-find-the-path-of-a-file-while-only-having-relative-path-in-the-logs">How can we find the path of a file, while only having relative path in the logs?</h3>
 
 <p>We can use shell <strong>find</strong> command, this is how you can run and retrieve response from a shell command in Swift:</p>
 
@@ -286,7 +286,7 @@ textStorage.kz_isUsedInXcodeConsole = true
 }
 </code></pre>
 
-<h3 id="injecting-links-into-logs:92e87d3b21c37213f4db3aee20ef73b9">Injecting links into logs</h3>
+<h3 id="injecting-links-into-logs">Injecting links into logs</h3>
 
 <ul>
 <li>Use pattern matching to find occurrences of our logs.</li>
@@ -316,7 +316,7 @@ textStorage.kz_isUsedInXcodeConsole = true
 }
 </code></pre>
 
-<h3 id="opening-file-and-scrolling-to-specific-line:92e87d3b21c37213f4db3aee20ef73b9">Opening file and scrolling to specific line</h3>
+<h3 id="opening-file-and-scrolling-to-specific-line">Opening file and scrolling to specific line</h3>
 
 <p>Opening a file is as simple as calling</p>
 
@@ -347,15 +347,15 @@ textStorage.kz_isUsedInXcodeConsole = true
 
 <p>It&rsquo;s much easier to deal with NSString than String here, otherwise I&rsquo;d have to introduce conversion from/to Range.</p>
 
-<h3 id="attribution:92e87d3b21c37213f4db3aee20ef73b9">Attribution</h3>
+<h3 id="attribution">Attribution</h3>
 
 <p>Writing this was much simpler because I was able to look at other people plugins, mostly those related to console, without them being open sourcing it would be more work to figure this stuff out with hopper.</p>
 
-<h3 id="installation:92e87d3b21c37213f4db3aee20ef73b9">Installation</h3>
+<h3 id="installation">Installation</h3>
 
 <p>Either use Alcatraz and search for <strong>KZLinkedConsole</strong> or you can just <a href="https://github.com/krzysztofzablocki/KZLinkedConsole">build the project</a> and it will install automatically.</p>
 
-<h3 id="conclusion:92e87d3b21c37213f4db3aee20ef73b9">Conclusion</h3>
+<h3 id="conclusion">Conclusion</h3>
 
 <p>This is my first attempt at writing an Xcode plugin, and I must say it&rsquo;s interesting to debug Xcode while working in Xcode&hellip;</p>
 
@@ -364,7 +364,6 @@ textStorage.kz_isUsedInXcodeConsole = true
 <p>Be sure to check out the source code on GitHub, as it&rsquo;s interesting to use Swift while dealing with private API&rsquo;s. Using KVC makes it simpler to retrieve values without having to introduce Objective-C binding.</p>
 
 <p>If you are using cmd+shift+f you are <strong>probably doing something wrong</strong>.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -373,7 +372,7 @@ textStorage.kz_isUsedInXcodeConsole = true
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/12/writing-xcode-plugin-in-swift/"

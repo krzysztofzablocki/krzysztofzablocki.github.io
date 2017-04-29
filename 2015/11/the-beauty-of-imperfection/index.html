@@ -23,6 +23,7 @@ Perfection is not something one can truly achieve, so it’s very smart that one
 If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.
 
 When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2015/11/the-beauty-of-imperfection/" />
@@ -73,6 +74,7 @@ Perfection is not something one can truly achieve, so it’s very smart that one
 If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.
 
 When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.
+
 ">
 
 
@@ -103,6 +105,7 @@ Perfection is not something one can truly achieve, so it’s very smart that one
 If you ever used their iOS app, you can notice how their dot slightly deforms, captivating your focus.
 
 When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -133,7 +136,8 @@ When it comes to graphics, if you are able to cheat (if user can’t tell the di
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -193,9 +197,7 @@ When it comes to graphics, if you are able to cheat (if user can’t tell the di
             
 
             <article class="post-content">
-                
-
-<video autoplay loop>
+                <video autoplay loop>
   <source src="/2015/12/dot-animated.mov" type="video/mp4">
 </video>
 
@@ -205,13 +207,15 @@ When it comes to graphics, if you are able to cheat (if user can’t tell the di
 
 <p>When it comes to graphics, if you are able to cheat (if user can’t tell the difference) and make tech stuff easier, just do it.</p>
 
-<h2 id="a-note-on-original-implementation:2ef054e1986c78a07cd2936c4a6d6e4a">A note on original implementation</h2>
+<p></p>
+
+<h2 id="a-note-on-original-implementation">A note on original implementation</h2>
 
 <p>The original implementation of Headspace app was using Quadrilateral, there is now a <a href="https://github.com/hfossli/AGGeometryKit/">library for iOS for doing that</a>, but I no longer think it’s neccesary for the intentend effect, it makes things more complex that they need to be.</p>
 
 <p>We can achieve same effect with little code.</p>
 
-<h2 id="implementation:2ef054e1986c78a07cd2936c4a6d6e4a">Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 
 <p>The first thing I wanted to do is start with slightly deformed circle, so I’ve opened <a href="https://paintcodeapp.com">PaintCode</a>:</p>
 
@@ -221,7 +225,7 @@ When it comes to graphics, if you are able to cheat (if user can’t tell the di
 <li>end up with:</li>
 </ul>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/12/blob.png"  />
@@ -229,7 +233,7 @@ When it comes to graphics, if you are able to cheat (if user can’t tell the di
     
 </figure>
 
-</p>
+
 
 <p>and the generated code:</p>
 
@@ -275,7 +279,7 @@ XCPlaygroundPage.currentPage.liveView = view
 
 <p>and already I’ve a simple deformed circle in my playground:</p>
 
-<p>
+
 <figure class="center">
     
         <img src="/2015/12/dot.png"  />
@@ -283,11 +287,11 @@ XCPlaygroundPage.currentPage.liveView = view
     
 </figure>
 
-</p>
+
 
 <p>Now we just need to make it animate with time, so we get the desired slight deformation effect.</p>
 
-<h3 id="animation:2ef054e1986c78a07cd2936c4a6d6e4a">Animation</h3>
+<h3 id="animation">Animation</h3>
 
 <p>We can use CADisplayLink to implement our animation manually. To use CADisplayLink in our playground, we&rsquo;ll add a simple wrapper for block based animation:</p>
 
@@ -374,12 +378,11 @@ view.addSubview(playImageView)
   <source src="/2015/12/play-animated.mov" type="video/mp4">
 </video>
 
-<h2 id="conclusion:2ef054e1986c78a07cd2936c4a6d6e4a">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>The total implementation fit 100 lines of code, the original implementation using Quadrilateral&rsquo;s was probably around this size.</p>
 
 <p>Keeping stuff simpler will make your life easier, and when it comes to graphics you can often cheat and your user won&rsquo;t care as they won&rsquo;t be able to tell the difference.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -388,7 +391,7 @@ view.addSubview(playImageView)
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2015/11/the-beauty-of-imperfection/"

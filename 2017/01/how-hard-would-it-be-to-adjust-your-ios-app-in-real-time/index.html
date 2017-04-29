@@ -100,7 +100,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -160,9 +161,7 @@
             
 
             <article class="post-content">
-                
-
-<p><a href="https://github.com/krzysztofzablocki/Traits">
+                <p><a href="https://github.com/krzysztofzablocki/Traits">
 <figure class="center">
     
         <img src="/2017/01/demo.gif"  />
@@ -180,7 +179,9 @@
 
 <p>Let&rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.</p>
 
-<h2 id="features:c74be9b17bc91cd593608d83085a01f3">Features</h2>
+<p></p>
+
+<h2 id="features">Features</h2>
 
 <p>First, let&rsquo;s consider all the features that we would like to have</p>
 
@@ -194,7 +195,7 @@
 <li>We want to be able to write the library in real-time, without having to recompile the project, in Xcode 8 using <a href="http://johnholdsworth.com/injection.html">code injection</a></li>
 </ul>
 
-<h2 id="designing:c74be9b17bc91cd593608d83085a01f3">Designing</h2>
+<h2 id="designing">Designing</h2>
 
 <p>As much as I enjoy writing pure Swift for apps, I find myself leveraging a lot of Objective-C runtime powers for developer tools, and I think they are worth using.</p>
 
@@ -202,9 +203,9 @@
 
 <p>If we want to be able to perform real-time changes of running applications and have minimal impact on the codebase we need to try to avoid unnecesary state changes.</p>
 
-<p>There is this concept in programming called <a href="https://en.wikipedia.org/wiki/Trait_(computer_programming">Trait</a>), it allows us to extend existing entities with additional functionality. Lets mimick that.</p>
+<p>There is this concept in programming called <a href="https://en.wikipedia.org/wiki/Trait_(computer_programming)">Trait</a>, it allows us to extend existing entities with additional functionality. Lets mimick that.</p>
 
-<h3 id="trait:c74be9b17bc91cd593608d83085a01f3">Trait</h3>
+<h3 id="trait">Trait</h3>
 
 <p>If the user of our library has some custom classes, we want to be able to modify them but in a restorable way.</p>
 
@@ -222,7 +223,7 @@ sourceView == view
 
 <p>This pattern will make it very easy to keep changing the live application with controllable side-effects, instead of allowing the mutation to go freely.</p>
 
-<h4 id="persistence:c74be9b17bc91cd593608d83085a01f3">Persistence</h4>
+<h4 id="persistence">Persistence</h4>
 
 <p>Using just functions would be great for understanding the code.</p>
 
@@ -246,7 +247,7 @@ sourceView == view
 }
 </code></pre>
 
-<h4 id="real-time-reloading:c74be9b17bc91cd593608d83085a01f3">Real-time reloading</h4>
+<h4 id="real-time-reloading">Real-time reloading</h4>
 
 <p>Leveraging the fact our data can be transformed to JSON format, we can now support both live-reloading and remote changes.</p>
 
@@ -276,7 +277,7 @@ sourceView == view
 <p>I have had to introduce <code>inout</code> param for remove closure because when migrating to Swift3 I discovered compiler bug with my previous approach of just returning closure</p>
 </blockquote>
 
-<h4 id="identifying-traits-and-minimizing-user-code-impact:c74be9b17bc91cd593608d83085a01f3">Identifying traits and minimizing user code impact</h4>
+<h4 id="identifying-traits-and-minimizing-user-code-impact">Identifying traits and minimizing user code impact</h4>
 
 <p>Each view might have different traits, so how can we identify which traits to apply to which entity? Simply, we can introduce identifiers using associated objects.</p>
 
@@ -306,7 +307,7 @@ public extension UIView {
 
 <p>It can be used from IB and Code all the same.</p>
 
-<h4 id="supporting-live-programming-the-library-itself:c74be9b17bc91cd593608d83085a01f3">Supporting live-programming the library itself</h4>
+<h4 id="supporting-live-programming-the-library-itself">Supporting live-programming the library itself</h4>
 
 <p>We want to be able to write a new Trait and have it supported immediately, without even recompiling the project.</p>
 
@@ -355,7 +356,7 @@ class func injected() {
 
 </a></p>
 
-<h4 id="ability-to-use-for-more-than-just-ui:c74be9b17bc91cd593608d83085a01f3">Ability to use for more than just UI</h4>
+<h4 id="ability-to-use-for-more-than-just-ui">Ability to use for more than just UI</h4>
 
 <p>This pattern can be used for so much more than UI, and it would be great to leverage all of those realtime benefits for other parts of the app. How can we make it safer?</p>
 
@@ -368,7 +369,7 @@ class func injected() {
 
 <p>Our <code>TraitsProvider</code> might then verify type requirements before ever applying the <code>Trait</code>, thus ensuring that <code>apply</code> will only be called with targets that are supported.</p>
 
-<h4 id="bonus-avoiding-strings:c74be9b17bc91cd593608d83085a01f3">Bonus: Avoiding Strings</h4>
+<h4 id="bonus-avoiding-strings">Bonus: Avoiding Strings</h4>
 
 <p>Strings are ugly. We cannot avoid them in Interface Builder case but we can in the Code.</p>
 
@@ -376,7 +377,7 @@ class func injected() {
 
 <p>That&rsquo;s what I used at the above live programming demo.</p>
 
-<h2 id="conclusion:c74be9b17bc91cd593608d83085a01f3">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p><a href="https://github.com/krzysztofzablocki/Traits">Full source code, with documentation and tests is available on GitHub</a>.</p>
 
@@ -385,7 +386,6 @@ class func injected() {
 <p>We designed architecture that allows rapid development of new Traits, without having to recompile the project, ability to change traits of your entities remotely (via JSON) or local via changing your code, all in real-time.</p>
 
 <p>Configuring theming in our application would now be consistent between Views defined in Code and those defined in Interface Builder, and the whole library is very straighforward.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -394,7 +394,7 @@ class func injected() {
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/"

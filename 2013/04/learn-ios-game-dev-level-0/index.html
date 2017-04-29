@@ -15,7 +15,6 @@
 
 <meta property="og:title" content="iOS Game with Interface Builder" />
 <meta property="og:description" content="
-
     
         
     
@@ -25,6 +24,7 @@
 
 
 By the end of this tutorial you will have a simple game with level editor under 250 lines of code.
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2013/04/learn-ios-game-dev-level-0/" />
@@ -61,7 +61,6 @@ By the end of this tutorial you will have a simple game with level editor under 
 
 <meta itemprop="name" content="iOS Game with Interface Builder">
 <meta itemprop="description" content="
-
     
         
     
@@ -71,6 +70,7 @@ By the end of this tutorial you will have a simple game with level editor under 
 
 
 By the end of this tutorial you will have a simple game with level editor under 250 lines of code.
+
 ">
 
 
@@ -89,7 +89,6 @@ By the end of this tutorial you will have a simple game with level editor under 
 
 <meta name="twitter:title" content="iOS Game with Interface Builder"/>
 <meta name="twitter:description" content="
-
     
         
     
@@ -99,6 +98,7 @@ By the end of this tutorial you will have a simple game with level editor under 
 
 
 By the end of this tutorial you will have a simple game with level editor under 250 lines of code.
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -129,7 +129,8 @@ By the end of this tutorial you will have a simple game with level editor under 
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -181,25 +182,24 @@ By the end of this tutorial you will have a simple game with level editor under 
             
 
             <article class="post-content">
-                
-
-<p>
-<figure >
+                <figure >
     
         <img src="/2013/04/clone-small.png"  />
     
     
 </figure>
 
-</p>
+
 
 <p>By the end of this tutorial you will have a simple game with level editor under 250 lines of code.</p>
 
-<h2 id="goal:82066e9a45e3952153175057cafdd8c0">Goal</h2>
+<p></p>
+
+<h2 id="goal">Goal</h2>
 
 <p>Create a simple clone of game called teeter.</p>
 
-<h2 id="technology:82066e9a45e3952153175057cafdd8c0">Technology</h2>
+<h2 id="technology">Technology</h2>
 
 <ul>
 <li><em>UIKit</em> for rendering - this game doesn&rsquo;t require any fancy effects.</li>
@@ -207,13 +207,13 @@ By the end of this tutorial you will have a simple game with level editor under 
 <li><em>Chipmunk</em> for Physics - Physics is heavy topic, let&rsquo;s not bother with it in this tutorial.</li>
 </ul>
 
-<h2 id="analysing:82066e9a45e3952153175057cafdd8c0">Analysing</h2>
+<h2 id="analysing">Analysing</h2>
 
 <p>As always you should first look at the problem ahead and think it through, let&rsquo;s do that even with our simple game.</p>
 
 <p>What kind of Actors (objects) do we need for our game and their physical properties?</p>
 
-<p>
+
 <figure >
     
         <img src="/2013/04/gamedev0-analyse.jpg"  />
@@ -221,7 +221,7 @@ By the end of this tutorial you will have a simple game with level editor under 
     
 </figure>
 
-</p>
+
 
 <ol>
 <li>Player - dynamic, circular</li>
@@ -241,7 +241,7 @@ By the end of this tutorial you will have a simple game with level editor under 
 <li>type - needed for recognising between object types</li>
 </ul>
 
-<h2 id="start-coding:82066e9a45e3952153175057cafdd8c0">Start coding</h2>
+<h2 id="start-coding">Start coding</h2>
 
 <p>I recommend you <a href="https://github.com/krzysztofzablocki/Learn-iOS-GameDev-Level-0">grab the project from GitHub</a> and read it along with this tutorial, or start fresh by following all steps and filling in missing pieces.</p>
 
@@ -276,13 +276,13 @@ Let&rsquo;s create PhysicalView class that will implement those:</p>
 } 
 </code></pre>
 
-<h2 id="levels:82066e9a45e3952153175057cafdd8c0">Levels</h2>
+<h2 id="levels">Levels</h2>
 
 <p>Most games consist of multiple levels, let&rsquo;s create LevelViewController that will manage each level. Create new UIViewController subclass, call it LevelViewController then add it to storyboards as well.</p>
 
 <p>Next step is downloading and adding <a href="http://chipmunk-physics.net/release/Chipmunk-6.x/ChipmunkPro-Trial-6.1.2.tgz">Chipmunk Physics library</a> to our project. Be sure to import &ldquo;ObjectiveChipmunk.h&rdquo; on top of PhysicalView and LevelViewController.</p>
 
-<h3 id="physics:82066e9a45e3952153175057cafdd8c0">Physics</h3>
+<h3 id="physics">Physics</h3>
 
 <p>All chipmunk physics is happening inside <em>space</em>, we need to make sure that our level has it&rsquo;s own <em>space</em>, let&rsquo;s limit the space to screen size. In LevelViewController create method called setupPhysics:</p>
 
@@ -356,7 +356,7 @@ Let&rsquo;s create PhysicalView class that will implement those:</p>
 
 <p>Here we progress <em>space</em> calculations by stepping it by the difference between current and previous frames. Then we just iterate over all our subviews and update them if they have update method.</p>
 
-<h3 id="would-be-nice-to-see-something:82066e9a45e3952153175057cafdd8c0">Would be nice to see something</h3>
+<h3 id="would-be-nice-to-see-something">Would be nice to see something</h3>
 
 <p>We already wrote bunch of code, but we can&rsquo;t see anything yet. We still didn&rsquo;t implement proper methods on PhysicalView, let&rsquo;s fix that. We need to start with setup:</p>
 
@@ -437,7 +437,7 @@ Let&rsquo;s create PhysicalView class that will implement those:</p>
 </ul></li>
 </ol>
 
-<p>
+
 <figure >
     
         <img src="/2013/04/gamedev0-attributes.png"  />
@@ -445,7 +445,7 @@ Let&rsquo;s create PhysicalView class that will implement those:</p>
     
 </figure>
 
-</p>
+
 
 <p>Run project, you should now see player animating and being affected by gravity, not very impressive right?
 Copy player view multiple times in IB, put it in different places (set them up so they collide after applying gravity), run it again. That was easy change right? Try changing mass properties and see how it changes animation.</p>
@@ -454,7 +454,7 @@ Copy player view multiple times in IB, put it in different places (set them up s
 
 <p><strong>You just added obstacles!</strong> It&rsquo;s nice to have flexible level editor, isn&rsquo;t it?</p>
 
-<h3 id="accelerometer:82066e9a45e3952153175057cafdd8c0">Accelerometer</h3>
+<h3 id="accelerometer">Accelerometer</h3>
 
 <p>Static gravity isn&rsquo;t that impressive, let&rsquo;s use our accelerometer to control player. Add this code at the end LevelViewController viewDidAppear method:</p>
 
@@ -478,7 +478,7 @@ accelerometer.delegate = self;
 
 <p><strong>Be sure to run project on device to see acceleration changes.</strong></p>
 
-<h3 id="game-logic:82066e9a45e3952153175057cafdd8c0">Game logic</h3>
+<h3 id="game-logic">Game logic</h3>
 
 <p>So now we have nice WYSIWYG editor inside IB (more or less), we have good physics along with accelerometer control over it. What&rsquo;s missing is the gameplay of our game, in this game we only have 2 types of actions affecting gameplay:</p>
 
@@ -573,9 +573,9 @@ In PhysicalView implement this class method:</p>
 
 <p>We load levels from storyboards, to make this work you need to setup LevelViewController <em>Storyboard ID</em> to LevelX where X is the level number. Once user finishes all levels we will automatically loop to the first one.</p>
 
-<h2 id="conclusion:82066e9a45e3952153175057cafdd8c0">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>
+
 <figure >
     
         <img src="/2013/04/clone.png"  />
@@ -583,7 +583,7 @@ In PhysicalView implement this class method:</p>
     
 </figure>
 
-</p>
+
 
 <p>You should now have a simple game, simple level editor and loads of space to improve. What&rsquo;s interesting is that everything has <strong>less than 250 lines of code</strong>, that&rsquo;s pretty small isn&rsquo;t it ?</p>
 
@@ -595,7 +595,6 @@ In PhysicalView implement this class method:</p>
 </ul>
 
 <p>Game graphics by my friend <a href="http://twitter.com/faktory">@faktory</a></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -604,7 +603,7 @@ In PhysicalView implement this class method:</p>
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2013/04/learn-ios-game-dev-level-0/"

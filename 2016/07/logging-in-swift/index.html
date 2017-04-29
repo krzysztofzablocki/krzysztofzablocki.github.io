@@ -94,7 +94,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -146,9 +147,7 @@
             
 
             <article class="post-content">
-                
-
-<p>Logging is one of the rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&rsquo;t need to.</p>
+                <p>Logging is one of the rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&rsquo;t need to.</p>
 
 <p>Let&rsquo;s integrate Logging in a way that:</p>
 
@@ -159,7 +158,9 @@
 <li>Ability to suppress logs from specific modules or classes</li>
 </ul>
 
-<h3 id="interface:3f3af53408cff75953b33723c0b061bb">Interface</h3>
+<p></p>
+
+<h3 id="interface">Interface</h3>
 
 <p>Protocol oriented programming is a very useful technique for Swift source, we can create protocols and provide default implementations for whole or specific parts of it.</p>
 
@@ -194,7 +195,7 @@ public protocol Loggable {
 <li><code>log</code> is a function that we will use for logging, one version will use underlying type <code>defaultLoggingTag</code> and the other one allows us to provide it explicitly.</li>
 </ul>
 
-<h3 id="default-implementation:3f3af53408cff75953b33723c0b061bb">Default implementation</h3>
+<h3 id="default-implementation">Default implementation</h3>
 
 <p>We want to provide default implementation for our logging function, and only require the users of our protocol to provide <code>defaultLoggingTag</code>:</p>
 
@@ -209,7 +210,7 @@ public protocol Loggable {
 }
 </code></pre>
 
-<h3 id="logger-singleton:3f3af53408cff75953b33723c0b061bb">Logger singleton</h3>
+<h3 id="logger-singleton">Logger singleton</h3>
 
 <p>We need to provide implementation of <code>Logger</code> that our protocol extension is supposed to use:</p>
 
@@ -311,7 +312,7 @@ func testIgnoredTagsAreHonored() {
 <p>If you are working on a Model layer in your app, and you don&rsquo;t care about UI logs, you can create a user breakpoint on the configuration point and do:
 </br></p>
 
-<p><a href="/2016/07/UserBreakpoint.png"
+<a href="/2016/07/UserBreakpoint.png"
 	
 	
 	class="image-gallery-photo"
@@ -335,11 +336,10 @@ func testIgnoredTagsAreHonored() {
 	
 </a>
 
-</p>
+
 
 <p></br>
 A simple implementation that fulfills all of our initial requirements. It&rsquo;s also an example of how you can create testable protocol extensions.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -348,7 +348,7 @@ A simple implementation that fulfills all of our initial requirements. It&rsquo;
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/07/logging-in-swift/"

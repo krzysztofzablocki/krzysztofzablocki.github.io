@@ -15,15 +15,14 @@
       <pubDate>Wed, 11 Jan 2017 09:17:47 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.&lt;/p&gt;
 
@@ -34,7 +33,8 @@
 &lt;p&gt;A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.&lt;/p&gt;
 
 &lt;p&gt;Let us look at practices and tips for writing maintainable tests in your iOS Apps.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -43,20 +43,20 @@
       <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -75,7 +75,8 @@
 &lt;li&gt;Supports writing fully testable code&lt;/li&gt;
 &lt;li&gt;Ability to suppress logs from specific modules or classes&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -87,7 +88,8 @@
       <description>&lt;p&gt;With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.&lt;/p&gt;
 
 &lt;p&gt;I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -112,7 +114,8 @@
 &lt;/ol&gt;
 
 &lt;p&gt;We&amp;rsquo;ll use Swift Playgrounds to explain it.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -123,8 +126,8 @@
       <guid>http://merowing.info/2014/07/implementing-observable-in-swift/</guid>
       <description>&lt;p&gt;KVO has been integral part of Cocoa programming, yet it&amp;rsquo;s not available for pure Swift classes.&lt;/p&gt;
 
-&lt;p&gt;Is there a way to implement your own implementation of native KVO?&lt;/p&gt;
-</description>
+&lt;p&gt;Is there a way to implement your own implementation of native KVO?
+&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -20,7 +20,8 @@
 &lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Can we improve the call-site API?&lt;/strong&gt;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,15 +30,14 @@
       <pubDate>Tue, 08 Dec 2015 11:07:09 &#43;0100</pubDate>
       
       <guid>http://merowing.info/2015/12/writing-xcode-plugin-in-swift/</guid>
-      <description>&lt;p&gt;
-&lt;figure class=&#34;center&#34;&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
     
         &lt;img src=&#34;http://merowing.info/2015/12/logs.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
 
-&lt;/p&gt;
+
 
 &lt;p&gt;I&amp;rsquo;ve found myself using Xcode a lot more than I did in Objective-C.&lt;/p&gt;
 
@@ -46,7 +46,8 @@
 &lt;p&gt;Because Xcode doesn’t offer such functionality and because I do not like to complain, I’ve decided to write my own plugin for it.&lt;/p&gt;
 
 &lt;p&gt;I wrote it in Swift.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -58,7 +59,8 @@
       <description>&lt;p&gt;Data parsing is one of most common tasks we need to do in our apps, yet still majority of people do this parsing by hand, always repeating the same code for each class they need to map.&lt;/p&gt;
 
 &lt;p&gt;I&amp;rsquo;ll show show you how you could simplify your code and make it more readable at the same time.&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -70,7 +72,8 @@
       <description>&lt;p&gt;Do you use assertions in your code? What for? How do you handle release builds ?&lt;/p&gt;
 
 &lt;p&gt;There is a better way than NSAssert&amp;hellip;&lt;/p&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -88,7 +91,8 @@ It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
   &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;
-</description>
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -101,8 +105,8 @@ Your browser does not support the video tag.
 
 &lt;p&gt;I’m working on my personal app that needs something similar, and after doing some research I’ve not seen a proper solution.&lt;/p&gt;
 
-&lt;p&gt;So I wrote one.&lt;/p&gt;
-</description>
+&lt;p&gt;So I wrote one.
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -115,8 +119,8 @@ Your browser does not support the video tag.
 
 &lt;p&gt;You need to remember to unregister before you release your observer object, if you don’t you are going to have crashes.&lt;/p&gt;
 
-&lt;p&gt;What if you could automate it ?&lt;/p&gt;
-</description>
+&lt;p&gt;What if you could automate it ?
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,8 +133,8 @@ Your browser does not support the video tag.
 
 &lt;p&gt;When Apple introduced UIGestureRecognizers they unified how touch interaction should work.&lt;/p&gt;
 
-&lt;p&gt;Is there a way we can add UIGestureRecognizers to cocos2d architecture, without modyfing cocos2d source?&lt;/p&gt;
-</description>
+&lt;p&gt;Is there a way we can add UIGestureRecognizers to cocos2d architecture, without modyfing cocos2d source?
+&lt;/p&gt;</description>
     </item>
     
   </channel>

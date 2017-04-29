@@ -30,6 +30,7 @@ how fast should we lose or gain weight?
 
 
 We&rsquo;ll use Swift Playgrounds to explain it.
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://merowing.info/2014/09/a-swift-introduction-into-fitness/" />
@@ -81,6 +82,7 @@ how fast should we lose or gain weight?
 
 
 We&rsquo;ll use Swift Playgrounds to explain it.
+
 ">
 
 
@@ -114,6 +116,7 @@ how fast should we lose or gain weight?
 
 
 We&rsquo;ll use Swift Playgrounds to explain it.
+
 "/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
@@ -144,7 +147,8 @@ We&rsquo;ll use Swift Playgrounds to explain it.
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -204,9 +208,7 @@ We&rsquo;ll use Swift Playgrounds to explain it.
             
 
             <article class="post-content">
-                
-
-<p>Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.</p>
+                <p>Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.</p>
 
 <p>Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:</p>
 
@@ -223,7 +225,9 @@ We&rsquo;ll use Swift Playgrounds to explain it.
 
 <p>We&rsquo;ll use Swift Playgrounds to explain it.</p>
 
-<h3 id="defining-user:fdff19e744d7abedd643ddc02db6f29d">Defining user</h3>
+<p></p>
+
+<h3 id="defining-user">Defining user</h3>
 
 <p>Before we start calculating our caloric needs we will need to have access to our user stats.</p>
 
@@ -253,7 +257,7 @@ func toCm(#feet: Double, #inches: Double) -&gt; Double {
 <pre><code class="language-swift">var user = User(gender: .Male, age: 26, weightInKg: 73, heightInCm: 184, bodyfat: 10)
 </code></pre>
 
-<h3 id="how-to-estimate-calories-we-should-eat:fdff19e744d7abedd643ddc02db6f29d">How to estimate calories we should eat?</h3>
+<h3 id="how-to-estimate-calories-we-should-eat">How to estimate calories we should eat?</h3>
 
 <p>The only real way to know how much calories you should eat would be to track your food intake and weight changes over couple of weeks, then we can calculate your personal calories accurately.</p>
 
@@ -261,7 +265,7 @@ func toCm(#feet: Double, #inches: Double) -&gt; Double {
 
 <p>There are few components we need to consider when calculating our caloric needs:</p>
 
-<h4 id="bmr-basal-metabolic-rate:fdff19e744d7abedd643ddc02db6f29d">BMR - Basal Metabolic Rate</h4>
+<h4 id="bmr-basal-metabolic-rate">BMR - Basal Metabolic Rate</h4>
 
 <p>BMR defines bulk of our caloric needs, it can be thought of as calories you would need if you stayed in bed all day and didn’t do anything eg. Comatose. Resting Metabolic Rate can be considered same as BMR .</p>
 
@@ -272,7 +276,7 @@ func toCm(#feet: Double, #inches: Double) -&gt; Double {
 <pre><code class="language-swift">typealias BMRCalculator = () -&gt; Double
 </code></pre>
 
-<h4 id="neat-and-activity-factor-non-exercise-associated-thermogenesis:fdff19e744d7abedd643ddc02db6f29d">NEAT and Activity Factor- Non-Exercise Associated Thermogenesis</h4>
+<h4 id="neat-and-activity-factor-non-exercise-associated-thermogenesis">NEAT and Activity Factor- Non-Exercise Associated Thermogenesis</h4>
 
 <p>NEAT is calories we burn doing stuff that’s not exercise, eg. washing/talking/working.</p>
 
@@ -287,7 +291,7 @@ func toCm(#feet: Double, #inches: Double) -&gt; Double {
 }
 </code></pre>
 
-<h4 id="tef-thermic-effect-of-feeding:fdff19e744d7abedd643ddc02db6f29d">TEF - Thermic Effect of Feeding</h4>
+<h4 id="tef-thermic-effect-of-feeding">TEF - Thermic Effect of Feeding</h4>
 
 <p>TEF is used to calculate amount of calories you burn while eating, it will mostly depend on the amount of Protein and Fiber content in your diet as they influence how much energy is needed for converting food into energy.</p>
 
@@ -296,11 +300,11 @@ func toCm(#feet: Double, #inches: Double) -&gt; Double {
 <p>Values would vary depending on protein intake mostly:
 0.05 to 0.15 from low to high protein intake (1-3g of protein / kg), but for most people starting out this difference will fall into calculation error margin so let’s not worry about it for now.</p>
 
-<h4 id="met-metabolic-effect-of-training:fdff19e744d7abedd643ddc02db6f29d">MET - Metabolic Effect of Training</h4>
+<h4 id="met-metabolic-effect-of-training">MET - Metabolic Effect of Training</h4>
 
 <p>MET is amount of calories you burn during exercise, as such it only applies for training days.</p>
 
-<h4 id="tdee-total-daily-energy-expenditure:fdff19e744d7abedd643ddc02db6f29d">TDEE - Total Daily Energy Expenditure</h4>
+<h4 id="tdee-total-daily-energy-expenditure">TDEE - Total Daily Energy Expenditure</h4>
 
 <p>TDEE is total amount of calories you need to maintain your current weight, it’s affected by all of the above, but we’ll be calculating TDEE without taking TEF (because for beginners it will be negligible) and MET (only applies to training days).</p>
 
@@ -311,7 +315,7 @@ func toCm(#feet: Double, #inches: Double) -&gt; Double {
 }
 </code></pre>
 
-<h4 id="bmr-equations:fdff19e744d7abedd643ddc02db6f29d">BMR Equations</h4>
+<h4 id="bmr-equations">BMR Equations</h4>
 
 <p>Two most accurate equations for calculating BMR are:</p>
 
@@ -343,7 +347,7 @@ func BMRCalculatorForUser(user: User) -&gt; BMRCalculator {
 }
 </code></pre>
 
-<h2 id="calculating-maintenance:fdff19e744d7abedd643ddc02db6f29d">Calculating maintenance</h2>
+<h2 id="calculating-maintenance">Calculating maintenance</h2>
 
 <p>Now we have enough code to calculate our TDEE needs:</p>
 
@@ -352,7 +356,7 @@ let tdee = TDEE(BMRCalculatorForUser(user), ActivityFactor.Sedentary)
 println(&quot;You can maintain your weight by eating \(tdee) kcal daily&quot;)
 </code></pre>
 
-<h2 id="personal-goals:fdff19e744d7abedd643ddc02db6f29d">Personal Goals</h2>
+<h2 id="personal-goals">Personal Goals</h2>
 
 <p>Now that we have calories to maintain our weight, let’s look at possible goals for a user:</p>
 
@@ -373,7 +377,7 @@ Same goes for fat loss, we don’t want to lose hard earned muscle tissue, only 
 }
 </code></pre>
 
-<h3 id="fat-loss:fdff19e744d7abedd643ddc02db6f29d">Fat loss</h3>
+<h3 id="fat-loss">Fat loss</h3>
 
 <p>It could be fast if you were willing to really restrict calories, but one have to be careful to avoid muscle loss. Starvation mode is a myth but you might be miserable when you do very strict diet. I’d suggest going slower but steady, having around 0.5 kg fat loss per week wouldn’t be bad, in 10 weeks you’d have 5 kg of FAT less.</p>
 
@@ -382,7 +386,7 @@ Same goes for fat loss, we don’t want to lose hard earned muscle tissue, only 
 <pre><code class="language-swift">println(&quot;daily deficit: \(caloriesForWeight(0.5) / 7.0)&quot;)
 </code></pre>
 
-<h3 id="muscle-gain:fdff19e744d7abedd643ddc02db6f29d">Muscle gain</h3>
+<h3 id="muscle-gain">Muscle gain</h3>
 
 <p>Muscle gain is hard, we can’t just overeat and expect to gain more muscle, doing so will end up with getting fat and having to go into Fat Loss phase, it will make you miserable in long run.</p>
 
@@ -403,7 +407,7 @@ func cutting(#kgPerWeek: Double) -&gt; Goal {
 }
 </code></pre>
 
-<h3 id="final-calculation:fdff19e744d7abedd643ddc02db6f29d">Final calculation</h3>
+<h3 id="final-calculation">Final calculation</h3>
 
 <p>Now we can finally calculate daily calories needed to reach our goals:</p>
 
@@ -415,7 +419,7 @@ let target = dailyCalories(tdee, goal: bulking(kgPerWeek: 0.2))
 println(&quot;You should be eating \(target) kcal everyday&quot;)
 </code></pre>
 
-<h2 id="conclusion:fdff19e744d7abedd643ddc02db6f29d">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>This should make starting your fitness journey easier, it also shows how cool playgrounds are.</p>
 
@@ -425,7 +429,6 @@ println(&quot;You should be eating \(target) kcal everyday&quot;)
 <li><a href="/2014/02/fit-geek/">Fit Geek</a></li>
 <li><a href="/2015/01/extracting-data-from-websites-without-api/">Simple way to scrape web with Ruby</a></li>
 </ul>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -434,7 +437,7 @@ println(&quot;You should be eating \(target) kcal everyday&quot;)
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2014/09/a-swift-introduction-into-fitness/"

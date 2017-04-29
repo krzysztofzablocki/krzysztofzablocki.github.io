@@ -96,7 +96,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -148,27 +149,26 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2012/05/reuse.jpg"  />
     
     
 </figure>
 
-</p>
+
 
 <p>We evolve and change our habits, probably many times every few years. Your code style changes, your approach to writing code in general.</p>
 
 <p>That’s usually good but sometimes bad habits are introduced into that process and remain with you for long time.</p>
 
-<h2 id="disclaimer:614a230477ec6462d47e6315c71bc6d1">Disclaimer</h2>
+<p></p>
+
+<h2 id="disclaimer">Disclaimer</h2>
 
 <p>The wrong habits I’m going to mention are all about extreme cases, so take it with a grain of salt. Remember that each project should have a well thought architecture and what works better for some might be hell for others. I’m all about doing OOP and SRP but as everything it can be abused, remember about KISS principle guys ?.</p>
 
-<h2 id="leaving-unused-code:614a230477ec6462d47e6315c71bc6d1">Leaving unused code</h2>
+<h2 id="leaving-unused-code">Leaving unused code</h2>
 
 <p>We all sometimes decide to rewrite some part of code because it either doesn’t work or we want to improve it a bit, a lot of us are perfectionist after all. You start by commenting current version and write new code in it place. That’s all fine but you should remove it after you are done with new version. If you don’t it will keep growing, and at some point it’s start to really obscure the important and working things.</p>
 
@@ -178,15 +178,15 @@
 
 <p><strong>You have version control for keeping old code, don’t be afraid to delete it! Do it now!</strong></p>
 
-<h2 id="over-generalization:614a230477ec6462d47e6315c71bc6d1">Over-generalization</h2>
+<h2 id="over-generalization">Over-generalization</h2>
 
 <p>Many programmers are taught to write code that can handle anything you throw at it at some point, and they begin to think that way in every application they do. I’ve created a lot of components / frameworks and did my own 3D Game engine so I know quite a lot about doing abstract code. But for 90% of apps that should not be the case.</p>
 
 <p>We as programmers tend to think that we will reuse our code later on, so we try to make it as general / abstract as we can think of. You are doing custom component? How about you make sure it handles 10 use cases even if we only need 2 in our current app ?</p>
 
-<p><strong>I’ve bad news for you, you barely reuse your older code in other projects. **You are wasting your time or your client time (which he is paying for) doing stuff that’s not needed in the project, instead of focusing on the parts that are important. If you have to write second (or better third) project that uses similar custom class, then I would think about exposing it as separate entity. **You already know a few use cases that are usually needed, you have experienced and fixed some pitfalls, it’s tested in real projects.</strong></p>
+<p>**I’ve bad news for you, you barely reuse your older code in other projects. **You are wasting your time or your client time (which he is paying for) doing stuff that’s not needed in the project, instead of focusing on the parts that are important. If you have to write second (or better third) project that uses similar custom class, then I would think about exposing it as separate entity. <strong>You already know a few use cases that are usually needed, you have experienced and fixed some pitfalls, it’s tested in real projects.</strong></p>
 
-<h2 id="object-oriented-fixation:614a230477ec6462d47e6315c71bc6d1">Object Oriented fixation</h2>
+<h2 id="object-oriented-fixation">Object Oriented fixation</h2>
 
 <p>Let me state this: I’m big fan of Object oriented programming and single responsibility principle, <strong>I love that approach</strong> as it’s easy to understand, easy to maintain.</p>
 
@@ -194,7 +194,7 @@
 
 <p>Too much generalization, putting everything in separate classes ( when non necessary ) may have a bad repercussions later on. It will be harder to optimize your code if it’s going between too many classes ( SRP is your friend ), it may actually be hard to add new features when you divide the code too much… <strong>Always think about the relations between your classes and their responsibilities, do you really need to move that code into separate class? Maybe it’s doesn’t really make sense?</strong></p>
 
-<h2 id="i-can-write-that-better:614a230477ec6462d47e6315c71bc6d1">I can write that better</h2>
+<h2 id="i-can-write-that-better">I can write that better</h2>
 
 <p>Many of us have have big egos, we think we can write anything and probably do it better than someone else. <strong>Leave your ego at home</strong>.</p>
 
@@ -220,7 +220,7 @@
 
 <p>**And if you don’t believe that you can write bad code, just open some project you did a few years ago, I bet you will think that’s it BAD! **</p>
 
-<h2 id="afraid-of-tools-and-writing-less-code:614a230477ec6462d47e6315c71bc6d1">Afraid of tools and writing less code</h2>
+<h2 id="afraid-of-tools-and-writing-less-code">Afraid of tools and writing less code</h2>
 
 <p>People tend to be afraid of change, we have our habits that we believe are the right ones, it takes some force to go out of your comfort zone and really give a try to something new.</p>
 
@@ -230,10 +230,9 @@
 
 <p>After all** Less code you write means less problems that you will have to debug.**</p>
 
-<h2 id="conclusion:614a230477ec6462d47e6315c71bc6d1">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>There are many more bad habits that you probably are aware of ( could probably write a book about them ). The one that I mentioned may not be the obvious ones, but I’ve noticed them quite often working with different people. If someone does any of them I doesn’t mean they are bad programmers, probably all of us have some bad habits and the point is to try to eliminate. <strong>I dare you to look at code that you wrote 3 years ago and tell me that you like it now ![:)]</strong></p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -242,7 +241,7 @@
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2012/05/programmers-bad-habits/"

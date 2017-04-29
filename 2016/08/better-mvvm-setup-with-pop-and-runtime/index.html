@@ -102,7 +102,8 @@
                 <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
             </nav>
             <nav class="site-nav right">
-                <a href="/hire/">About Me</a>
+                <a href="/post/">Blog</a>
+<a href="/hire/">About Me</a>
 <a href="/speaking/">Speaking</a>
 
 
@@ -154,23 +155,22 @@
             
 
             <article class="post-content">
-                
-
-<p>
-<figure class="center">
+                <figure class="center">
     
         <img src="/2016/08/better-mvvm.png"  />
     
     
 </figure>
 
-</p>
+
 
 <p>Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.</p>
 
 <p>Let&rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.</p>
 
-<h2 id="popular-mvvm-setup:b88731cf59f638344ffef1f5d9fa5f93">Popular MVVM setup</h2>
+<p></p>
+
+<h2 id="popular-mvvm-setup">Popular MVVM setup</h2>
 
 <p>Pretty standard approach for MVVM architecture is to have both <code>UIView</code> and <code>UIViewController</code> have a corresponding <code>ViewModel</code>.</p>
 
@@ -217,7 +217,7 @@ final class ListViewController: UIViewController {
 }
 </code></pre>
 
-<h2 id="problems:b88731cf59f638344ffef1f5d9fa5f93">Problems</h2>
+<h2 id="problems">Problems</h2>
 
 <p>Let&rsquo;s start with one distinction first.
 A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
@@ -243,9 +243,9 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 }
 </code></pre>
 
-<h2 id="alternatives:b88731cf59f638344ffef1f5d9fa5f93">Alternatives</h2>
+<h2 id="alternatives">Alternatives</h2>
 
-<h3 id="not-leveraging-interface-builder:b88731cf59f638344ffef1f5d9fa5f93">Not leveraging Interface Builder</h3>
+<h3 id="not-leveraging-interface-builder">Not leveraging Interface Builder</h3>
 
 <pre><code class="language-swift">final class ListViewController: UIViewController {
   let viewModel: ListViewModelType
@@ -273,7 +273,7 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 
 <p><strong>Note</strong>: <em>from now on this article now assumes you still want to leverage interface builder, and can&rsquo;t just use initializer injection</em></p>
 
-<h3 id="implicitly-unwrapped-optional:b88731cf59f638344ffef1f5d9fa5f93">Implicitly Unwrapped Optional</h3>
+<h3 id="implicitly-unwrapped-optional">Implicitly Unwrapped Optional</h3>
 
 <pre><code class="language-swift">var viewModel: ListViewModelType!
 </code></pre>
@@ -291,7 +291,7 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 <li>You can pass it <code>nil</code> as the ViewModel</li>
 </ul>
 
-<h3 id="default-value:b88731cf59f638344ffef1f5d9fa5f93">Default value</h3>
+<h3 id="default-value">Default value</h3>
 
 <p>Example from <a href="http://artsy.github.io/blog/2015/09/24/mvvm-in-swift/">Artsy MVVM in Swift</a></p>
 
@@ -319,7 +319,7 @@ A View might be <code>Reusable</code> or <code>NonReusable</code>.</p>
 <li>Complicates dependency injection and <a href="http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/">Flow Coordination</a></li>
 </ul>
 
-<h2 id="a-new-hope-mvvm-with-protocol-oriented-programming-and-runtime:b88731cf59f638344ffef1f5d9fa5f93">A New Hope - MVVM+ with Protocol Oriented Programming and Runtime</h2>
+<h2 id="a-new-hope-mvvm-with-protocol-oriented-programming-and-runtime">A New Hope - MVVM+ with Protocol Oriented Programming and Runtime</h2>
 
 <p>Let&rsquo;s create an alternative approach.
 One that removes unnecessary boilerplate and leverages:</p>
@@ -330,7 +330,7 @@ One that removes unnecessary boilerplate and leverages:</p>
 <li><a href="https://lwn.net/Articles/633117/">Crash early crash often</a> principles</li>
 </ul>
 
-<h3 id="design-goals:b88731cf59f638344ffef1f5d9fa5f93">Design goals</h3>
+<h3 id="design-goals">Design goals</h3>
 
 <p>MVVM goes well in pair with some <code>Observable</code> library like <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.</p>
 
@@ -393,7 +393,7 @@ reusable.viewModel = ItemViewModel()  // didSetViewModel
 reusable.viewModel = ItemViewModel()  // cleanup() -&gt; didSetViewModel
 </code></pre>
 
-<h3 id="implementation-tidbits:b88731cf59f638344ffef1f5d9fa5f93">Implementation tidbits</h3>
+<h3 id="implementation-tidbits">Implementation tidbits</h3>
 
 <p>Let&rsquo;s take a look at the <code>protocol</code> for <code>NonReusableViewModelOwner</code>:</p>
 
@@ -455,7 +455,7 @@ extension NonReusableViewModelOwner where Self: NSObject {
 <li><strong>Safety net</strong>: If somehow we did not find our mistake in development or QA stage and passed in subsequent <code>viewModel</code> values after initial configuration: this implementation behaves correctly by removing previous registrations and acting as <code>ReusableViewModelOwner</code>.</li>
 </ul>
 
-<h2 id="using-this-approach-in-your-app-is-simple:b88731cf59f638344ffef1f5d9fa5f93">Using this approach in your app is simple</h2>
+<h2 id="using-this-approach-in-your-app-is-simple">Using this approach in your app is simple</h2>
 
 <ul>
 <li>Conform to either <code>NonReusableViewModelOwner</code> or <code>ViewModelOwner</code></li>
@@ -478,12 +478,11 @@ extension NonReusableViewModelOwner where Self: NSObject {
 
 <p><em>You do not even have to declare <code>viewModel</code> property, you get that for free.</em></p>
 
-<h3 id="conclusion:b88731cf59f638344ffef1f5d9fa5f93">Conclusion</h3>
+<h3 id="conclusion">Conclusion</h3>
 
 <p>MVVM+ approach might not be ideal, but I believe it is a significant improvement over many popular approaches.</p>
 
 <p>Give it a try! Let me know if you have ideas for improvement.</p>
-
             </article>
             <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
                data-size="medium"></a>
@@ -492,7 +491,7 @@ extension NonReusableViewModelOwner where Self: NSObject {
             
             <div class="social-icons">
 
-                <p>Support my writing:<a href="https://www.patreon.com/bePatron?u=389336" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://cdn6.patreon.com/becomePatronButton.bundle.js"></script><p>
+                
                 <p>Need help with iOS project? <a href="/hire">You can hire me.</a></p>
                 <p>Share this post:</p>
                 <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/"
