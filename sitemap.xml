@@ -163,13 +163,6 @@
   </url>
   
   <url>
-    <loc>http://merowing.info/speaking/</loc>
-    <lastmod>2015-10-27T14:09:49+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://merowing.info/</loc>
     <lastmod>2015-10-27T14:09:49+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -178,6 +171,13 @@
   
   <url>
     <loc>http://merowing.info/hire/</loc>
+    <lastmod>2015-10-27T14:09:49+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://merowing.info/speaking/</loc>
     <lastmod>2015-10-27T14:09:49+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
