@@ -6,8 +6,8 @@ GitHubWidget = function (options) {
 
 	this.defaultConfig = {
 		sortBy: 'stars', // possible: 'stars', 'updateTime'
-		reposHeaderText: 'Most popular',
-		maxRepos: 7,
+		reposHeaderText: 'Top 3',
+		maxRepos: 3,
     user: 'krzysztofzablocki'
 	}
 
@@ -181,10 +181,10 @@ GitHubWidget.prototype.render = function (options) {
 
 	if (options.maxRepos > 0) {
 		var $repos = this.render.repos.bind(this)(options.sortBy, options.maxRepos),
-			$reposHeader = document.createElement('span');
+		$reposHeader = document.createElement('span');
 		$reposHeader.className = "header";
 		$reposHeader.appendChild(document.createTextNode(options.reposHeaderText + ' repositories'));
-
+		
 		$repos.insertBefore($reposHeader, $repos.firstChild);
 		$root.appendChild($repos);
 	}
@@ -228,7 +228,7 @@ GitHubWidget.prototype.render.profile = function () {
 		$stats  = document.createElement('div'),
 		$followContainer = document.createElement('div'),
 		$followButton = document.createElement('a'),
-		$followers = document.createElement('span');
+		$stars = document.createElement('span');
 
 	$name.href = this.data.html_url;
 	$name.className = "name";
@@ -241,13 +241,20 @@ GitHubWidget.prototype.render.profile = function () {
 	$followButton.className = "follow-button";
 	$followButton.innerHTML = "Follow @" + this.user;
 
-	$followers.href = this.data.followers_url;
-	$followers.className = "followers";
-	$followers.innerHTML = this.data.followers + " followers";
+	var reposData = this.getRepos();
+	var totalStars = 0
+	for (var i = 0; i < reposData.length; i++) {
+		var element = reposData[i];
+		totalStars += element.stargazers_count
+	}
+
+	$stars.href = this.data.followers_url;
+	$stars.className = "stars";
+	$stars.innerHTML = totalStars.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " stars";
 
 	$followContainer.className = "followMe";
 	$followContainer.appendChild($followButton);
-	$followContainer.appendChild($followers);
+	$followContainer.appendChild($stars);
 
 	$profile.appendChild($avatar);
 	$profile.appendChild($name);

@@ -509,11 +509,17 @@ blockquote {
  * ------------------------------------------------------------------
  */
 
+ .app-icons {
+   margin: 0;
+   padding: 0;
+ }
+
 .app-icons ul {
   margin: 2em auto;
   width: 100%;
   font-family: 'HelveticaNeue',Helvetica,sans-serif;
   font-size: 14px;
+  padding: 0;
 }
 
 
@@ -544,6 +550,8 @@ blockquote {
   float: left;
   display: block;
   height: 120px;
+  margin: 0;
+  padding: 0;
   margin-bottom: 2em;
 }
 
@@ -584,10 +592,11 @@ blockquote {
   /* followers number */
   /* List of repositories */
   float: right;
-
+  margin: 20px;
 }
+
 .gh-profile-widget {
-  width: 280px;
+  width: 220px;
   border-radius: 5px;
   font-size: 16px;
   font-family: Helvetica;
@@ -639,7 +648,7 @@ blockquote {
 .gh-profile-widget .profile {
   background: #FFF;
   overflow: hidden;
-  padding: 15px 10px;
+  padding: 10px 10px;
   padding-bottom: 0;
   min-height: 110px;
 }
@@ -678,8 +687,9 @@ blockquote {
   content: '';
 }
 .gh-profile-widget .followMe {
-  margin-top: 3px;
+  margin-top: 0px;
 }
+
 .gh-profile-widget .follow-button {
   font-size: 0.8em;
   color: #333;
@@ -706,7 +716,7 @@ blockquote {
 .gh-profile-widget .followMe span {
   position: relative;
   background: #FFF;
-  margin-left: 8px;
+  margin-left: 0px;
   padding: 0 5px;
   color: #444;
   font-size: 0.8em;
@@ -734,13 +744,13 @@ blockquote {
   width: 64px;
   height: 64px;
   float: left;
-  margin: 0 10px 15px 0;
+  margin: 0 10px 10px 0;
   margin-left: 0;
   border-radius: 5px;
   box-shadow: 0 0 2px 0 #DDD;
 }
 .gh-profile-widget .repos {
-  clear: both;
+  clear: both;  
 }
 .gh-profile-widget .repos .header {
   display: block;
@@ -780,7 +790,7 @@ blockquote {
   position: absolute;
   font-size: 0.9em;
   right: 0.5em;
-  top: 1.1em;
+  top: 0.5em;
   color: #888;
 }
 .gh-profile-widget .repos .star::after {
