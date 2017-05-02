@@ -545,6 +545,10 @@ blockquote {
   }
 }
 
+.support {
+  vertical-align: middle;
+}
+
 .app-icons li {
   border-radius: 20px;
   float: left;
