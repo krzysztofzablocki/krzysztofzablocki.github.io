@@ -10,6 +10,21 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Metaprogramming in Swift talk</title>
+      <link>http://merowing.info/2017/05/metaprogramming-in-swift-talk/</link>
+      <pubDate>Wed, 03 May 2017 08:04:14 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/05/metaprogramming-in-swift-talk/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently spoke at &lt;a href=&#34;https://craft-conf.com&#34;&gt;CraftConf&lt;/a&gt; about metaprogramming in Swift using my &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can watch the talk online:&lt;/p&gt;
+
+&lt;iframe width=&#34;728&#34; height=&#34;409&#34; src=&#34;http://www.ustream.tv/embed/recorded/102892349?html5ui&#34; scrolling=&#34;no&#34; allowfullscreen webkitallowfullscreen frameborder=&#34;0&#34; style=&#34;border: 0 none transparent;&#34;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Using protocol compositon for dependency injection</title>
       <link>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</link>
       <pubDate>Wed, 12 Apr 2017 18:13:31 &#43;0200</pubDate>
@@ -307,19 +322,6 @@
 &lt;p&gt;For me it has always been about solving problems, and analytical thinking.&lt;/p&gt;
 
 &lt;p&gt;Does it matter what language or platform you solve problems on? How do you learn more on your selected platform?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Improve your iOS Architecture with FlowControllers</title>
-      <link>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</link>
-      <pubDate>Tue, 05 Jan 2016 11:23:46 &#43;0100</pubDate>
-      
-      <guid>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</guid>
-      <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
-
-&lt;p&gt;Why?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

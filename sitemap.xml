@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://merowing.info/2017/05/metaprogramming-in-swift-talk/</loc>
+    <lastmod>2017-05-03T08:04:14+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</loc>
     <lastmod>2017-04-12T18:13:31+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -507,7 +514,7 @@
   
   <url>
     <loc>http://merowing.info/post/</loc>
-    <lastmod>2017-04-12T18:13:31+02:00</lastmod>
+    <lastmod>2017-05-03T08:04:14+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
