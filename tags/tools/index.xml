@@ -7,7 +7,67 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 02 Jan 2017 17:21:09 &#43;0200</updated>
+    <updated>Wed, 18 Oct 2017 12:30:51 &#43;0200</updated>
+    
+    <item>
+      <title>Finding exact difference between 2 instances</title>
+      <link>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
+      <pubDate>Wed, 18 Oct 2017 12:30:51 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
+      <description>&lt;p&gt;Better way to identify whats different between two instances.&lt;/p&gt;
+
+&lt;p&gt;Have you ever written tests? Usually they use equality asserts, e.g. XCTAssertEqual, what happens if the object aren&amp;rsquo;t equal ? Xcode throws wall of text at you:&lt;/p&gt;
+
+
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/Difference/master/Resources/before.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;This forces you to manually scan the text and try to figure out exactly whats wrong, what if instead you could just learn which property is different?&lt;/p&gt;
+
+
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/Difference/master/Resources/after.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to find retain cycles and memory leaks sooner</title>
+      <link>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
+      <pubDate>Sun, 01 Oct 2017 12:30:51 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/LifetimeTracker&#34;&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LifetimeTracker can surface retain cycle / memory issues right as you develop your application, and it will surface them to you immediately, so you can find them with more ease.&lt;/p&gt;
+
+&lt;p&gt;Instruments and Memory Graph Debugger are great, but too many times developers forget to check for issues as they close the feature implementation.&lt;/p&gt;
+
+&lt;p&gt;If you use those tools sporadicaly many of the issues they surface will require you to investigate the cause, and cost you a lot of time in the process.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>How hard would it be to adjust your iOS app in real-time?</title>

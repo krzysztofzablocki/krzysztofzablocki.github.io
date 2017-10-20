@@ -20,7 +20,7 @@
 
 
 
-<meta property="og:updated_time" content="2017-05-03 08:04:14 &#43;0200 &#43;0200"/>
+<meta property="og:updated_time" content="2017-10-18 12:30:51 &#43;0200 &#43;0200"/>
 
 
 <meta property="og:site_name" content="Krzysztof Zabłocki" />
@@ -33,7 +33,7 @@
 
 <meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
 <meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
-<meta property="article:published_time" content="2017-05-03 08:04:14 &#43;0200 &#43;0200" />
+<meta property="article:published_time" content="2017-10-18 12:30:51 &#43;0200 &#43;0200" />
 <meta property="article:section" content="post" />
 
 
@@ -130,6 +130,122 @@
                         
                         
                             <div class="post">
+    <a class="post-link" href="http://merowing.info/2017/10/finding-exact-difference-between-2-instances/">
+        <p class="post-meta left">Oct 18, 2017</p>
+
+        
+        <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>1 minute read</em></span>
+        
+
+        <div class="clearfix"></div>
+
+        <h3 class="h2 post-title">Finding exact difference between 2 instances </h3></a>
+
+    
+
+    
+
+    <br/>
+
+    <p class="post-summary"><p>Better way to identify whats different between two instances.</p>
+
+<p>Have you ever written tests? Usually they use equality asserts, e.g. XCTAssertEqual, what happens if the object aren&rsquo;t equal ? Xcode throws wall of text at you:</p>
+
+
+<figure class="center">
+    
+        <img src="https://raw.githubusercontent.com/krzysztofzablocki/Difference/master/Resources/before.png"  />
+    
+    
+</figure>
+
+
+
+<p>This forces you to manually scan the text and try to figure out exactly whats wrong, what if instead you could just learn which property is different?</p>
+
+
+<figure class="center">
+    
+        <img src="https://raw.githubusercontent.com/krzysztofzablocki/Difference/master/Resources/after.png"  />
+    
+    
+</figure>
+
+
+
+<p></p></p>
+
+    
+
+    
+    <br/>
+    <div class="center playground">
+        <a href="https://github.com/krzysztofzablocki/Difference">
+            <img src="http://merowing.info/2015/01/github.jpg"/>
+            <span>Source Code on GitHub.</span>
+        </a>
+    </div>
+    <br/>
+    
+    
+    
+</div>
+
+                        
+                            <div class="post">
+    <a class="post-link" href="http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/">
+        <p class="post-meta left">Oct 1, 2017</p>
+
+        
+        <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>1 minute read</em></span>
+        
+
+        <div class="clearfix"></div>
+
+        <h3 class="h2 post-title">How to find retain cycles and memory leaks sooner </h3></a>
+
+    
+
+    
+
+    <br/>
+
+    <p class="post-summary"><p><a href="https://github.com/krzysztofzablocki/LifetimeTracker">
+<figure class="center">
+    
+        <img src="https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif"  />
+    
+    
+</figure>
+
+</a></p>
+
+<p>LifetimeTracker can surface retain cycle / memory issues right as you develop your application, and it will surface them to you immediately, so you can find them with more ease.</p>
+
+<p>Instruments and Memory Graph Debugger are great, but too many times developers forget to check for issues as they close the feature implementation.</p>
+
+<p>If you use those tools sporadicaly many of the issues they surface will require you to investigate the cause, and cost you a lot of time in the process.</p>
+
+<p></p></p>
+
+    
+
+    
+    <br/>
+    <div class="center playground">
+        <a href="https://github.com/krzysztofzablocki/LifetimeTracker">
+            <img src="http://merowing.info/2015/01/github.jpg"/>
+            <span>Source Code on GitHub.</span>
+        </a>
+    </div>
+    <br/>
+    
+    
+    
+</div>
+
+                        
+                            <div class="post">
     <a class="post-link" href="http://merowing.info/2017/05/metaprogramming-in-swift-talk/">
         <p class="post-meta left">May 3, 2017</p>
 
@@ -155,6 +271,10 @@
 
 <p></p></p>
 
+    
+
+    
+    
     
 </div>
 
@@ -263,6 +383,10 @@
 <p><a href="http://benscheirman.com/2017/01/an-affordable-dynamic-mic-recommendation/">Ben Scheirman from NSPodcast has good recommendations for affordable microphone</a>
 </p></p>
 
+    
+
+    
+    
     
 </div>
 
@@ -441,89 +565,18 @@
 <p></p></p>
 
     
-</div>
-
-                        
-                            <div class="post">
-    <a class="post-link" href="http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/">
-        <p class="post-meta left">Aug 17, 2016</p>
-
-        
-        <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>6 minute read</em></span>
-        
-
-        <div class="clearfix"></div>
-
-        <h3 class="h2 post-title">Better MVVM setup with POP and Runtime </h3></a>
 
     
-
-    
-
     <br/>
-
-    <p class="post-summary"><figure class="center">
-    
-        <img src="/2016/08/better-mvvm.png"  />
-    
-    
-</figure>
-
-
-
-<p>Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.</p>
-
-<p>Let&rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.</p>
-
-<p></p></p>
-
-    
-    <div class="read-more-link">
-        <a href="/2016/08/better-mvvm-setup-with-pop-and-runtime/">Read More…</a>
+    <div class="center playground">
+        <a href="https://github.com/krzysztofzablocki/Sourcery">
+            <img src="http://merowing.info/2015/01/github.jpg"/>
+            <span>Source Code on GitHub.</span>
+        </a>
     </div>
-    
-</div>
-
-                        
-                            <div class="post">
-    <a class="post-link" href="http://merowing.info/2016/08/investing-time-into-developer-tools/">
-        <p class="post-meta left">Aug 8, 2016</p>
-
-        
-        <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>4 minute read</em></span>
-        
-
-        <div class="clearfix"></div>
-
-        <h3 class="h2 post-title">Investing time into developer tools </h3></a>
-
-    
-
-    
-
     <br/>
-
-    <p class="post-summary"><figure class="center">
-    
-        <img src="/2016/08/file-watchers.gif"  />
     
     
-</figure>
-
-
-
-<p>As I open source <a href="https://github.com/krzysztofzablocki/KZFileWatchers">another framework</a> this week, I wanted to share few thoughts about building developer tools.</p>
-
-<p>Developers are lazy creatures, we like to automate stuff, we write scripts, use File Automation to get rid of repetitive work.</p>
-
-<p>One would think that we&rsquo;d use the same principles in our jobs, yet I&rsquo;m constantly surprised how few developers actually invest their time into building tools and setting up processes inside their app to ease their day to day work.</p>
-
-<p></p></p>
-
-    
-    <div class="read-more-link">
-        <a href="/2016/08/investing-time-into-developer-tools/">Read More…</a>
-    </div>
     
 </div>
 

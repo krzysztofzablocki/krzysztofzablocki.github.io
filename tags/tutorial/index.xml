@@ -7,7 +7,67 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 03 Apr 2017 16:52:42 &#43;0200</updated>
+    <updated>Wed, 18 Oct 2017 12:30:51 &#43;0200</updated>
+    
+    <item>
+      <title>Finding exact difference between 2 instances</title>
+      <link>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
+      <pubDate>Wed, 18 Oct 2017 12:30:51 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
+      <description>&lt;p&gt;Better way to identify whats different between two instances.&lt;/p&gt;
+
+&lt;p&gt;Have you ever written tests? Usually they use equality asserts, e.g. XCTAssertEqual, what happens if the object aren&amp;rsquo;t equal ? Xcode throws wall of text at you:&lt;/p&gt;
+
+
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/Difference/master/Resources/before.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;This forces you to manually scan the text and try to figure out exactly whats wrong, what if instead you could just learn which property is different?&lt;/p&gt;
+
+
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/Difference/master/Resources/after.png&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to find retain cycles and memory leaks sooner</title>
+      <link>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
+      <pubDate>Sun, 01 Oct 2017 12:30:51 &#43;0200</pubDate>
+      
+      <guid>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/LifetimeTracker&#34;&gt;
+&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LifetimeTracker can surface retain cycle / memory issues right as you develop your application, and it will surface them to you immediately, so you can find them with more ease.&lt;/p&gt;
+
+&lt;p&gt;Instruments and Memory Graph Debugger are great, but too many times developers forget to check for issues as they close the feature implementation.&lt;/p&gt;
+
+&lt;p&gt;If you use those tools sporadicaly many of the issues they surface will require you to investigate the cause, and cost you a lot of time in the process.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Stop weak-strong dance</title>
@@ -228,39 +288,6 @@
 &lt;p&gt;By the end of this tutorial you will have a simple game with level editor under 250 lines of code.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Pinch to reveal animation, like in Boeing Milestones</title>
-      <link>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
-      <pubDate>Sun, 01 Jul 2012 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://itunes.apple.com/us/app/boeing-milestones/id510294916?mt=8&#34;&gt;Boeing made a nice app for iPad&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I was shown this app and asked if it’s hard to do this pinch to reveal animation.
-It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
-
-&lt;video width=&#34;100%&#34; controls&gt;
-  &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
-Your browser does not support the video tag.
-&lt;/video&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Drawing smooth lines with cocos2d ios inspired by Paper</title>
-      <link>http://merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</link>
-      <pubDate>Mon, 23 Apr 2012 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</guid>
-      <description>&lt;p&gt;You’ve probably seen &lt;a href=&#34;http://www.fiftythree.com/&#34;&gt;Paper&lt;/a&gt;, the app is pretty cool and the drawings look really nice and smooth.&lt;/p&gt;
-
-&lt;p&gt;I’m working on my personal app that needs something similar, and after doing some research I’ve not seen a proper solution.&lt;/p&gt;
-
-&lt;p&gt;So I wrote one.
-&lt;/p&gt;</description>
     </item>
     
   </channel>
