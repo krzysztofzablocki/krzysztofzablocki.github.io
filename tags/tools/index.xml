@@ -15,9 +15,7 @@
       <pubDate>Wed, 18 Oct 2017 12:30:51 &#43;0200</pubDate>
       
       <guid>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
-      <description>&lt;p&gt;Better way to identify whats different between two instances.&lt;/p&gt;
-
-&lt;p&gt;Have you ever written tests? Usually they use equality asserts, e.g. XCTAssertEqual, what happens if the object aren&amp;rsquo;t equal ? Xcode throws wall of text at you:&lt;/p&gt;
+      <description>&lt;p&gt;Have you ever written tests? Usually, they use equality asserts, e.g. XCTAssertEqual, what happens if the object isn&amp;rsquo;t equal? Xcode throws a wall of text at you:&lt;/p&gt;
 
 
 &lt;figure class=&#34;center&#34;&gt;
