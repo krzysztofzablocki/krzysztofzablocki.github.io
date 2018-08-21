@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Krzysztof Zabłocki </title>
-      <generator uri="https://gohugo.io">Hugo</generator>
+    <title>Experiments on Krzysztof Zabłocki</title>
     <link>http://merowing.info/tags/experiments/</link>
+    <description>Recent content in Experiments on Krzysztof Zabłocki</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Tue, 24 Nov 2015 12:29:37 +0100</lastBuildDate>
     
+	<atom:link href="http://merowing.info/tags/experiments/index.xml" rel="self" type="application/rss+xml" />
     
-    <updated>Tue, 24 Nov 2015 12:29:37 &#43;0100</updated>
     
     <item>
       <title>The beauty of imperfection</title>
       <link>http://merowing.info/2015/11/the-beauty-of-imperfection/</link>
-      <pubDate>Tue, 24 Nov 2015 12:29:37 &#43;0100</pubDate>
+      <pubDate>Tue, 24 Nov 2015 12:29:37 +0100</pubDate>
       
       <guid>http://merowing.info/2015/11/the-beauty-of-imperfection/</guid>
       <description>&lt;video autoplay loop&gt;
@@ -31,7 +33,7 @@
     <item>
       <title>Prototyping floating burger menu with CAShapeLayer</title>
       <link>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
-      <pubDate>Wed, 04 Nov 2015 13:29:44 &#43;0100</pubDate>
+      <pubDate>Wed, 04 Nov 2015 13:29:44 +0100</pubDate>
       
       <guid>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
       <description>&lt;video autoplay loop&gt;

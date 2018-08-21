@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Krzysztof Zabłocki </title>
-      <generator uri="https://gohugo.io">Hugo</generator>
+    <title>Gamedev on Krzysztof Zabłocki</title>
     <link>http://merowing.info/tags/gamedev/</link>
+    <description>Recent content in Gamedev on Krzysztof Zabłocki</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Thu, 11 Apr 2013 00:00:00 +0000</lastBuildDate>
     
+	<atom:link href="http://merowing.info/tags/gamedev/index.xml" rel="self" type="application/rss+xml" />
     
-    <updated>Thu, 11 Apr 2013 00:00:00 UTC</updated>
     
     <item>
       <title>iOS Game with Interface Builder</title>
       <link>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</link>
-      <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</guid>
       <description>&lt;figure &gt;

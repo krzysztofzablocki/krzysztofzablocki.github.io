@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Krzysztof Zabłocki </title>
-      <generator uri="https://gohugo.io">Hugo</generator>
+    <title>Process on Krzysztof Zabłocki</title>
     <link>http://merowing.info/tags/process/</link>
+    <description>Recent content in Process on Krzysztof Zabłocki</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Wed, 18 Jan 2017 15:43:04 +0100</lastBuildDate>
     
+	<atom:link href="http://merowing.info/tags/process/index.xml" rel="self" type="application/rss+xml" />
     
-    <updated>Wed, 18 Jan 2017 15:43:04 &#43;0100</updated>
     
     <item>
       <title>Seniority</title>
       <link>http://merowing.info/2017/01/seniority/</link>
-      <pubDate>Wed, 18 Jan 2017 15:43:04 &#43;0100</pubDate>
+      <pubDate>Wed, 18 Jan 2017 15:43:04 +0100</pubDate>
       
       <guid>http://merowing.info/2017/01/seniority/</guid>
       <description>&lt;p&gt;People use different words to classify Engineer skill, some companies give you more senior role just based on a number of years you have been working there, but what does it mean to be Senior?&lt;/p&gt;
@@ -29,7 +31,7 @@
     <item>
       <title>Programming</title>
       <link>http://merowing.info/2016/01/programming/</link>
-      <pubDate>Thu, 14 Jan 2016 16:21:06 &#43;0100</pubDate>
+      <pubDate>Thu, 14 Jan 2016 16:21:06 +0100</pubDate>
       
       <guid>http://merowing.info/2016/01/programming/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
@@ -53,7 +55,7 @@
     <item>
       <title>Playgrounds for Objective C</title>
       <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
-      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
       <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
@@ -95,7 +97,7 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     <item>
       <title>How do I work?</title>
       <link>http://merowing.info/2014/10/how-do-i-work/</link>
-      <pubDate>Mon, 06 Oct 2014 00:00:00 UTC</pubDate>
+      <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/10/how-do-i-work/</guid>
       <description>&lt;p&gt;I’ve been programming for 20 years now, doing commercial work for the last 8.&lt;/p&gt;

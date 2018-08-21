@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Krzysztof Zabłocki </title>
-      <generator uri="https://gohugo.io">Hugo</generator>
+    <title>Script on Krzysztof Zabłocki</title>
     <link>http://merowing.info/tags/script/</link>
+    <description>Recent content in Script on Krzysztof Zabłocki</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Wed, 03 Aug 2016 12:12:55 +0200</lastBuildDate>
     
+	<atom:link href="http://merowing.info/tags/script/index.xml" rel="self" type="application/rss+xml" />
     
-    <updated>Wed, 03 Aug 2016 12:12:55 &#43;0200</updated>
     
     <item>
       <title>Setting up pre-commit hook for iOS</title>
       <link>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</link>
-      <pubDate>Wed, 03 Aug 2016 12:12:55 &#43;0200</pubDate>
+      <pubDate>Wed, 03 Aug 2016 12:12:55 +0200</pubDate>
       
       <guid>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
@@ -34,7 +36,7 @@
     <item>
       <title>iOS tips</title>
       <link>http://merowing.info/2014/02/ios-tips/</link>
-      <pubDate>Thu, 20 Feb 2014 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/02/ios-tips/</guid>
       <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.
@@ -44,7 +46,7 @@
     <item>
       <title>iOS Developer Tools</title>
       <link>http://merowing.info/2014/02/ios-developer-tools/</link>
-      <pubDate>Fri, 07 Feb 2014 00:00:00 UTC</pubDate>
+      <pubDate>Fri, 07 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/02/ios-developer-tools/</guid>
       <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
@@ -56,7 +58,7 @@
     <item>
       <title>Crafter - setup your cocoa projects with ease</title>
       <link>http://merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
-      <pubDate>Thu, 02 May 2013 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 02 May 2013 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
       <description>&lt;p&gt;How do you setup your Cocoa projects?
@@ -69,7 +71,7 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
     <item>
       <title>Statusboard and Jenkins</title>
       <link>http://merowing.info/2013/04/statusboard-and-jenkins/</link>
-      <pubDate>Thu, 11 Apr 2013 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 11 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2013/04/statusboard-and-jenkins/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
@@ -89,7 +91,7 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
     <item>
       <title>Overlaying application version on top of your icon</title>
       <link>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</link>
-      <pubDate>Thu, 07 Mar 2013 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;

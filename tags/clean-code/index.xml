@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Krzysztof Zabłocki </title>
-      <generator uri="https://gohugo.io">Hugo</generator>
+    <title>Clean Code on Krzysztof Zabłocki</title>
     <link>http://merowing.info/tags/clean-code/</link>
+    <description>Recent content in Clean Code on Krzysztof Zabłocki</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Wed, 27 Aug 2014 00:00:00 +0000</lastBuildDate>
     
+	<atom:link href="http://merowing.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml" />
     
-    <updated>Wed, 27 Aug 2014 00:00:00 UTC</updated>
     
     <item>
       <title>Writing less code</title>
       <link>http://merowing.info/2014/08/writing-less-code/</link>
-      <pubDate>Wed, 27 Aug 2014 00:00:00 UTC</pubDate>
+      <pubDate>Wed, 27 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/08/writing-less-code/</guid>
       <description>&lt;p&gt;What are some of my favorite techniques for cleaner and more readable code?&lt;/p&gt;
@@ -23,7 +25,7 @@
     <item>
       <title>Refactoring tricks</title>
       <link>http://merowing.info/2014/03/refactoring-tricks/</link>
-      <pubDate>Mon, 24 Mar 2014 00:00:00 UTC</pubDate>
+      <pubDate>Mon, 24 Mar 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/03/refactoring-tricks/</guid>
       <description>&lt;p&gt;I believe in boy scout rule: &lt;em&gt;&amp;lsquo;Always leave the campground cleaner than you found it.&amp;rsquo;&lt;/em&gt;, that&amp;rsquo;s why I constantly refactor my code so it&amp;rsquo;s clean and tidy.&lt;/p&gt;
@@ -36,7 +38,7 @@
     <item>
       <title>7 most common code issues</title>
       <link>http://merowing.info/2014/03/7-most-common-code-issues/</link>
-      <pubDate>Thu, 20 Mar 2014 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate>
       
       <guid>http://merowing.info/2014/03/7-most-common-code-issues/</guid>
       <description>&lt;p&gt;What are top 7 most common issues I find doing Code Reviews?&lt;/p&gt;
