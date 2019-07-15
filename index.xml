@@ -10,6 +10,19 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Straighforward Data Snapshots</title>
+      <link>http://merowing.info/2019/07/straighforward-data-snapshots/</link>
+      <pubDate>Mon, 15 Jul 2019 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2019/07/straighforward-data-snapshots/</guid>
+      <description>&lt;p&gt;If your app has a lot of content, chances are that by the time you get a chance to work on a bug report, the data that the bug appeared on will be long gone.&lt;/p&gt;
+
+&lt;p&gt;Here are some tidbits on how I created a simple solution for that problem at &lt;a href=&#34;http://nytimes.com&#34;&gt;The New York Times&lt;/a&gt;, it&amp;rsquo;s based on a simple idea.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Finding exact difference between 2 instances</title>
       <link>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
       <pubDate>Wed, 18 Oct 2017 12:30:51 &#43;0200</pubDate>
@@ -51,7 +64,7 @@
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/LifetimeTracker&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif&#34;  /&gt;
+        &lt;img src=&#34;https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo-circular.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -328,16 +341,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>iOS Architecture</title>
-      <link>http://merowing.info/2016/06/ios-architecture/</link>
-      <pubDate>Mon, 27 Jun 2016 00:00:00 UTC</pubDate>
-      
-      <guid>http://merowing.info/2016/06/ios-architecture/</guid>
-      <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;
-&lt;/p&gt;</description>
     </item>
     
   </channel>
