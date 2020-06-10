@@ -10,6 +10,21 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Adding support for versioning and migration to your Codable models.</title>
+      <link>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 UTC</pubDate>
+      
+      <guid>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</guid>
+      <description>&lt;p&gt;&lt;code&gt;Codable&lt;/code&gt; is a great protocol for automating simple model persistence, but it lacks support for any kind of versioning or migrating the data from older versions.&lt;/p&gt;
+
+&lt;p&gt;You can, of course, implement custom &lt;code&gt;Codable&lt;/code&gt; adherence and throw in a bunch of if statements and manual decoding to achieve this goal, but isn&amp;rsquo;t that kind of killing the main selling point of &lt;code&gt;Codable&lt;/code&gt;?&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at an idea that adds Versoning yet still leverages derived &lt;code&gt;Codable&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Straighforward Data Snapshots</title>
       <link>http://merowing.info/2019/07/straighforward-data-snapshots/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 UTC</pubDate>
@@ -319,26 +334,6 @@
 &lt;p&gt;Many of us already write unit tests and run continuous integration servers, we can also leverage great tools like &lt;a href=&#34;https://github.com/danger/danger#what-is-danger&#34;&gt;Danger&lt;/a&gt; to easily add some checks to the pull requests.&lt;/p&gt;
 
 &lt;p&gt;If we&amp;rsquo;d like to prevent some common mistakes from appearing in the repo in the first place, we can use &lt;strong&gt;pre-commit&lt;/strong&gt; hook.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Logging in Swift</title>
-      <link>http://merowing.info/2016/07/logging-in-swift/</link>
-      <pubDate>Wed, 13 Jul 2016 17:36:06 &#43;0200</pubDate>
-      
-      <guid>http://merowing.info/2016/07/logging-in-swift/</guid>
-      <description>&lt;p&gt;Logging is one of the rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&amp;rsquo;t need to.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s integrate Logging in a way that:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Doesn&amp;rsquo;t cause 3rd party dependencies to leak across your codebase&lt;/li&gt;
-&lt;li&gt;Hides the existence of singleton from the codebase&lt;/li&gt;
-&lt;li&gt;Supports writing fully testable code&lt;/li&gt;
-&lt;li&gt;Ability to suppress logs from specific modules or classes&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

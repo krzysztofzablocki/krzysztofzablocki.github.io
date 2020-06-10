@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <title>Krzysztof Zabłocki - How to find retain cycles and memory leaks sooner</title>
+  <title>Krzysztof Zabłocki - Adding support for versioning and migration to your Codable models.</title>
   <link href="http://gmpg.org/xfn/11" rel="profile">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="description" content="Find retain cycles / memory leaks sooner">
+<meta name="description" content="Simple support for supporting versioning and migrations in Codable models.">
 
 <meta name="author" content="Krzysztof Zabłocki">
 
 
-<meta property="og:title" content="How to find retain cycles and memory leaks sooner" />
-<meta property="og:description" content="Find retain cycles / memory leaks sooner" />
+<meta property="og:title" content="Adding support for versioning and migration to your Codable models." />
+<meta property="og:description" content="Simple support for supporting versioning and migrations in Codable models." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/" />
-
-<meta property="og:image" content="https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif" />
+<meta property="og:url" content="http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./" />
 
 
 
-<meta property="og:updated_time" content="2017-10-01 12:30:51 &#43;0200 &#43;0200"/>
+<meta property="og:updated_time" content="2020-06-10 00:00:00 &#43;0000 UTC"/>
 
 
 <meta property="og:site_name" content="Krzysztof Zabłocki" />
@@ -35,12 +33,10 @@
 
 <meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
 <meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
-<meta property="article:published_time" content="2017-10-01 12:30:51 &#43;0200 &#43;0200" />
+<meta property="article:published_time" content="2020-06-10 00:00:00 &#43;0000 UTC" />
 <meta property="article:section" content="post" />
 
 <meta property="article:tag" content="iOS" />
-
-<meta property="article:tag" content="Tools" />
 
 <meta property="article:tag" content="Tutorial" />
 
@@ -48,35 +44,31 @@
 <meta property="fb:app_id" content="406961899319006" />
 
 
-<meta itemprop="name" content="How to find retain cycles and memory leaks sooner">
-<meta itemprop="description" content="Find retain cycles / memory leaks sooner">
+<meta itemprop="name" content="Adding support for versioning and migration to your Codable models.">
+<meta itemprop="description" content="Simple support for supporting versioning and migrations in Codable models.">
 
 
-
-<meta itemprop="image" content="https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif">
 
 
 
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="82">
+<meta itemprop="wordCount" content="587">
+
+
+<meta name="twitter:card" content="summary"/>
 
 
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image:src" content="https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo.gif"/>
-
-
-
-<meta name="twitter:title" content="How to find retain cycles and memory leaks sooner"/>
-<meta name="twitter:description" content="Find retain cycles / memory leaks sooner"/>
+<meta name="twitter:title" content="Adding support for versioning and migration to your Codable models."/>
+<meta name="twitter:description" content="Simple support for supporting versioning and migrations in Codable models."/>
 <meta name="twitter:site" content="@merowing_"/>
 <meta name="twitter:creator" content="@merowing_"/>
 
 
 
-  <link rel="canonical" href="http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/">
+  <link rel="canonical" href="http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./">
 
   <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
   <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
@@ -138,9 +130,9 @@
     <div class="post p2 p-responsive wrap" role="main">
         <div class="measure">
             <div class="post-header mb2">
-                <h1 class="h2 py2">How to find retain cycles and memory leaks sooner</h1>
+                <h1 class="h2 py2">Adding support for versioning and migration to your Codable models.</h1>
                 
-                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>1 minute read</em></span>
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
                 
                 <br>
 
@@ -151,7 +143,7 @@
 
             
             <div class="center playground">
-                <a href="https://github.com/krzysztofzablocki/LifetimeTracker">
+                <a href="https://github.com/krzysztofzablocki/Versionable">
                     <img src="http://merowing.info/2015/01/github.jpg"/>
                     <span>Source Code on GitHub.</span>
                 </a>
@@ -160,23 +152,117 @@
             
 
             <article class="post-content">
-                <p><a href="https://github.com/krzysztofzablocki/LifetimeTracker">
-<figure class="center">
-    
-        <img src="https://raw.githubusercontent.com/krzysztofzablocki/LifetimeTracker/master/Resources/demo-circular.gif"  />
-    
-    
-</figure>
+                <p><code>Codable</code> is a great protocol for automating simple model persistence, but it lacks support for any kind of versioning or migrating the data from older versions.</p>
 
-</a></p>
+<p>You can, of course, implement custom <code>Codable</code> adherence and throw in a bunch of if statements and manual decoding to achieve this goal, but isn&rsquo;t that kind of killing the main selling point of <code>Codable</code>?</p>
 
-<p>LifetimeTracker can surface retain cycle / memory issues right as you develop your application, and it will surface them to you immediately, so you can find them with more ease.</p>
-
-<p>Instruments and Memory Graph Debugger are great, but too many times developers forget to check for issues as they close the feature implementation.</p>
-
-<p>If you use those tools sporadicaly many of the issues they surface will require you to investigate the cause, and cost you a lot of time in the process.</p>
+<p>Let&rsquo;s look at an idea that adds Versoning yet still leverages derived <code>Codable</code>.</p>
 
 <p></p>
+
+<hr />
+
+<h3 id="requirements">Requirements</h3>
+
+<ul>
+<li><p>We want to be able to leverage automatically derived <code>Codable</code> implementation even as our models change over time.</p></li>
+
+<li><p>If we want to persist/decode our models without using versioning support we should be able to (leveraging pure <code>Codable</code> implementation).</p></li>
+
+<li><p>Migrations should be pure functions localized to specific Models and require minimal work to be added.</p></li>
+</ul>
+
+<h3 id="design">Design</h3>
+
+<p>First off <code>Versionable</code> protocol:</p>
+
+<pre><code class="language-swift">public protocol Versionable: Codable {
+ /// Version of this type
+ static var version: Version { get }
+
+ /// List of migrations for this model
+ static var migrations: [Migration] { get }
+
+ /// Persisted Version of this type
+ var version: Version { get }
+}
+</code></pre>
+
+<p>You need to specify the model version number and provide a list of migrations to get to the newest model from any past version.</p>
+
+<p>An example of how you&rsquo;d adhere to this protocol is the following:</p>
+
+<pre><code class="language-swift">private struct Object {
+ let text: String
+ let number: Int
+ let version: Version = Self.version
+}
+
+extension Object: Versionable {
+ static let version: Version = 3
+ static let migrations = [
+ Migration(to: 2, migration: { payload in
+ payload[&quot;text&quot;] = &quot;defaultText&quot;
+ }),
+ Migration(to: 3, migration: { payload in
+ payload[&quot;number&quot;] = (payload[&quot;text&quot;] as? String) == &quot;defaultText&quot; ? 1 : 200
+ }),
+ ]
+}
+</code></pre>
+
+<p>Migrations are pure functions (closures) that modify the JSON <code>Dictionary</code> before the actual decoding, you can add default values or derive values based on previously available data.</p>
+
+<p>Now to decode this model we provide a custom <code>VersionableDecoder</code> that has a single method that implements all our migration logic:</p>
+
+<pre><code class="language-swift">func decode&lt;T&gt;(type: T.Type, from data: Data, usingDecoder decoder: JSONDecoder = .init()) throws -&gt; T where T: Versionable
+</code></pre>
+
+<p>The way this function works is the following:</p>
+
+<ol>
+<li>First checks if the persisted model has the same version as the newest model our app has if so we simply use provided <code>JSONDecoder</code></li>
+<li>If our persisted version doesn&rsquo;t match the current model version we filter out all migrations that apply to that route</li>
+<li>We decode the data payload into a native dictionary and route it through all migrations one by one</li>
+<li>We run updated payload through provided <code>JSONDecoder()</code></li>
+</ol>
+
+<p>The whole function is simply:</p>
+
+<pre><code class="language-swift">func decode&lt;T&gt;(type: T.Type, from data: Data, usingDecoder decoder: JSONDecoder = .init()) throws -&gt; T where T: Versionable {
+ let serializedVersion = try decoder.decode(VersionContainer.self, from: data)
+
+ if serializedVersion.version == type.version {
+ return try decoder.decode(T.self, from: data)
+ }
+
+ var payload = try require(try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])
+
+ type
+ .migrations
+ .filter { serializedVersion.version &lt; $0.to }
+ .forEach {
+ $0.migration(&amp;payload)
+ payload[&quot;version&quot;] = $0.to
+ }
+
+ let data = try JSONSerialization.data(withJSONObject: payload as Any, options: [])
+ return try decoder.decode(T.self, from: data)
+}
+</code></pre>
+
+<p>We can now decode our models while applying all available migrations by doing:</p>
+
+<pre><code class="language-swift">let model = VersionableDecoder().decode(data, type: Object.self)
+</code></pre>
+
+<h3 id="performance-consideration">Performance consideration</h3>
+
+<p>If you want to use something like this in production, I&rsquo;d suggest changing the decoding algorithm slightly to avoid using both <code>JSONDecoder</code> and <code>JSONSerialization</code>.</p>
+
+<p>That can be done by using a decoder that allows you to create <code>Codable</code> from native dictionary directly rather than through <code>Data</code> like <a href="https://github.com/elegantchaos/DictionaryCoding">https://github.com/elegantchaos/DictionaryCoding</a></p>
+
+<p>You can find all source code and few tests for this prototype on my GitHub repo <a href="https://github.com/krzysztofzablocki/Versionable">https://github.com/krzysztofzablocki/Versionable</a></p>
             </article>
             <hr>
                 <p> If you found this article interesting, consider retweeting it. I'm also interested in your thoughts and suggestions for improving it. </p>
@@ -189,8 +275,8 @@
                 <p>Need help with iOS project? <a href="/hire">Let me know.</a></p>
 
                 <p>Share this post:</p>
-                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/"
-                     data-title="How to find retain cycles and memory leaks sooner"></div>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./"
+                     data-title="Adding support for versioning and migration to your Codable models."></div>
             </div>
             <div class="clearfix"></div>
 
@@ -203,9 +289,6 @@
                 
                 
                 <a href="http://merowing.info/tags/ios">iOS</a>
-                
-                ,&nbsp;
-                <a href="http://merowing.info/tags/tools">Tools</a>
                 
                 ,&nbsp;
                 <a href="http://merowing.info/tags/tutorial">Tutorial</a>

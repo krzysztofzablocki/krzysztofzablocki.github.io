@@ -6,10 +6,25 @@
     <description>Recent content in Ios on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://merowing.info/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adding support for versioning and migration to your Codable models.</title>
+      <link>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</guid>
+      <description>&lt;p&gt;&lt;code&gt;Codable&lt;/code&gt; is a great protocol for automating simple model persistence, but it lacks support for any kind of versioning or migrating the data from older versions.&lt;/p&gt;
+
+&lt;p&gt;You can, of course, implement custom &lt;code&gt;Codable&lt;/code&gt; adherence and throw in a bunch of if statements and manual decoding to achieve this goal, but isn&amp;rsquo;t that kind of killing the main selling point of &lt;code&gt;Codable&lt;/code&gt;?&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at an idea that adds Versoning yet still leverages derived &lt;code&gt;Codable&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Straighforward Data Snapshots</title>
