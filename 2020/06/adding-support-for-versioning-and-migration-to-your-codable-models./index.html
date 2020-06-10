@@ -54,7 +54,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="587">
+<meta itemprop="wordCount" content="588">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -199,15 +199,15 @@
 }
 
 extension Object: Versionable {
- static let version: Version = 3
- static let migrations = [
- Migration(to: 2, migration: { payload in
- payload[&quot;text&quot;] = &quot;defaultText&quot;
- }),
- Migration(to: 3, migration: { payload in
- payload[&quot;number&quot;] = (payload[&quot;text&quot;] as? String) == &quot;defaultText&quot; ? 1 : 200
- }),
- ]
+  static let version: Version = 3
+  static let migrations = [
+      Migration(to: 2, migration: { payload in
+          payload[&quot;text&quot;] = &quot;defaultText&quot;
+      }),
+      Migration(to: 3, migration: { payload in
+          payload[&quot;number&quot;] = (payload[&quot;text&quot;] as? String) == &quot;defaultText&quot; ? 1 : 200
+      }),
+  ]
 }
 </code></pre>
 
@@ -229,26 +229,26 @@ extension Object: Versionable {
 
 <p>The whole function is simply:</p>
 
-<pre><code class="language-swift">func decode&lt;T&gt;(type: T.Type, from data: Data, usingDecoder decoder: JSONDecoder = .init()) throws -&gt; T where T: Versionable {
- let serializedVersion = try decoder.decode(VersionContainer.self, from: data)
+<pre><code class="language-swift">func decode&lt;T&gt;(_ type: T.Type, from data: Data, usingDecoder decoder: JSONDecoder = .init()) throws -&gt; T where T: Versionable {
+    let serializedVersion = try decoder.decode(VersionContainer.self, from: data)
 
- if serializedVersion.version == type.version {
- return try decoder.decode(T.self, from: data)
- }
+    if serializedVersion.version == type.version {
+        return try decoder.decode(T.self, from: data)
+    }
 
- var payload = try require(try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])
+    var payload = try require(try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])
 
- type
- .migrations
- .filter { serializedVersion.version &lt; $0.to }
- .forEach {
- $0.migration(&amp;payload)
- payload[&quot;version&quot;] = $0.to
- }
+    type
+        .migrations
+        .filter { serializedVersion.version &lt; $0.to }
+        .forEach {
+            $0.migration(&amp;payload)
+            payload[&quot;version&quot;] = $0.to
+        }
 
- let data = try JSONSerialization.data(withJSONObject: payload as Any, options: [])
- return try decoder.decode(T.self, from: data)
-}
+    let data = try JSONSerialization.data(withJSONObject: payload as Any, options: [])
+    return try decoder.decode(T.self, from: data)
+    }
 </code></pre>
 
 <p>We can now decode our models while applying all available migrations by doing:</p>
