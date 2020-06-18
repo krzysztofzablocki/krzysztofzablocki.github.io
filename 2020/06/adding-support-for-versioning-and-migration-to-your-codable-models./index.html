@@ -54,7 +54,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="588">
+<meta itemprop="wordCount" content="667">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -132,7 +132,7 @@
             <div class="post-header mb2">
                 <h1 class="h2 py2">Adding support for versioning and migration to your Codable models.</h1>
                 
-                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>3 minute read</em></span>
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>4 minute read</em></span>
                 
                 <br>
 
@@ -176,38 +176,49 @@
 
 <p>First off <code>Versionable</code> protocol:</p>
 
-<pre><code class="language-swift">public protocol Versionable: Codable {
- /// Version of this type
- static var version: Version { get }
+<pre><code class="language-swift">public protocol VersionType: CaseIterable, Codable, Comparable, RawRepresentable {}
+public protocol Versionable: Codable {
+    associatedtype Version: VersionType
 
- /// List of migrations for this model
- static var migrations: [Migration] { get }
+    static func migrate(to: Version) -&gt; Migration
+    static var version: Version { get }
 
- /// Persisted Version of this type
- var version: Version { get }
+    /// Persisted Version of this type
+    var version: Version { get }
 }
 </code></pre>
 
-<p>You need to specify the model version number and provide a list of migrations to get to the newest model from any past version.</p>
+<p>You need to provide enumeration for all available model versions + a function that can migrate to each of them.</p>
 
 <p>An example of how you&rsquo;d adhere to this protocol is the following:</p>
 
-<pre><code class="language-swift">private struct Object {
- let text: String
- let number: Int
- let version: Version = Self.version
+<pre><code class="language-swift">private struct Complex {
+    let text: String
+    let number: Int
+    var version: Version = Self.version
 }
 
-extension Object: Versionable {
-  static let version: Version = 3
-  static let migrations = [
-      Migration(to: 2, migration: { payload in
-          payload[&quot;text&quot;] = &quot;defaultText&quot;
-      }),
-      Migration(to: 3, migration: { payload in
-          payload[&quot;number&quot;] = (payload[&quot;text&quot;] as? String) == &quot;defaultText&quot; ? 1 : 200
-      }),
-  ]
+extension Complex: Versionable {
+    enum Version: Int, VersionType {
+        case v1 = 1
+        case v2 = 2
+        case v3 = 3
+    }
+
+    static func migrate(to: Version) -&gt; Migration {
+        switch to {
+        case .v1:
+            return .none
+        case .v2:
+            return .migrate {  payload in
+                payload[&quot;text&quot;] = &quot;defaultText&quot;
+            }
+        case .v3:
+            return .migrate { payload in
+                payload[&quot;number&quot;] = (payload[&quot;text&quot;] as? String) == &quot;defaultText&quot; ? 1 : 200
+            }
+        }
+    }
 }
 </code></pre>
 
@@ -229,8 +240,8 @@ extension Object: Versionable {
 
 <p>The whole function is simply:</p>
 
-<pre><code class="language-swift">func decode&lt;T&gt;(_ type: T.Type, from data: Data, usingDecoder decoder: JSONDecoder = .init()) throws -&gt; T where T: Versionable {
-    let serializedVersion = try decoder.decode(VersionContainer.self, from: data)
+<pre><code class="language-swift">public func decode&lt;T&gt;(_ type: T.Type, from data: Data, usingDecoder decoder: JSONDecoder = .init()) throws -&gt; T where T: Versionable {
+    let serializedVersion = try decoder.decode(VersionContainer&lt;T.Version&gt;.self, from: data)
 
     if serializedVersion.version == type.version {
         return try decoder.decode(T.self, from: data)
@@ -239,16 +250,17 @@ extension Object: Versionable {
     var payload = try require(try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any])
 
     type
-        .migrations
-        .filter { serializedVersion.version &lt; $0.to }
+        .Version
+        .allCases
+        .filter { serializedVersion.version &lt; $0 }
         .forEach {
-            $0.migration(&amp;payload)
-            payload[&quot;version&quot;] = $0.to
+            type.migrate(to: $0)(&amp;payload)
+            payload[&quot;version&quot;] = $0.rawValue
         }
 
     let data = try JSONSerialization.data(withJSONObject: payload as Any, options: [])
     return try decoder.decode(T.self, from: data)
-    }
+}
 </code></pre>
 
 <p>We can now decode our models while applying all available migrations by doing:</p>
@@ -263,6 +275,12 @@ extension Object: Versionable {
 <p>That can be done by using a decoder that allows you to create <code>Codable</code> from native dictionary directly rather than through <code>Data</code> like <a href="https://github.com/elegantchaos/DictionaryCoding">https://github.com/elegantchaos/DictionaryCoding</a></p>
 
 <p>You can find all source code and few tests for this prototype on my GitHub repo <a href="https://github.com/krzysztofzablocki/Versionable">https://github.com/krzysztofzablocki/Versionable</a></p>
+
+<h2 id="special-thanks">Special Thanks</h2>
+
+<p>I&rsquo;ve updated the article to use <code>Enum</code> as a <code>VersionType</code> rather than simple <code>Integer</code>. This idea came from <a href="https://twitter.com/manuelmaly/status/1270832163387248642">Manuel Maly</a> 🙇🙇🙇.</p>
+
+<p>This approach means that if you add a new version of the model the compiler will warn you if you forgot to add migration, compile level errors are always best safety net for human errors.</p>
             </article>
             <hr>
                 <p> If you found this article interesting, consider retweeting it. I'm also interested in your thoughts and suggestions for improving it. </p>
