@@ -73,14 +73,11 @@ var GitHubWidget;
 	};
 
 	GitHubWidget.prototype.loadRepos = function () {
-		var request = this.getURL(this.data.repos_url + "&per_page=100");
+		var pagedURL = this.data.repos_url + '?per_page=100';
+		var request = this.getURL(pagedURL);
+		console.log("pagedURL: " + pagedURL);
 
 		this.profile.repos = JSON.parse(request.responseText);
-
-		// get API urls to generate language stats
-		for (var k in this.profile.repos) {
-			this.url.langs.push(this.profile.repos[k].languages_url);
-		}
 
 		return this.profile.repos;
 	};
@@ -88,52 +85,6 @@ var GitHubWidget;
 	GitHubWidget.prototype.getRepos = function () {
 		return this.profile.repos;
 	}
-
-	// GitHubWidget.prototype.getTopLanguages = function (callback) {
-	// 	var langStats = []; // array of URL strings
-
-	// 	// get URLs with language stats for each repository
-	// 	this.url.langs.forEach(function (apiURL) {
-	// 		var that = this,
-	// 			request = new XMLHttpRequest();
-
-	// 		request.addEventListener('load', function () {
-
-	// 			var repoLangs = JSON.parse(request.responseText);
-	// 			langStats.push(repoLangs);
-
-	// 			if (langStats.length === that.url.langs.length) { // all requests were made
-	// 				calcPopularity.bind(that)();
-	// 			}
-
-	// 		}, false);
-
-	// 		request.open("GET", apiURL, true);
-	// 		request.send(null);
-	// 	}, this);
-
-	// 	// give rank (weights) to the language
-	// 	var calcPopularity = function () {
-	// 		langStats.forEach(function(repoLangs) {
-	// 			var k, sum = 0;
-
-	// 			for (k in repoLangs) {
-	// 				if (repoLangs[k] !== undefined) {
-	// 					sum += repoLangs[k];
-	// 					this.langs[k] = this.langs[k] || 0;
-	// 				}
-	// 			}
-
-	// 			for (k in repoLangs) {
-	// 				if (repoLangs[k] !== undefined) {
-	// 					this.langs[k] += repoLangs[k] / (sum * 1.00); // force floats
-	// 				}
-	// 			}
-	// 		}, this);
-
-	// 		callback();
-	// 	};
-	// };
 
 	GitHubWidget.prototype.render = function (options) {
 		options = options || this.defaultConfig;
@@ -171,11 +122,6 @@ var GitHubWidget;
 
 		// API doesen't return errors, try to built widget
 		var $profile = this.render.profile.bind(this)();
-
-		// this.getTopLanguages((function () {
-		// 	var $langs = this.render.langs.bind(this)();
-		// 	$profile.appendChild($langs);
-		// }).bind(this));
 
 		$root.appendChild($profile);
 
