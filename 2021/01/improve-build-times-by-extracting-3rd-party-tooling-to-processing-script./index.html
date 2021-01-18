@@ -54,7 +54,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="961">
+<meta itemprop="wordCount" content="980">
 
 
 <meta name="twitter:card" content="summary"/>
@@ -188,6 +188,18 @@ Let&rsquo;s put this into context:</p>
 <li>Our repository should never be in a bad state, so no code can exist at any point that is not processed by our tooling</li>
 <li>Since we should never trust humans when a machine can be used, we are going to make sure CI enforces the repository state</li>
 </ul>
+
+<p>If we try commiting and forget to run the tool we&rsquo;ll get an error like (here using <a href="http://gitup.co">GitUp IDE</a>):</p>
+
+
+<figure class="center">
+    
+        <img src="/2020/01/process-error.png"  />
+    
+    
+</figure>
+
+
 
 <h2 id="implementation">Implementation</h2>
 
