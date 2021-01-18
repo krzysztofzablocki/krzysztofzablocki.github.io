@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Krzysztof Zabłocki - Improve build times by extracting 3rd party tooling to processing script.</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="How can you improve build times by extracting 3rd party tooling to a dedicated processing script while maintaining code safety?">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Improve build times by extracting 3rd party tooling to processing script." />
+<meta property="og:description" content="How can you improve build times by extracting 3rd party tooling to a dedicated processing script while maintaining code safety?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./" />
+
+
+
+<meta property="og:updated_time" content="2021-01-18 00:00:00 &#43;0000 UTC"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2021-01-18 00:00:00 &#43;0000 UTC" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Tutorial" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Improve build times by extracting 3rd party tooling to processing script.">
+<meta itemprop="description" content="How can you improve build times by extracting 3rd party tooling to a dedicated processing script while maintaining code safety?">
+
+
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="961">
+
+
+<meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="Improve build times by extracting 3rd party tooling to processing script."/>
+<meta name="twitter:description" content="How can you improve build times by extracting 3rd party tooling to a dedicated processing script while maintaining code safety?"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="http://merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="http://merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/post/">Blog</a>
+<a href="/hire/">Hire Me</a>
+<a href="/speaking/">Speaking</a>
+
+
+</form>
+
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Improve build times by extracting 3rd party tooling to processing script.</h1>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>5 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+            <div class="center playground">
+                <a href="https://gist.github.com/krzysztofzablocki/d7741ed1658cd32aeac0edeaa0cb05b6">
+                    <img src="http://merowing.info/2015/01/github.jpg"/>
+                    <span>Source Code on GitHub.</span>
+                </a>
+            </div>
+            <br/>
+            
+
+            <article class="post-content">
+                <p>A lot has been written about improving Swift compile times, but the compiler and linker are just part of the equation that slows down our development cycle.</p>
+
+<p>Most projects leverage great 3rd party tools like <a href="https://github.com/realm/SwiftLint">SwiftLint</a>, <a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a>, <a href="https://github.com/SwiftGen/SwiftGen">SwiftGen</a>, <a href="https://github.com/nicklockwood/SwiftFormat">SwiftFormat</a> and many more. Leveraging those tools is the right thing to do but we have to be aware that all of those tools come with some time delay for our <code>build -&gt; run</code> development cycle.</p>
+
+<p>We often set those tools to run as build-phases which means they run each time you attempt a build but <strong>none of those tools need to be run each time we build</strong>.</p>
+
+<p>Even tools that generate code we need for our projects like <a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a> or <a href="https://github.com/SwiftGen/SwiftGen">SwiftGen</a> don&rsquo;t need to be re-run unless we made changes in very specific parts of the application.</p>
+
+<p>As an example <a href="http://nytimes.com">New York Times</a> main application leverages a lot of 3rd party and internal tooling, the total time all the tools take is 6s on my (powerful) machine.</p>
+
+<p>Only 6 seconds or as much as 6 seconds?
+Let&rsquo;s put this into context:</p>
+
+<ul>
+<li>I build a project between 200-400 times on an average workday.</li>
+<li>Let&rsquo;s assume 90% of the time we don&rsquo;t need to run those tools with each build.</li>
+<li>We have 30 iOS developers working on the main app</li>
+</ul>
+
+<p>Lower limit: 200 * 6s * 30 * 90* =&gt; <strong>9 hours wasted per day</strong></p>
+
+<p><strong>We are wasting 45 hours per week</strong>, if we can improve that it&rsquo;s almost like hiring a new full-time developer, except it&rsquo;s free.</p>
+
+<p>Let&rsquo;s look at how we can improve this with a process change a dash of <code>bash</code> shell programming.</p>
+
+<p></p>
+
+<h2 id="establishing-a-new-process">Establishing a new process</h2>
+
+<p>If we are not going to run those tools each build we need to guarantee a few things:</p>
+
+<ul>
+<li>We need a way to run all our tooling manually and it needs to be consistent since we have a lot of different tools</li>
+<li>Our repository should never be in a bad state, so no code can exist at any point that is not processed by our tooling</li>
+<li>Since we should never trust humans when a machine can be used, we are going to make sure CI enforces the repository state</li>
+</ul>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>We are going to create a shell script that can be run manually by calling <code>./Scripts/process.sh</code>. It will also be a part of our <a href="http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/">pre-commit hook</a></p>
+
+<p>First, let&rsquo;s set the script up with 2 modes:</p>
+
+<ul>
+<li>fail-on-errors -&gt; any error will cause the script to exit with failure code, used by CI / pre-commit</li>
+<li>local -&gt; manual developer runs, we don&rsquo;t fail script and we can use this mode to add some console coloring &amp; extra debug information if need be</li>
+</ul>
+
+<pre><code class="language-bash">#!/bin/zsh
+
+if [[ -n &quot;$CI&quot; ]] || [[ $1 == &quot;--fail-on-errors&quot; ]] ; then
+ FAIL_ON_ERRORS=true
+ echo &quot;Running in --fail-on-errors mode&quot;
+ ERROR_START=&quot;&quot;
+ COLOR_END=&quot;&quot;
+ INFO_START=&quot;&quot;
+else
+ echo &quot;Running in local mode&quot;
+ ERROR_START=&quot;\e[31m&quot;
+ COLOR_END=&quot;\e[0m&quot;
+ INFO_START=&quot;\e[34m&quot;
+fi
+</code></pre>
+
+<p><br/>
+Next, let&rsquo;s configure some required variables for our project and the most common tooling:</p>
+
+<pre><code class="language-bash">final_status=0
+
+# :- is like swift's ?: so default fallback value
+PODS_ROOT=${PODS_ROOT:-&quot;Pods&quot;}
+PROJECT_DIR=${PROJECT_DIR:-$(pwd)}
+# Needed for SwiftGen
+export PRODUCT_MODULE_NAME=${PRODUCT_MODULE_NAME:-&quot;OurProjectModuleName&quot;}
+
+if [[ `xcode-select -p` =~ CommandLineTools ]] ; then 
+ echo &quot;${ERROR_START}Your toolchain won't run Swiftlint or Sourcery. Use\n sudo xcode-select -s /path/to/Xcode.app\nto fix this.${COLOR_END}&quot;
+fi
+
+</code></pre>
+
+<h2 id="checking-if-an-external-tool-has-done-anything-to-our-project">Checking if an external tool has done anything to our project</h2>
+
+<p>Now we are ready to start running our tools but the issue we&rsquo;ll immediately run into is the fact that each tool might be doing its job in many different ways:</p>
+
+<ul>
+<li>Files might be added/changed e.g. SwiftGen, Sourcery</li>
+<li>Messages might be printed on stdout e.g. SwiftLint</li>
+<li>Only the status code will be returned</li>
+</ul>
+
+<p>How can we account for all of that?</p>
+
+<h3 id="file-changes">File changes</h3>
+
+<p>We can leverage <code>git diff</code> to verify if anything was changed in our repo:</p>
+
+<pre><code class="language-bash"># execute like this `process name command`
+function process()
+ local initial_git_diff=`git diff --no-color`
+ eval &quot;$2&quot;
+ if [ &quot;$FAIL_ON_ERRORS&quot; = &quot;true&quot; ] &amp;&amp; [[ &quot;$initial_git_diff&quot; != `git diff --no-color` ]]
+ then
+ echo &quot;${ERROR_START}$1 generates git changes, run './Scripts/process.sh' and review the changes${COLOR_END}&quot;
+ final_status=1
+ fi
+}
+
+process &quot;Sourcery&quot; &quot;${PODS_ROOT}/Sourcery/bin/sourcery --prune --quiet&quot;
+</code></pre>
+
+<h3 id="standard-output">Standard output</h3>
+
+<p>Our processing function simply needs to see if output was generated:</p>
+
+<pre><code class="language-bash">local output=$(eval &quot;$2&quot;)
+if [[ ! -z &quot;$output&quot; ]]
+ then ...
+
+process_output &quot;SwiftLint&quot; &quot;${PODS_ROOT}/SwiftLint/swiftlint lint --quiet&quot;
+</code></pre>
+
+<h3 id="status-code">Status code</h3>
+
+<p>Simply checking the status code after executing the command should suffice:</p>
+
+<pre><code class="language-bash">eval &quot;$2&quot;
+local return_value=$?
+
+process_return_code &quot;MyCustomRubyScript&quot; &quot;ruby Scripts/myScript.rb MyProject.xcodeproj&quot;
+</code></pre>
+
+<h2 id="final-tweaks">Final tweaks</h2>
+
+<h3 id="colors-and-timing">Colors and timing</h3>
+
+<p>Let&rsquo;s improve information printed by the script by adding timing and coloring to our process functions:</p>
+
+<pre><code class="language-bash">function process() {
+ echo &quot;\n${INFO_START}# Running $1 #${COLOR_END}&quot;
+ local initial_git_diff=`git diff --no-color`
+ local start=`date +%s`
+ 
+ eval &quot;$2&quot;
+
+ if [ &quot;$FAIL_ON_ERRORS&quot; = &quot;true&quot; ] &amp;&amp; [[ &quot;$initial_git_diff&quot; != `git diff --no-color` ]]
+ then
+ echo &quot;${ERROR_START}$1 generates git changes, run './Scripts/process.sh' and review the changes${COLOR_END}&quot;
+ final_status=1
+ fi
+
+ local end=`date +%s`
+ echo Execution time was `expr $end - $start` seconds.
+}
+</code></pre>
+
+<h3 id="final-status-check">Final status check</h3>
+
+<pre><code class="language-bash">if [[ $final_status -gt 0 ]]
+then
+ echo &quot;\n${ERROR_START}Changes required. Run './Scripts/process.sh' and review the changes${COLOR_END}&quot;
+fi
+
+exit $final_status
+</code></pre>
+
+<h3 id="connecting-to-pre-commit-and-ci">Connecting to pre-commit and CI</h3>
+
+<p>In our pre-commit and CI scripts we simply run it in failure mode:</p>
+
+<pre><code class="language-bash">./Scripts/process.sh --fail-on-errors
+failed=$?
+exit $failed
+</code></pre>
+
+<h2 id="summary">Summary</h2>
+
+<p><a href="https://gist.github.com/krzysztofzablocki/d7741ed1658cd32aeac0edeaa0cb05b6">Final script you can use for your workflow</a></p>
+
+<p>We have been using this approach for a few years now and it has saved us thousands of work-hours</p>
+
+<p>During normal development, we don&rsquo;t run those processing tools, when we change code that requires them we simply run it from the command line (or desktop shortcut if you are into that).</p>
+
+<p>We can sleep peacefully because when we try to commit code our pre-commit hook runs it for us and lets us know if there were any changes that we need to review before proceeding. Even if someone messes up their pre-commit hook setup there is always CI ensuring they fix it.</p>
+            </article>
+            <hr>
+                <p> If you found this article interesting, consider retweeting it. I'm also interested in your thoughts and suggestions for improving it. </p>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+               data-size="medium"></a>
+            <br/>
+
+            
+            <div class="social-icons">
+                <p>Need help with iOS project? <a href="/hire">Let me know.</a></p>
+
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./"
+                     data-title="Improve build times by extracting 3rd party tooling to processing script."></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="http://merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="http://merowing.info/tags/tutorial">Tutorial</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2017<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
+

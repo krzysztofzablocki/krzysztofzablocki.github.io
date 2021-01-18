@@ -20,7 +20,7 @@
 
 
 
-<meta property="og:updated_time" content="2020-06-10 00:00:00 &#43;0000 UTC"/>
+<meta property="og:updated_time" content="2021-01-18 00:00:00 &#43;0000 UTC"/>
 
 
 <meta property="og:site_name" content="Krzysztof Zabłocki" />
@@ -33,7 +33,7 @@
 
 <meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
 <meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
-<meta property="article:published_time" content="2020-06-10 00:00:00 &#43;0000 UTC" />
+<meta property="article:published_time" content="2021-01-18 00:00:00 &#43;0000 UTC" />
 <meta property="article:section" content="post" />
 
 
@@ -128,6 +128,58 @@
                 <div class="posts">
                     
                         
+                        
+                            <div class="post">
+    <a class="post-link" href="http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./">
+
+        
+        <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>5 minute read</em></span>
+        
+
+        <div class="clearfix"></div>
+
+        <h3 class="h2 post-title">Improve build times by extracting 3rd party tooling to processing script. </h3></a>
+
+    
+
+    
+
+    <br/>
+
+    <p class="post-summary"><p>A lot has been written about improving Swift compile times, but the compiler and linker are just part of the equation that slows down our development cycle.</p>
+
+<p>Most projects leverage great 3rd party tools like <a href="https://github.com/realm/SwiftLint">SwiftLint</a>, <a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a>, <a href="https://github.com/SwiftGen/SwiftGen">SwiftGen</a>, <a href="https://github.com/nicklockwood/SwiftFormat">SwiftFormat</a> and many more. Leveraging those tools is the right thing to do but we have to be aware that all of those tools come with some time delay for our <code>build -&gt; run</code> development cycle.</p>
+
+<p>We often set those tools to run as build-phases which means they run each time you attempt a build but <strong>none of those tools need to be run each time we build</strong>.</p>
+
+<p>Even tools that generate code we need for our projects like <a href="https://github.com/krzysztofzablocki/Sourcery">Sourcery</a> or <a href="https://github.com/SwiftGen/SwiftGen">SwiftGen</a> don&rsquo;t need to be re-run unless we made changes in very specific parts of the application.</p>
+
+<p>As an example <a href="http://nytimes.com">New York Times</a> main application leverages a lot of 3rd party and internal tooling, the total time all the tools take is 6s on my (powerful) machine.</p>
+
+<p>Only 6 seconds or as much as 6 seconds?
+Let&rsquo;s put this into context:</p>
+
+<ul>
+<li>I build a project between 200-400 times on an average workday.</li>
+<li>Let&rsquo;s assume 90% of the time we don&rsquo;t need to run those tools with each build.</li>
+<li>We have 30 iOS developers working on the main app</li>
+</ul>
+
+<p>Lower limit: 200 * 6s * 30 * 90* =&gt; <strong>9 hours wasted per day</strong></p>
+
+<p><strong>We are wasting 45 hours per week</strong>, if we can improve that it&rsquo;s almost like hiring a new full-time developer, except it&rsquo;s free.</p>
+
+<p>Let&rsquo;s look at how we can improve this with a process change a dash of <code>bash</code> shell programming.</p>
+
+<p></p></p>
+
+    
+    <div class="read-more-link">
+        <a href="/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./">Read More…</a>
+    </div>
+    
+</div>
+
                         
                             <div class="post">
     <a class="post-link" href="http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./">
@@ -477,52 +529,6 @@
     
     <div class="read-more-link">
         <a href="/2017/01/seniority/">Read More…</a>
-    </div>
-    
-</div>
-
-                        
-                            <div class="post">
-    <a class="post-link" href="http://merowing.info/2017/01/testing-ios-apps/">
-
-        
-        <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>10 minute read</em></span>
-        
-
-        <div class="clearfix"></div>
-
-        <h3 class="h2 post-title">Testing iOS Apps </h3></a>
-
-    
-
-    
-
-    <br/>
-
-    <p class="post-summary"><figure class="center">
-    
-        <img src="/2017/01/testing.png"  />
-    
-    
-</figure>
-
-
-
-<p>Writing tests in iOS apps is a touchy subject. Not everyone is so privileged to be able to write tests full-time, for different reasons.</p>
-
-<p>Some people have full control over their development process and choose not to write tests, maybe because they have had a bad experience with it or they just don&rsquo;t see the value in them.</p>
-
-<p>I would argue that if you are part of a smaller team, tests can even be more helpful than in big corporations.</p>
-
-<p>A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.</p>
-
-<p>Let us look at practices and tips for writing maintainable tests in your iOS Apps.</p>
-
-<p></p></p>
-
-    
-    <div class="read-more-link">
-        <a href="/2017/01/testing-ios-apps/">Read More…</a>
     </div>
     
 </div>

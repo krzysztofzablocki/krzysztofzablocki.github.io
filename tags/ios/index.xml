@@ -6,10 +6,44 @@
     <description>Recent content in Ios on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://merowing.info/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Improve build times by extracting 3rd party tooling to processing script.</title>
+      <link>http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</link>
+      <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</guid>
+      <description>&lt;p&gt;A lot has been written about improving Swift compile times, but the compiler and linker are just part of the equation that slows down our development cycle.&lt;/p&gt;
+
+&lt;p&gt;Most projects leverage great 3rd party tools like &lt;a href=&#34;https://github.com/realm/SwiftLint&#34;&gt;SwiftLint&lt;/a&gt;, &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt;, &lt;a href=&#34;https://github.com/SwiftGen/SwiftGen&#34;&gt;SwiftGen&lt;/a&gt;, &lt;a href=&#34;https://github.com/nicklockwood/SwiftFormat&#34;&gt;SwiftFormat&lt;/a&gt; and many more. Leveraging those tools is the right thing to do but we have to be aware that all of those tools come with some time delay for our &lt;code&gt;build -&amp;gt; run&lt;/code&gt; development cycle.&lt;/p&gt;
+
+&lt;p&gt;We often set those tools to run as build-phases which means they run each time you attempt a build but &lt;strong&gt;none of those tools need to be run each time we build&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Even tools that generate code we need for our projects like &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt; or &lt;a href=&#34;https://github.com/SwiftGen/SwiftGen&#34;&gt;SwiftGen&lt;/a&gt; don&amp;rsquo;t need to be re-run unless we made changes in very specific parts of the application.&lt;/p&gt;
+
+&lt;p&gt;As an example &lt;a href=&#34;http://nytimes.com&#34;&gt;New York Times&lt;/a&gt; main application leverages a lot of 3rd party and internal tooling, the total time all the tools take is 6s on my (powerful) machine.&lt;/p&gt;
+
+&lt;p&gt;Only 6 seconds or as much as 6 seconds?
+Let&amp;rsquo;s put this into context:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I build a project between 200-400 times on an average workday.&lt;/li&gt;
+&lt;li&gt;Let&amp;rsquo;s assume 90% of the time we don&amp;rsquo;t need to run those tools with each build.&lt;/li&gt;
+&lt;li&gt;We have 30 iOS developers working on the main app&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lower limit: 200 * 6s * 30 * 90* =&amp;gt; &lt;strong&gt;9 hours wasted per day&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;We are wasting 45 hours per week&lt;/strong&gt;, if we can improve that it&amp;rsquo;s almost like hiring a new full-time developer, except it&amp;rsquo;s free.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at how we can improve this with a process change a dash of &lt;code&gt;bash&lt;/code&gt; shell programming.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Adding support for versioning and migration to your Codable models.</title>
