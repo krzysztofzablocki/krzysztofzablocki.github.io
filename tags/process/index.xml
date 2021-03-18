@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Process on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/process/</link>
+    <link>https://www.merowing.info/tags/process/</link>
     <description>Recent content in Process on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 15 Mar 2021 10:43:04 +0100</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/process/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/process/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The Decade in Review</title>
-      <link>http://merowing.info/2021/03/the-decade-in-review/</link>
+      <link>https://www.merowing.info/2021/03/the-decade-in-review/</link>
       <pubDate>Mon, 15 Mar 2021 10:43:04 +0100</pubDate>
       
-      <guid>http://merowing.info/2021/03/the-decade-in-review/</guid>
+      <guid>https://www.merowing.info/2021/03/the-decade-in-review/</guid>
       <description>&lt;p&gt;Lately, I&amp;rsquo;ve spent a significant amount of time thinking about my career: what I&amp;rsquo;ve done so far and what might lie ahead for me.&lt;/p&gt;
 
 &lt;p&gt;To gain some perspective, I&amp;rsquo;ve decided to journal some of the things I&amp;rsquo;ve done over the last decade, and to share that with you.&lt;/p&gt;
@@ -28,10 +28,10 @@
     
     <item>
       <title>Seniority</title>
-      <link>http://merowing.info/2017/01/seniority/</link>
+      <link>https://www.merowing.info/2017/01/seniority/</link>
       <pubDate>Wed, 18 Jan 2017 15:43:04 +0100</pubDate>
       
-      <guid>http://merowing.info/2017/01/seniority/</guid>
+      <guid>https://www.merowing.info/2017/01/seniority/</guid>
       <description>&lt;p&gt;People use different words to classify Engineer skill, some companies give you more senior role just based on a number of years you have been working there, but what does it mean to be Senior?&lt;/p&gt;
 
 &lt;p&gt;In this article, I composed a complete and final list of API&amp;rsquo;s that you need to know to classify yourself as Senior Engineer.&lt;/p&gt;
@@ -45,13 +45,13 @@
     
     <item>
       <title>Programming</title>
-      <link>http://merowing.info/2016/01/programming/</link>
+      <link>https://www.merowing.info/2016/01/programming/</link>
       <pubDate>Thu, 14 Jan 2016 16:21:06 +0100</pubDate>
       
-      <guid>http://merowing.info/2016/01/programming/</guid>
+      <guid>https://www.merowing.info/2016/01/programming/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/01/programming.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/01/programming.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -69,10 +69,10 @@
     
     <item>
       <title>Playgrounds for Objective C</title>
-      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
+      <link>https://www.merowing.info/2014/10/playgrounds-for-objective-c/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
+      <guid>https://www.merowing.info/2014/10/playgrounds-for-objective-c/</guid>
       <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
 
 &lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
@@ -111,10 +111,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>How do I work?</title>
-      <link>http://merowing.info/2014/10/how-do-i-work/</link>
+      <link>https://www.merowing.info/2014/10/how-do-i-work/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/10/how-do-i-work/</guid>
+      <guid>https://www.merowing.info/2014/10/how-do-i-work/</guid>
       <description>&lt;p&gt;I’ve been programming for 20 years now, doing commercial work for the last 8.&lt;/p&gt;
 
 &lt;p&gt;Over the years I’ve been exposed to different ideas and experiences that have constantly affected the way I work.&lt;/p&gt;

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Clean Code on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/clean-code/</link>
+    <link>https://www.merowing.info/tags/clean-code/</link>
     <description>Recent content in Clean Code on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 27 Aug 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Writing less code</title>
-      <link>http://merowing.info/2014/08/writing-less-code/</link>
+      <link>https://www.merowing.info/2014/08/writing-less-code/</link>
       <pubDate>Wed, 27 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/08/writing-less-code/</guid>
+      <guid>https://www.merowing.info/2014/08/writing-less-code/</guid>
       <description>&lt;p&gt;What are some of my favorite techniques for cleaner and more readable code?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Refactoring tricks</title>
-      <link>http://merowing.info/2014/03/refactoring-tricks/</link>
+      <link>https://www.merowing.info/2014/03/refactoring-tricks/</link>
       <pubDate>Mon, 24 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/03/refactoring-tricks/</guid>
+      <guid>https://www.merowing.info/2014/03/refactoring-tricks/</guid>
       <description>&lt;p&gt;I believe in boy scout rule: &lt;em&gt;&amp;lsquo;Always leave the campground cleaner than you found it.&amp;rsquo;&lt;/em&gt;, that&amp;rsquo;s why I constantly refactor my code so it&amp;rsquo;s clean and tidy.&lt;/p&gt;
 
 &lt;p&gt;What are few less-known refactoring tricks I use to simplify code and make it more readable?&lt;/p&gt;
@@ -37,10 +37,10 @@
     
     <item>
       <title>7 most common code issues</title>
-      <link>http://merowing.info/2014/03/7-most-common-code-issues/</link>
+      <link>https://www.merowing.info/2014/03/7-most-common-code-issues/</link>
       <pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/03/7-most-common-code-issues/</guid>
+      <guid>https://www.merowing.info/2014/03/7-most-common-code-issues/</guid>
       <description>&lt;p&gt;What are top 7 most common issues I find doing Code Reviews?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

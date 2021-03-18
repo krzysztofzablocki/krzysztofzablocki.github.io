@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tip on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/tip/</link>
+    <link>https://www.merowing.info/tags/tip/</link>
     <description>Recent content in Tip on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Dec 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/tip/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/tip/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Quick tip for Interface Builder</title>
-      <link>http://merowing.info/2012/12/quick-tip-for-interface-builder/</link>
+      <link>https://www.merowing.info/2012/12/quick-tip-for-interface-builder/</link>
       <pubDate>Wed, 26 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2012/12/quick-tip-for-interface-builder/</guid>
+      <guid>https://www.merowing.info/2012/12/quick-tip-for-interface-builder/</guid>
       <description>&lt;p&gt;Do you use Interface Builder ? Even if you don’t like IB, read this short tip and referenced articles.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>How to check if user touched anything in your ios app</title>
-      <link>http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app/</link>
+      <link>https://www.merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app/</link>
       <pubDate>Mon, 05 Mar 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app/</guid>
+      <guid>https://www.merowing.info/2012/03/how-to-check-if-user-touched-anything-in-your-ios-app/</guid>
       <description>&lt;p&gt;So you want to know when user is interacting with your app and you don’t really care which screen is he using or what is he doing.&lt;/p&gt;
 
 &lt;p&gt;You only want to know when he touches your app, for example: you make a game and you would like to automatically go into pause mode if user didn’t use your app for N minutes…&lt;/p&gt;

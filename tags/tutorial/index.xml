@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorial on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/tutorial/</link>
+    <link>https://www.merowing.info/tags/tutorial/</link>
     <description>Recent content in Tutorial on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 18 Jan 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Improve build times by extracting 3rd party tooling to processing script.</title>
-      <link>http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</link>
+      <link>https://www.merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</link>
       <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</guid>
+      <guid>https://www.merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</guid>
       <description>&lt;p&gt;A lot has been written about improving Swift compile times, but the compiler and linker are just part of the equation that slows down our development cycle.&lt;/p&gt;
 
 &lt;p&gt;Most projects leverage great 3rd party tools like &lt;a href=&#34;https://github.com/realm/SwiftLint&#34;&gt;SwiftLint&lt;/a&gt;, &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt;, &lt;a href=&#34;https://github.com/SwiftGen/SwiftGen&#34;&gt;SwiftGen&lt;/a&gt;, &lt;a href=&#34;https://github.com/nicklockwood/SwiftFormat&#34;&gt;SwiftFormat&lt;/a&gt; and many more. Leveraging those tools is the right thing to do but we have to be aware that all of those tools come with some time delay for our &lt;code&gt;build -&amp;gt; run&lt;/code&gt; development cycle.&lt;/p&gt;
@@ -47,10 +47,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Adding support for versioning and migration to your Codable models.</title>
-      <link>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</link>
+      <link>https://www.merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</link>
       <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</guid>
+      <guid>https://www.merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</guid>
       <description>&lt;p&gt;&lt;code&gt;Codable&lt;/code&gt; is a great protocol for automating simple model persistence, but it lacks support for any kind of versioning or migrating the data from older versions.&lt;/p&gt;
 
 &lt;p&gt;You can, of course, implement custom &lt;code&gt;Codable&lt;/code&gt; adherence and throw in a bunch of if statements and manual decoding to achieve this goal, but isn&amp;rsquo;t that kind of killing the main selling point of &lt;code&gt;Codable&lt;/code&gt;?&lt;/p&gt;
@@ -62,10 +62,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Straighforward Data Snapshots</title>
-      <link>http://merowing.info/2019/07/straighforward-data-snapshots/</link>
+      <link>https://www.merowing.info/2019/07/straighforward-data-snapshots/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2019/07/straighforward-data-snapshots/</guid>
+      <guid>https://www.merowing.info/2019/07/straighforward-data-snapshots/</guid>
       <description>&lt;p&gt;If your app has a lot of content, chances are that by the time you get a chance to work on a bug report, the data that the bug appeared on will be long gone.&lt;/p&gt;
 
 &lt;p&gt;Here are some tidbits on how I created a simple solution for that problem at &lt;a href=&#34;http://nytimes.com&#34;&gt;The New York Times&lt;/a&gt;, it&amp;rsquo;s based on a simple idea.&lt;/p&gt;
@@ -75,10 +75,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Finding exact difference between 2 instances</title>
-      <link>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
+      <link>https://www.merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
       <pubDate>Wed, 18 Oct 2017 12:30:51 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
+      <guid>https://www.merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
       <description>&lt;p&gt;Have you ever written tests? Usually, they use equality asserts, e.g. XCTAssertEqual, what happens if the object isn&amp;rsquo;t equal? Xcode throws a wall of text at you:&lt;/p&gt;
 
 
@@ -108,10 +108,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>How to find retain cycles and memory leaks sooner</title>
-      <link>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
+      <link>https://www.merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
       <pubDate>Sun, 01 Oct 2017 12:30:51 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
+      <guid>https://www.merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/LifetimeTracker&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
@@ -133,10 +133,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Stop weak-strong dance</title>
-      <link>http://merowing.info/2017/04/stop-weak-strong-dance/</link>
+      <link>https://www.merowing.info/2017/04/stop-weak-strong-dance/</link>
       <pubDate>Mon, 03 Apr 2017 16:52:42 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/04/stop-weak-strong-dance/</guid>
+      <guid>https://www.merowing.info/2017/04/stop-weak-strong-dance/</guid>
       <description>&lt;p&gt;Closures in Swift are extremely useful, they are interchangeable with functions and that creates a lot of opportunities for useful use-cases. One thing we have to be careful when using them is to avoid &lt;strong&gt;retain cycles&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
@@ -148,14 +148,14 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>How hard would it be to adjust your iOS app in real-time?</title>
-      <link>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
+      <link>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
       <pubDate>Mon, 02 Jan 2017 17:21:09 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
+      <guid>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Traits&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/01/demo.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/01/demo.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -175,10 +175,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Logging in Swift</title>
-      <link>http://merowing.info/2016/07/logging-in-swift/</link>
+      <link>https://www.merowing.info/2016/07/logging-in-swift/</link>
       <pubDate>Wed, 13 Jul 2016 17:36:06 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/07/logging-in-swift/</guid>
+      <guid>https://www.merowing.info/2016/07/logging-in-swift/</guid>
       <description>&lt;p&gt;Logging is one of the rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&amp;rsquo;t need to.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s integrate Logging in a way that:&lt;/p&gt;
@@ -195,10 +195,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Improve your iOS Architecture with FlowControllers</title>
-      <link>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</link>
+      <link>https://www.merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</link>
       <pubDate>Tue, 05 Jan 2016 11:23:46 +0100</pubDate>
       
-      <guid>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</guid>
+      <guid>https://www.merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</guid>
       <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
 
 &lt;p&gt;Why?&lt;/p&gt;
@@ -208,16 +208,16 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Details matter - harnessing the power of Core Animation</title>
-      <link>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</link>
+      <link>https://www.merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</link>
       <pubDate>Wed, 16 Dec 2015 22:23:13 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</guid>
+      <guid>https://www.merowing.info/2015/12/details-matter---harnessing-the-power-of-coreanimation/</guid>
       <description>&lt;p&gt;A friend showed me animations from &lt;a href=&#34;https://medium.com/bridge-collection/improve-the-payment-experience-with-animations-3d1b0a9b810e#.15j1me98l&#34;&gt;Stripe Checkout&lt;/a&gt; and asked: &amp;ldquo;how could we implement that on iOS?&amp;rdquo;&lt;/p&gt;
 
 &lt;p&gt;Quite simply, Core Animation is very powerful and if one learns how to harness that power, they do not need write a lot of code.&lt;/p&gt;
 
 &lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2015/12/details.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -225,12 +225,12 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>The beauty of imperfection</title>
-      <link>http://merowing.info/2015/11/the-beauty-of-imperfection/</link>
+      <link>https://www.merowing.info/2015/11/the-beauty-of-imperfection/</link>
       <pubDate>Tue, 24 Nov 2015 12:29:37 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/11/the-beauty-of-imperfection/</guid>
+      <guid>https://www.merowing.info/2015/11/the-beauty-of-imperfection/</guid>
       <description>&lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/12/dot-animated.mov&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2015/12/dot-animated.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 &lt;p&gt;Perfection is not something one can truly achieve, so it’s very smart that one of the best meditation services called &lt;a href=&#34;https://www.headspace.com&#34;&gt;Headspace&lt;/a&gt; is using an imperfect dot as their brand logo.&lt;/p&gt;
@@ -244,12 +244,12 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Prototyping floating burger menu with CAShapeLayer</title>
-      <link>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
+      <link>https://www.merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
       <pubDate>Wed, 04 Nov 2015 13:29:44 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
+      <guid>https://www.merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
       <description>&lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 &lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
@@ -259,10 +259,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>A Swift introduction into fitness</title>
-      <link>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
+      <link>https://www.merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
       <pubDate>Tue, 30 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
+      <guid>https://www.merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
       <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
 
 &lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
@@ -285,10 +285,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Behaviours and Xcode 6</title>
-      <link>http://merowing.info/2014/06/behaviours-and-xcode-6/</link>
+      <link>https://www.merowing.info/2014/06/behaviours-and-xcode-6/</link>
       <pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/06/behaviours-and-xcode-6/</guid>
+      <guid>https://www.merowing.info/2014/06/behaviours-and-xcode-6/</guid>
       <description>&lt;p&gt;Last time I&amp;rsquo;ve written about Behaviours in &lt;a href=&#34;http://www.objc.io/issue-13/behaviors.html&#34;&gt;objc.io&lt;/a&gt; Architecture Series.&lt;/p&gt;
 
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
@@ -299,21 +299,21 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>iOS App Architecture, Part 2: Data parsing</title>
-      <link>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
+      <link>https://www.merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
       <pubDate>Thu, 03 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
+      <guid>https://www.merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>iOS App Architecture, Part 1: Setting up</title>
-      <link>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
+      <link>https://www.merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
       <pubDate>Fri, 14 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
+      <guid>https://www.merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
       <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -321,10 +321,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Expanded use of asserts</title>
-      <link>http://merowing.info/2013/07/expanded-use-of-asserts/</link>
+      <link>https://www.merowing.info/2013/07/expanded-use-of-asserts/</link>
       <pubDate>Wed, 03 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2013/07/expanded-use-of-asserts/</guid>
+      <guid>https://www.merowing.info/2013/07/expanded-use-of-asserts/</guid>
       <description>&lt;p&gt;Do you use assertions in your code? What for? How do you handle release builds ?&lt;/p&gt;
 
 &lt;p&gt;There is a better way than NSAssert&amp;hellip;&lt;/p&gt;
@@ -334,13 +334,13 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>iOS Game with Interface Builder</title>
-      <link>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</link>
+      <link>https://www.merowing.info/2013/04/learn-ios-game-dev-level-0/</link>
       <pubDate>Thu, 11 Apr 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2013/04/learn-ios-game-dev-level-0/</guid>
+      <guid>https://www.merowing.info/2013/04/learn-ios-game-dev-level-0/</guid>
       <description>&lt;figure &gt;
     
-        &lt;img src=&#34;http://merowing.info/2013/04/clone-small.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2013/04/clone-small.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -354,17 +354,17 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Pinch to reveal animation, like in Boeing Milestones</title>
-      <link>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
+      <link>https://www.merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
+      <guid>https://www.merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://itunes.apple.com/us/app/boeing-milestones/id510294916?mt=8&#34;&gt;Boeing made a nice app for iPad&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I was shown this app and asked if it’s hard to do this pinch to reveal animation.
 It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
 
 &lt;video width=&#34;100%&#34; controls&gt;
-  &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;
 
@@ -373,10 +373,10 @@ Your browser does not support the video tag.
     
     <item>
       <title>Drawing smooth lines with cocos2d ios inspired by Paper</title>
-      <link>http://merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</link>
+      <link>https://www.merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</link>
       <pubDate>Mon, 23 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</guid>
+      <guid>https://www.merowing.info/2012/04/drawing-smooth-lines-with-cocos2d-ios-inspired-by-paper/</guid>
       <description>&lt;p&gt;You’ve probably seen &lt;a href=&#34;http://www.fiftythree.com/&#34;&gt;Paper&lt;/a&gt;, the app is pretty cool and the drawings look really nice and smooth.&lt;/p&gt;
 
 &lt;p&gt;I’m working on my personal app that needs something similar, and after doing some research I’ve not seen a proper solution.&lt;/p&gt;

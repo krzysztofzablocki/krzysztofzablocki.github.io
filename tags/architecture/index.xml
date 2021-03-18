@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Architecture on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/architecture/</link>
+    <link>https://www.merowing.info/tags/architecture/</link>
     <description>Recent content in Architecture on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 11 Jan 2017 09:17:47 +0200</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/architecture/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/architecture/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Testing iOS Apps</title>
-      <link>http://merowing.info/2017/01/testing-ios-apps/</link>
+      <link>https://www.merowing.info/2017/01/testing-ios-apps/</link>
       <pubDate>Wed, 11 Jan 2017 09:17:47 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
+      <guid>https://www.merowing.info/2017/01/testing-ios-apps/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/01/testing.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -41,20 +41,20 @@
     
     <item>
       <title>iOS Architecture</title>
-      <link>http://merowing.info/2016/06/ios-architecture/</link>
+      <link>https://www.merowing.info/2016/06/ios-architecture/</link>
       <pubDate>Mon, 27 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2016/06/ios-architecture/</guid>
+      <guid>https://www.merowing.info/2016/06/ios-architecture/</guid>
       <description>&lt;p&gt;I recently did a talk in Prague about iOS Application Architecture, you can &lt;a href=&#34;http://slideslive.com/38897361/good-ios-application-architecture&#34;&gt;watch it here.&lt;/a&gt;
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Improve your iOS Architecture with FlowControllers</title>
-      <link>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</link>
+      <link>https://www.merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</link>
       <pubDate>Tue, 05 Jan 2016 11:23:46 +0100</pubDate>
       
-      <guid>http://merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</guid>
+      <guid>https://www.merowing.info/2016/01/improve-your-ios-architecture-with-flowcontrollers/</guid>
       <description>&lt;p&gt;When working on iOS app, now more than ever one should avoid having view controllers pushing other view controllers around.&lt;/p&gt;
 
 &lt;p&gt;Why?&lt;/p&gt;
@@ -64,10 +64,10 @@
     
     <item>
       <title>iOS Project Bootstrap</title>
-      <link>http://merowing.info/2014/10/ios-project-bootstrap/</link>
+      <link>https://www.merowing.info/2014/10/ios-project-bootstrap/</link>
       <pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/10/ios-project-bootstrap/</guid>
+      <guid>https://www.merowing.info/2014/10/ios-project-bootstrap/</guid>
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;
@@ -77,10 +77,10 @@
     
     <item>
       <title>Behaviours and Xcode 6</title>
-      <link>http://merowing.info/2014/06/behaviours-and-xcode-6/</link>
+      <link>https://www.merowing.info/2014/06/behaviours-and-xcode-6/</link>
       <pubDate>Sun, 22 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/06/behaviours-and-xcode-6/</guid>
+      <guid>https://www.merowing.info/2014/06/behaviours-and-xcode-6/</guid>
       <description>&lt;p&gt;Last time I&amp;rsquo;ve written about Behaviours in &lt;a href=&#34;http://www.objc.io/issue-13/behaviors.html&#34;&gt;objc.io&lt;/a&gt; Architecture Series.&lt;/p&gt;
 
 &lt;p&gt;Xcode 6 has some great improvements, few people realise that &lt;strong&gt;IBInspectable&lt;/strong&gt; works on any class, not just views.&lt;/p&gt;
@@ -91,21 +91,21 @@
     
     <item>
       <title>iOS App Architecture, Part 2: Data parsing</title>
-      <link>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
+      <link>https://www.merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</link>
       <pubDate>Thu, 03 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
+      <guid>https://www.merowing.info/2014/04/subjective-guide-to-writing-ios-apps-part-2-data-parsing/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction&#34;&gt;Last time&lt;/a&gt; we set our project, this time we look at how we could create a simple yet flexible architecture for our model layer.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>iOS App Architecture, Part 1: Setting up</title>
-      <link>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
+      <link>https://www.merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</link>
       <pubDate>Fri, 14 Mar 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
+      <guid>https://www.merowing.info/2014/03/subjective-guide-to-writing-ios-apps-part-1-introduction/</guid>
       <description>&lt;p&gt;This will be subjective look at creating iOS app, first part will focus on basics like project setup, folder structure, version control and some quality metrics.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

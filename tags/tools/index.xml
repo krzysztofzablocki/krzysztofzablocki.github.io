@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/tools/</link>
+    <link>https://www.merowing.info/tags/tools/</link>
     <description>Recent content in Tools on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 18 Oct 2017 12:30:51 +0200</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Finding exact difference between 2 instances</title>
-      <link>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
+      <link>https://www.merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
       <pubDate>Wed, 18 Oct 2017 12:30:51 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
+      <guid>https://www.merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
       <description>&lt;p&gt;Have you ever written tests? Usually, they use equality asserts, e.g. XCTAssertEqual, what happens if the object isn&amp;rsquo;t equal? Xcode throws a wall of text at you:&lt;/p&gt;
 
 
@@ -46,10 +46,10 @@
     
     <item>
       <title>How to find retain cycles and memory leaks sooner</title>
-      <link>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
+      <link>https://www.merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
       <pubDate>Sun, 01 Oct 2017 12:30:51 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
+      <guid>https://www.merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/LifetimeTracker&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
@@ -71,14 +71,14 @@
     
     <item>
       <title>How hard would it be to adjust your iOS app in real-time?</title>
-      <link>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
+      <link>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
       <pubDate>Mon, 02 Jan 2017 17:21:09 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
+      <guid>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Traits&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/01/demo.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/01/demo.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -98,14 +98,14 @@
     
     <item>
       <title>Meta-programming in Swift</title>
-      <link>http://merowing.info/2016/12/introducing-sourcery/</link>
+      <link>https://www.merowing.info/2016/12/introducing-sourcery/</link>
       <pubDate>Wed, 14 Dec 2016 11:54:13 +0100</pubDate>
       
-      <guid>http://merowing.info/2016/12/introducing-sourcery/</guid>
+      <guid>https://www.merowing.info/2016/12/introducing-sourcery/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/12/daemon.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/12/daemon.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -131,13 +131,13 @@
     
     <item>
       <title>Investing time into developer tools</title>
-      <link>http://merowing.info/2016/08/investing-time-into-developer-tools/</link>
+      <link>https://www.merowing.info/2016/08/investing-time-into-developer-tools/</link>
       <pubDate>Mon, 08 Aug 2016 12:47:33 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
+      <guid>https://www.merowing.info/2016/08/investing-time-into-developer-tools/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -155,10 +155,10 @@
     
     <item>
       <title>Little things that can make your life easier in 2016</title>
-      <link>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</link>
+      <link>https://www.merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</link>
       <pubDate>Wed, 23 Dec 2015 10:31:43 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</guid>
+      <guid>https://www.merowing.info/2015/12/little-things-that-can-make-your-life-easier-in-2016/</guid>
       <description>&lt;p&gt;As we are closing this year, let&amp;rsquo;s take a look at few simple things you can add to your iOS developer toolbox to make your life easier and be more productive in 2016.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -166,13 +166,13 @@
     
     <item>
       <title>Writing Xcode plugin in Swift</title>
-      <link>http://merowing.info/2015/12/writing-xcode-plugin-in-swift/</link>
+      <link>https://www.merowing.info/2015/12/writing-xcode-plugin-in-swift/</link>
       <pubDate>Tue, 08 Dec 2015 11:07:09 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/12/writing-xcode-plugin-in-swift/</guid>
+      <guid>https://www.merowing.info/2015/12/writing-xcode-plugin-in-swift/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2015/12/logs.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2015/12/logs.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -192,10 +192,10 @@
     
     <item>
       <title>Playgrounds for Objective C</title>
-      <link>http://merowing.info/2014/10/playgrounds-for-objective-c/</link>
+      <link>https://www.merowing.info/2014/10/playgrounds-for-objective-c/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/10/playgrounds-for-objective-c/</guid>
+      <guid>https://www.merowing.info/2014/10/playgrounds-for-objective-c/</guid>
       <description>&lt;p&gt;Playgrounds are one of the niftiest features of Swift.&lt;/p&gt;
 
 &lt;p&gt;They allow you to quickly test out bits of code and see results in real time without going through the traditional edit-compile-run-debug cycle.&lt;/p&gt;
@@ -234,10 +234,10 @@ class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
     
     <item>
       <title>iOS Project Bootstrap</title>
-      <link>http://merowing.info/2014/10/ios-project-bootstrap/</link>
+      <link>https://www.merowing.info/2014/10/ios-project-bootstrap/</link>
       <pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/10/ios-project-bootstrap/</guid>
+      <guid>https://www.merowing.info/2014/10/ios-project-bootstrap/</guid>
       <description>&lt;p&gt;If you are looking for some good quality project settings and scripts, I&amp;rsquo;ve open-sources my bootstrap for upcoming 2015.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/KZBootstrap&#34;&gt;Check it out on github.&lt;/a&gt;&lt;/p&gt;

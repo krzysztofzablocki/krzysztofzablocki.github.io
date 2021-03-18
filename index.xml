@@ -3,7 +3,7 @@
   <channel>
       <title>Krzysztof Zabłocki </title>
       <generator uri="https://gohugo.io">Hugo</generator>
-    <link>http://merowing.info/</link>
+    <link>https://www.merowing.info/</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>The Decade in Review</title>
-      <link>http://merowing.info/2021/03/the-decade-in-review/</link>
+      <link>https://www.merowing.info/2021/03/the-decade-in-review/</link>
       <pubDate>Mon, 15 Mar 2021 10:43:04 &#43;0100</pubDate>
       
-      <guid>http://merowing.info/2021/03/the-decade-in-review/</guid>
+      <guid>https://www.merowing.info/2021/03/the-decade-in-review/</guid>
       <description>&lt;p&gt;Lately, I&amp;rsquo;ve spent a significant amount of time thinking about my career: what I&amp;rsquo;ve done so far and what might lie ahead for me.&lt;/p&gt;
 
 &lt;p&gt;To gain some perspective, I&amp;rsquo;ve decided to journal some of the things I&amp;rsquo;ve done over the last decade, and to share that with you.&lt;/p&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>Improve build times by extracting 3rd party tooling to processing script.</title>
-      <link>http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</link>
+      <link>https://www.merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</link>
       <pubDate>Mon, 18 Jan 2021 00:00:00 UTC</pubDate>
       
-      <guid>http://merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</guid>
+      <guid>https://www.merowing.info/2021/01/improve-build-times-by-extracting-3rd-party-tooling-to-processing-script./</guid>
       <description>&lt;p&gt;A lot has been written about improving Swift compile times, but the compiler and linker are just part of the equation that slows down our development cycle.&lt;/p&gt;
 
 &lt;p&gt;Most projects leverage great 3rd party tools like &lt;a href=&#34;https://github.com/realm/SwiftLint&#34;&gt;SwiftLint&lt;/a&gt;, &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt;, &lt;a href=&#34;https://github.com/SwiftGen/SwiftGen&#34;&gt;SwiftGen&lt;/a&gt;, &lt;a href=&#34;https://github.com/nicklockwood/SwiftFormat&#34;&gt;SwiftFormat&lt;/a&gt; and many more. Leveraging those tools is the right thing to do but we have to be aware that all of those tools come with some time delay for our &lt;code&gt;build -&amp;gt; run&lt;/code&gt; development cycle.&lt;/p&gt;
@@ -60,10 +60,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Adding support for versioning and migration to your Codable models.</title>
-      <link>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</link>
+      <link>https://www.merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</link>
       <pubDate>Wed, 10 Jun 2020 00:00:00 UTC</pubDate>
       
-      <guid>http://merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</guid>
+      <guid>https://www.merowing.info/2020/06/adding-support-for-versioning-and-migration-to-your-codable-models./</guid>
       <description>&lt;p&gt;&lt;code&gt;Codable&lt;/code&gt; is a great protocol for automating simple model persistence, but it lacks support for any kind of versioning or migrating the data from older versions.&lt;/p&gt;
 
 &lt;p&gt;You can, of course, implement custom &lt;code&gt;Codable&lt;/code&gt; adherence and throw in a bunch of if statements and manual decoding to achieve this goal, but isn&amp;rsquo;t that kind of killing the main selling point of &lt;code&gt;Codable&lt;/code&gt;?&lt;/p&gt;
@@ -75,10 +75,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Straighforward Data Snapshots</title>
-      <link>http://merowing.info/2019/07/straighforward-data-snapshots/</link>
+      <link>https://www.merowing.info/2019/07/straighforward-data-snapshots/</link>
       <pubDate>Mon, 15 Jul 2019 00:00:00 UTC</pubDate>
       
-      <guid>http://merowing.info/2019/07/straighforward-data-snapshots/</guid>
+      <guid>https://www.merowing.info/2019/07/straighforward-data-snapshots/</guid>
       <description>&lt;p&gt;If your app has a lot of content, chances are that by the time you get a chance to work on a bug report, the data that the bug appeared on will be long gone.&lt;/p&gt;
 
 &lt;p&gt;Here are some tidbits on how I created a simple solution for that problem at &lt;a href=&#34;http://nytimes.com&#34;&gt;The New York Times&lt;/a&gt;, it&amp;rsquo;s based on a simple idea.&lt;/p&gt;
@@ -88,10 +88,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Finding exact difference between 2 instances</title>
-      <link>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
+      <link>https://www.merowing.info/2017/10/finding-exact-difference-between-2-instances/</link>
       <pubDate>Wed, 18 Oct 2017 12:30:51 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
+      <guid>https://www.merowing.info/2017/10/finding-exact-difference-between-2-instances/</guid>
       <description>&lt;p&gt;Have you ever written tests? Usually, they use equality asserts, e.g. XCTAssertEqual, what happens if the object isn&amp;rsquo;t equal? Xcode throws a wall of text at you:&lt;/p&gt;
 
 
@@ -121,10 +121,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>How to find retain cycles and memory leaks sooner</title>
-      <link>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
+      <link>https://www.merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</link>
       <pubDate>Sun, 01 Oct 2017 12:30:51 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
+      <guid>https://www.merowing.info/2017/10/how-to-find-retain-cycles-and-memory-leaks-sooner/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/LifetimeTracker&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
@@ -146,10 +146,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Metaprogramming in Swift talk</title>
-      <link>http://merowing.info/2017/05/metaprogramming-in-swift-talk/</link>
+      <link>https://www.merowing.info/2017/05/metaprogramming-in-swift-talk/</link>
       <pubDate>Wed, 03 May 2017 08:04:14 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/05/metaprogramming-in-swift-talk/</guid>
+      <guid>https://www.merowing.info/2017/05/metaprogramming-in-swift-talk/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve recently spoke at &lt;a href=&#34;https://craft-conf.com&#34;&gt;CraftConf&lt;/a&gt; about metaprogramming in Swift using my &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;You can watch the talk online:&lt;/p&gt;
@@ -161,13 +161,13 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Using protocol compositon for dependency injection</title>
-      <link>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</link>
+      <link>https://www.merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</link>
       <pubDate>Wed, 12 Apr 2017 18:13:31 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</guid>
+      <guid>https://www.merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/04/RefactorSwift.jpg&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/04/RefactorSwift.jpg&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -185,10 +185,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Stop weak-strong dance</title>
-      <link>http://merowing.info/2017/04/stop-weak-strong-dance/</link>
+      <link>https://www.merowing.info/2017/04/stop-weak-strong-dance/</link>
       <pubDate>Mon, 03 Apr 2017 16:52:42 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/04/stop-weak-strong-dance/</guid>
+      <guid>https://www.merowing.info/2017/04/stop-weak-strong-dance/</guid>
       <description>&lt;p&gt;Closures in Swift are extremely useful, they are interchangeable with functions and that creates a lot of opportunities for useful use-cases. One thing we have to be careful when using them is to avoid &lt;strong&gt;retain cycles&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
@@ -200,10 +200,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Swift Coders interview</title>
-      <link>http://merowing.info/2017/02/swift-coders-interview/</link>
+      <link>https://www.merowing.info/2017/02/swift-coders-interview/</link>
       <pubDate>Thu, 02 Feb 2017 18:50:14 &#43;0100</pubDate>
       
-      <guid>http://merowing.info/2017/02/swift-coders-interview/</guid>
+      <guid>https://www.merowing.info/2017/02/swift-coders-interview/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been interviewed at Swift Coders podcast:&lt;/p&gt;
 
 &lt;iframe id=&#34;audio_iframe&#34; src=&#34;https://www.podbean.com/media/player/6eh75-6737ed?skin=103&#34; width=&#34;100%&#34; height=&#34;100&#34; frameborder=&#34;0&#34; scrolling=&#34;no&#34;&gt;&lt;/iframe&gt;
@@ -216,10 +216,10 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Seniority</title>
-      <link>http://merowing.info/2017/01/seniority/</link>
+      <link>https://www.merowing.info/2017/01/seniority/</link>
       <pubDate>Wed, 18 Jan 2017 15:43:04 &#43;0100</pubDate>
       
-      <guid>http://merowing.info/2017/01/seniority/</guid>
+      <guid>https://www.merowing.info/2017/01/seniority/</guid>
       <description>&lt;p&gt;People use different words to classify Engineer skill, some companies give you more senior role just based on a number of years you have been working there, but what does it mean to be Senior?&lt;/p&gt;
 
 &lt;p&gt;In this article, I composed a complete and final list of API&amp;rsquo;s that you need to know to classify yourself as Senior Engineer.&lt;/p&gt;
@@ -233,13 +233,13 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Testing iOS Apps</title>
-      <link>http://merowing.info/2017/01/testing-ios-apps/</link>
+      <link>https://www.merowing.info/2017/01/testing-ios-apps/</link>
       <pubDate>Wed, 11 Jan 2017 09:17:47 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
+      <guid>https://www.merowing.info/2017/01/testing-ios-apps/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/01/testing.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -261,14 +261,14 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>How hard would it be to adjust your iOS app in real-time?</title>
-      <link>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
+      <link>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
       <pubDate>Mon, 02 Jan 2017 17:21:09 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
+      <guid>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Traits&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/01/demo.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/01/demo.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -288,14 +288,14 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Meta-programming in Swift</title>
-      <link>http://merowing.info/2016/12/introducing-sourcery/</link>
+      <link>https://www.merowing.info/2016/12/introducing-sourcery/</link>
       <pubDate>Wed, 14 Dec 2016 11:54:13 &#43;0100</pubDate>
       
-      <guid>http://merowing.info/2016/12/introducing-sourcery/</guid>
+      <guid>https://www.merowing.info/2016/12/introducing-sourcery/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;
 &lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/12/daemon.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/12/daemon.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -321,13 +321,13 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
     
     <item>
       <title>Better MVVM setup with POP and Runtime</title>
-      <link>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
+      <link>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
       <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
       
-      <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
+      <guid>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
     
     
 &lt;/figure&gt;

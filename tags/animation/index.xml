@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Animation on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/animation/</link>
+    <link>https://www.merowing.info/tags/animation/</link>
     <description>Recent content in Animation on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Nov 2015 12:29:37 +0100</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/animation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/animation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The beauty of imperfection</title>
-      <link>http://merowing.info/2015/11/the-beauty-of-imperfection/</link>
+      <link>https://www.merowing.info/2015/11/the-beauty-of-imperfection/</link>
       <pubDate>Tue, 24 Nov 2015 12:29:37 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/11/the-beauty-of-imperfection/</guid>
+      <guid>https://www.merowing.info/2015/11/the-beauty-of-imperfection/</guid>
       <description>&lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/12/dot-animated.mov&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2015/12/dot-animated.mov&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 &lt;p&gt;Perfection is not something one can truly achieve, so it’s very smart that one of the best meditation services called &lt;a href=&#34;https://www.headspace.com&#34;&gt;Headspace&lt;/a&gt; is using an imperfect dot as their brand logo.&lt;/p&gt;
@@ -32,12 +32,12 @@
     
     <item>
       <title>Prototyping floating burger menu with CAShapeLayer</title>
-      <link>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
+      <link>https://www.merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</link>
       <pubDate>Wed, 04 Nov 2015 13:29:44 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
+      <guid>https://www.merowing.info/2015/11/prototyping-floating-burger-menu-with-cashapelayer/</guid>
       <description>&lt;video autoplay loop&gt;
-  &lt;source src=&#34;http://merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2015/11/Header-small.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 &lt;p&gt;Reproducing above effect is very simple with CAShapeLayer and CoreAnimation&amp;hellip;&lt;/p&gt;
@@ -47,17 +47,17 @@
     
     <item>
       <title>Pinch to reveal animation, like in Boeing Milestones</title>
-      <link>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
+      <link>https://www.merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</link>
       <pubDate>Sun, 01 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
+      <guid>https://www.merowing.info/2012/07/pinch-to-reveal-animation-like-in-boeing-milestones/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://itunes.apple.com/us/app/boeing-milestones/id510294916?mt=8&#34;&gt;Boeing made a nice app for iPad&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I was shown this app and asked if it’s hard to do this pinch to reveal animation.
 It’s actually quite easy to do with CoreAnimation.&lt;/p&gt;
 
 &lt;video width=&#34;100%&#34; controls&gt;
-  &lt;source src=&#34;http://merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  &lt;source src=&#34;https://www.merowing.info/2012/07/Boening-proof-of-concept.mp4&#34; type=&#34;video/mp4&#34;&gt;
 Your browser does not support the video tag.
 &lt;/video&gt;
 

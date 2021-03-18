@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Swift on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/swift/</link>
+    <link>https://www.merowing.info/tags/swift/</link>
     <description>Recent content in Swift on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 11 Jan 2017 09:17:47 +0200</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/swift/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/swift/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Testing iOS Apps</title>
-      <link>http://merowing.info/2017/01/testing-ios-apps/</link>
+      <link>https://www.merowing.info/2017/01/testing-ios-apps/</link>
       <pubDate>Wed, 11 Jan 2017 09:17:47 +0200</pubDate>
       
-      <guid>http://merowing.info/2017/01/testing-ios-apps/</guid>
+      <guid>https://www.merowing.info/2017/01/testing-ios-apps/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2017/01/testing.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2017/01/testing.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -41,13 +41,13 @@
     
     <item>
       <title>Better MVVM setup with POP and Runtime</title>
-      <link>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
+      <link>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
       <pubDate>Wed, 17 Aug 2016 18:17:19 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
+      <guid>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -63,10 +63,10 @@
     
     <item>
       <title>Logging in Swift</title>
-      <link>http://merowing.info/2016/07/logging-in-swift/</link>
+      <link>https://www.merowing.info/2016/07/logging-in-swift/</link>
       <pubDate>Wed, 13 Jul 2016 17:36:06 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/07/logging-in-swift/</guid>
+      <guid>https://www.merowing.info/2016/07/logging-in-swift/</guid>
       <description>&lt;p&gt;Logging is one of the rare cases when you could probably justify having a singleton, but with Swift Protocol Extension you don&amp;rsquo;t need to.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s integrate Logging in a way that:&lt;/p&gt;
@@ -83,10 +83,10 @@
     
     <item>
       <title>Swift init()</title>
-      <link>http://merowing.info/2015/11/swift-init/</link>
+      <link>https://www.merowing.info/2015/11/swift-init/</link>
       <pubDate>Tue, 17 Nov 2015 13:51:00 +0100</pubDate>
       
-      <guid>http://merowing.info/2015/11/swift-init/</guid>
+      <guid>https://www.merowing.info/2015/11/swift-init/</guid>
       <description>&lt;p&gt;With Swift strong typing and immutability, there are rules that prevent you from accesing variables until an object is fully initialized.&lt;/p&gt;
 
 &lt;p&gt;I do not like having a function do more than one thing, so I like to split my initializers into multiple functions, this becomes problematic.&lt;/p&gt;
@@ -96,10 +96,10 @@
     
     <item>
       <title>A Swift introduction into fitness</title>
-      <link>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
+      <link>https://www.merowing.info/2014/09/a-swift-introduction-into-fitness/</link>
       <pubDate>Tue, 30 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
+      <guid>https://www.merowing.info/2014/09/a-swift-introduction-into-fitness/</guid>
       <description>&lt;p&gt;Many people think getting fit is hard, the fitness industry is full of myths and unnecessary complications.&lt;/p&gt;
 
 &lt;p&gt;Doesn’t matter if your goal is to lose weight or gain it, what matter is Physics and law of energy:&lt;/p&gt;
@@ -122,10 +122,10 @@
     
     <item>
       <title>Implementing observable in Swift</title>
-      <link>http://merowing.info/2014/07/implementing-observable-in-swift/</link>
+      <link>https://www.merowing.info/2014/07/implementing-observable-in-swift/</link>
       <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/07/implementing-observable-in-swift/</guid>
+      <guid>https://www.merowing.info/2014/07/implementing-observable-in-swift/</guid>
       <description>&lt;p&gt;KVO has been integral part of Cocoa programming, yet it&amp;rsquo;s not available for pure Swift classes.&lt;/p&gt;
 
 &lt;p&gt;Is there a way to implement your own implementation of native KVO?

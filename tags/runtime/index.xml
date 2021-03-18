@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Runtime on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/runtime/</link>
+    <link>https://www.merowing.info/tags/runtime/</link>
     <description>Recent content in Runtime on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 Aug 2016 18:17:19 +0200</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/runtime/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/runtime/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Better MVVM setup with POP and Runtime</title>
-      <link>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
+      <link>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
       <pubDate>Wed, 17 Aug 2016 18:17:19 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
+      <guid>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -35,10 +35,10 @@
     
     <item>
       <title>Using UIGestureRecognizers in cocos2d</title>
-      <link>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</link>
+      <link>https://www.merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</link>
       <pubDate>Mon, 05 Mar 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</guid>
+      <guid>https://www.merowing.info/2012/03/using-uigesturerecognizers-in-cocos2d/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://www.cocos2d-iphone.org/&#34;&gt;cocos2d&lt;/a&gt; is one of the best gaming framework I’ve seen, but it doesn’t use UIKit.&lt;/p&gt;
 
 &lt;p&gt;When Apple introduced UIGestureRecognizers they unified how touch interaction should work.&lt;/p&gt;

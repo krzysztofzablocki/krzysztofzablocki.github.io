@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Development Process on Krzysztof Zabłocki</title>
-    <link>http://merowing.info/tags/development-process/</link>
+    <link>https://www.merowing.info/tags/development-process/</link>
     <description>Recent content in Development Process on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 08 Aug 2016 12:47:33 +0200</lastBuildDate>
     
-	<atom:link href="http://merowing.info/tags/development-process/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.merowing.info/tags/development-process/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Investing time into developer tools</title>
-      <link>http://merowing.info/2016/08/investing-time-into-developer-tools/</link>
+      <link>https://www.merowing.info/2016/08/investing-time-into-developer-tools/</link>
       <pubDate>Mon, 08 Aug 2016 12:47:33 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/08/investing-time-into-developer-tools/</guid>
+      <guid>https://www.merowing.info/2016/08/investing-time-into-developer-tools/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/08/file-watchers.gif&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -37,13 +37,13 @@
     
     <item>
       <title>Setting up pre-commit hook for iOS</title>
-      <link>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</link>
+      <link>https://www.merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</link>
       <pubDate>Wed, 03 Aug 2016 12:12:55 +0200</pubDate>
       
-      <guid>http://merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
+      <guid>https://www.merowing.info/2016/08/setting-up-pre-commit-hook-for-ios/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2016/08/git-up.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2016/08/git-up.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -59,10 +59,10 @@
     
     <item>
       <title>Tips for Interface Builder</title>
-      <link>http://merowing.info/2015/11/tips-for-interface-builder/</link>
+      <link>https://www.merowing.info/2015/11/tips-for-interface-builder/</link>
       <pubDate>Fri, 13 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2015/11/tips-for-interface-builder/</guid>
+      <guid>https://www.merowing.info/2015/11/tips-for-interface-builder/</guid>
       <description>&lt;p&gt;Young developers are happy when they write a lot of code, they like to brag about that project that has tens of thousands lines of code they wrote.&lt;/p&gt;
 
 &lt;p&gt;As we get more experienced, we realize that code is expensive. It&amp;rsquo;s expensive to maintain, debug and reason about.&lt;/p&gt;
@@ -76,20 +76,20 @@
     
     <item>
       <title>iOS tips</title>
-      <link>http://merowing.info/2014/02/ios-tips/</link>
+      <link>https://www.merowing.info/2014/02/ios-tips/</link>
       <pubDate>Thu, 20 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/02/ios-tips/</guid>
+      <guid>https://www.merowing.info/2014/02/ios-tips/</guid>
       <description>&lt;p&gt;Easy to apply tips that can improve your development workflow.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>iOS Developer Tools</title>
-      <link>http://merowing.info/2014/02/ios-developer-tools/</link>
+      <link>https://www.merowing.info/2014/02/ios-developer-tools/</link>
       <pubDate>Fri, 07 Feb 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2014/02/ios-developer-tools/</guid>
+      <guid>https://www.merowing.info/2014/02/ios-developer-tools/</guid>
       <description>&lt;p&gt;I probably spend too much money on apps, but I like to support other Developer&amp;rsquo;s good ideas.&lt;/p&gt;
 
 &lt;p&gt;I recently gave talk about tools I use and why.
@@ -98,10 +98,10 @@
     
     <item>
       <title>Crafter - setup your cocoa projects with ease</title>
-      <link>http://merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
+      <link>https://www.merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</link>
       <pubDate>Thu, 02 May 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
+      <guid>https://www.merowing.info/2013/05/crafter---setup-your-cocoa-projects-with-ease/</guid>
       <description>&lt;p&gt;How do you setup your Cocoa projects?
 Do you always set same warnings, clone configurations and do bunch of other stuff?&lt;/p&gt;
 
@@ -111,13 +111,13 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
     
     <item>
       <title>Statusboard and Jenkins</title>
-      <link>http://merowing.info/2013/04/statusboard-and-jenkins/</link>
+      <link>https://www.merowing.info/2013/04/statusboard-and-jenkins/</link>
       <pubDate>Thu, 11 Apr 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2013/04/statusboard-and-jenkins/</guid>
+      <guid>https://www.merowing.info/2013/04/statusboard-and-jenkins/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2013/04/statusboard-small.jpg&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2013/04/statusboard-small.jpg&#34;  /&gt;
     
     
 &lt;/figure&gt;
@@ -131,13 +131,13 @@ Do you always set same warnings, clone configurations and do bunch of other stuf
     
     <item>
       <title>Overlaying application version on top of your icon</title>
-      <link>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</link>
+      <link>https://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</link>
       <pubDate>Thu, 07 Mar 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
+      <guid>https://www.merowing.info/2013/03/overlaying-application-version-on-top-of-your-icon/</guid>
       <description>&lt;figure class=&#34;center&#34;&gt;
     
-        &lt;img src=&#34;http://merowing.info/2013/03/Icon.png&#34;  /&gt;
+        &lt;img src=&#34;https://www.merowing.info/2013/03/Icon.png&#34;  /&gt;
     
     
 &lt;/figure&gt;
