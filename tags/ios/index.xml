@@ -553,7 +553,7 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 
 &lt;div 
 class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
-	&lt;iframe src=&#34;http://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
+	&lt;iframe src=&#34;https://player.vimeo.com/video/109757619&#34; type=&#34;text/html&#34;
 		allowfullscreen
 		frameborder=&#34;0&#34;
 		width=&#34;100%&#34;
