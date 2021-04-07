@@ -10,6 +10,17 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Sourcery Pro</title>
+      <link>https://www.merowing.info/sourcery-pro/</link>
+      <pubDate>Wed, 07 Apr 2021 15:29:09 &#43;0200</pubDate>
+      
+      <guid>https://www.merowing.info/sourcery-pro/</guid>
+      <description>Sourcery Pro is a mac app that extends Xcode with support for live templates.
+ It comes bundled with many popular templates that let you generate:
+ Mocks from any protocol Codable conformance for enums with associated values SwiftUI from data structure Lenses / Prisms Automatic interfaces from types Type erasure And many more&amp;hellip;  It also provides powerful Stencil editor with inline documentation and intelisense which let you create your own templates with ease:</description>
+    </item>
+    
+    <item>
       <title>The Decade in Review</title>
       <link>https://www.merowing.info/2021/03/the-decade-in-review/</link>
       <pubDate>Mon, 15 Mar 2021 10:43:04 &#43;0100</pubDate>
@@ -315,28 +326,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 &lt;li&gt;Sourcery &lt;strong&gt;doesn&amp;rsquo;t use runtime tricks&lt;/strong&gt;, in fact, it allows you to leverage compiler, even more, creating more safety.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Immediate feedback:&lt;/strong&gt; Sourcery features built-in daemon support, enabling you to write your templates in real-time side-by-side with generated code.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Better MVVM setup with POP and Runtime</title>
-      <link>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</link>
-      <pubDate>Wed, 17 Aug 2016 18:17:19 &#43;0200</pubDate>
-      
-      <guid>https://www.merowing.info/2016/08/better-mvvm-setup-with-pop-and-runtime/</guid>
-      <description>&lt;figure class=&#34;center&#34;&gt;
-    
-        &lt;img src=&#34;https://www.merowing.info/2016/08/better-mvvm.png&#34;  /&gt;
-    
-    
-&lt;/figure&gt;
-
-
-
-&lt;p&gt;Even if we are writing pure Swift code in our app, we still deal with Objective-C Frameworks like UIKit.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s take a look at how we can improve our MVVM architecture by leveraging a little bit of Objective-C runtime and Protocol Oriented Programming.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.merowing.info/sourcery-pro/</loc>
+    <lastmod>2021-04-07T15:29:09+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://www.merowing.info/2021/03/the-decade-in-review/</loc>
     <lastmod>2021-03-15T10:43:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
