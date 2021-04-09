@@ -15,8 +15,10 @@
       <pubDate>Wed, 07 Apr 2021 15:29:09 &#43;0200</pubDate>
       
       <guid>https://www.merowing.info/sourcery-pro/</guid>
-      <description>Sourcery Pro is a mac app that extends Xcode with support for live templates.
- It comes bundled with many popular templates that let you generate:
+      <description>Sourcery Pro is a mac app that extends Xcode with the ability to create your own live templates that understand your code.
+This let&amp;rsquo;s you automate a lot of repetitive tasks in Swift codebases, this is how it looks from Xcode perspective:
+  
+You can create any template you want but the app comes bundled with many popular templates to get you started, you can generate:
  Mocks from any protocol Codable conformance for enums with associated values SwiftUI from data structure Lenses / Prisms Automatic interfaces from types Type erasure And many more&amp;hellip;  It also provides powerful Stencil editor with inline documentation and intelisense which let you create your own templates with ease:</description>
     </item>
     
