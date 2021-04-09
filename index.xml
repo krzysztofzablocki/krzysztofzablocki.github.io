@@ -10,6 +10,21 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Introducing Sourcery Pro</title>
+      <link>https://www.merowing.info/2021/04/introducing-sourcery-pro/</link>
+      <pubDate>Thu, 08 Apr 2021 10:43:04 &#43;0100</pubDate>
+      
+      <guid>https://www.merowing.info/2021/04/introducing-sourcery-pro/</guid>
+      <description>&lt;p&gt;Today I&amp;rsquo;m happy to announce a new mac app that extends Xcode features.&lt;/p&gt;
+
+&lt;p&gt;This is an effort of over 1000 hours, so if there was ever time to show your support for all the open source work I&amp;rsquo;ve done, it&amp;rsquo;s now.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.merowing.info/sourcery-pro/&#34; title=&#34;Read More&#34;&gt;Read more&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Sourcery Pro</title>
       <link>https://www.merowing.info/sourcery-pro/</link>
       <pubDate>Wed, 07 Apr 2021 15:29:09 &#43;0200</pubDate>
@@ -296,39 +311,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 &lt;p&gt;Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Meta-programming in Swift</title>
-      <link>https://www.merowing.info/2016/12/introducing-sourcery/</link>
-      <pubDate>Wed, 14 Dec 2016 11:54:13 &#43;0100</pubDate>
-      
-      <guid>https://www.merowing.info/2016/12/introducing-sourcery/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;
-&lt;figure class=&#34;center&#34;&gt;
-    
-        &lt;img src=&#34;https://www.merowing.info/2016/12/daemon.gif&#34;  /&gt;
-    
-    
-&lt;/figure&gt;
-
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Swift has very limited runtime support and no meta-programming features.&lt;/p&gt;
-
-&lt;p&gt;I created a new tool that changes that, it&amp;rsquo;s called &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery&#34;&gt;Sourcery&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Using it offers many benefits:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Write less repetitive code and make it easy to adhere to &lt;a href=&#34;https://en.wikipedia.org/wiki/Don&#39;t_repeat_yourself&#34;&gt;DRY principle&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;It allows you to create better code, one that would be hard to maintain without it, e.g. &lt;a href=&#34;https://github.com/krzysztofzablocki/Sourcery/blob/master/Sourcery/Templates/Diffable.stencil&#34;&gt;performing automatic property level difference in tests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Limits the risk of introducing human error when refactoring.&lt;/li&gt;
-&lt;li&gt;Sourcery &lt;strong&gt;doesn&amp;rsquo;t use runtime tricks&lt;/strong&gt;, in fact, it allows you to leverage compiler, even more, creating more safety.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Immediate feedback:&lt;/strong&gt; Sourcery features built-in daemon support, enabling you to write your templates in real-time side-by-side with generated code.&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
