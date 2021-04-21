@@ -10,6 +10,21 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Dear Xcode....</title>
+      <link>https://www.merowing.info/2021/04/dear-xcode..../</link>
+      <pubDate>Tue, 20 Apr 2021 06:43:04 &#43;0100</pubDate>
+      
+      <guid>https://www.merowing.info/2021/04/dear-xcode..../</guid>
+      <description>&lt;p&gt;Two weeks ago I&amp;rsquo;ve released &lt;a href=&#34;https://www.merowing.info/sourcery-pro&#34;&gt;Sourcery Pro&lt;/a&gt;, the most powerful Xcode extension that exists.&lt;/p&gt;
+
+&lt;p&gt;If you still didn&amp;rsquo;t check it out, you really should as it can save you 100+ hours by letting you automate a lot of repetitive code in your projects, from writing mocks through SwiftUI and Snapshots.&lt;/p&gt;
+
+&lt;p&gt;Now let me tell you a bit about what Xcode extension offer and a couple of ideas for what they could in future releases, to make tools like &lt;a href=&#34;https://www.merowing.info/sourcery-pro&#34;&gt;Sourcery Pro&lt;/a&gt; more powerful.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Introducing Sourcery Pro</title>
       <link>https://www.merowing.info/2021/04/introducing-sourcery-pro/</link>
       <pubDate>Thu, 08 Apr 2021 10:43:04 &#43;0100</pubDate>
@@ -283,33 +298,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 &lt;p&gt;A big corporation might have dedicated QA team, but if you are one of 2 developers, then you are often responsible for ensuring quality and reliability of your work, its considerable pressure because each feature you write might break something else in your app.&lt;/p&gt;
 
 &lt;p&gt;Let us look at practices and tips for writing maintainable tests in your iOS Apps.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>How hard would it be to adjust your iOS app in real-time?</title>
-      <link>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</link>
-      <pubDate>Mon, 02 Jan 2017 17:21:09 &#43;0200</pubDate>
-      
-      <guid>https://www.merowing.info/2017/01/how-hard-would-it-be-to-adjust-your-ios-app-in-real-time/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/krzysztofzablocki/Traits&#34;&gt;
-&lt;figure class=&#34;center&#34;&gt;
-    
-        &lt;img src=&#34;https://www.merowing.info/2017/01/demo.gif&#34;  /&gt;
-    
-    
-&lt;/figure&gt;
-
-&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Iterating over design that needs to be reflected in code can be tedious and time-consuming.&lt;/p&gt;
-
-&lt;p&gt;Typically the designer works in graphics editing software and then submits flat art to the developer who implements the design in code. Refining the design requires going through the same laborious process.&lt;/p&gt;
-
-&lt;p&gt;Even harder if we want to support multiple themes in our apps. How would we even approach that if we were using Interface Builder?&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s look at how we can approach implementing a simple library that could solve all of the above concerns.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
