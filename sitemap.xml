@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.merowing.info/2021/05/apple-treats-interview/</loc>
+    <lastmod>2021-05-05T06:43:04+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://www.merowing.info/2021/04/dear-xcode..../</loc>
     <lastmod>2021-04-20T06:43:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -535,7 +542,7 @@
   
   <url>
     <loc>https://www.merowing.info/tags/ios/</loc>
-    <lastmod>2021-04-20T06:43:04+01:00</lastmod>
+    <lastmod>2021-05-05T06:43:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -577,7 +584,7 @@
   
   <url>
     <loc>https://www.merowing.info/post/</loc>
-    <lastmod>2021-04-20T06:43:04+01:00</lastmod>
+    <lastmod>2021-05-05T06:43:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -647,7 +654,7 @@
   
   <url>
     <loc>https://www.merowing.info/tags/tools/</loc>
-    <lastmod>2021-04-20T06:43:04+01:00</lastmod>
+    <lastmod>2021-05-05T06:43:04+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>

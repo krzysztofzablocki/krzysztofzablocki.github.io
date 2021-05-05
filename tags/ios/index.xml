@@ -6,10 +6,37 @@
     <description>Recent content in Ios on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Apr 2021 06:43:04 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 05 May 2021 06:43:04 +0100</lastBuildDate>
     
 	<atom:link href="https://www.merowing.info/tags/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Apple Treats interview</title>
+      <link>https://www.merowing.info/2021/05/apple-treats-interview/</link>
+      <pubDate>Wed, 05 May 2021 06:43:04 +0100</pubDate>
+      
+      <guid>https://www.merowing.info/2021/05/apple-treats-interview/</guid>
+      <description>&lt;p&gt;Yesterday I was interviewed by &lt;a href=&#34;https://twitter.com/AppleTreatsNews&#34;&gt;Apple Treats&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can watch the recording here:&lt;/p&gt;
+
+&lt;div 
+class=&#34;magnific-video mpf-iframe embed video-player &#34;&gt;
+	&lt;iframe src=&#34;https://www.youtube.com/embed/nxzHcUTm20E&#34; type=&#34;text/html&#34;
+		allowfullscreen
+		frameborder=&#34;0&#34;
+		width=&#34;100%&#34;
+		height=&#34;385&#34;
+	&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+
+
+&lt;p&gt;Or &lt;a href=&#34;https://podcasts.apple.com/us/podcast/may-4-2021-sourcery-for-developers/id1553249730?i=1000520241454&#34;&gt;listen in Apple Podcasts&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Dear Xcode....</title>
