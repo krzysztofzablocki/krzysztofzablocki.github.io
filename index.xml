@@ -10,6 +10,26 @@
     <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
     
     <item>
+      <title>Improving Composable Architecture Debugging</title>
+      <link>https://www.merowing.info/2021/08/improving-composable-architecture-debugging/</link>
+      <pubDate>Wed, 18 Aug 2021 06:43:04 &#43;0100</pubDate>
+      
+      <guid>https://www.merowing.info/2021/08/improving-composable-architecture-debugging/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been a fan of &lt;a href=&#34;http://pointfree.co/&#34;&gt;Point Free&lt;/a&gt; &lt;a href=&#34;https://github.com/pointfreeco/swift-composable-architecture&#34;&gt;Composable architecture&lt;/a&gt; for a while now.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve worked on TCA projects for more than a year on projects of all sizes: from smaller projects like my indie &lt;a href=&#34;https://www.merowing.info/sourcery-pro&#34;&gt;Sourcery Pro&lt;/a&gt;, through the &lt;a href=&#34;nytimes.com&#34;&gt;New York Times&lt;/a&gt; project, to a truly large codebase, a completely new browser for &lt;a href=&#34;thebrowser.company&#34;&gt;The Browser Company&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;TCA has been working great in all of them, but one thing that I was missing was an easy way to debug state changes, as the official &lt;code&gt;debug&lt;/code&gt; higher-order reducer doesn&amp;rsquo;t play well with large app states.&lt;/p&gt;
+
+&lt;p&gt;So I thought: let&amp;rsquo;s create an interface that will not only deal with larger states, but also offer us a way to filter actions with ease:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;.debugDiffing(allowedActions: .allExcept(.hoverActions, .windowVisibility))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Apple Treats interview</title>
       <link>https://www.merowing.info/2021/05/apple-treats-interview/</link>
       <pubDate>Wed, 05 May 2021 06:43:04 &#43;0100</pubDate>
@@ -282,23 +302,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://benscheirman.com/2017/01/an-affordable-dynamic-mic-recommendation/&#34;&gt;Ben Scheirman from NSPodcast has good recommendations for affordable microphone&lt;/a&gt;
 &lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Seniority</title>
-      <link>https://www.merowing.info/2017/01/seniority/</link>
-      <pubDate>Wed, 18 Jan 2017 15:43:04 &#43;0100</pubDate>
-      
-      <guid>https://www.merowing.info/2017/01/seniority/</guid>
-      <description>&lt;p&gt;People use different words to classify Engineer skill, some companies give you more senior role just based on a number of years you have been working there, but what does it mean to be Senior?&lt;/p&gt;
-
-&lt;p&gt;In this article, I composed a complete and final list of API&amp;rsquo;s that you need to know to classify yourself as Senior Engineer.&lt;/p&gt;
-
-&lt;p&gt;Here’s a list of all the APIs you must know:&lt;/p&gt;
-
-&lt;p&gt;•&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

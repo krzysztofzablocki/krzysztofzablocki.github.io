@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Krzysztof Zabłocki - Improving Composable Architecture Debugging</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Improving Composable Architecture Debugging instrumentation">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Improving Composable Architecture Debugging" />
+<meta property="og:description" content="Improving Composable Architecture Debugging instrumentation" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.merowing.info/2021/08/improving-composable-architecture-debugging/" />
+
+
+
+<meta property="og:updated_time" content="2021-08-18 06:43:04 &#43;0100 &#43;0100"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2021-08-18 06:43:04 &#43;0100 &#43;0100" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="iOS" />
+
+<meta property="article:tag" content="Tools" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Improving Composable Architecture Debugging">
+<meta itemprop="description" content="Improving Composable Architecture Debugging instrumentation">
+
+
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,experiments,fitness,gamedev,general,interface-builder,ios,ios-tips,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="982">
+
+
+<meta name="twitter:card" content="summary"/>
+
+
+
+<meta name="twitter:title" content="Improving Composable Architecture Debugging"/>
+<meta name="twitter:description" content="Improving Composable Architecture Debugging instrumentation"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="https://www.merowing.info/2021/08/improving-composable-architecture-debugging/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="https://www.merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="https://www.merowing.info" class="site-title">Krzysztof Zabłocki</a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/post/">Blog</a>
+
+<a href="/speaking/">Speaking</a>
+<a href="/sourcery-pro/">Sourcery Pro</a>
+
+
+</form>
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Improving Composable Architecture Debugging</h1>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>5 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+            <div class="center playground">
+                <a href="https://gist.github.com/krzysztofzablocki/0dbe6461861d3fab173d48337757fa49">
+                    <img src="https://www.merowing.info/2015/01/github.jpg" />
+                    <span>Source Code on GitHub.</span>
+                </a>
+            </div>
+            <br />
+            
+
+            <article class="post-content">
+                <p>I&rsquo;ve been a fan of <a href="http://pointfree.co/">Point Free</a> <a href="https://github.com/pointfreeco/swift-composable-architecture">Composable architecture</a> for a while now.</p>
+
+<p>I&rsquo;ve worked on TCA projects for more than a year on projects of all sizes: from smaller projects like my indie <a href="/sourcery-pro">Sourcery Pro</a>, through the <a href="nytimes.com">New York Times</a> project, to a truly large codebase, a completely new browser for <a href="thebrowser.company">The Browser Company</a>.</p>
+
+<p>TCA has been working great in all of them, but one thing that I was missing was an easy way to debug state changes, as the official <code>debug</code> higher-order reducer doesn&rsquo;t play well with large app states.</p>
+
+<p>So I thought: let&rsquo;s create an interface that will not only deal with larger states, but also offer us a way to filter actions with ease:</p>
+
+<pre><code class="language-swift">.debugDiffing(allowedActions: .allExcept(.hoverActions, .windowVisibility))
+</code></pre>
+
+<p></p>
+
+<hr />
+
+<h2 id="problems-to-solve">Problems to solve</h2>
+
+<h3 id="large-diffs">Large diffs</h3>
+
+<p>The first problem is the amount of data TCA will print out whenever an action changes its state. ? In case of bigger apps it&rsquo;s simply won&rsquo;t be readable to humans because it prints the whole state and just marks the change.</p>
+
+<p>Sure, you can attach the <code>debug</code> in a specific module and that should make it more manageable - but when you&rsquo;re trying to understand all interactions between different behaviors in-app, that&rsquo;s not a real solution.</p>
+
+<h4 id="solution">Solution</h4>
+
+<p>Fortunately, there is one ready-to-use solution. I&rsquo;ve built it for TDD workflows a few years ago. It&rsquo;s called
+<a href="https://github.com/krzysztofzablocki/Difference">Difference</a> and it generates exact property level difference between 2 objects.</p>
+
+<p>Leveraging difference will let you get debug logs like this one:</p>
+
+<pre><code class="language-swift">🎬 Received action:
+  AppAction.windows(
+    WindowsAction.window(
+      windowID: WindowID(
+        rawValue: &quot;131DDF0A-DDE2-4757-B1AC-4DAB60269E8D&quot;
+      ),
+      action: WindowAction.toggleListCollapsedState(
+        listID: RootOrListIdentifier.list(
+          Identifier&lt;SidebarItem&gt;(
+            rawValue: &quot;F686B64A-E221-49FB-9504-FE003FC6493F&quot;
+          )
+        )
+      )
+    )
+  )
+🖨️ State:
+persistedWindows:
+| windows:
+| | Key 131DDF0A-DDE2-4757-B1AC-4DAB60269E8D:
+| | | collapsedListIDs:
+| | | | Different count:
+| | | | | Current: (1)
+| | | | | Previous: (0)
+</code></pre>
+
+<hr />
+
+<h3 id="action-filtering">Action filtering</h3>
+
+<p>When dealing with state debugging at the app level we often want to suppress messages from a particular set of actions, e.g. at <a href="thebrowser.company">Browser Company</a> we get actions for things like windows visibility or mouse hover state. Those things can easily get noisy, so it&rsquo;s good to have a way to suppress it.</p>
+
+<p>To do that, you could simply add closure for filtering actions, such as:</p>
+
+<pre><code class="language-swift">.debugDiffing(allowedActions: { action in 
+  switch action {
+    case .windows(_, action: .visibility):
+      return false
+
+    default: 
+      return true
+  }
+})
+</code></pre>
+
+<p>That could definitely work, but it would also mean that all the filtering code gets deleted the moment you are done with debugging.</p>
+
+<p>So, the next person that tries to debug the app will have to repeat the same kind of work. Not very efficient or convenient, right?</p>
+
+<h4 id="action-repository">Action repository</h4>
+
+<p>Instead, let&rsquo;s build a solution that:
+- enables you to accumulate an action filter repository that can be used by the next person debugging the codebase,
+- has got a nice composable DSL for readability and leveraging IntelliSense.</p>
+
+<p>To achieve the above we can introduce a generic wrapper over <code>Action</code> check called <code>ActionFilter</code>:</p>
+
+<pre><code class="language-swift">public struct ActionFilter&lt;Action: Equatable&gt; {
+    let isIncluded: (Action) -&gt; Bool
+
+    func callAsFunction(_ action: Action) -&gt; Bool {
+        isIncluded(action)
+    }
+
+    /// Include all actions
+    public static var all: Self {
+        .init(isIncluded: { _ in true })
+    }
+
+    /// negates the filter
+    public static func not(_ filter: Self) -&gt; Self {
+        .init(isIncluded: { !filter($0) })
+    }
+
+    /// Allows all actions except those specified
+    public static func allExcept(_ actions: [Self]) -&gt; Self {
+        .init(isIncluded: { action in
+            !actions.contains(where: { $0(action) })
+        })
+    }
+
+    /// Allows any of the specified actions
+    public static func anyOf(_ actions: [Self]) -&gt; Self {
+        .init(isIncluded: { action in
+            actions.contains(where: { $0(action) })
+        })
+    }
+</code></pre>
+
+<hr />
+
+<p>By leveraging variadic argument support in Swift you can enable an even nicer API when dealing with multiple filters and, therefore, simply forward the call to the array variant you already created:</p>
+
+<pre><code class="language-swift">/// Allows all actions except those specified
+public static func allExcept(_ actions: Self...) -&gt; Self {
+    allExcept(actions)
+}
+</code></pre>
+
+<hr />
+
+<p>By leveraging <code>callAsFunction</code> feature you can call the filters as one would do with standard closures. Using generic means that you can write specialized extensions for different <code>Action</code> types in our projects:</p>
+
+<pre><code class="language-swift">extension ActionFilter where Action == AppAction {
+    static var sidebarActions: Self {
+        Self(isIncluded: {
+            switch $0 {
+            case .appSidebar, .sidebarSync, .sidebarSyncCloudKit:
+                return true
+            default:
+                return false
+            }
+        })
+    }
+</code></pre>
+
+<hr />
+
+<p>This means that now you can have a central repository of filters related to <code>AppAction</code> and you can leverage IntelliSense when debugging <code>AppAction</code>.</p>
+
+
+<figure class="center">
+    
+        <img src="/2021/action-filter-intelisense.gif"  />
+    
+    
+</figure>
+
+
+
+<h2 id="connecting-it-all-together">Connecting it all together</h2>
+
+<p>Now you just want to take TCA original debug reducer implementation interface and modify it to fit your needs:</p>
+
+<pre><code class="language-swift">extension Reducer where State: Equatable, Action: Equatable {
+    public func debugDiffing(
+        actionFormat: ActionFormat = .prettyPrint,
+        allowedActions: ActionFilter&lt;Action&gt; = .all
+    ) -&gt; Self {
+        .init { state, action, env in
+            let oldState = state
+            let effects = self.run(&amp;state, action, env)
+            let newState = state
+
+            /// Leverage callAsFunction
+            guard allowedActions(action) else {
+                return effects
+            }
+
+            return .merge(
+                .fireAndForget {
+                    debugEnvironment.queue.async {
+                        let actionOutput =
+                            actionFormat == .prettyPrint
+                                ? debugOutput(action).indent(by: 2)
+                                : debugCaseOutput(action).indent(by: 2)
+
+                        var stateOutput: String = &quot;🖨️ (No state changes)&quot;
+                        if oldState != newState {
+                           /// Leverage Difference
+                            stateOutput = diff(oldState, newState, indentationType: .pipe, skipPrintingOnDiffCount: true, nameLabels: .comparing).joined(separator: &quot;, &quot;)
+                        }
+
+                        debugEnvironment.printer(
+                            &quot;&quot;&quot;
+                            🎬 Received action:
+                            \(actionOutput)
+                            🖨️ State:
+                            \(stateOutput)
+                            &quot;&quot;&quot;
+                        )
+                    }
+                },
+                effects
+            )
+        }
+    }
+</code></pre>
+
+<p>This allows you to append <code>debugDiffing(...)</code> call to any reducer that has got equatable state/action pairs.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>I believe this reducer to be a significant improvement for a majority of TCA-based applications.</p>
+
+<p>It leverages smaller diffs and adds the ability to easily filter out actions that you are not interested in.</p>
+
+<p>This interface not only leverages a couple of language features which enable convenient DSL and IntelliSense, but also improves the future workflows since the <code>ActionFilter</code> repository grows with each developer.</p>
+
+<p><a href="https://gist.github.com/krzysztofzablocki/0dbe6461861d3fab173d48337757fa49">Full gist is available on my github</a></p>
+
+<hr />
+
+<p>Do you like working with TCA-based architecture? <a href="https://thebrowser.company/#jobs">The Browser Company</a> is hiring and they are one of the largest projects leveraging this architecture that I&rsquo;ve seen.</p>
+            </article>
+            <hr>
+            <a href="https://merowing.info/sourcery-pro/"><span class="h6">Hate writing repetitive code?</span></a>
+            </br></br><a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+                data-size="medium"></a>
+            <br />
+
+
+            <div class="social-icons">
+                <p>
+                    Want to make your team more efficent and to have better Developer Experience?<br />
+                    <a href="/">I can help with that.</a>
+                </p>
+
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="https://www.merowing.info/2021/08/improving-composable-architecture-debugging/" data-title="Improving Composable Architecture Debugging"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="https://www.merowing.info/tags/ios">iOS</a>
+                
+                ,&nbsp;
+                <a href="https://www.merowing.info/tags/tools">Tools</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2021<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
