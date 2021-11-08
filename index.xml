@@ -7,7 +7,27 @@
     <language>en-us</language>
     
     
-    <updated>Tue, 27 Oct 2015 14:09:49 &#43;0100</updated>
+    <updated>Mon, 08 Nov 2021 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Leave your ego at the door</title>
+      <link>https://www.merowing.info/2021/11/leave-your-ego-at-the-door/</link>
+      <pubDate>Mon, 08 Nov 2021 00:00:00 UTC</pubDate>
+      
+      <guid>https://www.merowing.info/2021/11/leave-your-ego-at-the-door/</guid>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://www.merowing.info/2021/ego.jpg&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;We define ego as a person’s sense of self-importance. It’s an attribute that contributes to building up your identity and figuring out what you want in life. But left unchecked, ego can lead to arrogance and ignorance.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Improving Composable Architecture Debugging</title>
@@ -286,22 +306,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Can we improve the call-site API?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Swift Coders interview</title>
-      <link>https://www.merowing.info/2017/02/swift-coders-interview/</link>
-      <pubDate>Thu, 02 Feb 2017 18:50:14 &#43;0100</pubDate>
-      
-      <guid>https://www.merowing.info/2017/02/swift-coders-interview/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve been interviewed at Swift Coders podcast:&lt;/p&gt;
-
-&lt;iframe id=&#34;audio_iframe&#34; src=&#34;https://www.podbean.com/media/player/6eh75-6737ed?skin=103&#34; width=&#34;100%&#34; height=&#34;100&#34; frameborder=&#34;0&#34; scrolling=&#34;no&#34;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;I&amp;rsquo;m definitely investing into a better Microphone next time I&amp;rsquo;m doing any audio recording.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://benscheirman.com/2017/01/an-affordable-dynamic-mic-recommendation/&#34;&gt;Ben Scheirman from NSPodcast has good recommendations for affordable microphone&lt;/a&gt;
-&lt;/p&gt;</description>
     </item>
     
   </channel>
