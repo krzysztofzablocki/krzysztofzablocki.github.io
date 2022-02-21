@@ -17,7 +17,16 @@
       <pubDate>Mon, 21 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>https://www.merowing.info/2022/02/code-review-best-practices/</guid>
-      <description>&lt;p&gt;No matter how experienced we are, we are bound to make mistakes in our work.&lt;/p&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://www.merowing.info/2022/collaboration.jpg&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;No matter how experienced we are, we are bound to make mistakes in our work.&lt;/p&gt;
 
 &lt;p&gt;This simple fact is one of the reasons why Code Reviews have become the cornerstone of software engineering processes around the world.&lt;/p&gt;
 
