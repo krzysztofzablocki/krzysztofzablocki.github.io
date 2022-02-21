@@ -64,7 +64,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,engineering,experiments,fitness,gamedev,general,growth,interface-builder,ios,ios-tips,leading,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="2436">
+<meta itemprop="wordCount" content="2427">
 
 
 
@@ -166,7 +166,7 @@
 
 <p>I followed that with additional research and my own experiences from consulting with different-sized companies over the last decades and come up with best practices for our team&rsquo;s practices.</p>
 
-<p>In the spirit of giving back to the community, we&rsquo;ve decided to share those practices publically.</p>
+<p>In the spirit of giving back to the community, we&rsquo;ve decided to share those practices.</p>
 
 <p></p>
 
@@ -208,15 +208,30 @@
 
 <h3 id="examples">Examples:</h3>
 
-<p><strong>Good feedback:</strong>
- - “It looks like this might run in n^2 time – is there a way for us to improve it? maybe we could leverage hash map to make it linear?”
-    - Why it’s good → describes the potential issue, suggest an alternative approach that can improve it
- - “I think this is making a network call within a tight loop. Maybe add a bulk API on the server side so that we can do the work all at once in a single call?”
-    - Why it’s good → describes the potential issue, suggest another option, and why it’s better
- - “Could we leverage <a href="https://www.hackingwithswift.com/plus/high-performance-apps/using-memoization-to-speed-up-slow-functions">memoization technique</a> to improve performance here?”
-    - Why it’s good → ask questions, provide reference to what you mean rather than assuming the person knows the technique. It uses “team words” like <code>we</code>, making it explicit that we are a team, doing this work together
- - “I know you’ve given this a lot of thought and I am probably missing something here. Can you fill me in on why you decided to do X, rather than Y? Thank you!”
-    - Why it’s good → acknowledges that the writer spent more time than you as the reader, and asks them to provide more detail about their choice, before asking them to take approach Y instead</p>
+<p><strong>Good feedback:</strong></p>
+
+<ul>
+<li>“It looks like this might run in n^2 time – is there a way for us to improve it? maybe we could leverage hash map to make it linear?”
+
+<ul>
+<li>Why it’s good → describes the potential issue, suggest an alternative approach that can improve it</li>
+</ul></li>
+<li>“I think this is making a network call within a tight loop. Maybe add a bulk API on the server side so that we can do the work all at once in a single call?”
+
+<ul>
+<li>Why it’s good → describes the potential issue, suggest another option, and why it’s better</li>
+</ul></li>
+<li>“Could we leverage <a href="https://www.hackingwithswift.com/plus/high-performance-apps/using-memoization-to-speed-up-slow-functions">memoization technique</a> to improve performance here?”
+
+<ul>
+<li>Why it’s good → ask questions, provide reference to what you mean rather than assuming the person knows the technique. It uses “team words” like <code>we</code>, making it explicit that we are a team, doing this work together</li>
+</ul></li>
+<li>“I know you’ve given this a lot of thought and I am probably missing something here. Can you fill me in on why you decided to do X, rather than Y? Thank you!”
+
+<ul>
+<li>Why it’s good → acknowledges that the writer spent more time than you as the reader, and asks them to provide more detail about their choice, before asking them to take approach Y instead</li>
+</ul></li>
+</ul>
 
 <p><strong>And not so good feedback</strong></p>
 
