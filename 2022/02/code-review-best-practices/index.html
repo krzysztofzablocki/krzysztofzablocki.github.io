@@ -208,30 +208,38 @@
 
 <h3 id="examples">Examples:</h3>
 
-<ul>
-<li>Good feedback:
+<p><strong>Good feedback:</strong>
+ - “It looks like this might run in n^2 time – is there a way for us to improve it? maybe we could leverage hash map to make it linear?”
+    - Why it’s good → describes the potential issue, suggest an alternative approach that can improve it
+ - “I think this is making a network call within a tight loop. Maybe add a bulk API on the server side so that we can do the work all at once in a single call?”
+    - Why it’s good → describes the potential issue, suggest another option, and why it’s better
+ - “Could we leverage <a href="https://www.hackingwithswift.com/plus/high-performance-apps/using-memoization-to-speed-up-slow-functions">memoization technique</a> to improve performance here?”
+    - Why it’s good → ask questions, provide reference to what you mean rather than assuming the person knows the technique. It uses “team words” like <code>we</code>, making it explicit that we are a team, doing this work together
+ - “I know you’ve given this a lot of thought and I am probably missing something here. Can you fill me in on why you decided to do X, rather than Y? Thank you!”
+    - Why it’s good → acknowledges that the writer spent more time than you as the reader, and asks them to provide more detail about their choice, before asking them to take approach Y instead</p>
 
-<ul>
-<li>“It looks like this might run in n^2 time – is there a way for us to improve it? maybe we could leverage hash map to make it linear?”
-&gt; Why it’s good → describes the potential issue, suggest an alternative approach that can improve it</li>
-<li>“I think this is making a network call within a tight loop. Maybe add a bulk API on the server side so that we can do the work all at once in a single call?”
-&gt; Why it’s good → describes the potential issue, suggest another option, and why it’s better</li>
-<li>“Could we leverage <a href="https://www.hackingwithswift.com/plus/high-performance-apps/using-memoization-to-speed-up-slow-functions">memoization technique</a> to improve performance here?”
-&gt; Why it’s good → ask questions, provide reference to what you mean rather than assuming the person knows the technique. It uses “team words” like <code>we</code>, making it explicit that we are a team, doing this work together</li>
-<li>“I know you’ve given this a lot of thought and I am probably missing something here. Can you fill me in on why you decided to do X, rather than Y? Thank you!”
-&gt; Why it’s good → acknowledges that the writer spent more time than you as the reader, and asks them to provide more detail about their choice, before asking them to take approach Y instead</li>
-</ul></li>
-<li>And not so good feedback
+<p><strong>And not so good feedback</strong></p>
 
 <ul>
 <li>“Style guide calls for two newlines between top-level file comments.”
-&gt; Why it’s not good - We should adjust auto formatter / linter to do this kind of work for us, not engineers.</li>
+
+<ul>
+<li>Why it’s not good - We should adjust auto formatter / linter to do this kind of work for us, not engineers.</li>
+</ul></li>
 <li>“I didn’t understand how this worked but if you’re sure it produces the right results, then ok.”
-&gt; Why it’s not good - If a code can’t be understood by our engineers, we should request it be simplified or add additional documentation in the code to make it understandable.</li>
+
+<ul>
+<li>Why it’s not good - If a code can’t be understood by our engineers, we should request it be simplified or add additional documentation in the code to make it understandable.</li>
+</ul></li>
 <li>”This way is not right. You don’t understand how this should work. Use XYZ function/whatever instead.”
-&gt; Why it’s not good - This uses very absolute wording, where’s most of the time there is no one right solution for an engineering problem, it doesn’t provide the reason why this approach might be incorrect or inferior to alternatives. It also doesn’t encourage shared ownership by using ‘You’ instead of ‘We’.</li>
+
+<ul>
+<li>Why it’s not good - This uses very absolute wording, where’s most of the time there is no one right solution for an engineering problem, it doesn’t provide the reason why this approach might be incorrect or inferior to alternatives. It also doesn’t encourage shared ownership by using ‘You’ instead of ‘We’.</li>
+</ul></li>
 <li>“Can we do X? <insert great reasons written out clearly>”
-&gt; Why it’s not good → This is <em>almost</em> good but a teammate can’t tell if this is a blocking change, a nit, or a suggestion up for peer debate/judgment call.</li>
+
+<ul>
+<li>Why it’s not good → This is <em>almost</em> good but a teammate can’t tell if this is a blocking change, a nit, or a suggestion up for peer debate/judgment call.</li>
 </ul></li>
 </ul>
 
