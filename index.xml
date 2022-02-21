@@ -7,7 +7,28 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 08 Nov 2021 00:00:00 UTC</updated>
+    <updated>Mon, 21 Feb 2022 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Code-Review best practices</title>
+      <link>https://www.merowing.info/2022/02/code-review-best-practices/</link>
+      <pubDate>Mon, 21 Feb 2022 00:00:00 UTC</pubDate>
+      
+      <guid>https://www.merowing.info/2022/02/code-review-best-practices/</guid>
+      <description>&lt;p&gt;No matter how experienced we are, we are bound to make mistakes in our work.&lt;/p&gt;
+
+&lt;p&gt;This simple fact is one of the reasons why Code Reviews have become the cornerstone of software engineering processes around the world.&lt;/p&gt;
+
+&lt;p&gt;Part of my job is building teams and establishing best practices for them to operate efficiently and collaboratively.&lt;/p&gt;
+
+&lt;p&gt;But team practices shouldn&amp;rsquo;t just be coming from an individual, which is why first interviewed a bunch of our engineers at &lt;a href=&#34;https://thebrowser.company&#34;&gt;The Browser Company&lt;/a&gt; around what is the goal of PR&amp;rsquo;s and Code reviews.&lt;/p&gt;
+
+&lt;p&gt;I followed that with additional research and my own experiences from consulting with different-sized companies over the last decades and come up with best practices for our team&amp;rsquo;s practices.&lt;/p&gt;
+
+&lt;p&gt;In the spirit of giving back to the community, we&amp;rsquo;ve decided to share those practices publically.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Leave your ego at the door</title>
@@ -24,7 +45,9 @@
 
 
 
-&lt;p&gt;We define ego as a person’s sense of self-importance. It’s an attribute that contributes to building up your identity and figuring out what you want in life. But left unchecked, ego can lead to arrogance and ignorance.&lt;/p&gt;
+&lt;p&gt;We define ego as a person’s sense of self-importance. It’s an attribute that contributes to building up your identity and figuring out what you want in life.&lt;/p&gt;
+
+&lt;p&gt;But left unchecked, ego can lead to arrogance and ignorance.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
@@ -289,21 +312,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 &lt;p&gt;As the project grows and you need to inject more dependencies into your objects, you will end up having to refactor your methods a lot of times, as we all know Xcode doesn&amp;rsquo;t help with that.&lt;/p&gt;
 
 &lt;p&gt;There is a more manageable way.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Stop weak-strong dance</title>
-      <link>https://www.merowing.info/2017/04/stop-weak-strong-dance/</link>
-      <pubDate>Mon, 03 Apr 2017 16:52:42 &#43;0200</pubDate>
-      
-      <guid>https://www.merowing.info/2017/04/stop-weak-strong-dance/</guid>
-      <description>&lt;p&gt;Closures in Swift are extremely useful, they are interchangeable with functions and that creates a lot of opportunities for useful use-cases. One thing we have to be careful when using them is to avoid &lt;strong&gt;retain cycles&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;We have to do it so often that it begs the question:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Can we improve the call-site API?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

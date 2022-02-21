@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Krzysztof Zabłocki - Code-Review best practices</title>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="What are the goals of code reviews and how do we get most out of them?">
+
+<meta name="author" content="Krzysztof Zabłocki">
+
+
+<meta property="og:title" content="Code-Review best practices" />
+<meta property="og:description" content="What are the goals of code reviews and how do we get most out of them?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.merowing.info/2022/02/code-review-best-practices/" />
+
+<meta property="og:image" content="http://merowing.info/2022/collaboration.jpg" />
+
+
+
+<meta property="og:updated_time" content="2022-02-21 00:00:00 &#43;0000 UTC"/>
+
+
+<meta property="og:site_name" content="Krzysztof Zabłocki" />
+
+
+
+
+
+
+
+<meta property="article:author" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:publisher" content="https://www.facebook.com/krzysztof.zablocki" />
+<meta property="article:published_time" content="2022-02-21 00:00:00 &#43;0000 UTC" />
+<meta property="article:section" content="post" />
+
+<meta property="article:tag" content="Engineering" />
+
+<meta property="article:tag" content="Process" />
+
+<meta property="article:tag" content="Mindset" />
+
+<meta property="article:tag" content="Leading" />
+
+<meta property="article:tag" content="Growth" />
+
+
+<meta property="fb:app_id" content="406961899319006" />
+
+
+<meta itemprop="name" content="Code-Review best practices">
+<meta itemprop="description" content="What are the goals of code reviews and how do we get most out of them?">
+
+
+
+<meta itemprop="image" content="http://merowing.info/2022/collaboration.jpg">
+
+
+
+<meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,engineering,experiments,fitness,gamedev,general,growth,interface-builder,ios,ios-tips,leading,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
+
+
+<meta itemprop="wordCount" content="2436">
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image:src" content="http://merowing.info/2022/collaboration.jpg"/>
+
+
+
+<meta name="twitter:title" content="Code-Review best practices"/>
+<meta name="twitter:description" content="What are the goals of code reviews and how do we get most out of them?"/>
+<meta name="twitter:site" content="@merowing_"/>
+<meta name="twitter:creator" content="@merowing_"/>
+
+
+
+  <link rel="canonical" href="https://www.merowing.info/2022/02/code-review-best-practices/">
+
+  <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  
+  <link href="/css/prism.css" rel="stylesheet" />
+  <link href="/css/about.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="https://www.merowing.info/css/combined-min.css">
+</head>
+<body class="">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+    <div class="mt2 wrap">
+        <div class="measure">
+            <nav class="site-nav left">
+                <a href="https://www.merowing.info" class="site-title"><b>About</b></a>
+            </nav>
+            <nav class="site-nav right">
+                <a href="/post/">Blog</a>
+
+<a href="/speaking/">Speaking</a>
+<a href="/sourcery-pro/">Sourcery Pro</a>
+
+
+</form>
+            </nav>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+
+<div class="wrap measure center">
+    <nav class="social-icons icons">
+        
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+    </nav>
+</div>
+    <div class="post p2 p-responsive wrap" role="main">
+        <div class="measure">
+            <div class="post-header mb2">
+                <h1 class="h2 py2">Code-Review best practices</h1>
+                
+                <span class="post-meta right"><i class="fa fa-clock-o"></i> <em>12 minute read</em></span>
+                
+                <br>
+
+                
+            </div>
+
+            
+
+            
+
+            <article class="post-content">
+                <p>No matter how experienced we are, we are bound to make mistakes in our work.</p>
+
+<p>This simple fact is one of the reasons why Code Reviews have become the cornerstone of software engineering processes around the world.</p>
+
+<p>Part of my job is building teams and establishing best practices for them to operate efficiently and collaboratively.</p>
+
+<p>But team practices shouldn&rsquo;t just be coming from an individual, which is why first interviewed a bunch of our engineers at <a href="https://thebrowser.company">The Browser Company</a> around what is the goal of PR&rsquo;s and Code reviews.</p>
+
+<p>I followed that with additional research and my own experiences from consulting with different-sized companies over the last decades and come up with best practices for our team&rsquo;s practices.</p>
+
+<p>In the spirit of giving back to the community, we&rsquo;ve decided to share those practices publically.</p>
+
+<p></p>
+
+<hr />
+
+<h1 id="code-reviews-and-pr-s">Code Reviews and PR’s</h1>
+
+<p>We aim to turn PRs around in under a few hours for normal-size PRs, and no longer than a day for more challenging ones</p>
+
+<h2 id="code-reviews">Code Reviews</h2>
+
+<h3 id="what-is-the-goal-of-code-review">What is the goal of Code Review?</h3>
+
+<p>The goal of Code review is to maintain a high quality of codebase and product.</p>
+
+<p>Code reviews also give us opportunities to share knowledge about the codebase and give PR authors the confidence that their design approach is sound.</p>
+
+<p>Think about the reviewer role as someone that double-checks your parachute before you are about to jump from a plane, we know you checked your straps but we’ll double-check it for you because we care (paraphrased from <a href="https://www.linkedin.com/in/einyungchoi/">Ei-Nyung Choi</a>).</p>
+
+<p>Since we expect long-lived code to be read more than it is written, we want to optimize for readability &amp; understandability. Code-review focuses attention on this goal before code is merged.</p>
+
+<p>Pull requests also serve as documentation of how to do things and what our team culture is, often times you’ll find yourself looking at ‘How do we implement X’, finding the PR that something similar will be a great help to you in those cases.</p>
+
+<p>Understanding how things are done and seeing the discussions and considerations that went into them will help newcomers understand the approach and trade-offs better.</p>
+
+<h3 id="embrace-and-encourage-a-positive-culture">Embrace and Encourage a positive culture</h3>
+
+<p>Peer review can put a strain on relationships, especially in asynchronous written communication when we lack signals like tone of voice/face expression can be misinterpreted as crude/rough, etc.</p>
+
+<p>Code review is also a place for sharing and applying our company culture in practice. From &ldquo;how to communicate&rdquo; to &ldquo;code base styles&rdquo;, it&rsquo;s a big part of the communication between devs in the company, and a way to learn &amp; align with common practices and improve them.</p>
+
+<p>Assume the good intentions of the reviewer and their comments, they are only reviewing your code and in no way is it a reflection of your skill or value as an engineer. We all make mistakes.</p>
+
+<p>Code review presents learning/teaching opportunities for all participants. If either the code being reviewed or changes being suggested by the reviewer seem mysterious, ask for more information.</p>
+
+<p>For example, a newcomer reviewing a subject-matter expert’s PR is a great opportunity both to learn by asking questions and to suggest new/better ways of doing things from an outsider’s perspective</p>
+
+<p>Remember that we’re building a team that values learning over the process.</p>
+
+<h3 id="examples">Examples:</h3>
+
+<ul>
+<li>Good feedback:
+
+<ul>
+<li>“It looks like this might run in n^2 time – is there a way for us to improve it? maybe we could leverage hash map to make it linear?”
+&gt; Why it’s good → describes the potential issue, suggest an alternative approach that can improve it</li>
+<li>“I think this is making a network call within a tight loop. Maybe add a bulk API on the server side so that we can do the work all at once in a single call?”
+&gt; Why it’s good → describes the potential issue, suggest another option, and why it’s better</li>
+<li>“Could we leverage <a href="https://www.hackingwithswift.com/plus/high-performance-apps/using-memoization-to-speed-up-slow-functions">memoization technique</a> to improve performance here?”
+&gt; Why it’s good → ask questions, provide reference to what you mean rather than assuming the person knows the technique. It uses “team words” like <code>we</code>, making it explicit that we are a team, doing this work together</li>
+<li>“I know you’ve given this a lot of thought and I am probably missing something here. Can you fill me in on why you decided to do X, rather than Y? Thank you!”
+&gt; Why it’s good → acknowledges that the writer spent more time than you as the reader, and asks them to provide more detail about their choice, before asking them to take approach Y instead</li>
+</ul></li>
+<li>And not so good feedback
+
+<ul>
+<li>“Style guide calls for two newlines between top-level file comments.”
+&gt; Why it’s not good - We should adjust auto formatter / linter to do this kind of work for us, not engineers.</li>
+<li>“I didn’t understand how this worked but if you’re sure it produces the right results, then ok.”
+&gt; Why it’s not good - If a code can’t be understood by our engineers, we should request it be simplified or add additional documentation in the code to make it understandable.</li>
+<li>”This way is not right. You don’t understand how this should work. Use XYZ function/whatever instead.”
+&gt; Why it’s not good - This uses very absolute wording, where’s most of the time there is no one right solution for an engineering problem, it doesn’t provide the reason why this approach might be incorrect or inferior to alternatives. It also doesn’t encourage shared ownership by using ‘You’ instead of ‘We’.</li>
+<li>“Can we do X? <insert great reasons written out clearly>”
+&gt; Why it’s not good → This is <em>almost</em> good but a teammate can’t tell if this is a blocking change, a nit, or a suggestion up for peer debate/judgment call.</li>
+</ul></li>
+</ul>
+
+<h3 id="priority-and-timing-of-code-reviews">Priority and timing of code reviews</h3>
+
+<p>Code reviews should be prioritized above writing new code because it unblocks other developers. But don’t feel the need to stop what you are doing when a new PR request comes in, finish your focus block and do a review in the natural spots when you are not in deep-work e.g.</p>
+
+<ul>
+<li>After scheduled meetings</li>
+<li>Allocating some time at the start/end of your workday</li>
+</ul>
+
+<p>People should DM via Slack if it’s urgent but that should be a rare situation.</p>
+
+<p>We aim to turn PRs around in under a few hours for normal-size PRs, and no longer than a day for more challenging ones</p>
+
+<p>Code reviews are expected to happen during reviewers’ normal business hours, so adjust the above intervals depending on relative timezones.</p>
+
+<h3 id="kicking-off-feature-work">Kicking off feature work</h3>
+
+<p>Code reviews typically go a lot faster if major changes &amp; feature designs are discussed ahead of implementation with prospective reviewers, and minimize the odds of painful rewrites being suggested.</p>
+
+<p>Sometimes writing a rough draft of the code can help flesh out ideas and GitHub’s <em>Draft PR</em> functionality can be used to discuss the results.</p>
+
+<p>Feel free to reach out to subject matter experts for informal discussion or tupling.</p>
+
+<h2 id="pull-request-s-best-practices">Pull Request’s Best Practices</h2>
+
+<h3 id="describe-what-and-why-changes-are-made">Describe what and why changes are made</h3>
+
+<p>Leverage our PR template, a good PR description usually has the following structure:</p>
+
+<ul>
+<li>High-level goal and reason for the changes
+
+<ul>
+<li>Start by providing context for the reviewers, e.g. <strong>why</strong> you are changing something within this PR. Don’t skip this part, it’s more important than the changes themselves as they are easy to extract from the git history, whereas the reasoning behind them is often lost to time.</li>
+</ul></li>
+<li>Add any relevant context links/references
+
+<ul>
+<li>Adding bug reports/feature requests or discussion links is going to make the PR easier to understand and make the reviewer job easier, and shorten turnaround time.</li>
+<li>Context is not only helpful to reviewers but it will also serve as historic documentation when in the future we need to understand the code related to the changes in question.</li>
+</ul></li>
+<li>Describe the changes that were performed as part of the work (e.g. had to refactor X to accommodate for Y requirement)</li>
+<li>Test scenarios/steps listed out for verification of the changes</li>
+</ul>
+
+<p>By following that structure it gives good context to the reviewers:</p>
+
+<ul>
+<li>is this safe to merge / what would it break?</li>
+<li>does this do what it&rsquo;s supposed to do?</li>
+<li>is there another way we could achieve the same goal?</li>
+</ul>
+
+<p><strong>Remember that more context means faster review and hence faster approval.</strong></p>
+
+<p>Optional mental exercise: Ask yourself if you could send this to a new engineer to help them understand this area of code, our best practices, and how we make decisions.</p>
+
+<h3 id="scope-and-size">Scope and Size</h3>
+
+<p>The goal is to make PR’s that can be treated as independent changes, usually we should strive at making PR’s not larger than 200-400 lines of code changed.</p>
+
+<p>We understand that sometimes it’s not possible but that should be the goal for efficient effect discovery.</p>
+
+<p>Smaller PR’s have lots of benefits:</p>
+
+<ul>
+<li>Less strain on the reviewers time</li>
+<li>Faster turnaround and quick feedback loops</li>
+<li>Fewer merge conflicts</li>
+<li>Can lead to better abstractions and modularization</li>
+</ul>
+
+<h3 id="submitting-for-review">Submitting for Review</h3>
+
+<p>Self-review before submitting the PR, it helps you spot obvious mistakes and areas for improvement, saving time for other reviewers and shortening the feedback cycle.</p>
+
+<p>Favor discussion in PR rather than direct messages on Slack, as this will help with documenting the changes and reasoning for historic/debugging purposes, as well as encouraging other people to join in with suggestions for improvements.</p>
+
+<h3 id="how-many-people-should-review-a-pr">How many people should review a PR?</h3>
+
+<p>We ask for at least one reviewer, but generally recommend assigning 2 people since code review also serves to share knowledge which is worth considering when choosing (possibly “extra”) reviewers.</p>
+
+<p>If you are going to change any fundamental architecture or functionality of our product, assign at least 1 subject matter expert as a reviewer, ask in #eng-swift #eng-chromium or #eng if it’s unclear who knows that part of code well.</p>
+
+<p>For small changes, any single engineer is fine as a reviewer.</p>
+
+<h3 id="writing-clearly-labeled-comments">Writing clearly labeled comments</h3>
+
+<p>Try to be clear in your comments/suggestions, provide sample code or links to documentation/best practices.</p>
+
+<p>Start your comments with a <strong>Tag</strong> to your comments to make it easier for the author to understand how important they are:</p>
+
+<ul>
+<li><strong>Nit</strong>: small change e.g. re-naming function to be more clear
+
+<ul>
+<li>They can be implemented as follow-ups</li>
+</ul></li>
+<li><strong>Optional</strong>: what the name says, can be ignored</li>
+<li><strong>Blocker</strong>: Mistake or wrong code, this is a blocker. <strong><em>The PR should be marked as ‘Request Changes’</em></strong></li>
+</ul>
+
+<h3 id="dealing-with-feedback-and-updating-pr-s">Dealing with feedback and updating PR’s</h3>
+
+<p>If a PR is marked as requested changes by someone, the requested changes have to be discussed and resolved before merging.</p>
+
+<p>If your PR has questions posted by one reviewer, and another one approves it, you should still answer the first reviewer&rsquo;s questions and clear any confusion before merging.</p>
+
+<p>As an author, you should always respond to or acknowledge each review comment even if it’s just saying “<strong>Done”</strong> or resolving it. It’s difficult as a reviewer to tell what happened when the comment lingers and the author didn’t respond to it.</p>
+
+<p>If your PR gets approved you shouldn’t be modifying it non-trivially. Sometimes you might realize a mistake in your code or the request lead to significant code changes, in that case, add a request to review the PR again for all the people involved in the original process.</p>
+
+<h3 id="a-note-about-complexity-and-tech-debt">A note about complexity and tech debt</h3>
+
+<p>In addition to being a complex application with many running parts, our project is also long-running unlike iOS applications.</p>
+
+<p>It doesn’t get killed off by the system regularly, the app session for many users can be until the next update is released, which can mean weeks. This has serious implications for tech debt and code quality:</p>
+
+<ul>
+<li>Memory leaks will keep adding up</li>
+<li>Any leaked objects can be listening to side-effects causing additional performance issues</li>
+</ul>
+
+<p>In addition tech debt will make understanding the codebase harder and harder over time, slowing our ability to develop and making the logic of the app hard to follow</p>
+
+<p>All of the above adds up to a requirement that we maintain a high-quality bar for our codebase. When writing or reviewing code it’s good to keep this in mind, and err on the side of quality over expedience (within reasonable limits, obviously).</p>
+
+<h3 id="best-practices-for-reviewers">Best Practices for Reviewers</h3>
+
+<ul>
+<li>Always start with the big picture, read the description, and understand what the change is and what’s the reason behind it</li>
+<li>Look at whether the general architecture approach makes sense?
+
+<ul>
+<li>Think about how you would solve the problem</li>
+<li>If it’s different than the author solution consider why is that, this might be a knowledge-sharing opportunity</li>
+<li>If your idea can be simpler/safer with the same functionality or covering more cases, suggest it as an alternative and discuss pros and cons</li>
+<li>Does the code work as described?</li>
+<li>Are all the requirements fulfilled?</li>
+</ul></li>
+<li>When someone asks you for a review they care more about architecture/clarity and quality suggestions than code style adherence, we should automate our code style via swiftlint/swiftformat not put the strain on the engineers writing or reviewing the code</li>
+<li>If some piece of code seems complex enough to require extra review time, consider asking the author if it can be simplified.</li>
+<li>Optimize for code reading, not writing. Abbreviations, character-count golfing, etc. are usually worth pointing out as opportunities for improvement.</li>
+<li>Explain your reasoning behind suggestions</li>
+<li>Ask questions rather than pass judgment, assume competence and good intent</li>
+<li>Explain and discuss the pros and cons of different approaches</li>
+<li>If a review takes longer than an author feels comfortable with, consider suggesting following up in another PR or create a bug to track remaining improvements. This typically requires case-by-case judgment; feel free to ask a teammate for another perspective if you’re unsure what to do.</li>
+<li><strong>Be kind: compliment good design decisions and efforts to improve existing code, and approach opportunities for improvements as such.</strong></li>
+</ul>
+
+<h3 id="code-review-checklist">Code Review Checklist</h3>
+
+<p>What you should be looking for in a code review?</p>
+
+<ul>
+<li>Finding defects before they go into production</li>
+<li>Readability and understandability, being able to maintain the code we merge into main is crucial to the longevity of our product</li>
+<li>Follows our established architecture unless there are explicitly stated reasons to not do so</li>
+<li>Fulfill the feature requirements, meaning the code is correct from a usability perspective.
+
+<ul>
+<li>For user facing features there should always be test steps provided for the scenarios we are trying to implement and they should pass. Additional unit or UI tests are always encouraged.</li>
+<li>For other work we should leverage unit tests.</li>
+</ul></li>
+</ul>
+
+<h3 id="attributions">Attributions:</h3>
+
+<p>My teammate&rsquo;s at <a href="https://thebrowser.company/">The Browser Company</a>:</p>
+
+<p><a href="https://www.linkedin.com/in/ami-fischman-a72b96/">Ami</a>, <a href="https://www.linkedin.com/in/einyungchoi/">Ei-Nyung</a>, <a href="https://www.linkedin.com/in/piotr-galiszewski/">Piotr</a>, <a href="https://www.linkedin.com/in/maya-rosmarin-170794b5/">Maya</a>, <a href="https://twitter.com/@pvF">Stephan</a> and <a href="https://twitter.com/adamstern_">Adam</a></p>
+
+<h2 id="what-do-you-think">What do you think?</h2>
+
+<p>If you&rsquo;d like to join our mission of redefining what the internet means, <a href="https://thebrowser.company/careers">we are hiring!</a></p>
+
+<p>Do you disagree with any statements in our practices, anything you&rsquo;d do differently or improve? I&rsquo;d love to hear your opinions, hit me up on twitter:</p>
+            </article>
+            <a href="https://twitter.com/merowing_" class="twitter-follow-button" data-show-count="true"
+                data-size="medium"></a>
+            <br />
+            <br />
+            <hr>
+            <a href="https://merowing.info/sourcery-pro/" class="p">
+                If you hate writing repetitive code <b>SourceryPro</b> is here.
+            </a>
+            <p>
+                Want to optimize your development workflow?
+                <a href="mailto:krzysztof.zablocki@pixle.pl?Subject=I%20want%20to%20hire%20you" class="p">I'd love to
+                    help your
+                    team.
+            </p>
+            <div class="social-icons">
+                <p>Share this post:</p>
+                <div class="addthis_sharing_toolbox left" data-url="https://www.merowing.info/2022/02/code-review-best-practices/" data-title="Code-Review best practices"></div>
+            </div>
+            <div class="clearfix"></div>
+
+            </br>
+            
+            </br>
+            </br>
+
+            <p class="post-meta">tags:&nbsp;
+                
+                
+                <a href="https://www.merowing.info/tags/engineering">Engineering</a>
+                
+                ,&nbsp;
+                <a href="https://www.merowing.info/tags/process">Process</a>
+                
+                ,&nbsp;
+                <a href="https://www.merowing.info/tags/mindset">Mindset</a>
+                
+                ,&nbsp;
+                <a href="https://www.merowing.info/tags/leading">Leading</a>
+                
+                ,&nbsp;
+                <a href="https://www.merowing.info/tags/growth">Growth</a>
+                
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, "script", "twitter-wjs");</script>
+
+
+
+
+
+<footer class="footer">
+    <div class="p2 wrap">
+        <div class="measure mt1 center">
+            <nav class="social-icons icons">
+    
+<a class="fa fa-twitter" href="https://twitter.com/merowing_"></a>
+
+
+
+<a class="fa fa-github" href="https://github.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-facebook" href="https://facebook.com/krzysztofzablocki"></a>
+
+
+
+<a class="fa fa-linkedin" href="https://linkedin.com/pub/krzysztof-zab%c5%82ocki/26/200/442"></a>
+
+
+<a class="fa fa-rss" href="/index.xml"></a>
+
+</nav>
+
+            <small>
+                Krzysztof Zabłocki <br/>
+                Copyright &#169; 2012-2021<br>
+                Powered by <a href="http://gohugo.io/" target="_blank">Hugo</a> &amp; based on <a
+                    href="https://github.com/azmelanar/hugo-theme-pixyll" target="_blank">Pixyll</a>
+            </small>
+        </div>
+    </div>
+</footer>
+
+<script src="/js/prism.js"></script>
+<script src="/js/carousel.js"></script>
+
+
+
+
+<script src="/lightgallery/js/lightgallery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+
+
+<script src="/lightgallery/js/lg-thumbnail.min.js"></script>
+<script src="/lightgallery/js/lg-fullscreen.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lightgallery').lightGallery({
+            thumbnail: true
+        });
+    });
+</script>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29400340-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-532368630eb37492" async="async"></script>
+<script type="text/javascript">
+var addthis_share = addthis_share || {}
+addthis_share = {
+	passthrough : {
+		twitter: {
+			via: "merowing_"
+		}
+	}
+}
+</script>
+</body>
+</html>
