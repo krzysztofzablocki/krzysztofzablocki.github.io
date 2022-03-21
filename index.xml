@@ -7,7 +7,22 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 21 Feb 2022 00:00:00 UTC</updated>
+    <updated>Mon, 21 Mar 2022 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Exhaustive testing in TCA</title>
+      <link>https://www.merowing.info/2022/03/exhaustive-testing-in-tca/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 UTC</pubDate>
+      
+      <guid>https://www.merowing.info/2022/03/exhaustive-testing-in-tca/</guid>
+      <description>&lt;h2 id=&#34;why-i-don-t-like-exhaustivity-in-tca-stores&#34;&gt;Why I don’t like exhaustivity in TCA stores?&lt;/h2&gt;
+
+&lt;p&gt;I’ve worked on 5+ apps using &lt;a href=&#34;https://github.com/pointfreeco/swift-composable-architecture&#34;&gt;The Composable Architecture&lt;/a&gt; and I really like it but I’ve observed few issues that we can run into in bigger apps.&lt;/p&gt;
+
+&lt;p&gt;As you probably know I’m also a big proponent of &lt;a href=&#34;https://merowing.info/2017/01/testing-ios-apps/&#34;&gt;TDD / BDD&lt;/a&gt;, so let’s start by talking about what I don’t like about the way TCA does testing.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Code-Review best practices</title>
@@ -295,30 +310,6 @@ Let&amp;rsquo;s put this into context:&lt;/p&gt;
 &lt;p&gt;You can watch the talk online:&lt;/p&gt;
 
 &lt;iframe width=&#34;728&#34; height=&#34;409&#34; src=&#34;http://www.ustream.tv/embed/recorded/102903026?html5ui&#34; scrolling=&#34;no&#34; allowfullscreen webkitallowfullscreen frameborder=&#34;0&#34; style=&#34;border: 0 none transparent;&#34;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Using protocol compositon for dependency injection</title>
-      <link>https://www.merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</link>
-      <pubDate>Wed, 12 Apr 2017 18:13:31 &#43;0200</pubDate>
-      
-      <guid>https://www.merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/</guid>
-      <description>&lt;figure class=&#34;center&#34;&gt;
-    
-        &lt;img src=&#34;https://www.merowing.info/2017/04/RefactorSwift.jpg&#34;  /&gt;
-    
-    
-&lt;/figure&gt;
-
-
-
-&lt;p&gt;I like using composition and dependency injection, but when you need to inject each entity with multiple dependencies, it can get cumbersome fast.&lt;/p&gt;
-
-&lt;p&gt;As the project grows and you need to inject more dependencies into your objects, you will end up having to refactor your methods a lot of times, as we all know Xcode doesn&amp;rsquo;t help with that.&lt;/p&gt;
-
-&lt;p&gt;There is a more manageable way.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

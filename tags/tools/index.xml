@@ -6,10 +6,25 @@
     <description>Recent content in Tools on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Aug 2021 06:43:04 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.merowing.info/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exhaustive testing in TCA</title>
+      <link>https://www.merowing.info/2022/03/exhaustive-testing-in-tca/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.merowing.info/2022/03/exhaustive-testing-in-tca/</guid>
+      <description>&lt;h2 id=&#34;why-i-don-t-like-exhaustivity-in-tca-stores&#34;&gt;Why I don’t like exhaustivity in TCA stores?&lt;/h2&gt;
+
+&lt;p&gt;I’ve worked on 5+ apps using &lt;a href=&#34;https://github.com/pointfreeco/swift-composable-architecture&#34;&gt;The Composable Architecture&lt;/a&gt; and I really like it but I’ve observed few issues that we can run into in bigger apps.&lt;/p&gt;
+
+&lt;p&gt;As you probably know I’m also a big proponent of &lt;a href=&#34;https://merowing.info/2017/01/testing-ios-apps/&#34;&gt;TDD / BDD&lt;/a&gt;, so let’s start by talking about what I don’t like about the way TCA does testing.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Improving Composable Architecture Debugging</title>
