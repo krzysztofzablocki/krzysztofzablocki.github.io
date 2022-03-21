@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,engineering,experiments,fitness,gamedev,general,growth,interface-builder,ios,ios-tips,leading,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="1501">
+<meta itemprop="wordCount" content="1498">
 
 
 
@@ -187,10 +187,13 @@
 
 <h3 id="confidence-to-refactor-internal-implementation-details-without-breaking-expected-behavior">Confidence to refactor internal implementation details without breaking expected behavior</h3>
 
-<p>When we write new tests we want to through the process of:
-- <strong>Red</strong> - Write failing test for non-existent (empty) API
-- <strong>Green</strong> - Implement minimal code to make the test pass
-- <strong>Refactor</strong> - Change implementation detail without breaking the test</p>
+<p>When we write new tests we want to through the process of:</p>
+
+<ul>
+<li><strong>Red</strong> - Write failing test for non-existent (empty) API</li>
+<li><strong>Green</strong> - Implement minimal code to make the test pass</li>
+<li><strong>Refactor</strong> - Change implementation detail without breaking the test</li>
+</ul>
 
 <p>Now the key factor here is that once the test is Green, it should usually not change as we change the implementation.</p>
 
