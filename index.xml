@@ -15,7 +15,14 @@
       <pubDate>Mon, 21 Mar 2022 00:00:00 UTC</pubDate>
       
       <guid>https://www.merowing.info/2022/03/exhaustive-testing-in-tca/</guid>
-      <description>&lt;h2 id=&#34;why-i-don-t-like-exhaustivity-in-tca-stores&#34;&gt;Why I don’t like exhaustivity in TCA stores?&lt;/h2&gt;
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://www.merowing.info/2022/exhausted.jpg&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
 
 &lt;p&gt;I’ve worked on 5+ apps using &lt;a href=&#34;https://github.com/pointfreeco/swift-composable-architecture&#34;&gt;The Composable Architecture&lt;/a&gt; and I really like it but I’ve observed few issues that we can run into in bigger apps.&lt;/p&gt;
 

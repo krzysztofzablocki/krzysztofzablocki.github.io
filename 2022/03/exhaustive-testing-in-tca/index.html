@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,engineering,experiments,fitness,gamedev,general,growth,interface-builder,ios,ios-tips,leading,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix," />
 
 
-<meta itemprop="wordCount" content="1511">
+<meta itemprop="wordCount" content="1501">
 
 
 
@@ -154,7 +154,14 @@
             
 
             <article class="post-content">
-                <h2 id="why-i-don-t-like-exhaustivity-in-tca-stores">Why I don’t like exhaustivity in TCA stores?</h2>
+                <figure class="center">
+    
+        <img src="/2022/exhausted.jpg"  />
+    
+    
+</figure>
+
+
 
 <p>I’ve worked on 5+ apps using <a href="https://github.com/pointfreeco/swift-composable-architecture">The Composable Architecture</a> and I really like it but I’ve observed few issues that we can run into in bigger apps.</p>
 
@@ -325,25 +332,24 @@ store.send(.changeIdentity(name: &quot;Merowing&quot;, surname: &quot;Info&quot;
 </code></pre>
 
 <ol>
-<li>You can verify actions received from effects and state changes by using final block, but unlike a standard store, do it in a non-exhaustive manner, e.g. here we only check we get changeAge and ignore changeMood effect callback
-```swift
-store.send(.advanceAgeAndMoodAfterDelay)
-<br /></li>
+<li>You can verify actions received from effects and state changes by using final block, but unlike a standard store, do it in a non-exhaustive manner, e.g. here we only check we get changeAge and ignore changeMood effect callback</li>
 </ol>
 
-<p>// When moving scheduler forward in time
-testScheduler.advance(by: 1)</p>
-
-<p>// Verify that it received delayed action and updated state
-// note that we choose ignore checking for whether <code>changeMood</code> was received
+<pre><code class="language-swift">store.send(.advanceAgeAndMoodAfterDelay)
+        
+// When moving scheduler forward in time
+testScheduler.advance(by: 1)
+        
+// Verify that it received delayed action and updated state 
+// note that we choose ignore checking for whether `changeMood` was received
 store.receive(.changeAge(34)) {
   $0.age = 34
-}</p>
+} 
+</code></pre>
 
-<pre><code>
-You could also use an alternative approach for the final check:
-```swift
-XCTAssertEqual(store.state.age, 34)
+<p>You could also use an alternative approach for the final check:</p>
+
+<pre><code class="language-swift">XCTAssertEqual(store.state.age, 34)
 </code></pre>
 
 <h2 id="converting-from-exhaustive-to-non-exhaustive-tests">Converting from Exhaustive to Non-Exhaustive tests</h2>
