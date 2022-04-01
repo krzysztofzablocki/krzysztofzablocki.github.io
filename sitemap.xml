@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.merowing.info/2022/04/hot-reloading-in-swift/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://www.merowing.info/2022/03/exhaustive-testing-in-tca/</loc>
     <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -493,7 +486,7 @@
   
   <url>
     <loc>https://www.merowing.info/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -542,7 +535,7 @@
   
   <url>
     <loc>https://www.merowing.info/tags/engineering/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -633,14 +626,14 @@
   
   <url>
     <loc>https://www.merowing.info/tags/open-source/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2013-07-25T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.merowing.info/post/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -710,7 +703,7 @@
   
   <url>
     <loc>https://www.merowing.info/tags/tools/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -725,13 +718,6 @@
   <url>
     <loc>https://www.merowing.info/tags/uix/</loc>
     <lastmod>2015-12-16T22:23:13+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.merowing.info/tags/workflow/</loc>
-    <lastmod>2022-04-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
