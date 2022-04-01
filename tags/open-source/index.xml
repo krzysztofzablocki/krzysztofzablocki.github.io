@@ -6,10 +6,38 @@
     <description>Recent content in Open Source on Krzysztof Zabłocki</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2013 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.merowing.info/tags/open-source/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hot Reloading in Swift</title>
+      <link>https://www.merowing.info/2022/03/hot-reloading-in-swift/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.merowing.info/2022/03/hot-reloading-in-swift/</guid>
+      <description>&lt;figure class=&#34;center&#34;&gt;
+    
+        &lt;img src=&#34;https://www.merowing.info/2022/hot-reloading.jpg&#34;  /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+
+&lt;p&gt;The year is 2040, our newest MacBook M30X processors can compile large Swift projects perceivably instantaneously, sounds pretty amazing right?&lt;/p&gt;
+
+&lt;p&gt;Except, compiling codebase is just part of our iteration cycle, there are other ones like restarting it (or deploying to the device), re-navigate to the previous location where you were in the app itself, re-produce the data you need.&lt;/p&gt;
+
+&lt;p&gt;Doesn’t sound bad if you have to do it once, but what if you are like me and on a usual day do between &lt;strong&gt;200 - 500&lt;/strong&gt; iterations on the codebase? It adds up.&lt;/p&gt;
+
+&lt;p&gt;There is a better way, embraced by other platforms but also achievable in the Swift/iOS ecosystem. &lt;strong&gt;I’ve used it for over a decade.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Do you want to save up to 10h work per week, starting today?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Stop writing data parsing code in your apps</title>

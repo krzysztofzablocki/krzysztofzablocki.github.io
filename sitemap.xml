@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://www.merowing.info/2022/03/hot-reloading-in-swift/</loc>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://www.merowing.info/2022/02/code-review-best-practices/</loc>
     <lastmod>2022-02-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -626,7 +633,7 @@
   
   <url>
     <loc>https://www.merowing.info/tags/open-source/</loc>
-    <lastmod>2013-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
@@ -718,6 +725,13 @@
   <url>
     <loc>https://www.merowing.info/tags/uix/</loc>
     <lastmod>2015-12-16T22:23:13+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.merowing.info/tags/workflow/</loc>
+    <lastmod>2022-03-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0</priority>
   </url>
