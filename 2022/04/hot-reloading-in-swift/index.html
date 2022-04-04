@@ -62,7 +62,7 @@
 <meta itemprop="keywords" content="animation,animations,architecture,clean-code,development-process,engineering,experiments,fitness,gamedev,general,growth,interface-builder,ios,ios-tips,leading,library,mindset,mvvm,open-source,process,psychology,reading,ruby,runtime,script,swift,tip,tools,tutorial,uix,workflow," />
 
 
-<meta itemprop="wordCount" content="1595">
+<meta itemprop="wordCount" content="1592">
 
 
 
@@ -277,17 +277,15 @@ It&rsquo;s an entirely free, open-source tool that you run in your menu bar, and
 
 <p>I create the concept of <strong>Hosts</strong> that work well in that context. There are 2:</p>
 
-<p>&ldquo;`swift
-- Inject.ViewHost
-- Inject.ViewControllerHost</p>
+<pre><code class="language-swift">- Inject.ViewHost
+- Inject.ViewControllerHost
+</code></pre>
 
-<pre><code>
-How do we integrate this? We wrap the class we want to iterate on at the parent level, so we don't modify the type we want to inject but change the parent call site.
+<p>How do we integrate this? We wrap the class we want to iterate on at the parent level, so we don&rsquo;t modify the type we want to inject but change the parent call site.</p>
 
-E.g., If you have a `SplitViewController` that creates `PaneA` and `PaneB, `and you want to iterate on layout/logic code in `PaneA,` you modify the call site in `SplitViewController`:
+<p>E.g., If you have a <code>SplitViewController</code> that creates <code>PaneA</code> and <code>PaneB,</code>and you want to iterate on layout/logic code in <code>PaneA,</code> you modify the call site in <code>SplitViewController</code>:</p>
 
-```swift
-paneA = Inject.ViewHost(
+<pre><code class="language-swift">paneA = Inject.ViewHost(
   PaneAView(whatever: arguments, you: want)
 )
 </code></pre>
